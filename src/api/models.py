@@ -64,3 +64,47 @@ class Checkout(db.Model):
     status = db.Column(db.String, nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+#table Followers
+class Followers(db.Model):
+    __tablename__ = 'followers'
+    id = db.Column(db.Integer, primary_key=True)
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+#table Users
+class Users(db.Model):
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
+    userName = db.Column(db.String, nullable=False)
+    avatar = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=False)
+    address = db.Column(db.String, nullable=False)
+    city = db.Column(db.String, nullable=False)
+    following = db.Column(db.Array)
+    subscription = db.Column(db.boolean, nullable=False)
+    role = db.Column(db.String, nullable=False)
+
+#table Cathegories
+class Cathegories(db.Model):
+    __tablename__ = 'cathegories'
+    id = db.Column(db.Integer, primary_key=True)
+    cathegory = db.Column(db.String, nullable=False)
+
+#table Favorites
+class Favorites(db.Model):
+    __tablename__ = 'favorites'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable= False)
+
+#table Reviews
+class Reviews(db.Model):
+    __tablename__ = 'rewiews'
+    id = db.Column(db.Integer, primary_key=True)
+    rating = db.Column(db.Integer, nullable=False)
+    comment = db.Column(db.String, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable= False)
