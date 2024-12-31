@@ -1,0 +1,382 @@
+
+{"consoles":[ 
+        
+{
+    "name": "Nintendo Entertainment System (NES)",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735213847/NES-Console-Set_z672gh.png",
+    "year": "1983",
+    "brand": "Nintendo",
+    "platform": "Nintendo",
+    "type": "Board",
+    "description": "### General\nLa Nintendo Entertainment System (NES) fue la consola que revolucion\u00f3 el mundo de los videojuegos en la d\u00e9cada de los 80, marcando el inicio de una nueva era para Nintendo.\n\n### Caracter\u00edsticas\n- Procesador de 8 bits\n- Biblioteca ic\u00f3nica con t\u00edtulos como Super Mario Bros y The Legend of Zelda\n- Dise\u00f1o compacto y resistente\n\n### Ideal para\nColeccionistas y fan\u00e1ticos de los videojuegos retro que buscan revivir la nostalgia de los cl\u00e1sicos.",
+    "state": "TRUE",
+    "price": "149"
+},
+{
+    "name": "Sega Master System",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735372628/Sega_Mark_III_wj1jnu.jpg",
+    "year": "1985",
+    "brand": "Sega",
+    "platform": "Sega Master System",
+    "type": "Board",
+    "description": "### General\nLa Sega Master System es una consola cl\u00e1sica de 8 bits que ofreci\u00f3 una experiencia de juego alternativa frente a la competencia de la \u00e9poca.\n\n### Caracter\u00edsticas\n- Gr\u00e1ficos avanzados para su generaci\u00f3n\n- Compatibilidad con juegos mediante tarjetas Sega\n- Incluye t\u00edtulos populares como Sonic y Alex Kidd\n\n### Ideal para\nFans de Sega que quieran explorar las ra\u00edces de esta ic\u00f3nica marca.",
+    "state": "TRUE",
+    "price": "200"
+},
+{
+    "name": "Atari 7800",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373396/1920px-Atari-7800-Console-Set_lijraj.jpg",
+    "year": "1986",
+    "brand": "Atari",
+    "platform": "Atari Corporation",
+    "type": "Board",
+    "description": "### General\nEl Atari 7800 fue dise\u00f1ado para ofrecer compatibilidad retro con juegos de la 2600 y gr\u00e1ficos mejorados para los nuevos t\u00edtulos.\n\n### Caracter\u00edsticas\n- Compatibilidad con m\u00e1s de 500 juegos del Atari 2600\n- Mejores capacidades gr\u00e1ficas y de sonido frente a su predecesor\n- Dise\u00f1o robusto y compacto\n\n### Ideal para\nAmantes de los videojuegos cl\u00e1sicos que buscan una consola retro con una amplia biblioteca de juegos.",
+    "state": "TRUE",
+    "price": "140"
+},
+{
+    "name": "Game & Watch",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373489/Game-and-watch-ball_hd5flw.png",
+    "year": "1980-1989",
+    "brand": "Nintendo",
+    "platform": "Game & Watch",
+    "type": "Portable",
+    "description": "### General\nEl Game & Watch de Nintendo es una serie de consolas port\u00e1tiles con pantalla LCD que introdujeron el concepto de juegos port\u00e1tiles.\n\n### Caracter\u00edsticas\n- Pantalla LCD monocrom\u00e1tica\n- Dise\u00f1o ligero y port\u00e1til\n- Juegos integrados espec\u00edficos para cada modelo\n\n### Ideal para\nColeccionistas y fan\u00e1ticos de los primeros pasos de Nintendo en el mundo de los videojuegos.",
+    "state": "FALSE",
+    "price": "40"
+},
+{
+    "name": "Super Nintendo Entertainment System (SNES)",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373614/SNES-Mod1-Console-Set_xpvhbg.jpg",
+    "year": "1990",
+    "brand": "Nintendo",
+    "platform": "Nintendo",
+    "type": "Board",
+    "description": "### General\nLa Super Nintendo Entertainment System (SNES) es una consola de 16 bits que consolid\u00f3 el liderazgo de Nintendo en los videojuegos.\n\n### Caracter\u00edsticas\n- Biblioteca ic\u00f3nica con juegos como Super Mario World y The Legend of Zelda: A Link to the Past\n- Procesador de 16 bits para gr\u00e1ficos y sonido avanzados\n- Dise\u00f1o ergon\u00f3mico de los controles\n\n### Ideal para\nAmantes de los videojuegos retro que buscan revivir los a\u00f1os dorados de los 90.",
+    "state": "TRUE",
+    "price": "199"
+},
+{
+    "name": "PlayStation (PS1)",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735374031/PlayStation-SCPH-1001_wybzjb.jpg",
+    "year": "1994",
+    "brand": "Sony",
+    "platform": "PlayStation",
+    "type": "Board",
+    "description": "### General\nLa primera PlayStation marc\u00f3 el ingreso triunfal de Sony al mundo de las consolas de videojuegos, cambiando para siempre la industria.\n\n### Caracter\u00edsticas\n- Juegos en CD con capacidad para videos y audio de alta calidad\n- Biblioteca extensa con cl\u00e1sicos como Final Fantasy VII y Metal Gear Solid\n- Primer control con sticks anal\u00f3gicos opcionales\n\n### Ideal para\nJugadores que buscan experimentar los t\u00edtulos revolucionarios de los a\u00f1os 90.",
+    "state": "TRUE",
+    "price": "180"
+},
+{
+    "name": "Nintendo 64",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735374153/N64-Console-Set_qpvovs.jpg",
+    "year": "1996",
+    "brand": "Nintendo",
+    "platform": "Nintendo",
+    "type": "Board",
+    "description": "### General\nLa Nintendo 64 fue la primera consola de Nintendo en ofrecer gr\u00e1ficos en 3D, llevando los videojuegos a una nueva dimens\u00edn.\n\n### Caracter\u00edsticas\n- Gr\u00e1ficos en 3D y soporte para cuatro jugadores\n- Juegos ic\u00f3nicos como Super Mario 64, The Legend of Zelda: Ocarina of Time y GoldenEye 007\n- Control con stick anal\u00f3gico y gatillo Z\n\n### Ideal para\nAquellos que buscan revivir las innovaciones de los videojuegos de los 90.",
+    "state": "TRUE",
+    "price": "160"
+},
+{
+    "name": "Game Boy",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735374455/Game-Boy-FL_osmddu.png",
+    "year": "1989",
+    "brand": "Nintendo",
+    "platform": "Nintendo",
+    "type": "Portable",
+    "description": "### General\nLa Game Boy fue la primera consola portátil de Nintendo, marcando el comienzo de una nueva era en los videojuegos móviles.\n\n### Características\n- Pantalla monocromática\n- Jueguetes como Tetris, Super Mario Land y Pokémon\n- Batería de larga duración\n\n### Ideal para\nColeccionistas de consolas portátiles y aquellos que disfrutan de los primeros juegos de Pokémon.",
+    "state": "FALSE",
+    "price": "30"
+},
+{
+    "name": "Sega Saturn",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735374550/Sega-Saturn-Console-Set-Mk2_je8f1k.png",
+    "year": "1994",
+    "brand": "Sega",
+    "platform": "Sega",
+    "type": "Board",
+    "description": "### General\nLa Sega Saturn fue una consola de 32 bits, famosa por su potencia gráfica y su capacidad para manejar juegos en 2D y 3D.\n\n### Características\n- Potente procesador y gráficos en 2D y 3D\n- Incluye títulos como Virtua Fighter, Nights into Dreams\n- Amplia biblioteca de juegos\n\n### Ideal para\nColeccionistas y fanáticos de las consolas de Sega.",
+    "state": "FALSE",
+    "price": "150"
+},
+{
+    "name": "PlayStation 2",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397962/PS2-Versions_zzhjnh.jpg",
+    "year": "2000",
+    "brand": "Sony",
+    "platform": "PlayStation 2",
+    "type": "Board",
+    "description": "### General\nLa PlayStation 2 es una de las consolas más exitosas de todos los tiempos, conocida por su enorme biblioteca de juegos.\n\n### Características\n- Procesador de 128 bits\n- Compatibilidad con DVDs y juegos clásicos de PS1\n- Títulos icónicos como Grand Theft Auto, Final Fantasy X\n\n### Ideal para\nJugadores que buscan disfrutar de los mejores títulos de los años 2000.",
+    "state": "TRUE",
+    "price": "120"
+},
+{
+    "name": "Nintendo GameCube",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397962/GameCube-Set_vokzkr.jpg",
+    "year": "2001",
+    "brand": "Nintendo",
+    "platform": "Nintendo GameCube",
+    "type": "Board",
+    "description": "### General\nLa Nintendo GameCube es una consola que destacó por sus juegos exclusivos y su diseño compacto.\n\n### Características\n- Juegos como Super Smash Bros. Melee y The Legend of Zelda: The Wind Waker\n- Procesador PowerPC Gekko\n- Soporte para cuatro controles\n\n### Ideal para\nFans de Nintendo que quieren revivir una consola muy querida.",
+    "state": "TRUE",
+    "price": "90"
+},
+{
+    "name": "Game Boy Advance",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397962/Nintendo-Game-Boy-Advance-Purple-FL_yfp2ph.jpg",
+    "year": "2001",
+    "brand": "Nintendo",
+    "platform": "Nintendo",
+    "type": "Portable",
+    "description": "### General\nEl Game Boy Advance ofrece una gran biblioteca de juegos en 2D en una pantalla retroiluminada.\n\n### Características\n- Pantalla a color de 2.9 pulgadas\n- Juegos populares como Pokémon Ruby/Sapphire, Metroid Fusion\n- Batería de larga duración\n\n### Ideal para\nFans de los juegos portátiles y los títulos clásicos de Nintendo.",
+    "state": "TRUE",
+    "price": "60"
+},
+{
+    "name": "Nintendo DS",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397962/Nintendo-DS-Fat-Blue_b9dl11.jpg",
+    "year": "2004",
+    "brand": "Nintendo",
+    "description": "### General\nLa Nintendo DS es una consola portátil con dos pantallas, una de ellas táctil. Fue una de las primeras en incorporar el control táctil como mecanismo de interacción en los juegos.\n\n### Características\n- Pantalla táctil dual\n- Juegos como Mario Kart DS y The Legend of Zelda: Phantom Hourglass\n- Conectividad Wi-Fi\n\n### Ideal para\nJugadores que buscan una experiencia portátil innovadora y una gran variedad de juegos.",
+    "platform": "",
+    "type": "Portable",
+    "state": "FALSE",
+    "price": "80"
+  },
+  {
+    "name": "PlayStation Portable (PSP)",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397967/Sony-PSP-1000-Body_b66nxd.png",
+    "year": "2004",
+    "brand": "Sony",
+    "description": "### General\nLa PSP fue una consola portátil de Sony que revolucionó el mercado, destacando por sus gráficos de alta calidad y su capacidad multimedia.\n\n### Características\n- Pantalla LCD de 4.3 pulgadas\n- Reproducción de video y música\n- Conectividad Wi-Fi\n\n### Ideal para\nJugadores que buscan una consola portátil para juegos en 3D y entretenimiento multimedia.",
+    "platform": "",
+    "type": "Portable",
+    "state": "TRUE",
+    "price": "100"
+  },
+  {
+    "name": "Xbox 360",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397966/Xbox-360-Pro-wController_mgdupa.jpg",
+    "year": "2005",
+    "brand": "Microsoft",
+    "description": "### General\nLa Xbox 360 fue una consola de nueva generación, destacando por sus potentes gráficos y su integración con Xbox Live para el juego en línea.\n\n### Características\n- Soporte para HD 1080p\n- Amplia librería de juegos exclusivos\n- Xbox Live para juego en línea\n\n### Ideal para\nJugadores que buscan una experiencia de juego fluida y la mejor calidad en juegos en línea.",
+    "platform": "",
+    "type": "Portable",
+    "state": "FALSE",
+    "price": "110"
+  },
+  {
+    "name": "PlayStation 3",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397963/PS3-slim-console_mevjhi.png",
+    "year": "2006",
+    "brand": "Sony",
+    "description": "### General\nLa PS3 fue una consola de nueva generación que ofreció gráficos impresionantes y la capacidad de reproducir discos Blu-ray, posicionándose como un centro de entretenimiento.\n\n### Características\n- Soporte para Blu-ray\n- Gráficos de alta definición\n- Juegos como Uncharted y The Last of Us\n\n### Ideal para\nJugadores que buscan una consola potente con un excelente catálogo de juegos exclusivos.",
+    "platform": "",
+    "type": "Board",
+    "state": "TRUE",
+    "price": "130"
+  },
+  {
+    "name": "Nintendo Wii",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397960/1200px-Wii-console_kttpqx.jpg",
+    "year": "2006",
+    "brand": "Nintendo",
+    "description": "### General\nLa Wii fue una consola que revolucionó el mercado con su control de movimiento, permitiendo una experiencia de juego completamente nueva.\n\n### Características\n- Control de movimiento Wii Remote\n- Juegos como Super Mario Galaxy y The Legend of Zelda: Twilight Princess\n- Interfaz sencilla y accesible\n\n### Ideal para\nJugadores casuales y familias que buscan diversión interactiva y fácil acceso a los juegos.",
+    "platform": "",
+    "type": "Board",
+    "state": "FALSE",
+    "price": "70"
+  },
+  {
+    "name": "PlayStation VR",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397960/2560px-Sony-PlayStation-4-PSVR-Headset-Mk1-FL_ra7x66.jpg",
+    "year": "2016",
+    "brand": "Sony",
+    "description": "### General\nPlayStation VR es el sistema de realidad virtual de Sony para PlayStation 4, ofreciendo una experiencia inmersiva con una amplia gama de juegos exclusivos.\n\n### Características\n- Compatible con PlayStation 4\n- Juegos como Resident Evil 7 y Beat Saber\n- Pantalla OLED y seguimiento de movimiento\n\n### Ideal para\nJugadores que buscan una experiencia de realidad virtual accesible en consolas.",
+    "platform": "",
+    "type": "Portable",
+    "state": "TRUE",
+    "price": "250"
+  },
+  {
+    "name": "Oculus Rift",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735386967/Oculus-Rift-CV1-Headset-Front_with_transparent_background_z4yjjv.png",
+    "year": "2016",
+    "brand": "Meta Platforms",
+    "description": "### General\nEl Oculus Rift es uno de los pioneros en el mercado de la realidad virtual, ofreciendo una experiencia inmersiva en PC.\n\n### Características\n- Resolución 1080x1200\n- Juegos y aplicaciones de VR compatibles\n- Requiere PC para funcionamiento\n\n### Ideal para\nEntusiastas de la realidad virtual que buscan un dispositivo avanzado para PC.",
+    "platform": "Oculus VR",
+    "type": "Portable",
+    "state": "TRUE",
+    "price": "530"
+  },
+  {
+    "name": "Playstation 4",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735387364/PS4-Console-wDS4_vpu1mn.jpg",
+    "year": "2013",
+    "brand": "Sony",
+    "description": "### General\nLa PS4 es la consola que definió la nueva generación de Sony, ofreciendo un potente rendimiento gráfico y un catálogo de juegos exclusivos.\n\n### Características\n- Juegos como The Last of Us Part II y God of War\n- Soporte para streaming y multimedia\n- Conectividad online mejorada\n\n### Ideal para\nJugadores que buscan una experiencia de juego increíble con una amplia selección de títulos exclusivos.",
+    "platform": "PlayStation 4",
+    "type": "Board",
+    "state": "TRUE",
+    "price": "399"
+  },
+  {
+    "name": "Xbox One",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735387630/2880px-Microsoft-Xbox-One-S-Console-FL_llmazk.jpg",
+    "year": "2013",
+    "brand": "Microsoft",
+    "description": "### General\nLa Xbox One de Microsoft fue un avance en los juegos, con un potente rendimiento y la integración de entretenimiento multimedia en una sola consola.\n\n### Características\n- Juegos como Halo 5 y Gears of War 4\n- Integración con Xbox Live y servicios multimedia\n- Compatibilidad con juegos de generaciones anteriores\n\n### Ideal para\nJugadores que desean un sistema todo-en-uno para juegos y entretenimiento.",
+    "platform": "Xbox One",
+    "type": "Board",
+    "state": "FALSE",
+    "price": "499"
+  },
+  {
+    "name": "Nintendo Switch",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735388108/Nintendo-Switch-Console-Docked-wJoyConRB_lyfkw1.jpg",
+    "year": "2017",
+    "brand": "Nintendo",
+    "description": "### General\nLa Nintendo Switch es una consola híbrida que puede ser usada como portátil o como consola de sobremesa, ofreciendo gran versatilidad y una excelente librería de juegos.\n\n### Características\n- Juegos como The Legend of Zelda: Breath of the Wild y Super Mario Odyssey\n- Pantalla táctil de 6.2 pulgadas\n- Modo de juego portátil y en el hogar\n\n### Ideal para\nJugadores que buscan una consola flexible, adecuada tanto para jugar en casa como sobre la marcha.",
+    "platform": "Nintendo Switch",
+    "type": "Both",
+    "state": "TRUE",
+    "price": "329"
+  },
+  {
+    "name": "Nintendo 3DS",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735388278/Nintendo-3DS-AquaOpen_vib6fh.png",
+    "year": "2011",
+    "brand": "Nintendo",
+    "description": "### General\nLa Nintendo 3DS introdujo una pantalla 3D sin gafas, junto con una potente librería de juegos y la compatibilidad con títulos clásicos de DS.\n\n### Características\n- Pantalla superior 3D\n- Juegos como Mario Kart 7 y Animal Crossing: New Leaf\n- Cámara 3D\n\n### Ideal para\nFanáticos de Nintendo que buscan una experiencia de juego portátil innovadora con tecnología 3D.",
+    "platform": "Nintendo 3DS",
+    "type": "Board",
+    "state": "FALSE",
+    "price": "219"
+  },
+  {
+    "name": "Wii U",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735388474/Wii_U_Console_and_Gamepad_muqqhh.png",
+    "year": "2012",
+    "brand": "Nintendo",
+    "platform": "Nintendo Wii U",
+    "type": "Both",
+    "description": "### General\nLa Wii U es una consola híbrida que permite jugar tanto en el televisor como en su GamePad, una pantalla táctil independiente.\n\n### Características\n- Juego en la televisión y en pantalla táctil\n- Juegos como Super Mario 3D World y The Legend of Zelda: The Wind Waker HD\n- Retrocompatibilidad con juegos de Wii\n\n### Ideal para\nJugadores que buscan una consola versátil, con la posibilidad de jugar tanto de forma tradicional como portátil.",
+    "state": "TRUE",
+    "price": "349"
+  },
+  {
+    "name": "Playstation VR2",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735388663/61x0Ej1el7L._AC_SX679__zruqse.jpg",
+    "year": "2023",
+    "brand": "Sony",
+    "platform": "PlayStation VR2",
+    "type": "Portable",
+    "description": "### General\nEl PlayStation VR2 ofrece una experiencia de realidad virtual más inmersiva para PlayStation 5, con un rendimiento gráfico mejorado y controles innovadores.\n\n### Características\n- Pantalla OLED 4K HDR\n- Sensores avanzados para inmersión total\n- Compatible con PlayStation 5\n\n### Ideal para\nJugadores que buscan una experiencia de realidad virtual de nueva generación con gráficos impresionantes y una jugabilidad envolvente.",
+    "state": "TRUE",
+    "price": "599,99"
+  },
+  {
+    "name": "Meta Quest 3",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735388940/Meta_Quest_3_zffyfq.webp",
+    "year": "2023",
+    "brand": "Meta",
+    "platform": "Meta Quest 3",
+    "type": "Portable",
+    "description": "### General\nMeta Quest 3 es un sistema de realidad virtual independiente que no necesita un PC o consola para funcionar, ofreciendo una experiencia inmersiva con gráficos mejorados y mayor comodidad.\n\n### Características\n- Resolución mejorada y pantallas de alta calidad\n- Juega sin cables ni dispositivos adicionales\n- Gran variedad de títulos en VR\n\n### Ideal para\nEntusiastas de la VR que buscan un sistema todo-en-uno fácil de usar y de alta calidad, sin necesidad de conectarse a otros dispositivos.",
+    "state": "TRUE",
+    "price": "569,99"
+  },
+  {
+    "name": "PlayStation 5 Pro",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735389803/Sony-playstation-5-pro_xz9d9p.webp",
+    "year": "2024",
+    "brand": "Sony",
+    "platform": "PlatStation 5 Pro",
+    "type": "Board",
+    "description": "### General\nLa PlayStation 5 Pro es la versión mejorada de la PlayStation 5, con un mayor rendimiento gráfico, soporte para 8K y nuevas funciones para mejorar la experiencia de juego.\n\n### Características\n- Potente rendimiento gráfico en 8K\n- Juegos exclusivos de alta calidad\n- Mejoras en la velocidad de carga y en la experiencia de juego\n\n### Ideal para\nJugadores que buscan una consola de nueva generación con el mejor rendimiento y una experiencia visual de vanguardia.",
+    "state": "TRUE",
+    "price": "699,99"
+  },
+  {
+    "name": "Xbox Series X",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735390072/Xbox_Series_X_cixsah.webp",
+    "year": "2020",
+    "brand": "Microsoft",
+    "platform": "Xbox Series X",
+    "type": "Board",
+    "description": "### General\nLa Xbox Series X es la consola más poderosa de Microsoft, con un rendimiento gráfico increíble y tiempos de carga ultrarrápidos, ideal para juegos de última generación.\n\n### Características\n- Soporte para 4K y hasta 120 FPS\n- Amplia biblioteca de juegos exclusivos\n- Compatible con juegos de Xbox One y Xbox 360\n\n### Ideal para\nJugadores que buscan una experiencia de juego rápida, fluida y con gráficos excepcionales.",
+    "state": "TRUE",
+    "price": "499"
+  },
+  {
+    "name": "Steam Deck",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735416552/fbhgvqhogjtaych7ioth.webp",
+    "year": "2022",
+    "brand": "Valve",
+    "platform": "Steam Deck",
+    "type": "Portable",
+    "description": "### General\nEl Steam Deck es una consola portátil que te permite jugar a la mayoría de tus juegos de PC desde Steam en cualquier lugar, con una interfaz intuitiva y controles cómodos.\n\n### Características\n- Gran compatibilidad con juegos de Steam\n- Pantalla táctil y controles de alta calidad\n- Soporte para juegos AAA y títulos indie\n\n### Ideal para\nJugadores que buscan una experiencia de juegos de PC portátil, sin comprometer el rendimiento o la calidad gráfica.",
+    "state": "TRUE",
+    "price": "419"
+  },
+  {
+    "name": "Nintendo Switch OLED",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735416637/2880px-Nintendo-Switch-wJoyCons-BlRd-Standing-FL_fkkske.png",
+    "year": "2021",
+    "brand": "Nintendo",
+    "platform": "Nintendo Switch",
+    "type": "Hybrid",
+    "description": "### General\nLa Nintendo Switch OLED es una versión mejorada de la consola híbrida Nintendo Switch, con una pantalla OLED más vibrante y otras mejoras en el diseño.\n\n### Características\n- Pantalla OLED de 7 pulgadas\n- Juegos como Super Mario Odyssey y The Legend of Zelda: Breath of the Wild\n- Modo portátil y en casa\n\n### Ideal para\nJugadores que buscan una consola híbrida con una pantalla de calidad superior para juegos tanto en casa como sobre la marcha.",
+    "state": "TRUE",
+    "price": "349"
+  },
+  {
+    "name": "Pico 4",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735416699/SrqDodC-1TIZPacPGhFbFIRoHEQ5qCmpjqVq7oxrAjXtM4jS3AxtJqKoo0REv-kteAl2GEDyBGaVYlwrSnj2eA_urnyjo.webp",
+    "year": "2022",
+    "brand": "Pico Interactive",
+    "platform": "Pico 4",
+    "type": "VR",
+    "description": "### General\nPico 4 es un dispositivo de realidad virtual autónomo que no requiere conexión a un PC, con una excelente calidad gráfica y una amplia variedad de títulos VR.\n\n### Características\n- Resolución de 4K\n- Seguimiento avanzado de la cabeza y los ojos\n- Amplia biblioteca de juegos VR\n\n### Ideal para\nUsuarios que buscan un sistema VR independiente, con gráficos de alta calidad y facilidad de uso.",
+    "state": "TRUE",
+    "price": "429"
+  },
+  {
+    "name": "ROG Ally",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735416699/asus-rog-ally-analisis-precio_whlz2s.webp",
+    "year": "2023",
+    "brand": "ASUS",
+    "platform": "ROG Ally",
+    "type": "Portable",
+    "description": "### General\nEl ROG Ally es una consola portátil de ASUS que permite jugar a los juegos de PC de manera portátil con un potente rendimiento gráfico y un diseño ergonómico.\n\n### Características\n- Pantalla de alta tasa de refresco\n- Compatible con juegos de PC y Steam\n- Gran rendimiento en juegos AAA\n\n### Ideal para\nJugadores que buscan una consola portátil potente, capaz de manejar juegos de PC en cualquier lugar.",
+    "state": "TRUE",
+    "price": "799"
+  }      
+
+
+
+],
+"videogames":[ 
+{
+"name":" ",
+"img": " ",
+"year":" ",
+"brand": " ",
+"description":" ",
+"state": " ",
+"price": " "
+}
+],
+"accesorios":[ 
+{
+"name":" ",
+"img": " ",
+"year":" ",
+"brand": " ",
+"description":" ",
+"state": " ",
+"price": " "
+}
+]
+}
