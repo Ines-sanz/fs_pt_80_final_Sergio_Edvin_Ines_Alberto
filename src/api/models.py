@@ -26,11 +26,13 @@ class Product(db.Model):
     photo = db.Column(db.String)
     year = db.Column(db.Integer)
     brand = db.Column(db.String)
+    platform = db.Column(db.String)
+    type = db.Column(db.String)
     state = db.Column(db.Boolean, default=True)
     promoted = db.Column(db.Boolean, default=False)
     price = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, nullable=False)
-    users_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
 
 #Table Orders
