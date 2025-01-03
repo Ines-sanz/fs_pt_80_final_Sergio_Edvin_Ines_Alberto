@@ -985,14 +985,244 @@
 
 ],
 "accesorios":[ 
+  {
+    "name": "Power Glove NES",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735392798/NES-Power-Glove_usrmzd.jpg",
+    "year": 1989,
+    "brand": "Mattel",
+    "platform": "Nintendo Entertainment System",
+    "type": "Accessory",
+    "description": "### General\nEl Power Glove es un accesorio icónico para el NES que permite controlar los juegos mediante movimientos de la mano, introduciendo un concepto único para la época.\n\n### Características\n- Control mediante sensores de movimiento\n- Diseño futurista para su tiempo\n- Compatible con juegos específicos\n\n### Ideal para\nJugadores nostálgicos y coleccionistas de accesorios únicos de Nintendo.",
+    "state": false,
+    "price": "239"
+  },
+  {
+    "name": "Control Pad con Joystick desmontable SMS",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735392861/Control_stick_master_system_po162725_ygwzh8.jpg",
+    "year": "1985",
+    "brand": "Sega",
+    "platform": "Sega Master System",
+    "type": "Accessory",
+    "description": "### General\nEl Control Pad con Joystick desmontable para el Master System ofrece una experiencia de juego versátil, permitiendo a los jugadores alternar entre un pad clásico y un joystick.\n\n### Características\n- Joystick desmontable para adaptarse a diferentes estilos de juego\n- Construcción duradera\n- Diseño ergonómico para largas sesiones de juego\n\n### Ideal para\nFans de la Sega Master System que buscan mejorar su experiencia de control.",
+    "state": false,
+    "price": "39.99"
+  },
+  {
+    "name": "Expansion Module Atari 7800",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735393524/Expasion_Module_Atari_zw66wh.png",
+    "year": "1986",
+    "brand": "Atari Corporation",
+    "platform": "Atari 7800",
+    "type": "Accessory",
+    "description": "### General\nEl Expansion Module para el Atari 7800 es un accesorio diseñado para ampliar las capacidades de la consola y ofrecer compatibilidad adicional.\n\n### Características\n- Incrementa las funcionalidades de la consola\n- Fácil de instalar y usar\n- Compatible con ciertos juegos y accesorios\n\n### Ideal para\nColeccionistas y usuarios del Atari 7800 que buscan explorar todo el potencial de la consola.",
+    "state": "FALSE",
+    "price": "694.99"
+  },
+  {
+    "name": "Super Nintendo MultiTap",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735417305/Super_Nintendo_MultiTap_zr0myz.jpg",
+    "year": "1993",
+    "brand": "Nintendo",
+    "platform": "Super Nintendo Entertainment System",
+    "type": "Accessory",
+    "description": "### General\nEl Super Nintendo MultiTap permite conectar hasta 5 jugadores simultáneamente, haciendo los juegos multijugador más accesibles.\n\n### Características\n- Soporta hasta 5 controladores simultáneamente\n- Compatible con juegos multijugador específicos\n- Diseño compacto y fácil de conectar\n\n### Ideal para\nJugadores que disfrutan de experiencias multijugador en la SNES.",
+    "state": false,
+    "price": "15.00"
+  },
+  {
+    "name": "Joystick AES",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735417303/images_sxhpjr.jpg",
+    "year": "1990",
+    "brand": "SNK",
+    "platform": "Neo Geo",
+    "type": "Accessory",
+    "description": "### General\nEl Joystick AES ofrece una experiencia auténtica de arcade en casa, diseñado específicamente para los juegos de Neo Geo.\n\n### Características\n- Diseño inspirado en los controles de arcade\n- Construcción robusta para máxima durabilidad\n- Compatible con todos los juegos de Neo Geo AES\n\n### Ideal para\nAmantes de los juegos de arcade y fans de Neo Geo que buscan máxima precisión.",
+    "state": false,
+    "price": "50.50"
+  },
+  {
+    "name": "Memory Card",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735417303/1015px-PSX-Memory-Card_n9e6w7.jpg",
+    "year": "1994",
+    "brand": "Sony",
+    "platform": "PlayStation",
+    "type": "Accessory",
+    "description": "### General\nLa Memory Card para PlayStation permite guardar el progreso de los juegos, ofreciendo comodidad y flexibilidad para los jugadores.\n\n### Características\n- Almacena datos de guardado para múltiples juegos\n- Diseño compacto y portátil\n- Fácil de usar e intercambiar entre consolas\n\n### Ideal para\nJugadores de PlayStation que quieren guardar y reanudar sus partidas de forma sencilla.",
+    "state": false,
+    "price": "10.00"
+  },  {
+    "name": "Transfer Pak",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735417303/Nintendo-64-GB-Transfer-Pak_dyciuw.jpg",
+    "year": "1999",
+    "brand": "Nintendo",
+    "platform": "Nintendo 64",
+    "type": "Accessory",
+    "description": "### General\nEl Transfer Pak permite conectar juegos de Game Boy a la Nintendo 64, proporcionando funcionalidad adicional y compatibilidad entre plataformas.\n\n### Características\n- Conexión sencilla entre Game Boy y Nintendo 64\n- Compatible con títulos específicos\n- Expande las posibilidades de juego\n\n### Ideal para\nJugadores de Nintendo 64 que buscan mejorar la integración con sus juegos de Game Boy.",
+    "state": false,
+    "price": "15.00"
+  },
+  {
+    "name": "Game Boy Printer",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735417303/Game_Boy_Printer_ojfudf.jpg",
+    "year": "1998",
+    "brand": "Nintendo",
+    "platform": "Game Boy",
+    "type": "Accessory",
+    "description": "### General\nLa Game Boy Printer es una impresora portátil diseñada para funcionar con juegos compatibles de Game Boy, permitiendo imprimir imágenes y contenido del juego.\n\n### Características\n- Impresión portátil desde Game Boy\n- Compatible con varios juegos\n- Diseño compacto y fácil de usar\n\n### Ideal para\nJugadores nostálgicos que buscan personalizar su experiencia de Game Boy.",
+    "state": false,
+    "price": "25.00"
+  },
+  {
+    "name": "DualShock 2",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735377394/1280px-PSX-DualShock-Controller_pdvd9i.jpg",
+    "year": "2000",
+    "platform": "PlayStation 2",
+    "type": "Accessory",
+    "description": "### General\nEl DualShock 2 es el controlador oficial de PlayStation 2, ofreciendo vibración y controles analógicos para una experiencia de juego inmersiva.\n\n### Características\n- Vibración para mayor inmersión\n- Controles analógicos precisos\n- Diseño ergonómico y familiar\n\n### Ideal para\nJugadores de PlayStation 2 que buscan un control confiable y avanzado.",
+    "state": false,
+    "price": "25.00"
+  },
+  {
+    "name": "Game Boy Player",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735377459/game-boy-multitap-4player-adapter-1_sxb5je.jpg",
+    "year": "2001",
+    "brand": "Nintendo",
+    "platform": "GameCube",
+    "type": "Accessory",
+    "description": "### General\nEl Game Boy Player permite jugar títulos de Game Boy en la consola GameCube, ampliando la compatibilidad entre plataformas.\n\n### Características\n- Soporte para juegos de Game Boy, Game Boy Color y Game Boy Advance\n- Fácil de instalar en la GameCube\n- Mejora la experiencia de juego portátil en pantalla grande\n\n### Ideal para\nPropietarios de GameCube que quieren disfrutar de su biblioteca de Game Boy en su televisor.",
+    "state": true,
+    "price": "40.50"
+  },
+  {
+    "name": "GameCube Link Cable",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735377525/61kzvuwffPL_ddezuz.jpg",
+    "year": "2001",
+    "brand": "Nintendo",
+    "platform": "GameCube",
+    "type": "Accessory",
+    "description": "### General\nEl GameCube Link Cable conecta la consola GameCube con la Game Boy Advance, desbloqueando características exclusivas en juegos compatibles.\n\n### Características\n- Conexión sencilla entre dispositivos\n- Compatible con múltiples juegos\n- Expande la interacción entre GameCube y Game Boy Advance\n\n### Ideal para\nJugadores que desean disfrutar de experiencias adicionales en juegos compatibles.",
+    "state": true,
+    "price": "25.00"
+  },
+  {
+    "name": "Stylus",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735377784/s-l400_fxwx4w.jpg",
+    "year": "2004",
+    "brand": "Nintendo",
+    "platform": "Nintendo DS",
+    "type": "Accessory",
+    "description": "### General\nEl Stylus es un accesorio esencial para la Nintendo DS, diseñado para interactuar con la pantalla táctil de la consola de manera precisa y cómoda.\n\n### Características\n- Diseño ligero y fácil de usar\n- Compatible con todos los modelos de Nintendo DS\n- Construcción duradera para uso prolongado\n\n### Ideal para\nUsuarios de Nintendo DS que buscan un accesorio confiable para la interacción táctil.",
+    "state": true,
+    "price": "9.99"
+  },
+  {
+    "name": "Camera PSP",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735377902/products-894_mlzxgb.jpg",
+    "year": "2004",
+    "brand": "Sony",
+    "platform": "PSP",
+    "type": "Accessory",
+    "description": "### General\nLa Camera PSP es un accesorio que permite capturar fotos y videos directamente desde tu consola PSP, ofreciendo una experiencia multimedia única.\n\n### Características\n- Resolución compacta ideal para su época\n- Compatible con varios juegos de PSP\n- Diseño ligero y portátil\n\n### Ideal para\nUsuarios de PSP que buscan maximizar las capacidades multimedia de su consola.",
+    "state": false,
+    "price": "10.00"
+},
 {
-"name":" ",
-"img": " ",
-"year":" ",
-"brand": " ",
-"description":" ",
-"state": " ",
-"price": " "
+    "name": "Kinect",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397962/kinetic_fdyyby.jpg",
+    "year": "2010",
+    "brand": "Microsoft",
+    "platform": "XBOX",
+    "type": "Accessory",
+    "description": "### General\nKinect es un sensor de movimiento que permite a los jugadores interactuar con su consola Xbox sin necesidad de un controlador.\n\n### Características\n- Captura de movimiento precisa\n- Compatible con juegos y aplicaciones multimedia\n- Control por voz integrado\n\n### Ideal para\nJugadores que buscan experiencias inmersivas y control sin contacto.",
+    "state": false,
+    "price": "40.00"
+},
+{
+    "name": "Bluetooth Headset",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397960/blueheadset_kwgktg.jpg",
+    "year": "2006",
+    "brand": "Sony",
+    "platform": "PS3",
+    "type": "Accessory",
+    "description": "### General\nEl Bluetooth Headset para PS3 ofrece una comunicación clara y manos libres para juegos en línea.\n\n### Características\n- Tecnología Bluetooth para conexión inalámbrica\n- Diseño ergonómico y ligero\n- Micrófono de alta calidad para conversaciones claras\n\n### Ideal para\nJugadores de PS3 que disfrutan de juegos multijugador y necesitan comunicación eficiente.",
+    "state": true,
+    "price": "25.50"
+},
+{
+    "name": "DualShock 4",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397961/dualshock-controller_rbod8y.webp",
+    "year": "2013",
+    "brand": "Sony",
+    "platform": "PS4",
+    "type": "Accessory",
+    "description": "### General\nEl DualShock 4 es el controlador principal para la consola PS4, ofreciendo una experiencia de juego precisa e inmersiva.\n\n### Características\n- Sensores de movimiento integrados\n- Panel táctil interactivo\n- Botón Share para capturas y transmisiones instantáneas\n\n### Ideal para\nJugadores que buscan un controlador confiable y versátil para sus juegos de PS4.",
+    "state": false,
+    "price": "40.50"
+},
+{
+    "name": "Elite Controller",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397961/EliteController_evcdyd.jpg",
+    "year": "2013",
+    "brand": "Microsoft",
+    "platform": "XBOX",
+    "type": "Accessory",
+    "description": "### General\nEl Elite Controller es un controlador personalizable diseñado para jugadores competitivos y entusiastas.\n\n### Características\n- Partes intercambiables para personalización\n- Configuraciones avanzadas de botones\n- Materiales de alta calidad para durabilidad\n\n### Ideal para\nJugadores que buscan el máximo rendimiento y personalización en su experiencia de juego.",
+    "state": true,
+    "price": "150.00"
+},
+{
+    "name": "Amiibo NFC Reader",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397960/amiibo_tqy9kl.jpg",
+    "year": "2011",
+    "brand": "Nintendo",
+    "platform": "3DS",
+    "type": "Accessory",
+    "description": "### General\nEl Amiibo NFC Reader permite a los usuarios de Nintendo 3DS interactuar con figuras Amiibo para desbloquear contenido exclusivo.\n\n### Características\n- Compatible con una amplia variedad de Amiibos\n- Fácil de usar con consolas 3DS\n- Añade funcionalidades y contenido extra a los juegos\n\n### Ideal para\nJugadores de Nintendo 3DS que desean expandir su experiencia con figuras Amiibo.",
+    "state": false,
+    "price": "30.00"
+}, {
+  "name": "Pulse 3D Headset PS5",
+  "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735393676/Pulse_3D_Headset_PS5_mkyykv.webp",
+  "year": "2020",
+  "brand": "Sony",
+  "platform": "PlatStation 5",
+  "type": "Accessory",
+  "description": "### General\nEl Pulse 3D Headset para PS5 ofrece una experiencia de audio inmersiva con soporte para audio 3D.\n\n### Características\n- Audio envolvente 3D\n- Diseño cómodo y elegante\n- Micrófonos duales con cancelación de ruido\n\n### Ideal para\nJugadores de PS5 que desean una experiencia auditiva superior y comunicación clara.",
+  "state": true,
+  "price": "89.99"
+},
+{
+  "name": "Seagate Storage Expansion Card Xbox Series X/S 1TB",
+  "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735393803/Seagate_Storage_Expansion_Card_yolbuv.webp",
+  "year": "2020",
+  "brand": "Seagate",
+  "platform": "Xbox Series X",
+  "type": "Accessory",
+  "description": "### General\nLa Seagate Storage Expansion Card ofrece 1TB de almacenamiento adicional optimizado para las consolas Xbox Series X/S.\n\n### Características\n- Integración perfecta con la consola\n- Velocidades de carga rápidas\n- Diseño compacto y fácil de instalar\n\n### Ideal para\nJugadores de Xbox Series X/S que necesitan ampliar su capacidad de almacenamiento sin comprometer el rendimiento.",
+  "state": true,
+  "price": "239.99"
+},
+{
+  "name": "Dock Steam Deck",
+  "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735393900/Docking_Station_for_Steam_Deck_HB0702_01_700x-1_a4it64.webp",
+  "year": "2022",
+  "brand": "Valve",
+  "platform": "Steam Deck",
+  "type": "Accessory",
+  "description": "### General\nEl Dock para Steam Deck permite conectar tu consola a una pantalla externa y otros periféricos para una experiencia de juego versátil.\n\n### Características\n- Puertos múltiples para conectividad\n- Diseño robusto y portátil\n- Compatible con diversas resoluciones de pantalla\n\n### Ideal para\nUsuarios de Steam Deck que buscan expandir las posibilidades de su consola con una estación de conexión completa.",
+  "state": true,
+  "price": "99.99"
+},
+{
+  "name": "Joy-Con Zelda Skyward Sword",
+  "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735394026/Nintendo-switch-joy-con-the-legend-of-zelda-skyward-sword-hd_vaqp0a.jpg",
+  "year": "2021",
+  "brand": "Nintendo",
+  "platform": "Nintendo Switch",
+  "type": "Accessory",
+  "description": "### General\nLos Joy-Con Zelda Skyward Sword son controles temáticos diseñados especialmente para los fans de la franquicia The Legend of Zelda.\n\n### Características\n- Diseño inspirado en Skyward Sword\n- Funcionalidades completas de los Joy-Con estándar\n- Conectividad inalámbrica confiable\n\n### Ideal para\nJugadores de Nintendo Switch que buscan un toque único y personalizado en sus controles.",
+  "state": true,
+  "price": "120.00"
 }
 ]
 }
