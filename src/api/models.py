@@ -88,6 +88,7 @@ class Users(db.Model):
     following = db.Column(db.Array)
     subscription = db.Column(db.boolean, nullable=False)
     role = db.Column(db.String, nullable=False)
+    shoppingCart = db.Column(db.Array)
 
 #table Cathegories
 class Cathegories(db.Model):
@@ -107,6 +108,6 @@ class Reviews(db.Model):
     __tablename__ = 'rewiews'
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
-    comment = db.Column(db.String, nullable=False)
+    comment = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable= False)
