@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Products, Orders, ProductsInOrder, Followers
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 
@@ -23,7 +23,7 @@ def register():
 
         # aqui chequeamos que toda la info este
         if not email or not password:
-            raise Exception('Missing data')
+            return jsonify({'msg': 'Missing data'}), 400
         
         # aqui chequeamos si usuario existe
         check_user= User.query.filter_by(email=email).first()
@@ -32,9 +32,9 @@ def register():
         if not check_user:
             new_user = User(email=email, password=password, is_active=True)  # aqui se creo nuevo usuario
             db.session.add(new_user)                                         # aqui se agrego a la tabla
-            db.session.commit                                                #aqui se almacena cambios en la base de datos
+            db.session.commit()                                                #aqui se almacena cambios en la base de datos
             token = create_access_token(identity=str(new_user.id))
-            return({"msg": "okey", 'token': token}), 201
+            return({"msg": "okey", 'token': token, 'user': new_user}), 201
         
         # si existe usuario, devolvemos que ya hay una cuenta con ese correo
         return jsonify({"msg": "Usuario vinculado a este correo, intenta iniciar session"}), 400
@@ -46,11 +46,14 @@ def register():
 def update_user(user_id):
     try:
          # extract new data from the request
-        email = request.json.get('email')
-        password = request.json.get('password')
+        user_name = request.json.get('user_name')
+        description = request.json.get('description')
+        city = request.json.get('city')
+        avatar = request.json.get('avatar')
+
 
         # ensure there's at least one field to update
-        if not email and not password:
+        if not user_name or not description or not city or not avatar:
             return jsonify({'msg': 'No data provided to update'}), 400
         
         # retrieve the user by ID
@@ -58,21 +61,12 @@ def update_user(user_id):
         if not user:
             return jsonify({'msg': 'User not found'}), 404
         
-        # update fields if provided
-        if email:
-            # check if email is already in use by another user
-            existing_user = User.query.filter_by(email=email).first()
-            if existing_user and existing_user.id != user_id:
-                return jsonify({'msg': 'Email is already in use'}), 400
-            user.email = email
-
-    #aqui necesito ayuda porque no se si usar hash esta? !!!!!!!
-    #
-        if password:
-            hashed_password = generate_password_hash(password, method='sha256')
-            user.password = hashed_password
-
+        
         # save the changes to the database
+        user.user_name = user_name
+        user.description = description
+        user.city = city
+        user.avatar = avatar
         db.session.commit()
 
         return jsonify({'msg':'User updated successfully'}), 200
@@ -89,7 +83,7 @@ def delete_user(user_id):
         
         #delete user
         db.session.delete(user)
-        db.session.commit
+        db.session.commit()
 
         return jsonify({'msg': 'User deleted successfully'}), 200
     except Exception as error:
@@ -100,7 +94,7 @@ def get_users():
     try:
         # retrieve all users
         users = User.query.all()
-        users_list = [{'id': user.id, 'email':user.email, 'is_active': user.is_active} for user in users]
+        users_list = [user.serialize() for user in users]
 
         return jsonify(users_list), 200
     except Exception as error:
@@ -120,7 +114,10 @@ def follow_user(follow_id):
         if not current_user or not follow_user:
             return jsonify({'msg': 'User not found'}), 404
         
+        follower = Followers(follower_id = follow_id, followed_id= current_user_id)
+        db.session.add(follower)
         db.session.commit()
+
 
         return jsonify({'msg': 'f user {follow_id} followed successfully'}), 200
     except Exception as error:
@@ -147,7 +144,7 @@ def create_product():
         #create a new product
         new_product = Product(name=name, description=description, price=price, id=id)
         db.session.add(new_product)
-        db.session.commit
+        db.session.commit()
 
         return jsonify({'msg': 'Product created successfully', 'product': new_product.id}), 201
     except Exception as error:
