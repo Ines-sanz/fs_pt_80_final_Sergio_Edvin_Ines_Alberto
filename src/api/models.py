@@ -38,7 +38,7 @@ class Products(db.Model):
     #Relationships
     products_in_order = db.relationship('ProductsInOrder', backref= 'products') 
     favorites = db.relationship('Favorites', backref= 'products')
-    reviews = db.relatioship('Reviews', backref= 'products')
+    reviews = db.relationship('Reviews', backref= 'products')
 
     def serialize(self):
         return {

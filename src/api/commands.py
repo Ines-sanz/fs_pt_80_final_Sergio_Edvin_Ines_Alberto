@@ -1,6 +1,7 @@
 
 import click
-from api.models import db, User
+from api.models import db, User, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Cathegories, Favorites, Reviews
+import json
 
 """
 In this file, you can add as many commands as you want using the @app.cli.command decorator
@@ -32,3 +33,8 @@ def setup_commands(app):
     @app.cli.command("insert-test-data")
     def insert_test_data():
         pass
+    @app.cli.command('dummy')
+    def insert_dummy():
+        with open('products.json', 'r') as file:
+            data = json.load(file)
+        print(data)
