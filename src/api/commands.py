@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, User, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Cathegories, Favorites, Reviews
+from api.models import db, Users, Products, Orders, ProductsInOrder, Checkout, Followers, Categories, Favorites, Reviews
 import json
 
 """
@@ -20,7 +20,7 @@ def setup_commands(app):
     def insert_test_users(count):
         print("Creating test users")
         for x in range(1, int(count) + 1):
-            user = User()
+            user = Users()
             user.email = "test_user" + str(x) + "@test.com"
             user.password = "123456"
             user.is_active = True
