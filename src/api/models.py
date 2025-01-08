@@ -23,17 +23,17 @@ class Products(db.Model):
     __tablename__ = 'products'
     id = db.Column(db.Integer, primary_key=True)
     description = db.Column(db.String, nullable=False)
-    photo = db.Column(db.String)
-    year = db.Column(db.Integer)
-    brand = db.Column(db.String)
-    platform = db.Column(db.String)
-    type = db.Column(db.String)
-    state = db.Column(db.Boolean, default=True)
+    photo = db.Column(db.String, nullable=False)
+    year = db.Column(db.Integer, nullable=False)
+    brand = db.Column(db.String, nullable=False)
+    platform = db.Column(db.String, nullable=False)
+    type = db.Column(db.String, nullable=False)
+    state = db.Column(db.Boolean)
     promoted = db.Column(db.Boolean, default=False)
     price = db.Column(db.Float, nullable=False)
-    stock = db.Column(db.Integer, nullable=False)
-    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'), nullable=False)
+    stock = db.Column(db.Integer, default=1)
+    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
 
     #Relationships
     products_in_order = db.relationship('ProductsInOrder', backref= 'products') 
@@ -63,8 +63,9 @@ class Orders(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False)
     subtotal_amount = db.Column(db.Float, nullable=False)
+    total_amount = db.Column(db.Float, nullable=False)
     discount = db.Column(db.Boolean, default=False)
-    status = db.Column(db.String, nullable=False)
+    status = db.Column(db.String)
     address = db.Column(db.String, nullable=False)
     city = db.Column(db.String, nullable=False)
     postal_code = db.Column(db.Integer, nullable=False)
@@ -82,6 +83,7 @@ class Orders(db.Model):
             "id": self.id,
             "date": self.date,
             "subtotal_amount": self.subtotal_amount,
+            "total_amount": self.total_amount,
             "discount": self.discount,
             "status": self.status,
             "address": self.address,
@@ -111,8 +113,7 @@ class Checkout(db.Model):
     __tablename__ = 'checkout'
     id = db.Column(db.Integer, primary_key=True)
     payment_method = db.Column(db.String, nullable=False)
-    total_amount = db.Column(db.Float, nullable=False)
-    status = db.Column(db.String, nullable=False)
+    status = db.Column(db.String)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
@@ -120,7 +121,6 @@ class Checkout(db.Model):
         return {
             "id": self.id,
             "payment_method": self.payment_method,
-            "total_amount": self.total_amount,
             "status": self.status,
             "order_id": self.order_id,
             "user_id": self.user_id
@@ -147,13 +147,14 @@ class Users(db.Model):
     email = db.Column(db.String, nullable=False)
     password = db.Column(db.String, nullable=False)
     userName = db.Column(db.String, nullable=False)
-    avatar = db.Column(db.String, nullable=False)
-    description = db.Column(db.String, nullable=False)
+    avatar = db.Column(db.String)
+    description = db.Column(db.String)
     address = db.Column(db.String, nullable=False)
+    postal_code = db.Column(db.Integer, nullable=False)
     city = db.Column(db.String, nullable=False)
     following = db.Column(db.ARRAY(db.Integer))
-    subscription = db.Column(db.Boolean, nullable=False)
-    role = db.Column(db.String, nullable=False)
+    subscription = db.Column(db.Boolean, default=False)
+    role = db.Column(db.String)
     shoppingCart = db.Column(db.ARRAY(db.Integer))
 
     def serialize(self):
@@ -165,6 +166,7 @@ class Users(db.Model):
             "avatar": self.avatar,
             "description": self.description,
             "address": self.address,
+            "postal_code": self.postal_code,
             "city": self.city,
             "following": self.following,
             "subscription": self.subscription,
@@ -173,15 +175,15 @@ class Users(db.Model):
         }
 
 # table Cathegories
-class Cathegories(db.Model):
-    __tablename__ = 'cathegories'
+class Categories(db.Model):
+    __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
-    cathegory = db.Column(db.String, nullable=False)
+    category = db.Column(db.String, nullable=False)
 
     def serialize(self):
         return {
             "id": self.id,
-            "cathegory": self.cathegory
+            "category": self.category
         }
 
 # table Favorites
@@ -203,7 +205,7 @@ class Reviews(db.Model):
     __tablename__ = 'rewiews'
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
-    comment = db.Column(db.Text, nullable=False)
+    comment = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
 

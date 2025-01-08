@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Cathegories, Favorites, Reviews
+from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Categories, Favorites, Reviews
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
@@ -23,11 +23,12 @@ def register():
         password = request.json.get('password', None)
         user_name = request.json.get('user_name', None)
         address = request.json.get('address', None)
+        postal_code = request.json.get('postal_code', None)
         city = request.json.get('city', None)
 
 
         # aqui chequeamos que toda la info este
-        if not email or not password or not user_name or not address or not city:
+        if not email and not password and not user_name and not address and not city and not postal_code:
             return jsonify({'msg': 'Missing data'}), 400
         
         # aqui chequeamos si usuario existe
@@ -35,7 +36,7 @@ def register():
 
         # en caso no existe -> creamos usario
         if not check_user:
-            new_user = Users(email=email, password=password, user_name=user_name, address=address, city=city)  # aqui se creo nuevo usuario
+            new_user = Users(email=email, password=password, user_name=user_name, address=address, city=city, postal_code=postal_code)  # aqui se creo nuevo usuario
             db.session.add(new_user)                                         # aqui se agrego a la tabla
             db.session.commit()                                                #aqui se almacena cambios en la base de datos
             token = create_access_token(identity=str(new_user.id))
@@ -55,11 +56,12 @@ def update_user(user_id):
         description = request.json.get('description')
         city = request.json.get('city')
         address = request.json.get('address')
+        postal_code = request.json.get('postal_code')
         avatar = request.json.get('avatar')
 
 
         # ensure there's at least one field to update
-        if not user_name or not description or not city or not avatar or not address:
+        if not user_name or not description or not city or not avatar or not address or not postal_code:
             return jsonify({'msg': 'No data provided to update'}), 400
         
         # retrieve the user by ID
@@ -73,6 +75,7 @@ def update_user(user_id):
         user.description = description
         user.city = city
         user.address = address
+        user.postal_code = postal_code
         user.avatar = avatar
         db.session.commit()
 
