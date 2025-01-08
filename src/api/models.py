@@ -133,6 +133,7 @@ class Followers(db.Model):
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     followed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
+    
 #table Users
 class Users(db.Model):
     __tablename__ = 'users'
@@ -149,11 +150,21 @@ class Users(db.Model):
     role = db.Column(db.String, nullable=False)
     shoppingCart = db.Column(db.Array)
 
+    #Relationships
+    followers= db.relationship('Followers', backref='users')
+    favorites = db.relationship('Favorites', backref='users')
+    reviews = db.relationship('Reviews', backref='users')
+    orders = db.relationship('Orders', backref='users')
+    products = db.relationship('Products', backref='users')
+
 #table Cathegories
 class Cathegories(db.Model):
     __tablename__ = 'cathegories'
     id = db.Column(db.Integer, primary_key=True)
     cathegory = db.Column(db.String, nullable=False)
+    
+    #Relationships
+    products = db.relationship('Products', backref='cathegories')
 
 #table Favorites
 class Favorites(db.Model):
