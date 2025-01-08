@@ -40,6 +40,23 @@ class Products(db.Model):
     favorites = db.relationship('Favorites', backref= 'products')
     reviews = db.relatioship('Reviews', backref= 'products')
 
+    def serialize(self):
+        return {
+            "id": self.id,
+            "description": self.description,
+            "photo": self.photo,
+            "year": self.year,
+            "brand": self.brand,
+            "platform": self.platform,
+            "type": self.type,
+            "state": self.state,
+            "promoted": self.promoted,
+            "price": self.price,
+            "stock": self.stock,
+            "seller_id": self.seller_id,
+            "category_id": self.category_id
+        }
+
 #Table Orders
 class Orders(db.Model):
     __tablename__ = 'orders'
@@ -59,12 +76,35 @@ class Orders(db.Model):
     products_in_order = db.relationship('ProductsInOrder', backref='orders')
     checkout = db.relationship('Checkout', backref='orders')
 
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "date": self.date,
+            "subtotal_amount": self.subtotal_amount,
+            "discount": self.discount,
+            "status": self.status,
+            "address": self.address,
+            "city": self.city,
+            "postal_code": self.postal_code,
+            "country": self.country,
+            "buyer_id": self.buyer_id,
+            "seller_id": self.seller_id
+        }
+
 #Table ProductsInOrder
 class ProductsInOrder(db.Model):
     __tablename__ = 'products_in_order'
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "order_id": self.order_id,
+            "product_id": self.product_id
+        }
 
 #table Checkout
 class Checkout(db.Model):
@@ -75,6 +115,16 @@ class Checkout(db.Model):
     status = db.Column(db.String, nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "payment_method": self.payment_method,
+            "total_amount": self.total_amount,
+            "status": self.status,
+            "order_id": self.order_id,
+            "user_id": self.user_id
+        }
 
 #table Followers
 class Followers(db.Model):
