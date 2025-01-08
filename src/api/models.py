@@ -126,7 +126,7 @@ class Checkout(db.Model):
             "user_id": self.user_id
         }
 
-# table Followers
+#table Followers
 class Followers(db.Model):
     __tablename__ = 'followers'
     id = db.Column(db.Integer, primary_key=True)
