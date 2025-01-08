@@ -133,8 +133,14 @@ class Followers(db.Model):
     follower_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     followed_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    
-#table Users
+    def serialize(self):
+        return {
+            "id": self.id,
+            "follower_id": self.follower_id,
+            "followed_id": self.followed_id
+        }
+
+# table Users
 class Users(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
@@ -145,39 +151,67 @@ class Users(db.Model):
     description = db.Column(db.String, nullable=False)
     address = db.Column(db.String, nullable=False)
     city = db.Column(db.String, nullable=False)
-    following = db.Column(db.Array)
-    subscription = db.Column(db.boolean, nullable=False)
+    following = db.Column(db.ARRAY(db.Integer))
+    subscription = db.Column(db.Boolean, nullable=False)
     role = db.Column(db.String, nullable=False)
-    shoppingCart = db.Column(db.Array)
+    shoppingCart = db.Column(db.ARRAY(db.Integer))
 
-    #Relationships
-    followers= db.relationship('Followers', backref='users')
-    favorites = db.relationship('Favorites', backref='users')
-    reviews = db.relationship('Reviews', backref='users')
-    orders = db.relationship('Orders', backref='users')
-    products = db.relationship('Products', backref='users')
+    def serialize(self):
+        return {
+            "id": self.id,
+            "email": self.email,
+            "password": self.password,
+            "userName": self.userName,
+            "avatar": self.avatar,
+            "description": self.description,
+            "address": self.address,
+            "city": self.city,
+            "following": self.following,
+            "subscription": self.subscription,
+            "role": self.role,
+            "shoppingCart": self.shoppingCart
+        }
 
-#table Cathegories
+# table Cathegories
 class Cathegories(db.Model):
     __tablename__ = 'cathegories'
     id = db.Column(db.Integer, primary_key=True)
     cathegory = db.Column(db.String, nullable=False)
-    
-    #Relationships
-    products = db.relationship('Products', backref='cathegories')
 
-#table Favorites
+    def serialize(self):
+        return {
+            "id": self.id,
+            "cathegory": self.cathegory
+        }
+
+# table Favorites
 class Favorites(db.Model):
     __tablename__ = 'favorites'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable= False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
 
-#table Reviews
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "product_id": self.product_id
+        }
+
+# table Reviews
 class Reviews(db.Model):
     __tablename__ = 'rewiews'
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable= False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "rating": self.rating,
+            "comment": self.comment,
+            "user_id": self.user_id,
+            "product_id": self.product_id
+        }
