@@ -2,21 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-#class User(db.Model):
-#    id = db.Column(db.Integer, primary_key=True)
-#   email = db.Column(db.String(120), unique=True, nullable=False)
-#    password = db.Column(db.String(80), unique=False, nullable=False)
-#   is_active = db.Column(db.Boolean(), unique=False, nullable=False)
-
-#    def __repr__(self):
-#        return f'<User {self.email}>'
-#
-#   def serialize(self):
-#        return {
-#          "id": self.id,
-#            "email": self.email,
-#         do not serialize the password, its a security breach
-#       }
 
 #Table Products    
 class Products(db.Model):
@@ -29,12 +14,13 @@ class Products(db.Model):
     brand = db.Column(db.String, nullable=False)
     platform = db.Column(db.String, nullable=False)
     type = db.Column(db.String, nullable=False)
+    category = db.Column(db.Enum('accessory', 'console', 'videogame', name='category_enum'), nullable=False)
     state = db.Column(db.Boolean)
     promoted = db.Column(db.Boolean, default=False)
     price = db.Column(db.Float, nullable=False)
     stock = db.Column(db.Integer, default=1)
     seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    
 
     #Relationships
     products_in_order = db.relationship('ProductsInOrder', backref= 'products') 
@@ -56,7 +42,7 @@ class Products(db.Model):
             "price": self.price,
             "stock": self.stock,
             "seller_id": self.seller_id,
-            "category_id": self.category_id
+            "category": self.category
         }
 
 #Table Orders
@@ -115,7 +101,7 @@ class Checkout(db.Model):
     __tablename__ = 'checkout'
     id = db.Column(db.Integer, primary_key=True)
     payment_method = db.Column(db.String, nullable=False)
-    status = db.Column(db.String)
+    status = db.Column(db.Enum('Pending', 'Paid', 'Sent','Transit','Received', name='status_enum'), nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
@@ -159,33 +145,24 @@ class Users(db.Model):
     role = db.Column(db.String)
     shoppingCart = db.Column(db.ARRAY(db.Integer))
 
+    #Relationships
+    favorites = db.relationship("Favorites", backref='user', lazy=True)
+
     def serialize(self):
         return {
             "id": self.id,
             "email": self.email,
-            "password": self.password,
             "userName": self.userName,
             "avatar": self.avatar,
             "description": self.description,
             "address": self.address,
             "postal_code": self.postal_code,
             "city": self.city,
+            "favorites": [fav.serilize() for fav in self.favorites],
             "following": self.following,
             "subscription": self.subscription,
             "role": self.role,
             "shoppingCart": self.shoppingCart
-        }
-
-# table Cathegories
-class Categories(db.Model):
-    __tablename__ = 'categories'
-    id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.String, nullable=False)
-
-    def serialize(self):
-        return {
-            "id": self.id,
-            "category": self.category
         }
 
 # table Favorites
@@ -204,7 +181,7 @@ class Favorites(db.Model):
 
 # table Reviews
 class Reviews(db.Model):
-    __tablename__ = 'rewiews'
+    __tablename__ = 'reviews'
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.Text)

@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, Users, Products, Orders, ProductsInOrder, Checkout, Followers, Categories, Favorites, Reviews
+from api.models import db, Users, Products, Orders, ProductsInOrder, Checkout, Followers, Favorites, Reviews
 import json
 
 """

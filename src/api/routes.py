@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Categories, Favorites, Reviews
+from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Favorites, Reviews
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
@@ -488,7 +488,7 @@ def follow_user(followed_id):
         ###### duda
         
 
-# # User to User Endpoints
+# User to User Endpoints
 # @api.route('/users/<int:user_id>/follow', methods=['POST'])
 # def follow_user(user_id):
 #     try:
