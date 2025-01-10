@@ -45,6 +45,7 @@ def register():
         # si existe usuario, devolvemos que ya hay una cuenta con ese correo
         return jsonify({"msg": "User already registered"}), 400
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error':str(error)}), 400
     
 
@@ -81,6 +82,7 @@ def update_user(user_id):
 
         return jsonify({'msg':'User updated successfully'}), 200
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error':'str(error)'}), 400
     
 api.route('/user/<int:user_id>', methods=['DELETE'])       # agregar JWT
@@ -97,6 +99,7 @@ def delete_user(user_id):
 
         return jsonify({'msg': 'User deleted successfully'}), 200
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
 api.route('/users', methods=['GET'])  #para ver otros user
@@ -132,6 +135,7 @@ def follow_user(follow_id):
 
         return jsonify({'msg': 'f user {follow_id} followed successfully'}), 200
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
 
@@ -157,6 +161,7 @@ def login():
         return jsonify({"msg": "Contraseña incorrecta"}), 400
     
     except Exception as error:
+            db.session.rollback()
             return jsonify({'error': str(error)}), 400
 
 #     @api.route('/protected' , methods=['GET'])
@@ -198,6 +203,7 @@ def create_product():
 
         return jsonify({'msg': 'Product created successfully', 'product': new_product}), 201
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
 
@@ -226,6 +232,7 @@ def update_product(product_id):
         db.session.commit()
         return jsonify({'msg': 'Product updated successfully'}), 200
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
 
@@ -245,6 +252,7 @@ def delete_product(product_id):
         db.session.commit()
         return jsonify({'msg': 'Product deleted successfully'}), 200
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error': str(error)}), 400
 
 
@@ -331,6 +339,7 @@ def add_to_favorites():
 
         return jsonify({'msg': 'Added to favorites successfully'}), 201
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
 @api.route('/favorite/<int:product_id>', methods=['DELETE'])           # agregar JWT 
@@ -356,6 +365,7 @@ def remove_from_favorite(product_id):
 
         return jsonify({'msg': 'Removed from favorites successfully'}), 200
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
 api.route('/favorites', methods=['GET'])
@@ -407,6 +417,7 @@ def add_to_checkout():
 
         return jsonify({'msg': 'Product added to the checkout successfully'}), 201
     except Exception as error:
+        db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
 
@@ -431,6 +442,7 @@ def add_to_checkout():
 
 #         return jsonify({'msg':'Product removed from the checkout succesfully'}), 200
 #     except Exception as error:
+#     db.session.rollback()
 #         return jsonify({'error': str(error)}), 400
 
 
