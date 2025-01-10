@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Categories, Favorites, Reviews
+from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Favorites, Reviews
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
@@ -477,72 +477,72 @@ def follow_user(followed_id):
         
 
 # User to User Endpoints
-@api.route('/users/<int:user_id>/follow', methods=['POST'])
-def follow_user(user_id):
-    try:
-        data = request.get_json()
-        followed_id = data.get('followed_id')
-        if not followed_id:
-            return jsonify({"followed_id is required"})
-        new_follow = Followers(follower_id=user_id, followed_id=followed_id)
-        db.session.add(new_follow)
-        db.session.commit()
-        return jsonify({"msg": "Followed successfully"}), 201
-    except Exception as error:
-        return jsonify({"error": str(error)}), 400
+# @api.route('/users/<int:user_id>/follow', methods=['POST'])
+# def follow_user(user_id):
+#     try:
+#         data = request.get_json()
+#         followed_id = data.get('followed_id')
+#         if not followed_id:
+#             return jsonify({"followed_id is required"})
+#         new_follow = Followers(follower_id=user_id, followed_id=followed_id)
+#         db.session.add(new_follow)
+#         db.session.commit()
+#         return jsonify({"msg": "Followed successfully"}), 201
+#     except Exception as error:
+#         return jsonify({"error": str(error)}), 400
     
-@api.route('/users/<int:user_id>/unfollow/<int:followed_id>', methods=['DELETE'])
-def unfollow_user(user_id, followed_id):
-    try:
-        follow = Followers.query.filter_by(follower_id=user_id, followed_id=followed_id).first()
-        if not follow:
-            return jsonify({"error": "Follow relationship not found"}), 404
-        db.session.delete(follow)
-        db.session.commit()
-        return jsonify({"message": "Unfollowed successfully"}), 200
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({"error": message}), 400
-@api.route('/users/<int:user_id>/following', methods=['GET'])
-def get_following(user_id):
-    try:
-        following = Followers.query.filter_by(follower_id=user_id).all()
-        return jsonify([f.serialize() for f in following]), 200
-    except Exception as e:
-        return jsonify({"error": message}), 400
-# User to Reviews Endpoints
-@api.route('/users/<int:user_id>/reviews', methods=['POST'])
-def add_review(user_id):
-    try:
-        data = request.get_json()
-        product_id = data.get('product_id')
-        rating = data.get('rating')
-        comment = data.get('comment')
-        if not all([product_id, rating, comment]):
-            return handle_error("product_id, rating, and comment are required")
-        new_review = Reviews(user_id=user_id, product_id=product_id, rating=rating, comment=comment)
-        db.session.add(new_review)
-        db.session.commit()
-        return jsonify({"message": "Review added successfully"}), 201
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({"error": message}), 400
-@api.route('/users/<int:user_id>/reviews/<int:review_id>', methods=['DELETE'])
-def delete_review(user_id, review_id):
-    try:
-        review = Reviews.query.filter_by(id=review_id, user_id=user_id).first()
-        if not review:
-            return jsonify({"error": "Review not found"}), 404
-        db.session.delete(review)
-        db.session.commit()
-        return jsonify({"message": "Review deleted successfully"}), 200
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({"error": message}), 400
-@api.route('/users/<int:user_id>/reviews', methods=['GET'])
-def get_reviews(user_id):
-    try:
-        reviews = Reviews.query.filter_by(user_id=user_id).all()
-        return jsonify([r.serialize() for r in reviews]), 200
-    except Exception as e:
-        return jsonify({"error": message}), 400
+# @api.route('/users/<int:user_id>/unfollow/<int:followed_id>', methods=['DELETE'])
+# def unfollow_user(user_id, followed_id):
+#     try:
+#         follow = Followers.query.filter_by(follower_id=user_id, followed_id=followed_id).first()
+#         if not follow:
+#             return jsonify({"error": "Follow relationship not found"}), 404
+#         db.session.delete(follow)
+#         db.session.commit()
+#         return jsonify({"message": "Unfollowed successfully"}), 200
+#     except Exception as e:
+#         db.session.rollback()
+#         return jsonify({"error": message}), 400
+# @api.route('/users/<int:user_id>/following', methods=['GET'])
+# def get_following(user_id):
+#     try:
+#         following = Followers.query.filter_by(follower_id=user_id).all()
+#         return jsonify([f.serialize() for f in following]), 200
+#     except Exception as e:
+#         return jsonify({"error": message}), 400
+# # User to Reviews Endpoints
+# @api.route('/users/<int:user_id>/reviews', methods=['POST'])
+# def add_review(user_id):
+#     try:
+#         data = request.get_json()
+#         product_id = data.get('product_id')
+#         rating = data.get('rating')
+#         comment = data.get('comment')
+#         if not all([product_id, rating, comment]):
+#             return handle_error("product_id, rating, and comment are required")
+#         new_review = Reviews(user_id=user_id, product_id=product_id, rating=rating, comment=comment)
+#         db.session.add(new_review)
+#         db.session.commit()
+#         return jsonify({"message": "Review added successfully"}), 201
+#     except Exception as e:
+#         db.session.rollback()
+#         return jsonify({"error": message}), 400
+# @api.route('/users/<int:user_id>/reviews/<int:review_id>', methods=['DELETE'])
+# def delete_review(user_id, review_id):
+#     try:
+#         review = Reviews.query.filter_by(id=review_id, user_id=user_id).first()
+#         if not review:
+#             return jsonify({"error": "Review not found"}), 404
+#         db.session.delete(review)
+#         db.session.commit()
+#         return jsonify({"message": "Review deleted successfully"}), 200
+#     except Exception as e:
+#         db.session.rollback()
+#         return jsonify({"error": message}), 400
+# @api.route('/users/<int:user_id>/reviews', methods=['GET'])
+# def get_reviews(user_id):
+#     try:
+#         reviews = Reviews.query.filter_by(user_id=user_id).all()
+#         return jsonify([r.serialize() for r in reviews]), 200
+#     except Exception as e:
+#         return jsonify({"error": message}), 400
