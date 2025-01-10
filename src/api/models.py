@@ -22,6 +22,7 @@ db = SQLAlchemy()
 class Products(db.Model):
     __tablename__ = 'products'
     id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     photo = db.Column(db.String, nullable=False)
     year = db.Column(db.Integer, nullable=False)
@@ -43,6 +44,7 @@ class Products(db.Model):
     def serialize(self):
         return {
             "id": self.id,
+            "name": self.name,
             "description": self.description,
             "photo": self.photo,
             "year": self.year,
