@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 67911c073f58
+Revision ID: 2d9472db4a53
 Revises: 
-Create Date: 2025-01-10 18:51:03.362585
+Create Date: 2025-01-10 19:36:47.954075
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '67911c073f58'
+revision = '2d9472db4a53'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -68,7 +68,7 @@ def upgrade():
     sa.Column('brand', sa.String(), nullable=False),
     sa.Column('platform', sa.String(), nullable=False),
     sa.Column('type', sa.String(), nullable=False),
-    sa.Column('category', sa.Enum(), nullable=False),
+    sa.Column('category', sa.Enum('accessory', 'console', 'videogame', name='category_enum'), nullable=False),
     sa.Column('state', sa.Boolean(), nullable=True),
     sa.Column('promoted', sa.Boolean(), nullable=True),
     sa.Column('price', sa.Float(), nullable=False),
@@ -80,7 +80,7 @@ def upgrade():
     op.create_table('checkout',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('payment_method', sa.String(), nullable=False),
-    sa.Column('status', sa.String(), nullable=True),
+    sa.Column('status', sa.Enum('Pending', 'Paid', 'Sent', 'Transit', 'Received', name='status_enum'), nullable=False),
     sa.Column('order_id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['order_id'], ['orders.id'], ),

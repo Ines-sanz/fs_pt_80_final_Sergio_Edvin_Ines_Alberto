@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
-from enum import Enum
 
 db = SQLAlchemy()
+
 
 #Table Products    
 class Products(db.Model):
