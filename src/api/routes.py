@@ -15,9 +15,14 @@ CORS(api)
 
 ## ······················································· Cómo USER (profile):
 
-@api.route('/register', methods=['POST'])           # agregar JWT
+@api.route('/register', methods=['POST'])          
+@jwt_required()
 def register():
-    try:        
+    try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401
         # aqui extraemos info
         email = request.json.get('email', None)
         password = request.json.get('password', None)
@@ -49,9 +54,14 @@ def register():
         return jsonify({'error':str(error)}), 400
     
 
-@api.route('/user/<int:user_id>', methods=['PUT'])       # agregar JWT
+@api.route('/user/<int:user_id>', methods=['PUT'])       
+@jwt_required()
 def update_user(user_id):
     try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401
          # extract new data from the request
         user_name = request.json.get('user_name')
         description = request.json.get('description')
@@ -85,9 +95,14 @@ def update_user(user_id):
         db.session.rollback()
         return jsonify({'error':'str(error)'}), 400
     
-api.route('/user/<int:user_id>', methods=['DELETE'])       # agregar JWT
+api.route('/user/<int:user_id>', methods=['DELETE'])
+@jwt_required()      
 def delete_user(user_id):
     try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401
         #retrieve the user by id
         user = Users.query.get(user_id)
         if not user:
@@ -112,38 +127,19 @@ def get_users():
         return jsonify(users_list), 200
     except Exception as error:
         return jsonify({'error': str(error)}), 400
-    
-    
-api.route('/follow/<int:follow_id', methods=['POST'])         # agregar JWT
-def follow_user(follow_id):
-    try:
-        current_user_id = request.json.get('user_id', None)
 
-        if not current_user_id:
-            return jsonify({'msg': 'Missing current user ID'}), 400
-        
-        current_user = Users.query.get(current_user_id)
-        follow_user = Users.query.get(follow_id)
-
-        if not current_user or not follow_user:
-            return jsonify({'msg': 'User not found'}), 404
-        
-        follower = Followers(follower_id = follow_id, followed_id= current_user_id)
-        db.session.add(follower)
-        db.session.commit()
-
-
-        return jsonify({'msg': 'f user {follow_id} followed successfully'}), 200
-    except Exception as error:
-        db.session.rollback()
-        return jsonify({'error': str(error)}), 400
     
 
   ##........................................................ COMO USER LOGIN 
 
-@api.route('/login', methods=['POST'])     
+@api.route('/login', methods=['POST'])  
+@jwt_required()   
 def login():
-    try:        
+    try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401        
         # aqui extraemos info
         email = request.json.get('email', None)
         password = request.json.get('password', None)
@@ -176,9 +172,14 @@ def login():
 
     ##·······················································  Cómo USER(buy/sell):
 
-@api.route('/product', methods=['POST'])          # agregar JWT
+@api.route('/product', methods=['POST']) 
+@jwt_required()     
 def create_product():
     try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401
         #extract product details from the request
         name = request.json.get('name', None)
         description = request.json.get('description', None)
@@ -207,9 +208,14 @@ def create_product():
         return jsonify({'error': str(error)}), 400
     
 
-api.route('/product/<int:product_id>', methods=['PUT'])    # agregar JWT
+api.route('/product/<int:product_id>', methods=['PUT'])  
+@jwt_required()
 def update_product(product_id):
     try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401
         # extract user_id from the request
         user_id = request.json.get('user_id', None)
 
@@ -236,9 +242,14 @@ def update_product(product_id):
         return jsonify({'error': str(error)}), 400
     
 
-@api.route('/product/<int:product_id>', methods=['DELETE']) # agregar JWT   hemos quedado
+@api.route('/product/<int:product_id>', methods=['DELETE'])
+@jwt_required()
 def delete_product(product_id):
     try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401
         #extract user id from the request
         user_id = request.json.get('user_id', None)
 
@@ -316,9 +327,14 @@ def get_product(product_id):
 
     ##······················································· Cómo USER favs. 
 
-api.route('/favorites', methods=['POST'])       # agregar JWT
+api.route('/favorites', methods=['POST'])
+@jwt_required()
 def add_to_favorites():
     try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401
         #extract user_id and product_id from the request
         user_id = request.json.get('user_id', None)
         product_id = request.json.get('product_id', None)
@@ -342,10 +358,15 @@ def add_to_favorites():
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-@api.route('/favorite/<int:product_id>', methods=['DELETE'])           # agregar JWT 
+@api.route('/favorite/<int:product_id>', methods=['DELETE']) 
+@jwt_required
 @jwt_required()
 def remove_from_favorite(product_id):
-    try: 
+    try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401 
         #extract user_id from the request
         id = get_jwt_identity()
         user_id = Users.query.get(id)  
@@ -421,69 +442,57 @@ def add_to_checkout():
         return jsonify({'error': str(error)}), 400
     
 
-# @api.route('/checkout/<int:product_id>', methods=['DELETE'])
-# def remove_from_checkout(product_id):
-#     try:
-#         #Extract user_id from the request
-#         user_id = request.json.get('user_id', None)
-
-#         #validate required fields
-#         if not user_id:
-#             return jsonify({'msg': 'User ID is required'}), 400
-    
-#         #find the checkout item by user_id and product_id
-#         checkout_item = Checkout.query.filter_by(user_id=user_id, product_id=product_id).first()
-#         if not checkout_item:
-#             return jsonify({'msg': 'Product not found in checkout'}), 404
-        
-#         #remove from chechout 
-#         db.session.delete(checkout_item)
-#         db.session.commit()
-
-#         return jsonify({'msg':'Product removed from the checkout succesfully'}), 200
-#     except Exception as error:
-#     db.session.rollback()
-#         return jsonify({'error': str(error)}), 400
-
-
-    
-
-# @api.route('/checkout', methods=['GET'])
-# def get_checkout():
-#     try:
-#         # Extract user_id from the request
-#         user_id = request.args.get('user_id', None)
-
-#         #validate required fields
-#         if not user_id:
-#             return jsonify({'msg': 'user ID is required'}), 400
-        
-#         #retrieve all checkout items for the user
-#         checkout_items = Checkout.query.filter_by(user_id=user_id).all()
-#         checkout_list = [{'id': item.id, 'product_id': item.product_id} for item in checkout_items]
-
-#         return jsonify({'checkout': checkout_list}), 200
-#     except Exception as error:
-#         return jsonify({'error': str(error)}),400
-    
-
-@api.route('/users/follow', methods=['POST'])
+@api.route('/checkout/<int:product_id>', methods=['DELETE'])
 @jwt_required()
-def follow_user(followed_id):
+def remove_from_checkout(product_id):
     try:
-        id = get_jwt_identity()
-        followed_id = request.json.get('followed_id', None)
+        user_id = get_jwt_identity()
+        product_id = request.json.get('product_id', None)
+        #Extract user_id from the request
+        user_id = request.json.get('user_id', None)
 
-        if not followed_id:
-            return jsonify({'msg':'Followed ID is required'}), 400
-        new_follower = Followers(follower_id= id, followed_id=followed_id)
+        #validate required fields
+        if not user_id:
+            return jsonify({'msg': 'User ID is required'}), 400
+    
+        #find the checkout item by user_id and product_id
+        checkout_item = Checkout.query.filter_by(user_id=user_id, product_id=product_id).first()
+        if not checkout_item:
+            return jsonify({'msg': 'Product not found in checkout'}), 404
         
-        db.session.add(new_follower)
+        #remove from chechout 
+        db.session.delete(checkout_item)
         db.session.commit()
-        return jsonify({'msg': 'Followed succesfully'}), 201
+
+        return jsonify({'msg':'Product removed from the checkout succesfully'}), 200
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
+
+
+    
+
+@api.route('/checkout', methods=['GET'])
+def get_checkout():
+    try:
+        # Extract user_id from the request
+        user_id = request.args.get('user_id', None)
+
+        #validate required fields
+        if not user_id:
+            return jsonify({'msg': 'user ID is required'}), 400
+        
+        #retrieve all checkout items for the user
+        checkout_items = Checkout.query.filter_by(user_id=user_id).all()
+        checkout_list = [{'id': item.id, 'product_id': item.product_id} for item in checkout_items]
+
+        return jsonify({'checkout': checkout_list}), 200
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({'error': str(error)}),400
+    
+
+
 
         ###### duda
         
