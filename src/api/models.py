@@ -147,6 +147,11 @@ class Users(db.Model):
 
     #Relationships
     favorites = db.relationship("Favorites", backref='user', lazy=True)
+    followers= db.relationship('Followers', backref='users')
+    reviews = db.relationship('Reviews', backref='users')
+    orders_as_buyer = db.relationship("Orders", foreign_keys=[Orders.buyer_id], backref='buyer', lazy=True)
+    orders_as_seller = db.relationship("Orders", foreign_keys=[Orders.seller_id], backref='seller', lazy=True)
+    products = db.relationship('Products', backref='users')
 
     def serialize(self):
         return {
