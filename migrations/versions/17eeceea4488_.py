@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 2fb4fd9a8940
+Revision ID: 17eeceea4488
 Revises: 
-Create Date: 2025-01-13 17:57:19.439786
+Create Date: 2025-01-13 20:10:14.913616
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '2fb4fd9a8940'
+revision = '17eeceea4488'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -26,7 +26,7 @@ def upgrade():
     sa.Column('avatar', sa.String(), nullable=True),
     sa.Column('description', sa.String(), nullable=True),
     sa.Column('address', sa.String(), nullable=False),
-    sa.Column('postal_code', sa.Integer(), nullable=False),
+    sa.Column('postalCode', sa.Integer(), nullable=False),
     sa.Column('city', sa.String(), nullable=False),
     sa.Column('following', sa.ARRAY(sa.Integer()), nullable=True),
     sa.Column('subscription', sa.Boolean(), nullable=True),
@@ -63,12 +63,12 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('description', sa.String(), nullable=False),
-    sa.Column('photo', sa.String(), nullable=False),
+    sa.Column('img', sa.String(), nullable=False),
     sa.Column('year', sa.Integer(), nullable=False),
     sa.Column('brand', sa.String(), nullable=False),
     sa.Column('platform', sa.String(), nullable=False),
     sa.Column('type', sa.String(), nullable=False),
-    sa.Column('category', sa.Enum('accessory', 'console', 'videogame', name='category_enum'), nullable=False),
+    sa.Column('category', sa.Enum('accessory', 'console', 'videogames', name='category_enum'), nullable=False),
     sa.Column('state', sa.Boolean(), nullable=True),
     sa.Column('promoted', sa.Boolean(), nullable=True),
     sa.Column('price', sa.Float(), nullable=False),
