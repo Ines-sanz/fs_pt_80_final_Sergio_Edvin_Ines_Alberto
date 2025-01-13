@@ -1,0 +1,48 @@
+.my-footer{
+    background-color:#19191d;
+}
+
+.copyrigth{
+    font-family: "Kode Mono", serif;
+    font-size: 18px;
+    color: white;
+}
+
+.my-footer img{
+    height: 80px;
+}
+
+.my-footer li{
+    list-style-type: none; 
+  padding: 0;
+  margin: 0; 
+}
+.footer-menu a {
+    text-decoration: none;
+   color: #AFAFB2;
+   display: inline-block; 
+  position: relative; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+.footer-menu a:hover {
+    text-decoration: none;
+   color: #EDEDEF;
+   transform: translateY(-5px);
+}
+
+@media(max-width:990px){
+    .my-footer img{
+        height: 40px;
+    }
+
+    .copyrigth{
+        font-size: 15px;
+    }
+
+    .footer-menu{
+        display: none;
+    }
+    
+}

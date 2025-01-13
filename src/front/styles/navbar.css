@@ -1,0 +1,45 @@
+.my-navbar{
+    background-color: #19191d;
+    font-family: "Kode Mono", serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 2px; 
+}
+.navbar-nav {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%; 
+  }
+  
+.navbar-nav a{
+    color: #EDEDEF;
+    display: inline-block; 
+  position: relative; 
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.navbar-nav a:hover{
+    color: #FCEE21;
+    transform: translateY(-5px);
+}
+.navbar-nav a:focus{
+    color: #FCEE21;
+}
+.my-dropdown a{
+    color: #19191d;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.my-navbar-button{
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 18px;
+    padding: 2px;
+    border-radius: 10px;
+    border: #FCEE21 solid 1px;
+}
+
+.nav-shopping-bag{
+height: 30px;
+}
