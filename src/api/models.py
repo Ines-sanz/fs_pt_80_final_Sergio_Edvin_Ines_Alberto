@@ -21,6 +21,7 @@ class Products(db.Model):
     stock = db.Column(db.Integer, default=1)
     seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     
+    
 
     #Relationships
     products_in_order = db.relationship('ProductsInOrder', backref= 'products') 
