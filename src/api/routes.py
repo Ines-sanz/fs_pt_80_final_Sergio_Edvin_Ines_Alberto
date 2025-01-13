@@ -454,6 +454,17 @@ def add_to_checkout():
 #     except Exception as error:
 #         return jsonify({'error': str(error)}),400
     
+# uSer to User followed
+
+@api.route('/users/following', methods=['GET'])
+@jwt_required()
+def get_following():
+    try:
+        id = get_jwt_identity()
+        following = Followers.query.filter_by(follower_id=id).all()
+        return jsonify([f.serialize() for f in following]), 200
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400
 
 @api.route('/users/follow', methods=['POST'])
 @jwt_required()
@@ -463,86 +474,83 @@ def follow_user(followed_id):
         followed_id = request.json.get('followed_id', None)
 
         if not followed_id:
-            return jsonify({'msg':'Followed ID is required'}), 400
+            return jsonify({'error':'Followed ID is required'}), 400
+
         new_follower = Followers(follower_id= id, followed_id=followed_id)
-        
         db.session.add(new_follower)
         db.session.commit()
         return jsonify({'msg': 'Followed succesfully'}), 201
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
-
-        ###### duda
         
 
-# User to User Endpoints
-# @api.route('/users/<int:user_id>/follow', methods=['POST'])
-# def follow_user(user_id):
-#     try:
-#         data = request.get_json()
-#         followed_id = data.get('followed_id')
-#         if not followed_id:
-#             return jsonify({"followed_id is required"})
-#         new_follow = Followers(follower_id=user_id, followed_id=followed_id)
-#         db.session.add(new_follow)
-#         db.session.commit()
-#         return jsonify({"msg": "Followed successfully"}), 201
-#     except Exception as error:
-#         return jsonify({"error": str(error)}), 400
-    
-# @api.route('/users/<int:user_id>/unfollow/<int:followed_id>', methods=['DELETE'])
-# def unfollow_user(user_id, followed_id):
-#     try:
-#         follow = Followers.query.filter_by(follower_id=user_id, followed_id=followed_id).first()
-#         if not follow:
-#             return jsonify({"error": "Follow relationship not found"}), 404
-#         db.session.delete(follow)
-#         db.session.commit()
-#         return jsonify({"message": "Unfollowed successfully"}), 200
-#     except Exception as e:
-#         db.session.rollback()
-#         return jsonify({"error": message}), 400
-# @api.route('/users/<int:user_id>/following', methods=['GET'])
-# def get_following(user_id):
-#     try:
-#         following = Followers.query.filter_by(follower_id=user_id).all()
-#         return jsonify([f.serialize() for f in following]), 200
-#     except Exception as e:
-#         return jsonify({"error": message}), 400
-# # User to Reviews Endpoints
-# @api.route('/users/<int:user_id>/reviews', methods=['POST'])
-# def add_review(user_id):
-#     try:
-#         data = request.get_json()
-#         product_id = data.get('product_id')
-#         rating = data.get('rating')
-#         comment = data.get('comment')
-#         if not all([product_id, rating, comment]):
-#             return handle_error("product_id, rating, and comment are required")
-#         new_review = Reviews(user_id=user_id, product_id=product_id, rating=rating, comment=comment)
-#         db.session.add(new_review)
-#         db.session.commit()
-#         return jsonify({"message": "Review added successfully"}), 201
-#     except Exception as e:
-#         db.session.rollback()
-#         return jsonify({"error": message}), 400
-# @api.route('/users/<int:user_id>/reviews/<int:review_id>', methods=['DELETE'])
-# def delete_review(user_id, review_id):
-#     try:
-#         review = Reviews.query.filter_by(id=review_id, user_id=user_id).first()
-#         if not review:
-#             return jsonify({"error": "Review not found"}), 404
-#         db.session.delete(review)
-#         db.session.commit()
-#         return jsonify({"message": "Review deleted successfully"}), 200
-#     except Exception as e:
-#         db.session.rollback()
-#         return jsonify({"error": message}), 400
-# @api.route('/users/<int:user_id>/reviews', methods=['GET'])
-# def get_reviews(user_id):
-#     try:
-#         reviews = Reviews.query.filter_by(user_id=user_id).all()
-#         return jsonify([r.serialize() for r in reviews]), 200
-#     except Exception as e:
-#         return jsonify({"error": message}), 400
+@api.route('/users/unfollow/<int:followed_id>', methods=['DELETE'])
+@jwt_required()
+def unfollow_user(followed_id):
+    try:
+        id = get_jwt_identity()
+        follow = Followers.query.filter_by(follower_id=id, followed_id=followed_id).first()
+
+        if not follow:
+            return jsonify({'error': 'Follow relationship not found'}), 404
+
+        db.session.delete(follow)
+        db.session.commit()
+        return jsonify({'msg': 'Unfollowed user successfully'}), 200
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({'error': str(error)}), 400
+
+
+# User to Review
+
+@api.route('/users/reviews', methods=['GET'])
+@jwt_required()
+def get_reviews():
+    try:
+        id = get_jwt_identity()
+        reviews = Reviews.query.filter_by(user_id=id).all()
+        return jsonify([r.serialize() for r in reviews]), 200
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400
+
+
+@api.route('/users/reviews', methods=['POST'])
+@jwt_required()
+def add_review():
+    try:
+        id = get_jwt_identity()
+        product_id = request.get.json('product_id')
+        rating = request.get.json('rating')
+        comment = request.get.json('comment')
+
+        if not all([product_id, rating, comment]):
+            return jsonify({'error': 'product_id, rating, and comment are required'}), 400
+
+        new_review = Reviews(user_id=id, product_id=product_id, rating=rating, comment=comment)
+        db.session.add(new_review)
+        db.session.commit()
+        return jsonify({'msg': 'Review added successfully'}), 201
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({'error': str(error)}), 400
+
+
+@api.route('/users/reviews/<int:review_id>', methods=['DELETE'])
+@jwt_required()
+def delete_review(review_id):
+    try:
+        id = get_jwt_identity()
+        review = Reviews.query.filter_by(id=review_id, user_id=id).first()
+
+        if not review:
+            return jsonify({'error': 'Review not found'}), 404
+
+        db.session.delete(review)
+        db.session.commit()
+        return jsonify({'msg': 'Review deleted successfully'}), 200
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({'error': str(error)}), 400
+
