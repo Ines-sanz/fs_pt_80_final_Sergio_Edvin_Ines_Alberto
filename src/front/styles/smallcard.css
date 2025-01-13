@@ -1,0 +1,52 @@
+.product-sm-bg{
+    background-color: white;
+    width: 100%;
+    padding: 8px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.videogame-sm-bg img{
+    background-color: white;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+
+.small-c-brand{
+    font-family: "Kanit", serif;
+    font-weight: 300; 
+    color: #AFAFB2;
+    font-size: 15px;
+}
+
+.small-c-name{
+    font-family: "Kanit", serif;
+    font-weight: 400; 
+    color: white;
+    font-size: 24px;
+}
+.small-c-price{
+    font-family: "Kanit", serif;
+    font-weight: 500; 
+    letter-spacing: 1px; 
+    color: white;
+    font-size: 16px;
+    background-color: #3A39FF;
+    padding: 3px 13px ;
+    border-radius: 30px;
+}
+
+.fav-icon{
+   
+    font-size: 30px;
+    color: rgba(255, 255, 255);
+    opacity: 0.4;
+    transform: ease 0.2s;
+}
+
+.fav-icon:hover {
+    color: white;
+    transform: scale(1.2);
+}

@@ -12,23 +12,30 @@
     width: 100%; 
   }
   
-.navbar-nav a{
+.float{
     color: #EDEDEF;
     display: inline-block; 
   position: relative; 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.navbar-nav a:hover{
+.float:hover{
     color: #FCEE21;
     transform: translateY(-5px);
 }
-.navbar-nav a:focus{
+.float:focus{
     color: #FCEE21;
 }
 .my-dropdown a{
     color: #19191d;
     font-weight: 500;
     text-transform: uppercase;
+    text-decoration: none;
+}
+.my-dropdown a:hover{
+    color: #19191d;
+    background-color: hsla(56, 97%, 56%, 0.8);
+    border-radius: 30px;
+    transform: scale(1.1);
 }
 
 .my-navbar-button{

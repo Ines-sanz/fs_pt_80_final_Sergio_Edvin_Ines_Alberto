@@ -1,7 +1,22 @@
-/*
-    home.css: This website contains selectors only used in home.css
+.home-banners img{
+border-radius: 10px;
+transition: all 0.4s ease;
+}
+.home-banners img:hover{
+    transform: scale(1.01);
+    border: solid 1px #FCEE21;
+    }
 
-    All pages share the styles on index.css but you should create 
-    one more css for each page that will contain the selected used 
-    on that page only (the ones not reused in other pages).
-*/
+.t-seccion{
+    text-transform: uppercase;
+    font-weight: 300;
+    font-family: "Kode Mono", serif;
+    color: white;
+    font-size: 32px;
+
+}
+
+.home-type img{
+    border-radius: 10px !important;
+    object-fit: cover !important;
+}

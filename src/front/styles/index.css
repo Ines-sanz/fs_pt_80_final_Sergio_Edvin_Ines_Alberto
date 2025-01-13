@@ -7,11 +7,15 @@ margin: 0;
 font-family:"Kanit", serif;
 font-weight: 400;
 font-style: normal;
-overflow: hidden;
-max-width: 100vw;
+overflow-x: hidden;
 background-color: black;
+background-size: cover;
 background-image: url(https://res.cloudinary.com/dr0wlij0c/image/upload/v1736769296/fondo-finalboss-opacity_wgwrxe.png) ;
 background-repeat: repeat-y;
 background-position: center start;
+}
 
+.container{
+    width: 70%;
+    margin: auto;
 }

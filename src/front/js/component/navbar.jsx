@@ -8,11 +8,13 @@ export const Navbar = () => {
       <nav className="navbar navbar-expand-lg my-navbar py-3 px-lg-3  px-0">
         <div className="container-fluid">
           <div className="col-2 text-center">
+          <Link to="/">
             <img
               src="https://res.cloudinary.com/dr0wlij0c/image/upload/c_thumb,w_200,g_face/v1736453861/web-illustrations/logo.png"
               className="img-fluid"
               alt=""
             />
+          </Link>
           </div>
           <button
             className="navbar-toggler"
@@ -29,8 +31,9 @@ export const Navbar = () => {
   <ul className="navbar-nav me-auto mb-2 mb-lg-0 mt-5 d-flex justify-content-between align-items-center ">
     
     <li className="nav-item dropdown">
+
       <a
-        className="nav-link dropdown-toggle"
+        className="nav-link dropdown-toggle float"
         href="#"
         role="button"
         data-bs-toggle="dropdown"
@@ -39,6 +42,11 @@ export const Navbar = () => {
         STORE
       </a>
       <ul className="dropdown-menu my-dropdown">
+      <li>
+        <Link to="/store">
+          <a className="dropdown-item" href="#">Ver todo</a>
+        </Link>
+        </li>
         <li>
           <a className="dropdown-item" href="#">Consolas</a>
         </li>
@@ -53,13 +61,17 @@ export const Navbar = () => {
 
     <div className="d-flex align-items-center">
       <li className="nav-item">
-        <a className="nav-link " aria-current="page" href="#">CONTACTO</a>
+      <Link to="/contacto">
+        <a className="nav-link float" aria-current="page" href="#">CONTACTO</a>
+      </Link>
       </li>
       <li className="nav-item ms-3">
-        <button className="my-navbar-button px-3" type="submit">PERFIL</button>
+      <Link to="/perfil">
+        <button className="my-navbar-button px-3 float">PERFIL</button>
+        </Link>
       </li>
 	  <li className="nav-item">
-        <a className="nav-link" aria-current="page" href="#"><img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/shopping-bag-icon.png" className="img-fluid nav-shopping-bag" alt="" /></a>
+        <a className="nav-link float" aria-current="page" href="#"><img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/shopping-bag-icon.png" className="img-fluid nav-shopping-bag" alt="" /></a>
       </li>
     </div>
   </ul>
