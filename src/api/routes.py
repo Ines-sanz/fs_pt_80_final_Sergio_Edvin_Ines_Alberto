@@ -16,13 +16,8 @@ CORS(api)
 ## ······················································· Cómo USER (profile):
 
 @api.route('/register', methods=['POST'])          
-@jwt_required()
 def register():
     try:
-        id = get_jwt_identity()
-        user = Users.query.get(id)
-        if not user:
-            return jsonify({'msg':'Unauthorized: User not found'}), 401
         # aqui extraemos info
         email = request.json.get('email', None)
         password = request.json.get('password', None)
@@ -95,7 +90,7 @@ def update_user(user_id):
         db.session.rollback()
         return jsonify({'error':'str(error)'}), 400
     
-api.route('/user/<int:user_id>', methods=['DELETE'])
+@api.route('/user/<int:user_id>', methods=['DELETE'])
 @jwt_required()      
 def delete_user(user_id):
     try:
@@ -117,7 +112,7 @@ def delete_user(user_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-api.route('/users', methods=['GET'])  #para ver otros user
+@api.route('/users', methods=['GET'])  #para ver otros user
 def get_users():
     try:
         # retrieve all users
@@ -133,13 +128,8 @@ def get_users():
   ##........................................................ COMO USER LOGIN 
 
 @api.route('/login', methods=['POST'])  
-@jwt_required()   
 def login():
-    try:
-        id = get_jwt_identity()
-        user = Users.query.get(id)
-        if not user:
-            return jsonify({'msg':'Unauthorized: User not found'}), 401        
+    try: 
         # aqui extraemos info
         email = request.json.get('email', None)
         password = request.json.get('password', None)
@@ -208,7 +198,7 @@ def create_product():
         return jsonify({'error': str(error)}), 400
     
 
-api.route('/product/<int:product_id>', methods=['PUT'])  
+@api.route('/product/<int:product_id>', methods=['PUT'])  
 @jwt_required()
 def update_product(product_id):
     try:
@@ -268,7 +258,7 @@ def delete_product(product_id):
 
 
 
-api.route('/products', methods=['GET'])
+@api.route('/products', methods=['GET'])
 def get_products():
     try:
         # bring all products
@@ -295,7 +285,7 @@ def get_products():
         return jsonify({'error': str(error)})
     
 
-api.route('/product/<int:product_id>', methods=['GET'])  
+@api.route('/product/<int:product_id>', methods=['GET'])  
 def get_product(product_id):
     try:
         # bring one product with id
@@ -327,7 +317,7 @@ def get_product(product_id):
 
     ##······················································· Cómo USER favs. 
 
-api.route('/favorites', methods=['POST'])
+@api.route('/favorites', methods=['POST'])
 @jwt_required()
 def add_to_favorites():
     try:
@@ -358,8 +348,7 @@ def add_to_favorites():
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-@api.route('/favorite/<int:product_id>', methods=['DELETE']) 
-@jwt_required
+@api.route('/favorite/<int:product_id>', methods=['DELETE'])
 @jwt_required()
 def remove_from_favorite(product_id):
     try:
@@ -389,7 +378,7 @@ def remove_from_favorite(product_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-api.route('/favorites', methods=['GET'])
+@api.route('/favorites', methods=['GET'])
 @jwt_required()
 def get_favorites():
     try:
