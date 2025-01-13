@@ -21,6 +21,7 @@ class Products(db.Model):
     stock = db.Column(db.Integer, default=1)
     seller_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     
+    
 
     #Relationships
     products_in_order = db.relationship('ProductsInOrder', backref= 'products') 
@@ -147,6 +148,14 @@ class Users(db.Model):
 
     #Relationships
     favorites = db.relationship("Favorites", backref='user', lazy=True)
+    reviews = db.relationship('Reviews', backref='users')
+    orders_as_buyer = db.relationship("Orders", foreign_keys=[Orders.buyer_id], backref='buyer', lazy=True)
+    orders_as_seller = db.relationship("Orders", foreign_keys=[Orders.seller_id], backref='seller', lazy=True)
+    products = db.relationship('Products', backref='users')
+
+    followed_by = db.relationship('Followers', foreign_keys='Followers.followed_id', backref='followed', lazy=True)  # Users following this user
+    following_users = db.relationship('Followers', foreign_keys='Followers.follower_id', backref='follower', lazy=True)  # Users this user is following
+    
 
     def serialize(self):
         return {
@@ -159,7 +168,8 @@ class Users(db.Model):
             "postal_code": self.postal_code,
             "city": self.city,
             "favorites": [fav.serilize() for fav in self.favorites],
-            "following": self.following,
+            "followed_by": [follower.serialize() for follower in self.followed_by],
+            "following_users": [followed.serialize() for followed in self.following_users],
             "subscription": self.subscription,
             "role": self.role,
             "shoppingCart": self.shoppingCart
