@@ -1,26 +1,39 @@
-import React, { Component } from "react";
+import React, { Component, useContext} from "react";
+import { Navigate, useNavigate } from "react-router";
 import "../../styles/smallcard.css";
+import { Context } from "../store/appContext";
 
-export const ProductCard = () => (
-  <>
-    <div class="col-10 col-md-5 col-lg-4">
-      {/* <img className="img-fluid" src={props.img} alt={props.name} onClick={handleLink} /> */}
-      <div className="product-sm-bg">
+
+export const ProductCard = (props) => {
+  const{store, actions} = useContext(Context)
+  const navigate = useNavigate();
+
+  const isPromoted = props.promoted === true
+  return (<>
+    <div className="col-10 col-md-5 col-lg-4">
+   
+      <div className={ isPromoted ? "promoted": "product-sm-bg" } >
+        
         <img
           className="img-fluid"
-          src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1735416637/2880px-Nintendo-Switch-wJoyCons-BlRd-Standing-FL_fkkske.png"
+          src={props.img}
+          alt={props.name}
         />
       </div>
 
       <div className="px-0 mt-2">
-        <span class="small-c-brand">Brand</span>
-        <h5 class="small-c-name">Product Name</h5>
+        <span className="small-c-brand">{props.brand}</span>
+        <h5 className="small-c-name">{props.name}</h5>
         <div  className="d-flex justify-content-between">
-        <span class="small-c-price"> 99.99€</span>   
+        <span className="small-c-price">
+            {props.price !== undefined && !isNaN(props.price)
+              ? `${props.price.toFixed(2)}€`
+              : "N/A"}
+          </span>  
         <span className="fa-solid fa-star fav-icon"></span>
         </div>
         
       </div>
     </div>
-  </>
-);
+  </>)
+};

@@ -34,15 +34,39 @@ export const Home = () => {
       </div>
       <div className="my-5">
         <h3 className="t-seccion">Consolas</h3>
+        <div className="horizontal-scrollable">
         <div className="row flex-nowrap pt-1">
-		<ProductCard/>
+            {store.consoles?.map((console) => (
+              <ProductCard
+                key={console.id}
+                img={console.img}
+                name={console.name}
+                brand={console.brand}
+                price={console.price}
+                promoted={console.promoted}
+                id={console.id}
+              />
+            ))}
+        </div>
         </div>
       </div>
-
+      <div className="divider"></div>
 	  <div className="my-5">
-        <h3 className="t-seccion">Consolas</h3>
+        <h3 className="t-seccion">Videojuegos</h3>
+        <div className="horizontal-scrollable">
         <div className="row flex-nowrap pt-1">
-		<VideogameCard/>
+            {store.videogames?.map((videogame) => (
+              <VideogameCard
+                key={videogame.id}
+                img={videogame.img}
+                name={videogame.name}
+                brand={videogame.brand}
+                price={videogame.price}
+                promoted={videogame.promoted}
+                id={videogame.id}
+              />
+            ))}
+        </div>
         </div>
 		<div className="row my-5 home-type g-2">
 			<img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/rpg.png" alt="" className="col-4" />
@@ -50,11 +74,23 @@ export const Home = () => {
 			<img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/fighting.png" alt="" className="col-4" />
 		</div>
       </div>
-
+            <div className="divider"></div>
 	  <div className="my-5">
         <h3 className="t-seccion">Accesorios</h3>
+        <div className="horizontal-scrollable">
         <div className="row flex-nowrap pt-1">
-		<ProductCard/>
+            {store.accesorys?.map((accesory) => (
+              <ProductCard
+                key={accesory.id}
+                img={accesory.img}
+                name={accesory.name}
+                brand={accesory.brand}
+                price={accesory.price}
+                promoted={accesory.promoted}
+                id={accesory.id}
+              />
+            ))}
+        </div>
         </div>
       </div>
     </div>
