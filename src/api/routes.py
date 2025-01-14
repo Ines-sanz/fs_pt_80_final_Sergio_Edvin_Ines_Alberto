@@ -15,20 +15,21 @@ CORS(api)
 
 ## ······················································· Cómo USER (profile):
 
+#Funciona!!!
 @api.route('/register', methods=['POST'])          
 def register():
     try:
         # aqui extraemos info
         email = request.json.get('email', None)
         password = request.json.get('password', None)
-        user_name = request.json.get('user_name', None)
+        userName = request.json.get('userName', None)
         address = request.json.get('address', None)
-        postal_code = request.json.get('postal_code', None)
+        postalCode = request.json.get('postalCode', None)
         city = request.json.get('city', None)
 
 
         # aqui chequeamos que toda la info este
-        if not email and not password and not user_name and not address and not city and not postal_code:
+        if not email and not password and not userName and not address and not city and not postalCode:
             return jsonify({'msg': 'Missing data'}), 400
         
         # aqui chequeamos si usuario existe
@@ -36,60 +37,77 @@ def register():
 
         # en caso no existe -> creamos usario
         if not check_user:
-            new_user = Users(email=email, password=password, user_name=user_name, address=address, city=city, postal_code=postal_code)  # aqui se creo nuevo usuario
+            new_user = Users(email=email, password=password, userName=userName, address=address, city=city, postalCode=postalCode)  # aqui se creo nuevo usuario
             db.session.add(new_user)                                         # aqui se agrego a la tabla
             db.session.commit()                                                #aqui se almacena cambios en la base de datos
             token = create_access_token(identity=str(new_user.id))
-            return({"msg": "okey", 'token': token, 'user': new_user}), 201
-        
+            user_data = {
+                "id": new_user.id,
+                "email": new_user.email,
+                "userName": new_user.userName,
+                "address": new_user.address,
+                "city": new_user.city,
+                "postalCode": new_user.postalCode
+            }
+
+            return {"msg": "okey", 'token': token, 'user': user_data}, 201
         # si existe usuario, devolvemos que ya hay una cuenta con ese correo
         return jsonify({"msg": "User already registered"}), 400
     except Exception as error:
         db.session.rollback()
         return jsonify({'error':str(error)}), 400
     
-
+#lo he cambiado y ahora si que va, faltaba comprobar valores
 @api.route('/user/<int:user_id>', methods=['PUT'])       
 @jwt_required()
 def update_user(user_id):
     try:
+        # Obtener el usuario autenticado
         id = get_jwt_identity()
         user = Users.query.get(id)
         if not user:
-            return jsonify({'msg':'Unauthorized: User not found'}), 401
-         # extract new data from the request
-        user_name = request.json.get('user_name')
+            return jsonify({'msg': 'Unauthorized: User not found'}), 401
+
+        # Extraer datos del cuerpo de la solicitud
+        userName = request.json.get('userName')
         description = request.json.get('description')
         city = request.json.get('city')
         address = request.json.get('address')
-        postal_code = request.json.get('postal_code')
+        postalCode = request.json.get('postalCode')
         avatar = request.json.get('avatar')
 
-
-        # ensure there's at least one field to update
-        if not user_name or not description or not city or not avatar or not address or not postal_code:
+        # Asegurarse de que al menos un campo está presente
+        if not (userName or description or city or avatar or address or postalCode):
             return jsonify({'msg': 'No data provided to update'}), 400
-        
-        # retrieve the user by ID
+
+        # Obtener el usuario que se desea actualizar
         user = Users.query.get(user_id)
         if not user:
             return jsonify({'msg': 'User not found'}), 404
-        
-        
-        # save the changes to the database
-        user.user_name = user_name
-        user.description = description
-        user.city = city
-        user.address = address
-        user.postal_code = postal_code
-        user.avatar = avatar
-        db.session.commit()
 
-        return jsonify({'msg':'User updated successfully'}), 200
+        # Actualizar solo los campos proporcionados
+        if userName is not None:
+            user.userName = userName
+        if description is not None:
+            user.description = description
+        if city is not None:
+            user.city = city
+        if address is not None:
+            user.address = address
+        if postalCode is not None:
+            user.postalCode = postalCode
+        if avatar is not None:
+            user.avatar = avatar
+
+        # Guardar los cambios en la base de datos
+        db.session.commit()
+        return jsonify({'msg': 'User updated successfully'}), 200
+
     except Exception as error:
         db.session.rollback()
-        return jsonify({'error':'str(error)'}), 400
-    
+        return jsonify({'error': str(error)}), 400
+
+#funciona!!   
 @api.route('/user/<int:user_id>', methods=['DELETE'])
 @jwt_required()      
 def delete_user(user_id):
@@ -99,9 +117,8 @@ def delete_user(user_id):
         if not user:
             return jsonify({'msg':'Unauthorized: User not found'}), 401
         #retrieve the user by id
-        user = Users.query.get(user_id)
-        if not user:
-            return jsonify({'msg': 'User not found'}), 404
+        if user.id != user_id:
+            return jsonify({'msg': 'Unauthorized: You can only delete your own account'}), 404
         
         #delete user
         db.session.delete(user)
@@ -112,6 +129,7 @@ def delete_user(user_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
+#funciona!!!
 @api.route('/users', methods=['GET'])  #para ver otros user
 def get_users():
     try:
@@ -123,10 +141,28 @@ def get_users():
     except Exception as error:
         return jsonify({'error': str(error)}), 400
 
-    
+
+
+
+#he hecho este para traer solo un user, funciona!!
+@api.route('/users/<int:user_id>', methods=['GET'])
+def get_user(user_id):
+    try:
+        # Retrieve a single user by ID
+        user = Users.query.get(user_id)
+
+        # Check if the user exists
+        if not user:
+            return jsonify({'error': 'User not found'}), 404
+
+        return jsonify(user.serialize()), 200
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400
+  
 
   ##........................................................ COMO USER LOGIN 
 
+#funciona!!
 @api.route('/login', methods=['POST'])  
 def login():
     try: 
@@ -257,7 +293,7 @@ def delete_product(product_id):
         return jsonify({'error': str(error)}), 400
 
 
-
+#funciona!!!
 @api.route('/products', methods=['GET'])
 def get_products():
     try:
@@ -268,9 +304,10 @@ def get_products():
                 'id': product.id,
                 'name': product.name,
                 'description': product.description,
-                'photo': product.photo,
+                'img': product.img,
                 'year': product.year,
                 'brand': product.brand,
+                'category': product.category,
                 'platform': product.platform,
                 'type': product.type,
                 'state': product.state,
@@ -284,7 +321,7 @@ def get_products():
     except Exception as error:
         return jsonify({'error': str(error)})
     
-
+#funciona!!!
 @api.route('/product/<int:product_id>', methods=['GET'])  
 def get_product(product_id):
     try:
@@ -298,9 +335,10 @@ def get_product(product_id):
                 'id': product.id,
                 'name': product.name,
                 'description': product.description,
-                'photo': product.photo,
+                'img': product.img,
                 'year': product.year,
                 'brand': product.brand,
+                'category': product.category,
                 'platform': product.platform,
                 'type': product.type,
                 'state': product.state,
