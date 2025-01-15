@@ -1,54 +1,40 @@
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
-		},
-		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
+  return {
+    store: {
+      url: "https://fuzzy-robot-7vrw4x76wpj7cr5qq-3001.app.github.dev/",
+      consoles: [],
+      videogames: [],
+      accesorys: [],
+    },
+    actions: {
+      loadInfo: async () => {
+        try {
+          const store = getStore();
+          const url = `${store.url}/api/products`;
+          const response = await fetch(url);
+          const data = await response.json();
 
-			getMessage: async () => {
-				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
-					const data = await resp.json()
-					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
-					return data;
-				}catch(error){
-					console.log("Error loading message from backend", error)
-				}
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+          const consoles = data.filter((item) => item.category === "console");
+          const videogames = data.filter(
+            (item) => item.category === "videogames"
+          );
+          const accesorys = data.filter(
+            (item) => item.category === "accessory"
+          );
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+          const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
-		}
-	};
+          setStore({
+            consoles: shuffleArray(consoles),
+            videogames: shuffleArray(videogames),
+            accesorys: shuffleArray(accesorys),
+          });
+        } catch (error) {
+          console.error("Error loading data:", error);
+        }
+      },
+    },
+  };
 };
 
 export default getState;

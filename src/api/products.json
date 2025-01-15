@@ -13,6 +13,7 @@
     "description": "### General\nLa Nintendo Entertainment System (NES) fue la consola que revolucion\u00f3 el mundo de los videojuegos en la d\u00e9cada de los 80, marcando el inicio de una nueva era para Nintendo.\n\n### Caracter\u00edsticas\n- Procesador de 8 bits\n- Biblioteca ic\u00f3nica con t\u00edtulos como Super Mario Bros y The Legend of Zelda\n- Dise\u00f1o compacto y resistente\n\n### Ideal para\nColeccionistas y fan\u00e1ticos de los videojuegos retro que buscan revivir la nostalgia de los cl\u00e1sicos.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 149.00
 },
 {
@@ -26,11 +27,12 @@
     "description": "### General\nLa Sega Master System es una consola cl\u00e1sica de 8 bits que ofreci\u00f3 una experiencia de juego alternativa frente a la competencia de la \u00e9poca.\n\n### Caracter\u00edsticas\n- Gr\u00e1ficos avanzados para su generaci\u00f3n\n- Compatibilidad con juegos mediante tarjetas Sega\n- Incluye t\u00edtulos populares como Sonic y Alex Kidd\n\n### Ideal para\nFans de Sega que quieran explorar las ra\u00edces de esta ic\u00f3nica marca.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 199.99
 },
 {
     "name": "Atari 7800",
-    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373396/1920px-Atari-7800-Console-Set_lijraj.jpg",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373918/1920px-Atari-7800-Console-Set_nqtvf5.jpg",
     "year": "1986",
     "brand": "Atari",
     "platform": "Atari Corporation",
@@ -39,11 +41,12 @@
     "description": "### General\nEl Atari 7800 fue dise\u00f1ado para ofrecer compatibilidad retro con juegos de la 2600 y gr\u00e1ficos mejorados para los nuevos t\u00edtulos.\n\n### Caracter\u00edsticas\n- Compatibilidad con m\u00e1s de 500 juegos del Atari 2600\n- Mejores capacidades gr\u00e1ficas y de sonido frente a su predecesor\n- Dise\u00f1o robusto y compacto\n\n### Ideal para\nAmantes de los videojuegos cl\u00e1sicos que buscan una consola retro con una amplia biblioteca de juegos.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 140.00
 },
 {
     "name": "Game & Watch",
-    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373489/Game-and-watch-ball_hd5flw.png",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373917/Game-and-watch-ball_veid2n.png",
     "year": "1980",
     "brand": "Nintendo",
     "platform": "Game & Watch",
@@ -52,11 +55,12 @@
     "description": "### General\nEl Game & Watch de Nintendo es una serie de consolas port\u00e1tiles con pantalla LCD que introdujeron el concepto de juegos port\u00e1tiles.\n\n### Caracter\u00edsticas\n- Pantalla LCD monocrom\u00e1tica\n- Dise\u00f1o ligero y port\u00e1til\n- Juegos integrados espec\u00edficos para cada modelo\n\n### Ideal para\nColeccionistas y fan\u00e1ticos de los primeros pasos de Nintendo en el mundo de los videojuegos.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 40.00
 },
 {
     "name": "Super Nintendo Entertainment System (SNES)",
-    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373614/SNES-Mod1-Console-Set_xpvhbg.jpg",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373915/SNES-Mod1-Console-Set_upozmm.jpg",
     "year": "1990",
     "brand": "Nintendo",
     "platform": "Nintendo",
@@ -65,11 +69,12 @@
     "description": "### General\nLa Super Nintendo Entertainment System (SNES) es una consola de 16 bits que consolid\u00f3 el liderazgo de Nintendo en los videojuegos.\n\n### Caracter\u00edsticas\n- Biblioteca ic\u00f3nica con juegos como Super Mario World y The Legend of Zelda: A Link to the Past\n- Procesador de 16 bits para gr\u00e1ficos y sonido avanzados\n- Dise\u00f1o ergon\u00f3mico de los controles\n\n### Ideal para\nAmantes de los videojuegos retro que buscan revivir los a\u00f1os dorados de los 90.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 199.00
 },
 {
     "name": "PlayStation (PS1)",
-    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735374031/PlayStation-SCPH-1001_wybzjb.jpg",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735374080/PlayStation-SCPH-1000-with-Controller_eolbsi.jpg",
     "year": "1994",
     "brand": "Sony",
     "platform": "PlayStation",
@@ -78,11 +83,12 @@
     "description": "### General\nLa primera PlayStation marc\u00f3 el ingreso triunfal de Sony al mundo de las consolas de videojuegos, cambiando para siempre la industria.\n\n### Caracter\u00edsticas\n- Juegos en CD con capacidad para videos y audio de alta calidad\n- Biblioteca extensa con cl\u00e1sicos como Final Fantasy VII y Metal Gear Solid\n- Primer control con sticks anal\u00f3gicos opcionales\n\n### Ideal para\nJugadores que buscan experimentar los t\u00edtulos revolucionarios de los a\u00f1os 90.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 180.50
 },
 {
     "name": "Nintendo 64",
-    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735374153/N64-Console-Set_qpvovs.jpg",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735374172/1920px-Nintendo-64-wController-L_fbcwaa.jpg",
     "year": "1996",
     "brand": "Nintendo",
     "platform": "Nintendo",
@@ -91,6 +97,7 @@
     "description": "### General\nLa Nintendo 64 fue la primera consola de Nintendo en ofrecer gr\u00e1ficos en 3D, llevando los videojuegos a una nueva dimens\u00edn.\n\n### Caracter\u00edsticas\n- Gr\u00e1ficos en 3D y soporte para cuatro jugadores\n- Juegos ic\u00f3nicos como Super Mario 64, The Legend of Zelda: Ocarina of Time y GoldenEye 007\n- Control con stick anal\u00f3gico y gatillo Z\n\n### Ideal para\nAquellos que buscan revivir las innovaciones de los videojuegos de los 90.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 160.50
 },
 {
@@ -104,6 +111,7 @@
     "description": "### General\nLa Game Boy fue la primera consola portátil de Nintendo, marcando el comienzo de una nueva era en los videojuegos móviles.\n\n### Características\n- Pantalla monocromática\n- Jueguetes como Tetris, Super Mario Land y Pokémon\n- Batería de larga duración\n\n### Ideal para\nColeccionistas de consolas portátiles y aquellos que disfrutan de los primeros juegos de Pokémon.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 30.00
 },
 {
@@ -117,6 +125,7 @@
     "description": "### General\nLa Sega Saturn fue una consola de 32 bits, famosa por su potencia gráfica y su capacidad para manejar juegos en 2D y 3D.\n\n### Características\n- Potente procesador y gráficos en 2D y 3D\n- Incluye títulos como Virtua Fighter, Nights into Dreams\n- Amplia biblioteca de juegos\n\n### Ideal para\nColeccionistas y fanáticos de las consolas de Sega.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 150.50
 },
 {
@@ -130,6 +139,7 @@
     "description": "### General\nLa PlayStation 2 es una de las consolas más exitosas de todos los tiempos, conocida por su enorme biblioteca de juegos.\n\n### Características\n- Procesador de 128 bits\n- Compatibilidad con DVDs y juegos clásicos de PS1\n- Títulos icónicos como Grand Theft Auto, Final Fantasy X\n\n### Ideal para\nJugadores que buscan disfrutar de los mejores títulos de los años 2000.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 120.00
 },
 {
@@ -143,6 +153,7 @@
     "description": "### General\nLa Nintendo GameCube es una consola que destacó por sus juegos exclusivos y su diseño compacto.\n\n### Características\n- Juegos como Super Smash Bros. Melee y The Legend of Zelda: The Wind Waker\n- Procesador PowerPC Gekko\n- Soporte para cuatro controles\n\n### Ideal para\nFans de Nintendo que quieren revivir una consola muy querida.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 90.00
 },
 {
@@ -156,6 +167,7 @@
     "description": "### General\nEl Game Boy Advance ofrece una gran biblioteca de juegos en 2D en una pantalla retroiluminada.\n\n### Características\n- Pantalla a color de 2.9 pulgadas\n- Juegos populares como Pokémon Ruby/Sapphire, Metroid Fusion\n- Batería de larga duración\n\n### Ideal para\nFans de los juegos portátiles y los títulos clásicos de Nintendo.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 60.00
 },
 {
@@ -169,6 +181,7 @@
     "type": "Portable",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 79.99
   },
   {
@@ -182,6 +195,7 @@
     "type": "Portable",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 100.00
   },
   {
@@ -195,6 +209,7 @@
     "type": "Portable",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 110.00
   },
   {
@@ -208,6 +223,7 @@
     "type": "Board",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 130.00
   },
   {
@@ -221,6 +237,7 @@
     "type": "Board",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 70.00
   },
   {
@@ -234,6 +251,7 @@
     "type": "Portable",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 250.00
   },
   {
@@ -247,6 +265,7 @@
     "type": "Portable",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 530.00
   },
   {
@@ -260,6 +279,7 @@
     "type": "Board",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 399.99
   },
   {
@@ -273,6 +293,7 @@
     "type": "Board",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 499.00
   },
   {
@@ -286,6 +307,7 @@
     "type": "Hybrid",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 329.50
   },
   {
@@ -299,6 +321,7 @@
     "type": "Board",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 219.00
   },
   {
@@ -312,6 +335,7 @@
     "description": "### General\nLa Wii U es una consola híbrida que permite jugar tanto en el televisor como en su GamePad, una pantalla táctil independiente.\n\n### Características\n- Juego en la televisión y en pantalla táctil\n- Juegos como Super Mario 3D World y The Legend of Zelda: The Wind Waker HD\n- Retrocompatibilidad con juegos de Wii\n\n### Ideal para\nJugadores que buscan una consola versátil, con la posibilidad de jugar tanto de forma tradicional como portátil.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 349.00
   },
   {
@@ -325,6 +349,7 @@
     "description": "### General\nEl PlayStation VR2 ofrece una experiencia de realidad virtual más inmersiva para PlayStation 5, con un rendimiento gráfico mejorado y controles innovadores.\n\n### Características\n- Pantalla OLED 4K HDR\n- Sensores avanzados para inmersión total\n- Compatible con PlayStation 5\n\n### Ideal para\nJugadores que buscan una experiencia de realidad virtual de nueva generación con gráficos impresionantes y una jugabilidad envolvente.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 599.99
   },
   {
@@ -338,6 +363,7 @@
     "description": "### General\nMeta Quest 3 es un sistema de realidad virtual independiente que no necesita un PC o consola para funcionar, ofreciendo una experiencia inmersiva con gráficos mejorados y mayor comodidad.\n\n### Características\n- Resolución mejorada y pantallas de alta calidad\n- Juega sin cables ni dispositivos adicionales\n- Gran variedad de títulos en VR\n\n### Ideal para\nEntusiastas de la VR que buscan un sistema todo-en-uno fácil de usar y de alta calidad, sin necesidad de conectarse a otros dispositivos.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 569.99
   },
   {
@@ -351,6 +377,7 @@
     "description": "### General\nLa PlayStation 5 Pro es la versión mejorada de la PlayStation 5, con un mayor rendimiento gráfico, soporte para 8K y nuevas funciones para mejorar la experiencia de juego.\n\n### Características\n- Potente rendimiento gráfico en 8K\n- Juegos exclusivos de alta calidad\n- Mejoras en la velocidad de carga y en la experiencia de juego\n\n### Ideal para\nJugadores que buscan una consola de nueva generación con el mejor rendimiento y una experiencia visual de vanguardia.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 690.50
   },
   {
@@ -364,6 +391,7 @@
     "description": "### General\nLa Xbox Series X es la consola más poderosa de Microsoft, con un rendimiento gráfico increíble y tiempos de carga ultrarrápidos, ideal para juegos de última generación.\n\n### Características\n- Soporte para 4K y hasta 120 FPS\n- Amplia biblioteca de juegos exclusivos\n- Compatible con juegos de Xbox One y Xbox 360\n\n### Ideal para\nJugadores que buscan una experiencia de juego rápida, fluida y con gráficos excepcionales.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 499.00
   },
   {
@@ -377,6 +405,7 @@
     "description": "### General\nEl Steam Deck es una consola portátil que te permite jugar a la mayoría de tus juegos de PC desde Steam en cualquier lugar, con una interfaz intuitiva y controles cómodos.\n\n### Características\n- Gran compatibilidad con juegos de Steam\n- Pantalla táctil y controles de alta calidad\n- Soporte para juegos AAA y títulos indie\n\n### Ideal para\nJugadores que buscan una experiencia de juegos de PC portátil, sin comprometer el rendimiento o la calidad gráfica.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 419.00
   },
   {
@@ -390,6 +419,7 @@
     "description": "### General\nLa Nintendo Switch OLED es una versión mejorada de la consola híbrida Nintendo Switch, con una pantalla OLED más vibrante y otras mejoras en el diseño.\n\n### Características\n- Pantalla OLED de 7 pulgadas\n- Juegos como Super Mario Odyssey y The Legend of Zelda: Breath of the Wild\n- Modo portátil y en casa\n\n### Ideal para\nJugadores que buscan una consola híbrida con una pantalla de calidad superior para juegos tanto en casa como sobre la marcha.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 349.99
   },
   {
@@ -403,6 +433,7 @@
     "description": "### General\nPico 4 es un dispositivo de realidad virtual autónomo que no requiere conexión a un PC, con una excelente calidad gráfica y una amplia variedad de títulos VR.\n\n### Características\n- Resolución de 4K\n- Seguimiento avanzado de la cabeza y los ojos\n- Amplia biblioteca de juegos VR\n\n### Ideal para\nUsuarios que buscan un sistema VR independiente, con gráficos de alta calidad y facilidad de uso.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 429.50
   },
   {
@@ -416,6 +447,7 @@
     "description": "### General\nEl ROG Ally es una consola portátil de ASUS que permite jugar a los juegos de PC de manera portátil con un potente rendimiento gráfico y un diseño ergonómico.\n\n### Características\n- Pantalla de alta tasa de refresco\n- Compatible con juegos de PC y Steam\n- Gran rendimiento en juegos AAA\n\n### Ideal para\nJugadores que buscan una consola portátil potente, capaz de manejar juegos de PC en cualquier lugar.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 799.00
   }      
 
@@ -434,6 +466,7 @@
     "description": "### General\nMetal Gear Solid es un innovador juego de sigilo que revolucionó el género, con una narrativa cinematográfica que sumergió a los jugadores en una historia de espionaje y traición.\n\n### Características\n- Juego de sigilo con mecánicas complejas\n- Personajes memorables y trama profunda\n- Gráficos avanzados para su época\n\n### Ideal para\nAquellos que disfrutan de juegos de sigilo con una narrativa inmersiva y profunda.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 24.99
   },
   {
@@ -447,6 +480,7 @@
     "description": "### General\nGrand Theft Auto: Vice City es un juego de mundo abierto que transporta a los jugadores a los años 80, con una atmósfera vibrante y una historia llena de acción y crimen.\n\n### Características\n- Mundo abierto con libertad total para explorar\n- Banda sonora icónica de los 80\n- Historia profunda y personajes memorables\n\n### Ideal para\nJugadores que disfrutan de la acción, el crimen y una narrativa clásica ambientada en los años 80.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 20.50
   },
   {
@@ -460,6 +494,7 @@
     "description": "### General\nGod of War II es un juego de acción mitológica donde Kratos, el dios de la guerra, se enfrenta a los dioses del Olimpo. Con combates épicos y una narrativa que mantiene a los jugadores al borde de sus asientos.\n\n### Características\n- Combate brutal y espectacular\n- Historia basada en la mitología griega\n- Gráficos avanzados para la PlayStation 2\n\n### Ideal para\nFans de la mitología y la acción intensa, que buscan un desafío en su experiencia de juego.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 15.00
   },
   {
@@ -473,6 +508,7 @@
     "description": "### General\nUncharted 2: Among Thieves es un juego de acción y aventuras que sigue al cazador de tesoros Nathan Drake. Con gráficos espectaculares y una narrativa inmersiva, los jugadores se embarcan en una peligrosa búsqueda a través del mundo.\n\n### Características\n- Gráficos impresionantes para la época\n- Historia cautivadora con giros inesperados\n- Secuencias de acción de alto nivel\n\n### Ideal para\nJugadores que buscan una aventura épica llena de acción y misterio, con una historia intrigante.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 10.00
   },
   {
@@ -486,6 +522,7 @@
     "description": "### General\nDark Souls es un RPG desafiante que ofrece una experiencia de juego única con un combate profundo y un mundo interconectado lleno de peligros. Conocido por su dificultad y su atmósfera oscura.\n\n### Características\n- Mundo interconectado y sin interrupciones\n- Desafío de combate con una curva de dificultad elevada\n- Narrativa ambiental que el jugador debe descubrir\n\n### Ideal para\nJugadores que buscan un desafío intenso y disfrutan de explorar un mundo sombrío lleno de misterios.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 15.00
   },
   {
@@ -499,6 +536,7 @@
     "description": "### General\nThe Last of Us es un juego de supervivencia que sigue la historia de Joel y Ellie mientras navegan por un mundo postapocalíptico. Con una narrativa emocional, es uno de los títulos más aclamados de la PlayStation 3.\n\n### Características\n- Historia profundamente emocional\n- Mundo postapocalíptico inmersivo\n- Jugabilidad de supervivencia tensa\n\n### Ideal para\nJugadores que disfrutan de una narrativa emocionalmente cargada y una jugabilidad de supervivencia desafiante.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 14.99
   },
   {
@@ -512,6 +550,7 @@
     "description": "### General\nDoom Eternal es la continuación de la famosa franquicia de disparos en primera persona. Este título ofrece una jugabilidad frenética, combates intensos y una experiencia visual impresionante.\n\n### Características\n- Acción ininterrumpida y combates rápidos\n- Gráficos impresionantes con diseño detallado\n- Desafío alto para jugadores experimentados\n\n### Ideal para\nJugadores que disfrutan de la acción sin descanso y de un desafío continuo en un mundo apocalíptico.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 9.99
   },
   {
@@ -525,6 +564,7 @@
     "description": "### General\nThe Legend of Zelda es un clásico juego de aventura que introdujo a los jugadores en un mundo de fantasía lleno de exploración, acertijos y batallas épicas. Este título es considerado un pilar en la historia de los videojuegos.\n\n### Características\n- Introducción a la fórmula de exploración y aventura\n- Mundo abierto con mazmorras y secretos\n- Jugabilidad innovadora para su época\n\n### Ideal para\nAquellos que quieren experimentar uno de los videojuegos más influyentes de la historia y explorar sus orígenes.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 4.99
   },
   {
@@ -538,6 +578,7 @@
     "description": "### General\nMonkey Island 2: LeChuck's Revenge es una aventura gráfica que sigue las desventuras de Guybrush Threepwood, un aspirante a pirata que se enfrenta a su mayor enemigo: el temido pirata LeChuck.\n\n### Características\n- Aventura gráfica con puzzles ingeniosos\n- Humor único y personajes memorables\n- Mundo colorido y bien diseñado\n\n### Ideal para\nFans de las aventuras gráficas clásicas con humor, rompecabezas desafiantes y personajes carismáticos.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 2.50
   },
   {
@@ -551,6 +592,7 @@
     "description": "### General\nShadow of the Colossus es un juego de acción y aventura donde los jugadores deben derrotar a gigantes colosos para revivir a una joven mujer. Su mundo vasto y vacío está lleno de belleza y misterio.\n\n### Características\n- Batallas épicas contra gigantes\n- Mundo abierto impresionante y atmosférico\n- Historia mínima pero profunda\n\n### Ideal para\nJugadores que buscan una experiencia única con un enfoque en la belleza visual y desafíos masivos.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 10.00
   },
   {
@@ -564,6 +606,7 @@
     "description": "### General\nJourney es una experiencia única de aventura interactiva, donde los jugadores exploran un vasto desierto en busca de la cima de una montaña. Con un enfoque en la interacción emocional y el descubrimiento, es una obra maestra visual y sonora.\n\n### Características\n- Gráficos impresionantes y música evocadora\n- Juego multijugador asimétrico sin palabras\n- Enfoque en la exploración y la conexión emocional\n\n### Ideal para\nJugadores que buscan una experiencia introspectiva y emocionalmente rica, donde la narrativa se construye a través de la experiencia compartida.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 15.00
   },
   {
@@ -577,6 +620,7 @@
     "description": "### General\nBreath of the Wild es un juego de aventura de mundo abierto que redefine la serie Zelda, ofreciendo una experiencia libre y expansiva donde los jugadores pueden explorar un vasto mundo lleno de secretos, enemigos y recursos.\n\n### Características\n- Mundo abierto con total libertad de exploración\n- Combate dinámico y resolución de acertijos\n- Gráficos y diseño de mundo excepcionales\n\n### Ideal para\nJugadores que disfrutan de la exploración libre, los acertijos y una narrativa profunda en un mundo vibrante.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 49.50
   },
   {
@@ -590,6 +634,7 @@
     "description": "### General\nLife is Strange es un juego de aventura interactivo que sigue a Max Caulfield, una joven con la habilidad de retroceder en el tiempo. El juego explora temas de amistad, destino y consecuencias.\n\n### Características\n- Historia emocional y de decisiones\n- Mecánica de retroceder el tiempo\n- Personajes bien desarrollados y conmovedores\n\n### Ideal para\nJugadores que disfrutan de una narrativa emocional con decisiones significativas que afectan el curso de la historia.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 20.00
   },
   {
@@ -603,6 +648,7 @@
     "description": "### General\nDisco Elysium es un RPG de aventura interactiva con un enfoque en la narrativa, donde los jugadores toman el rol de un detective con amnesia mientras investigan un crimen. El juego está lleno de diálogos profundos y decisiones que afectan al mundo y a los personajes.\n\n### Características\n- Narrativa profunda y diálogos extensos\n- Sistema de habilidades único que afecta las interacciones\n- Exploración y resolución de misterios\n\n### Ideal para\nJugadores que disfrutan de una historia profunda, decisiones que importan y una jugabilidad centrada en el diálogo y la interacción.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 20.00
   },
   {
@@ -616,6 +662,7 @@
     "description": "### General\nMetroid Prime Remastered es una versión remasterizada del clásico juego de acción y exploración. Los jugadores toman el control de Samus Aran en una misión para explorar un planeta alienígena lleno de misterios y peligros.\n\n### Características\n- Gráficos remasterizados y gameplay mejorado\n- Elementos clásicos de la serie Metroid\n- Exploración y combate intensos\n\n### Ideal para\nFans de los juegos de acción y aventura, especialmente aquellos que disfrutaron de las entregas clásicas de Metroid.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 39.99
   },
   {
@@ -629,6 +676,7 @@
     "description": "### General\nFinal Fantasy VII Remake es una versión moderna y rediseñada del clásico RPG de 1997, con gráficos de última generación y un sistema de combate actualizado. La historia sigue a Cloud Strife mientras lucha contra la megacorporación Shinra y sus peligrosos planes para el planeta.\n\n### Características\n- Gráficos impresionantes y personajes detallados\n- Combate en tiempo real combinado con elementos tácticos\n- Profunda historia con giros emocionales\n\n### Ideal para\nJugadores que buscan revivir uno de los RPG más icónicos de todos los tiempos con una experiencia visual y jugable completamente renovada.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 40.50
   },
   {
@@ -642,6 +690,7 @@
     "description": "### General\nChrono Trigger es un RPG clásico con una historia de viajes en el tiempo, donde los jugadores controlan a un grupo de héroes que deben salvar al mundo de una amenaza apocalíptica. Este título es reconocido por su narrativa, personajes y sistema de combate.\n\n### Características\n- Sistema de combate innovador y fluido\n- Múltiples finales dependiendo de las decisiones del jugador\n- Historia rica y personajes memorables\n\n### Ideal para\nAmantes de los RPGs clásicos que disfrutan de una historia épica de aventuras y viajes temporales.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 40.00
   },
   {
@@ -655,6 +704,7 @@
     "description": "### General\nDiablo III es un RPG de acción donde los jugadores exploran mazmorras oscuras y luchan contra hordas de demonios. Con un enfoque en el loot y el progreso de personaje, es una de las entregas más populares de la saga Diablo.\n\n### Características\n- Jugabilidad adictiva y dinámica\n- Gran variedad de clases y habilidades\n- Acción en tiempo real con gráficos impresionantes para su época\n\n### Ideal para\nJugadores que disfrutan de un RPG de acción intenso con un enfoque en la recolección de botín y el progreso continuo del personaje.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 20.00
   },
   {
@@ -668,6 +718,7 @@
     "description": "### General\nMass Effect 2 es un RPG de acción con una narrativa envolvente en el espacio exterior. Los jugadores toman el rol del comandante Shepard mientras reclutan un equipo para salvar a la galaxia de una invasión inminente.\n\n### Características\n- Historia profunda con decisiones que afectan el curso de la trama\n- Sistema de combate táctico y personalización de personajes\n- Enemigos y mundos bien diseñados\n\n### Ideal para\nJugadores que disfrutan de una historia épica con decisiones difíciles que tienen un impacto significativo en el mundo del juego.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 15.50
   },
   {
@@ -681,6 +732,7 @@
     "description": "### General\nThe Witcher 3: Wild Hunt es un RPG de mundo abierto que sigue a Geralt de Rivia, un cazador de monstruos, mientras busca a su hija adoptiva y se enfrenta a una guerra apocalíptica. El juego destaca por su historia envolvente y su mundo vasto y detallado.\n\n### Características\n- Mundo abierto expansivo y detallado\n- Combate dinámico y habilidades personalizables\n- Decisiones que afectan el mundo y la narrativa\n\n### Ideal para\nJugadores que disfrutan de una historia profunda, exploración en un mundo abierto y combates intensos contra monstruos y humanos.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 30.99
   },
   {
@@ -694,6 +746,7 @@
     "description": "### General\nPersona 5 Royal es una versión ampliada del aclamado juego de rol, donde los jugadores controlan a un grupo de estudiantes de secundaria que tienen la capacidad de entrar en un mundo paralelo y luchar contra los deseos corruptos de la sociedad.\n\n### Características\n- Combate por turnos y estrategias profundas\n- Estilo visual único y una narrativa emocionalmente compleja\n- Gran cantidad de actividades secundarias y eventos sociales\n\n### Ideal para\nJugadores que disfrutan de una historia compleja, personajes carismáticos y una jugabilidad rica con una mezcla de exploración, combate y simulación social.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 50.00
   }, 
   {
@@ -707,6 +760,7 @@
     "description": "### General\nElden Ring es un RPG de acción desarrollado por FromSoftware, conocido por sus mundos abiertos y su dificultad desafiante. En este juego, los jugadores exploran un vasto mundo lleno de misterios, combates épicos y un sistema de progreso profundo.\n\n### Características\n- Mundo abierto extenso y detallado\n- Desafiante sistema de combate en tiempo real\n- Historia rica escrita en colaboración con George R.R. Martin\n\n### Ideal para\nJugadores que buscan una experiencia desafiante, con exploración abierta y una narrativa envolvente en un mundo de fantasía oscura.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 60.00
   },
   {
@@ -720,6 +774,7 @@
     "description": "### General\nAge of Empires II es un juego de estrategia en tiempo real que lleva a los jugadores a través de la historia, donde pueden construir imperios y luchar en batallas históricas. Es uno de los títulos más emblemáticos de la serie y es conocido por su jugabilidad profunda.\n\n### Características\n- Amplia variedad de civilizaciones jugables\n- Modo campaña con misiones históricas\n- Estrategia en tiempo real con énfasis en la gestión de recursos\n\n### Ideal para\nAmantes de los juegos de estrategia que disfrutan de la gestión de imperios y la toma de decisiones tácticas.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 25.00
   },
   {
@@ -733,6 +788,7 @@
     "description": "### General\nStarCraft es un juego de estrategia en tiempo real que ha marcado un antes y un después en el género. Los jugadores controlan tres razas distintas, cada una con su propio estilo de juego, y compiten en un universo futurista lleno de batallas intensas.\n\n### Características\n- Tres razas únicas con estrategias propias\n- Multijugador altamente competitivo\n- Profundización en el control de unidades y gestión de recursos\n\n### Ideal para\nJugadores que disfrutan de una estrategia profunda y de batallas intensas en un mundo futurista.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 20.00
   },
   {
@@ -746,6 +802,7 @@
     "description": "### General\nCivilization III es un juego de estrategia por turnos donde los jugadores lideran una civilización desde la antigüedad hasta la era moderna. El objetivo es construir un imperio que sea capaz de competir contra otros jugadores o la IA en múltiples frentes.\n\n### Características\n- Gran enfoque en la gestión de recursos y diplomacia\n- Varias victorias posibles: científica, militar, cultural\n- Amplia cantidad de civilizaciones y líderes históricos\n\n### Ideal para\nJugadores que disfrutan de juegos estratégicos complejos y de la simulación de civilizaciones.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 15.50
   },
   {
@@ -759,6 +816,7 @@
     "description": "### General\nCrusader Kings III es un juego de gran estrategia donde los jugadores controlan una dinastía y toman decisiones políticas, militares y familiares a lo largo de generaciones. El juego destaca por su complejidad y profundidad en los aspectos de simulación de la nobleza medieval.\n\n### Características\n- Control total sobre dinastías y relaciones familiares\n- Profundización en las decisiones políticas y diplomáticas\n- Amplias opciones de personalización y estrategia\n\n### Ideal para\nJugadores que buscan un desafío en la gestión de imperios y relaciones familiares en un contexto medieval.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 14.99
   },
   {
@@ -772,6 +830,7 @@
     "description": "### General\nTotal War: Warhammer III combina la estrategia por turnos con la táctica en tiempo real, ambientado en el universo de Warhammer. Los jugadores pueden controlar facciones fantásticas y librar batallas épicas mientras gestionan imperios.\n\n### Características\n- Batallas masivas en tiempo real\n- Facciones y unidades fantásticas inspiradas en el universo Warhammer\n- Juego por turnos en el cual se toman decisiones tácticas y estratégicas\n\n### Ideal para\nJugadores que disfrutan de la estrategia a gran escala, con batallas épicas y un rico universo de fantasía.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 39.99
   },
   {
@@ -785,6 +844,7 @@
     "description": "### General\nFIFA ‘98 es una de las entregas más populares de la franquicia FIFA, lanzada para PlayStation 1. Incluye la opción de jugar el Mundial de Fútbol y es conocida por su jugabilidad fluida y su enfoque realista en el fútbol.\n\n### Características\n- Modo mundialista con todos los equipos de la Copa del Mundo\n- Gráficos avanzados para su época\n- Jugabilidad intuitiva y rápida\n\n### Ideal para\nAmantes de los juegos de fútbol y nostálgicos de los primeros títulos de la franquicia FIFA.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 19.50
   },
   {
@@ -798,6 +858,7 @@
     "description": "### General\nTony Hawk’s Pro Skater 2 es un juego de skateboarding que revolucionó el género con su jugabilidad fluida y su extenso repertorio de trucos. El juego permite a los jugadores realizar acrobacias complejas mientras exploran diversos entornos.\n\n### Características\n- Jugabilidad adictiva y fluida\n- Diversos escenarios con rampas y obstáculos\n- Modo multijugador para disfrutar con amigos\n\n### Ideal para\nAficionados al skate y jugadores que buscan un título dinámico y desafiante con un toque clásico de la era dorada del PS1.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 40.00
   },
   {
@@ -811,6 +872,7 @@
     "description": "### General\nNBA Street es un juego de baloncesto de estilo arcade con un enfoque en jugadas acrobáticas y jugabilidad rápida. Ofrece partidos de baloncesto urbanos donde los jugadores pueden realizar trucos y movimientos espectaculares.\n\n### Características\n- Jugabilidad basada en trucos y acrobacias\n- Modos de juego innovadores y divertidos\n- Música dinámica que acompaña la acción\n\n### Ideal para\nJugadores que buscan una experiencia de baloncesto arcade rápida y divertida con amigos.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 30.00
   },
   {
@@ -824,6 +886,7 @@
     "description": "### General\nGran Turismo 7 es un simulador de carreras de coches que lleva la experiencia de conducción al siguiente nivel, con gráficos impresionantes y una jugabilidad extremadamente realista.\n\n### Características\n- Amplia selección de coches y circuitos\n- Gráficos realistas optimizados para PS5\n- Sistema de personalización detallado para coches\n\n### Ideal para\nAmantes de las carreras y la simulación que buscan un desafío realista y una experiencia visual impresionante.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 59.99
   },
   {
@@ -837,6 +900,7 @@
     "description": "### General\nMario Kart 8 es un juego de carreras rápido y colorido donde los personajes de Mario compiten en circuitos llenos de obstáculos y potenciadores. Es uno de los títulos más divertidos de la saga Mario Kart.\n\n### Características\n- Diversión para toda la familia con multijugador local y online\n- Circuitos llenos de sorpresas y potenciadores\n- Gráficos impresionantes en la Nintendo Switch\n\n### Ideal para\nJugadores de todas las edades que buscan una experiencia de carreras divertida y accesible.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 39.99
   },
   {
@@ -845,11 +909,12 @@
     "year": "2018",
     "brand": "Capcom",
     "platform": "PlayStation 4",
-    "type": "Fighting",
+    "type": "Sports",
     "category":"videogames",
     "description": "### General\nStreet Fighter 30th Anniversary es una recopilación que celebra los 30 años de la famosa saga de lucha, ofreciendo los mejores títulos de la serie en una edición definitiva.\n\n### Características\n- Incluye 12 juegos clásicos de la saga Street Fighter\n- Modo multijugador online para competir con otros jugadores\n- Gráficos remasterizados y opciones de personalización\n\n### Ideal para\nFanáticos de los juegos de lucha y aquellos que quieren revivir los clásicos de la saga Street Fighter.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 39.99
   },
   {
@@ -858,11 +923,12 @@
     "year": "2023",
     "brand": "Warner Bros.Games",
     "platform": "PlayStation 5",
-    "type": "Fighting",
+    "type": "Sports",
     "category":"videogames",
     "description": "### General\nMortal Kombat 1 es una nueva entrega de la famosa saga de lucha que se reinicia con una historia fresca y combate brutal. El juego ofrece una jugabilidad fluida y un elenco de personajes icónicos.\n\n### Características\n- Nuevos personajes y escenarios impactantes\n- Combate brutal y sangriento, fiel a la saga\n- Historia renovada que revitaliza la franquicia\n\n### Ideal para\nFanáticos de los juegos de lucha que buscan una experiencia más intensa y con combate sangriento.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 49.50
   },
   {
@@ -871,11 +937,12 @@
     "year": "1998",
     "brand": "Namco",
     "platform": "PlayStation 1",
-    "type": "Fighting",
+    "type": "Sports",
     "category":"videogames",
     "description": "### General\nTekken 3 es uno de los mejores juegos de lucha de todos los tiempos, conocido por su jugabilidad precisa, combos espectaculares y una amplia gama de personajes. Es una de las entregas más queridas de la saga Tekken.\n\n### Características\n- Amplio elenco de personajes jugables\n- Gráficos impresionantes para su época\n- Sistema de combos fluido y variado\n\n### Ideal para\nFanáticos de los juegos de lucha que disfrutan de batallas rápidas y técnicas con una jugabilidad accesible y profunda.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 60.00
   },
   {
@@ -884,11 +951,12 @@
     "year": "2002",
     "brand": "Namco",
     "platform": "GameCube",
-    "type": "Fighting",
+    "type": "Sports",
     "category":"videogames",
     "description": "### General\nSoulcalibur II es un juego de lucha con armas que ofrece combates rápidos, una amplia variedad de personajes y escenarios visualmente impresionantes. La serie es conocida por su jugabilidad accesible y su enfoque en el combate cuerpo a cuerpo.\n\n### Características\n- Diversos modos de juego, desde historia hasta multijugador\n- Personajes icónicos como Mitsurugi y Nightmare\n- Combate basado en armas, con una jugabilidad técnica\n\n### Ideal para\nJugadores que disfrutan de juegos de lucha profundos con personajes únicos y combates emocionantes.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 12.00
   },
   {
@@ -897,11 +965,12 @@
     "year": "2018",
     "brand": "Arc System Works",
     "platform": "GameCube",
-    "type": "Fighting",
+    "type": "Sports",
     "category":"videogames",
     "description": "### General\nDragon Ball FighterZ es un juego de lucha en 2.5D que captura la esencia de la serie Dragon Ball con combates espectaculares y visuales impresionantes. Los jugadores pueden elegir entre una gran variedad de personajes de la saga para luchar en combates dinámicos.\n\n### Características\n- Combates rápidos y fluidos con movimientos especiales\n- Estilo visual fiel al anime de Dragon Ball\n- Modo multijugador para enfrentamientos épicos\n\n### Ideal para\nFanáticos de Dragon Ball que buscan un juego de lucha rápido y con un diseño fiel a la serie.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 20.00
   },
   {
@@ -910,11 +979,12 @@
     "year": "2018",
     "brand": "Nintendo",
     "platform": "Nintendo Switch",
-    "type": "Fighting",
+    "type": "Sports",
     "category":"videogames",
     "description": "### General\nSuper Smash Bros. Ultimate es un juego de lucha crossover que reúne a personajes de múltiples franquicias de videojuegos. Ofrece una experiencia de juego única, con acción rápida y diversos modos para disfrutar con amigos o en solitario.\n\n### Características\n- Amplia selección de personajes jugables\n- Diversos modos de juego y escenarios\n- Multijugador local y online\n\n### Ideal para\nJugadores que buscan un juego de lucha accesible pero competitivo con una enorme variedad de personajes y modos.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 50.00
   },
   {
@@ -928,6 +998,7 @@
     "description": "### General\nSuper Mario Bros. es uno de los juegos de plataformas más emblemáticos que definió una era en los videojuegos. Acompaña a Mario en su misión por salvar a la princesa Peach mientras atraviesa diversos niveles llenos de desafíos.\n\n### Características\n- Niveles de plataformas clásicos\n- Jugabilidad simple pero adictiva\n- Música y efectos icónicos\n\n### Ideal para\nJugadores nostálgicos y aquellos que disfrutan de un juego de plataformas clásico.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 30.50
   },
   {
@@ -941,6 +1012,7 @@
     "description": "### General\nSonic the Hedgehog es el juego que introdujo al icónico erizo azul de Sega, conocido por su velocidad y niveles vibrantes. El juego se centra en superar obstáculos a gran velocidad mientras se recoge anillos y se enfrenta a enemigos.\n\n### Características\n- Velocidad frenética y niveles vibrantes\n- Elementos de plataforma innovadores\n- Personajes carismáticos y enemigos memorables\n\n### Ideal para\nJugadores que disfrutan de plataformas rápidas con niveles coloridos y acción vertiginosa.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 24.99
   },
   {
@@ -954,6 +1026,7 @@
     "description": "### General\nDonkey Kong Country es un juego de plataformas innovador para SNES, que destacó por sus gráficos prerenderizados y sus niveles desafiantes. Acompaña a Donkey Kong y Diddy Kong en su aventura para recuperar su tesoro robado.\n\n### Características\n- Gráficos avanzados para la época\n- Jugabilidad clásica de plataformas con un toque innovador\n- Variedad de niveles y enemigos\n\n### Ideal para\nJugadores que buscan un reto clásico de plataformas con una atmósfera única y un diseño visual impresionante para su época.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 20.00
   },
   {
@@ -967,6 +1040,7 @@
     "description": "### General\nCrash Bandicoot es un clásico juego de plataformas en 3D protagonizado por el carismático marsupial Crash. A través de varios niveles desafiantes, los jugadores deben saltar, girar y evitar obstáculos mientras recolectan frutas.\n\n### Características\n- Niveles en 3D con desafíos dinámicos\n- Protagonista memorable con habilidades únicas\n- Gráficos avanzados para la época\n\n### Ideal para\nJugadores que disfrutan de plataformas en 3D con una jugabilidad desafiante y personajes carismáticos.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 19.99
   },
   {
@@ -980,6 +1054,7 @@
     "description": "### General\nLa Spyro Trilogy es una colección de tres juegos de plataformas protagonizados por Spyro, un pequeño dragón morado. Con entornos coloridos y jugabilidad amigable, esta trilogía se ha ganado un lugar especial en los corazones de los jugadores.\n\n### Características\n- Tres juegos remasterizados con gráficos actualizados\n- Diversión para todas las edades con plataformas y coleccionables\n- Ambientación encantadora y personajes entrañables\n\n### Ideal para\nJugadores que buscan un juego de plataformas accesible, con un toque de nostalgia y gráficos mejorados.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 25.00
   },
   {
@@ -993,6 +1068,7 @@
     "description": "### General\nHollow Knight es un juego de plataformas Metroidvania ambientado en un mundo sombrío lleno de misterios y secretos por descubrir.\n\n### Características\n- Desafiantes combates contra jefes\n- Gran exploración en un vasto mapa interconectado\n- Estilo de arte único y hermoso\n\n### Ideal para\nJugadores que disfrutan de la exploración y los combates desafiantes.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 15.50
   },
   {
@@ -1006,6 +1082,7 @@
     "description": "### General\nRed Dead Redemption es un juego de acción de mundo abierto que te transporta al Lejano Oeste, donde debes enfrentarte a desafíos mientras sigues una narrativa profunda.\n\n### Características\n- Mundo abierto con una gran libertad de acción\n- Historia rica y profunda\n- Diversas actividades, como cazar, pescar y enfrentarse a otros vaqueros\n\n### Ideal para\nLos amantes de los juegos de acción y los fanáticos del Lejano Oeste.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 15.00
   },
   {
@@ -1019,6 +1096,7 @@
     "description": "### General\nOri and the Blind Forest es un juego de plataformas que destaca por su emotiva historia y sus bellos gráficos, además de sus desafiantes mecánicas de juego.\n\n### Características\n- Hermosos gráficos en 2D\n- Historia emotiva y profunda\n- Mecánicas de plataformas desafiantes\n\n### Ideal para\nJugadores que buscan una experiencia emocional y desafiante.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 18.50
   },
   {
@@ -1032,6 +1110,7 @@
     "description": "### General\nResident Evil es un juego de terror y supervivencia que ha sido pionero en su género, ofreciendo una experiencia de juego llena de suspenso y desafíos.\n\n### Características\n- Exploración y resolución de acertijos\n- Ambiente tenso y aterrador\n- Primer juego de la serie que introdujo la mecánica de supervivencia en un mundo de zombis\n\n### Ideal para\nFanáticos del horror clásico y aquellos que buscan una experiencia de supervivencia desafiante.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 19.99
   },
   {
@@ -1045,6 +1124,7 @@
     "description": "### General\nSilent Hill es un juego de terror psicológico que juega con la mente del jugador, sumergiéndolo en un pueblo lleno de horrores sobrenaturales.\n\n### Características\n- Ambiente espeluznante y perturbador\n- Enfoque en el terror psicológico más que en el gore\n- Historia que mantiene a los jugadores atrapados con giros sorprendentes\n\n### Ideal para\nJugadores que disfrutan del terror psicológico y la tensión constante.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 140.00
   },
   {
@@ -1058,6 +1138,7 @@
     "description": "### General\nFatal Frame II: Crimson Butterfly es un juego de survival horror que utiliza una cámara como principal herramienta para enfrentarse a los fantasmas.\n\n### Características\n- Juega con la tensión y el miedo psicológico\n- Cámara como principal elemento de combate\n- Historia de terror japonesa con un ambiente único\n\n### Ideal para\nLos fans de los juegos de terror y quienes disfrutan de mecánicas innovadoras de supervivencia.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 100.00
   },
   {
@@ -1071,6 +1152,7 @@
     "description": "### General\nAmnesia: The Dark Descent es un juego de terror en primera persona que se centra en la exploración y la resolución de acertijos en un ambiente oscuro y misterioso.\n\n### Características\n- Enfoque en el terror psicológico\n- Estilo de juego en primera persona que aumenta la inmersión\n- Resolver acertijos mientras se explora un antiguo castillo\n\n### Ideal para\nJugadores que disfrutan de una atmósfera tensa y desafíos mentales en un juego de terror.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 4.99
   },
   {
@@ -1084,6 +1166,7 @@
     "description": "### General\nResident Evil 7: Biohazard es un juego de terror de supervivencia que se aleja de los elementos de acción y regresa a las raíces del horror psicológico.\n\n### Características\n- Perspectiva en primera persona para una mayor inmersión\n- Ambiente tenso y aterrador\n- Elementos de supervivencia tradicionales de la serie\n\n### Ideal para\nFanáticos del survival horror clásico con un enfoque más psicológico.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 30.50
   },
   {
@@ -1097,6 +1180,7 @@
     "description": "### General\nDead Space Remake es una versión modernizada del clásico juego de terror espacial, mejorando los gráficos y la jugabilidad mientras conserva la atmósfera tensa.\n\n### Características\n- Gráficos mejorados y sonidos aterradores\n- Historia de terror espacial con giros inesperados\n- Nuevas mecánicas de juego y ajustes en la jugabilidad\n\n### Ideal para\nJugadores que buscan revivir el clásico Dead Space con una experiencia visual mejorada y mayor inmersión.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 69.99
   },
   {
@@ -1110,6 +1194,7 @@
     "description": "### General\nUndertale es un juego indie que combina humor, acción y decisiones importantes en un mundo de fantasía donde tus elecciones realmente importan.\n\n### Características\n- Sistema de combate único basado en la negociación\n- Mundo lleno de personajes memorables\n- Varias rutas de juego basadas en las decisiones del jugador\n\n### Ideal para\nJugadores que disfrutan de historias profundas y sistemas de combate innovadores.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 10.00
   },
   {
@@ -1123,6 +1208,7 @@
     "description": "### General\nHollow Knight es un juego de plataformas tipo Metroidvania que combina exploración profunda con un sistema de combate desafiante y fluido.\n\n### Características\n- Amplio mundo interconectado\n- Combates contra jefes épicos\n- Estilo artístico hermoso y oscuro\n\n### Ideal para\nJugadores que disfrutan de la exploración y el combate en un mundo sombrío y desafiante.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 15.00
   },
   {
@@ -1136,6 +1222,7 @@
     "description": "### General\nStardew Valley es un juego de simulación de granja en el que los jugadores deben cultivar, pescar, y hacer amistades en un pueblo encantador.\n\n### Características\n- Personalización de la granja y el pueblo\n- Gran énfasis en la interacción social\n- Diversión sin fin con actividades diarias\n\n### Ideal para\nJugadores que disfrutan de los juegos relajantes y las simulaciones de vida.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 20.00
   },
   {
@@ -1149,6 +1236,7 @@
     "description": "### General\nCeleste es un juego de plataformas desafiante y emocional que sigue la historia de Madeline mientras escala la montaña Celeste.\n\n### Características\n- Desafiantes niveles de plataformas\n- Historia que explora temas emocionales profundos\n- Controles precisos y fluidos\n\n### Ideal para\nJugadores que buscan un reto en plataformas y una historia conmovedora.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 29.00
   },
   {
@@ -1162,6 +1250,7 @@
     "description": "### General\nHades es un juego de acción rogue-like en el que juegas como Zagreus, el hijo de Hades, tratando de escapar del inframundo mientras enfrentas a enemigos desafiantes.\n\n### Características\n- Combates rápidos y fluidos\n- Múltiples armas y poderes para personalizar el estilo de juego\n- Historia interactiva con personajes memorables\n\n### Ideal para\nJugadores que disfrutan de acción intensa y la rejugabilidad de los rogue-likes.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 19.99
   }
 
@@ -1178,11 +1267,12 @@
     "description": "### General\nEl Power Glove es un accesorio icónico para el NES que permite controlar los juegos mediante movimientos de la mano, introduciendo un concepto único para la época.\n\n### Características\n- Control mediante sensores de movimiento\n- Diseño futurista para su tiempo\n- Compatible con juegos específicos\n\n### Ideal para\nJugadores nostálgicos y coleccionistas de accesorios únicos de Nintendo.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 239.00
   },
   {
     "name": "Control Pad con Joystick desmontable SMS",
-    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735392861/Control_stick_master_system_po162725_ygwzh8.jpg",
+    "img": "https://res.cloudinary.com/dr0wlij0c/image/upload/v1735373920/Sega_Mark_III_oqtgud.jpg",
     "year": "1985",
     "brand": "Sega",
     "platform": "Sega Master System",
@@ -1191,6 +1281,7 @@
     "description": "### General\nEl Control Pad con Joystick desmontable para el Master System ofrece una experiencia de juego versátil, permitiendo a los jugadores alternar entre un pad clásico y un joystick.\n\n### Características\n- Joystick desmontable para adaptarse a diferentes estilos de juego\n- Construcción duradera\n- Diseño ergonómico para largas sesiones de juego\n\n### Ideal para\nFans de la Sega Master System que buscan mejorar su experiencia de control.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 39.99
   },
   {
@@ -1204,6 +1295,7 @@
     "description": "### General\nEl Expansion Module para el Atari 7800 es un accesorio diseñado para ampliar las capacidades de la consola y ofrecer compatibilidad adicional.\n\n### Características\n- Incrementa las funcionalidades de la consola\n- Fácil de instalar y usar\n- Compatible con ciertos juegos y accesorios\n\n### Ideal para\nColeccionistas y usuarios del Atari 7800 que buscan explorar todo el potencial de la consola.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 694.99
   },
   {
@@ -1217,6 +1309,7 @@
     "description": "### General\nEl Super Nintendo MultiTap permite conectar hasta 5 jugadores simultáneamente, haciendo los juegos multijugador más accesibles.\n\n### Características\n- Soporta hasta 5 controladores simultáneamente\n- Compatible con juegos multijugador específicos\n- Diseño compacto y fácil de conectar\n\n### Ideal para\nJugadores que disfrutan de experiencias multijugador en la SNES.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 15.00
   },
   {
@@ -1230,6 +1323,7 @@
     "description": "### General\nEl Joystick AES ofrece una experiencia auténtica de arcade en casa, diseñado específicamente para los juegos de Neo Geo.\n\n### Características\n- Diseño inspirado en los controles de arcade\n- Construcción robusta para máxima durabilidad\n- Compatible con todos los juegos de Neo Geo AES\n\n### Ideal para\nAmantes de los juegos de arcade y fans de Neo Geo que buscan máxima precisión.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 50.50
   },
   {
@@ -1243,6 +1337,7 @@
     "description": "### General\nLa Memory Card para PlayStation permite guardar el progreso de los juegos, ofreciendo comodidad y flexibilidad para los jugadores.\n\n### Características\n- Almacena datos de guardado para múltiples juegos\n- Diseño compacto y portátil\n- Fácil de usar e intercambiar entre consolas\n\n### Ideal para\nJugadores de PlayStation que quieren guardar y reanudar sus partidas de forma sencilla.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 10.00
   },  
   {
@@ -1256,6 +1351,7 @@
     "description": "### General\nEl Transfer Pak permite conectar juegos de Game Boy a la Nintendo 64, proporcionando funcionalidad adicional y compatibilidad entre plataformas.\n\n### Características\n- Conexión sencilla entre Game Boy y Nintendo 64\n- Compatible con títulos específicos\n- Expande las posibilidades de juego\n\n### Ideal para\nJugadores de Nintendo 64 que buscan mejorar la integración con sus juegos de Game Boy.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 15.00
   },
   {
@@ -1269,6 +1365,7 @@
     "description": "### General\nLa Game Boy Printer es una impresora portátil diseñada para funcionar con juegos compatibles de Game Boy, permitiendo imprimir imágenes y contenido del juego.\n\n### Características\n- Impresión portátil desde Game Boy\n- Compatible con varios juegos\n- Diseño compacto y fácil de usar\n\n### Ideal para\nJugadores nostálgicos que buscan personalizar su experiencia de Game Boy.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 25.00
   },
   {
@@ -1282,6 +1379,7 @@
     "description": "### General\nEl DualShock 2 es el controlador oficial de PlayStation 2, ofreciendo vibración y controles analógicos para una experiencia de juego inmersiva.\n\n### Características\n- Vibración para mayor inmersión\n- Controles analógicos precisos\n- Diseño ergonómico y familiar\n\n### Ideal para\nJugadores de PlayStation 2 que buscan un control confiable y avanzado.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 25.00
   },
   {
@@ -1295,6 +1393,7 @@
     "description": "### General\nEl Game Boy Player permite jugar títulos de Game Boy en la consola GameCube, ampliando la compatibilidad entre plataformas.\n\n### Características\n- Soporte para juegos de Game Boy, Game Boy Color y Game Boy Advance\n- Fácil de instalar en la GameCube\n- Mejora la experiencia de juego portátil en pantalla grande\n\n### Ideal para\nPropietarios de GameCube que quieren disfrutar de su biblioteca de Game Boy en su televisor.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 40.50
   },
   {
@@ -1308,6 +1407,7 @@
     "description": "### General\nEl GameCube Link Cable conecta la consola GameCube con la Game Boy Advance, desbloqueando características exclusivas en juegos compatibles.\n\n### Características\n- Conexión sencilla entre dispositivos\n- Compatible con múltiples juegos\n- Expande la interacción entre GameCube y Game Boy Advance\n\n### Ideal para\nJugadores que desean disfrutar de experiencias adicionales en juegos compatibles.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 25.00
   },
   {
@@ -1321,6 +1421,7 @@
     "description": "### General\nEl Stylus es un accesorio esencial para la Nintendo DS, diseñado para interactuar con la pantalla táctil de la consola de manera precisa y cómoda.\n\n### Características\n- Diseño ligero y fácil de usar\n- Compatible con todos los modelos de Nintendo DS\n- Construcción duradera para uso prolongado\n\n### Ideal para\nUsuarios de Nintendo DS que buscan un accesorio confiable para la interacción táctil.",
     "stock": 1,
     "state": true,
+    "promoted": true,
     "price": 9.99
   },
   {
@@ -1334,6 +1435,7 @@
     "description": "### General\nLa Camera PSP es un accesorio que permite capturar fotos y videos directamente desde tu consola PSP, ofreciendo una experiencia multimedia única.\n\n### Características\n- Resolución compacta ideal para su época\n- Compatible con varios juegos de PSP\n- Diseño ligero y portátil\n\n### Ideal para\nUsuarios de PSP que buscan maximizar las capacidades multimedia de su consola.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 10.00
 },
 {
@@ -1347,6 +1449,7 @@
     "description": "### General\nKinect es un sensor de movimiento que permite a los jugadores interactuar con su consola Xbox sin necesidad de un controlador.\n\n### Características\n- Captura de movimiento precisa\n- Compatible con juegos y aplicaciones multimedia\n- Control por voz integrado\n\n### Ideal para\nJugadores que buscan experiencias inmersivas y control sin contacto.",
     "stock": 1,
     "state": false,
+    "promoted": true,
     "price": 40.00
 },
 {
@@ -1360,6 +1463,7 @@
     "description": "### General\nEl Bluetooth Headset para PS3 ofrece una comunicación clara y manos libres para juegos en línea.\n\n### Características\n- Tecnología Bluetooth para conexión inalámbrica\n- Diseño ergonómico y ligero\n- Micrófono de alta calidad para conversaciones claras\n\n### Ideal para\nJugadores de PS3 que disfrutan de juegos multijugador y necesitan comunicación eficiente.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 25.50
 },
 {
@@ -1373,6 +1477,7 @@
     "description": "### General\nEl DualShock 4 es el controlador principal para la consola PS4, ofreciendo una experiencia de juego precisa e inmersiva.\n\n### Características\n- Sensores de movimiento integrados\n- Panel táctil interactivo\n- Botón Share para capturas y transmisiones instantáneas\n\n### Ideal para\nJugadores que buscan un controlador confiable y versátil para sus juegos de PS4.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 40.50
 },
 {
@@ -1386,6 +1491,7 @@
     "description": "### General\nEl Elite Controller es un controlador personalizable diseñado para jugadores competitivos y entusiastas.\n\n### Características\n- Partes intercambiables para personalización\n- Configuraciones avanzadas de botones\n- Materiales de alta calidad para durabilidad\n\n### Ideal para\nJugadores que buscan el máximo rendimiento y personalización en su experiencia de juego.",
     "stock": 1,
     "state": true,
+    "promoted": false,
     "price": 150.00
 },
 {
@@ -1399,6 +1505,7 @@
     "description": "### General\nEl Amiibo NFC Reader permite a los usuarios de Nintendo 3DS interactuar con figuras Amiibo para desbloquear contenido exclusivo.\n\n### Características\n- Compatible con una amplia variedad de Amiibos\n- Fácil de usar con consolas 3DS\n- Añade funcionalidades y contenido extra a los juegos\n\n### Ideal para\nJugadores de Nintendo 3DS que desean expandir su experiencia con figuras Amiibo.",
     "stock": 1,
     "state": false,
+    "promoted": false,
     "price": 30.00
 }, {
   "name": "Pulse 3D Headset PS5",
@@ -1411,6 +1518,7 @@
   "description": "### General\nEl Pulse 3D Headset para PS5 ofrece una experiencia de audio inmersiva con soporte para audio 3D.\n\n### Características\n- Audio envolvente 3D\n- Diseño cómodo y elegante\n- Micrófonos duales con cancelación de ruido\n\n### Ideal para\nJugadores de PS5 que desean una experiencia auditiva superior y comunicación clara.",
   "stock": 1,
   "state": true,
+  "promoted": false,
   "price": 89.99
 },
 {
@@ -1424,6 +1532,7 @@
   "description": "### General\nLa Seagate Storage Expansion Card ofrece 1TB de almacenamiento adicional optimizado para las consolas Xbox Series X/S.\n\n### Características\n- Integración perfecta con la consola\n- Velocidades de carga rápidas\n- Diseño compacto y fácil de instalar\n\n### Ideal para\nJugadores de Xbox Series X/S que necesitan ampliar su capacidad de almacenamiento sin comprometer el rendimiento.",
   "stock": 1,
   "state": true,
+  "promoted": false,
   "price": 239.99
 },
 {
@@ -1437,6 +1546,7 @@
   "description": "### General\nEl Dock para Steam Deck permite conectar tu consola a una pantalla externa y otros periféricos para una experiencia de juego versátil.\n\n### Características\n- Puertos múltiples para conectividad\n- Diseño robusto y portátil\n- Compatible con diversas resoluciones de pantalla\n\n### Ideal para\nUsuarios de Steam Deck que buscan expandir las posibilidades de su consola con una estación de conexión completa.",
   "stock": 1,
   "state": true,
+  "promoted": true,
   "price": 99.99
 },
 {
@@ -1450,6 +1560,7 @@
   "description": "### General\nLos Joy-Con Zelda Skyward Sword son controles temáticos diseñados especialmente para los fans de la franquicia The Legend of Zelda.\n\n### Características\n- Diseño inspirado en Skyward Sword\n- Funcionalidades completas de los Joy-Con estándar\n- Conectividad inalámbrica confiable\n\n### Ideal para\nJugadores de Nintendo Switch que buscan un toque único y personalizado en sus controles.",
   "stock": 1,
   "state": true,
+  "promoted": true,
   "price": 120.00
 }
 ]

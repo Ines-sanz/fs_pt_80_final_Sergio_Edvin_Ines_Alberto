@@ -1,10 +1,14 @@
 .my-navbar{
-    background-color: #19191d;
+    background-color: black;
     font-family: "Kode Mono", serif;
     font-weight: 500;
     font-size: 22px;
     letter-spacing: 2px; 
+    z-index: 1000;
+    transition: background-color 0.3s ease;
 }
+.my-navbar.transparent {
+    background-color: transparent; }
 .navbar-nav {
     display: flex;
     justify-content: space-between; 
@@ -45,6 +49,7 @@
     padding: 2px;
     border-radius: 10px;
     border: #FCEE21 solid 1px;
+    text-decoration: none;
 }
 
 .nav-shopping-bag{

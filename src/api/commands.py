@@ -54,6 +54,7 @@ def setup_commands(app):
             prod.description = i['description']
             prod.stock = i['stock']
             prod.state = i['state']
+            prod.promoted = i['promoted']
             prod.price = i['price']
             db.session.add(prod)
             db.session.commit()
@@ -70,6 +71,7 @@ def setup_commands(app):
             prod.description = i['description']
             prod.stock = i['stock']
             prod.state = i['state']
+            prod.promoted = i['promoted']
             prod.price = i['price']
             db.session.add(prod)
             db.session.commit()
@@ -86,6 +88,7 @@ def setup_commands(app):
             prod.description = i['description']
             prod.stock = i['stock']
             prod.state = i['state']
+            prod.promoted = i['promoted']
             prod.price = i['price']
             db.session.add(prod)
             db.session.commit() 
