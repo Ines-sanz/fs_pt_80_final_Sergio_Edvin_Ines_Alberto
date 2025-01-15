@@ -483,13 +483,14 @@ def get_following():
     try:
         id = get_jwt_identity()
         following = Followers.query.filter_by(follower_id=id).all()
+        
         return jsonify([f.serialize() for f in following]), 200
     except Exception as error:
         return jsonify({'error': str(error)}), 400
 
 @api.route('/users/follow', methods=['POST'])
 @jwt_required()
-def remove_from_checkout(product_id):
+def follow_user():
     try:
         id = get_jwt_identity()
         followed_id = request.json.get('followed_id', None)
@@ -501,12 +502,11 @@ def remove_from_checkout(product_id):
         db.session.add(new_follower)
         db.session.commit()
 
-        return jsonify({'msg':'Product removed from the checkout succesfully'}), 200
+        return jsonify({'msg':'User followed successfully'}), 200
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
         
-
 @api.route('/users/unfollow/<int:followed_id>', methods=['DELETE'])
 @jwt_required()
 def unfollow_user(followed_id):
@@ -524,7 +524,6 @@ def unfollow_user(followed_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
 
-
 # User to Review
 
 @api.route('/users/reviews', methods=['GET'])
@@ -533,6 +532,7 @@ def get_reviews():
     try:
         id = get_jwt_identity()
         reviews = Reviews.query.filter_by(user_id=id).all()
+     
         return jsonify([r.serialize() for r in reviews]), 200
     except Exception as error:
         return jsonify({'error': str(error)}), 400
@@ -547,8 +547,11 @@ def add_review():
         rating = request.get.json('rating')
         comment = request.get.json('comment')
 
-        if not all([product_id, rating, comment]):
+        if not product_id or not rating or not comment:
             return jsonify({'error': 'product_id, rating, and comment are required'}), 400
+        
+        if not (1 <= rating <= 5):
+            return jsonify({'error': 'Rating must be between 1 and 5'}), 400
 
         new_review = Reviews(user_id=id, product_id=product_id, rating=rating, comment=comment)
         db.session.add(new_review)
