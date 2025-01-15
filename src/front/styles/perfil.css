@@ -1,0 +1,56 @@
+.bg-image {
+    height: 100vh; 
+}
+
+.bg-image img {
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.form-container {
+    max-width: 100%;
+    width: 100%;
+    color: #4c4b4b;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+
+
+.profile-icon {
+    display: block;
+    margin: 0 auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.form-control {
+    border-radius: 20px; 
+}
+
+.btn-crear-perfil {
+    background-color: #FCEE21; 
+    color: #000; 
+    font-family: "Kode Mono", serif;
+    font-size: 3rem; 
+    font-weight: bold; 
+    border: none; 
+    border-radius: 5px; 
+    padding: 2.5% 10%; 
+    text-align: center;
+    display: block;
+    margin: 0 auto; 
+    cursor: pointer; 
+    transition: transform 0.2s ease;
+    margin-bottom: 20px;
+}
+
+.btn-crear-perfil:hover {
+    transform: scale(1.05);
+    background-color: #ffd700;
+}
+
+.btn-crear-perfil:active {
+    transform: scale(0.95);
+}
