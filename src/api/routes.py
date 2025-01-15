@@ -469,49 +469,49 @@ def add_to_checkout():
         return jsonify({'error': str(error)}), 400
     
 
-@api.route('/checkout/<int:product_id>', methods=['DELETE'])
-def remove_from_checkout(product_id):
-    try:
-        #Extract user_id from the request
-        user_id = request.json.get('user_id', None)
+# @api.route('/checkout/<int:product_id>', methods=['DELETE'])
+# def remove_from_checkout(product_id):
+#     try:
+#         #Extract user_id from the request
+#         user_id = request.json.get('user_id', None)
 
-        #validate required fields
-        if not user_id:
-            return jsonify({'msg': 'User ID is required'}), 400
+#         #validate required fields
+#         if not user_id:
+#             return jsonify({'msg': 'User ID is required'}), 400
     
-        #find the checkout item by user_id and product_id
-        checkout_item = Checkout.query.filter_by(user_id=user_id, product_id=product_id).first()
-        if not checkout_item:
-            return jsonify({'msg': 'Product not found in checkout'}), 404
+#         #find the checkout item by user_id and product_id
+#         checkout_item = Checkout.query.filter_by(user_id=user_id, product_id=product_id).first()
+#         if not checkout_item:
+#             return jsonify({'msg': 'Product not found in checkout'}), 404
         
-        #remove from chechout 
-        db.session.delete(checkout_item)
-        db.session.commit()
+#         #remove from chechout 
+#         db.session.delete(checkout_item)
+#         db.session.commit()
 
-        return jsonify({'msg':'Product removed from the checkout succesfully'}), 200
-    except Exception as error:
-        return jsonify({'error': str(error)}), 400
+#         return jsonify({'msg':'Product removed from the checkout succesfully'}), 200
+#     except Exception as error:
+#         return jsonify({'error': str(error)}), 400
 
 
     
 
-@api.route('/checkout', methods=['GET'])
-def get_checkout():
-    try:
-        # Extract user_id from the request
-        user_id = request.args.get('user_id', None)
+# @api.route('/checkout', methods=['GET'])
+# def get_checkout():
+#     try:
+#         # Extract user_id from the request
+#         user_id = request.args.get('user_id', None)
 
-        #validate required fields
-        if not user_id:
-            return jsonify({'msg': 'user ID is required'}), 400
+#         #validate required fields
+#         if not user_id:
+#             return jsonify({'msg': 'user ID is required'}), 400
         
-        #retrieve all checkout items for the user
-        checkout_items = Checkout.query.filter_by(user_id=user_id).all()
-        checkout_list = [{'id': item.id, 'product_id': item.product_id} for item in checkout_items]
+#         #retrieve all checkout items for the user
+#         checkout_items = Checkout.query.filter_by(user_id=user_id).all()
+#         checkout_list = [{'id': item.id, 'product_id': item.product_id} for item in checkout_items]
 
-        return jsonify({'checkout': checkout_list}), 200
-    except Exception as error:
-        return jsonify({'error': str(error)}),400
+#         return jsonify({'checkout': checkout_list}), 200
+#     except Exception as error:
+#         return jsonify({'error': str(error)}),400
     
 # uSer to User followed
 
