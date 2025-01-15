@@ -108,3 +108,11 @@ h2 {
         flex-direction: column;
     }
 }
+
+.bulleted-list {
+    list-style-type: disc;
+    list-style-position: inside;
+    margin: 20px 0;
+    padding: 0;
+    text-align: left;
+}
