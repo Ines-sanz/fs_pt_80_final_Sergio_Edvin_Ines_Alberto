@@ -8,9 +8,11 @@ export const Suscription = () => {
     return (
        <>
        <div className="card-container">
+        <h2>Convierte en premium Premium Boss</h2>
+        <h3>Unete a nuestra comunidad y disfruta de las mejores ventajas.</h3>
   <div className="card basic">
     <div className="icon"></div>
-    <h2>Básico</h2>
+    <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/user.png" alt="Basic subscription user illustration"/>
         <ul>
                 <li>Descuentos estándar</li>
                 <li>Tarifas de envío regulares</li>
@@ -24,6 +26,7 @@ export const Suscription = () => {
 
   <div className="card premium">
     <div className="icon crown"></div>
+    <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/premium-user.png" alt="Premium subscription user illustration"/>
     <h2>PREMIUM BOSS</h2>
         <ul>
                 <li>Descuentos exclusivos</li>

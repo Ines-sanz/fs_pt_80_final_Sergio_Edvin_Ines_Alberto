@@ -1,0 +1,110 @@
+
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    margin: 20px 0;
+    font-size: 2rem;
+    color: #fff;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.card {
+    width: 300px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.basic {
+    background-color: #555;
+    color: #fff;
+}
+
+.premium {
+    background-color: #0033ff;
+    color: #fff;
+}
+
+/* Icon Styles */
+.icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.crown {
+    background: url("https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/premium-user.png") 
+        no-repeat center center;
+    background-size: contain;
+}
+
+/* Image Styling */
+.card img {
+    width: 100px;
+    margin: 20px auto;
+}
+
+/* List Styles */
+.card ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    color: #fff;
+}
+
+.card ul li {
+    margin: 10px 0;
+}
+
+/* Premium-specific styles */
+.premium .price {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.premium button {
+    background-color: #ffcc00;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.premium button:hover {
+    background-color: #ffdd33;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card-container {
+        flex-direction: column;
+    }
+}

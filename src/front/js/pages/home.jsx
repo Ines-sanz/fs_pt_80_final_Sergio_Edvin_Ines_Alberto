@@ -6,6 +6,7 @@ import "../../styles/home.css";
 import {ProductCard} from "../component/product-small-card.jsx";
 import {VideogameCard} from "../component/videogame-small-card.jsx";
 
+
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
