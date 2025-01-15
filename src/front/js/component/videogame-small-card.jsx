@@ -10,7 +10,7 @@ const{store, actions} = useContext(Context)
   const isPromoted = props.promoted === true
 
   return (<>
-    <div className="col-10 col-md-4 col-lg-3">
+    <div className="col-10 col-md-5 col-xl-3">
       {/* <img className="img-fluid" src={props.img} alt={props.name} onClick={handleLink} /> */}
       <div className={ isPromoted ? "videogame-sm-bg videogame-sm-promoted": "videogame-sm-bg" } >
         
@@ -30,7 +30,13 @@ const{store, actions} = useContext(Context)
               ? `${props.price.toFixed(2)}€`
               : "N/A"}
           </span>  
+          <div>
+          <div className="d-flex align-items-center">
+          <span class="fa-solid fa-plus plus-icon"></span>
         <span className="fa-solid fa-star fav-icon"></span>
+        </div>
+          </div>
+        
         </div>
         
       </div>

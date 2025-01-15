@@ -64,10 +64,8 @@ export const Navbar = () => {
               </a>
               <ul className="dropdown-menu my-dropdown">
                 <li>
-                  <Link to="/store">
-                    <a className="dropdown-item" href="#">
+                  <Link to="/store" className="dropdown-item">
                       Ver todo
-                    </a>
                   </Link>
                 </li>
                 <li>
@@ -90,25 +88,21 @@ export const Navbar = () => {
 
             <div className="d-flex align-items-center">
               <li className="nav-item">
-                <Link to="/contacto">
-                  <a className="nav-link float" aria-current="page" href="#">
+                <Link to="/contacto" className="nav-link float" aria-current="page">
                     CONTACTO
-                  </a>
                 </Link>
               </li>
               <li className="nav-item ms-3">
-                <Link to="/perfil">
-                  <button className="my-navbar-button px-3 float">PERFIL</button>
+                <Link to="/perfil" className="my-navbar-button px-3 float">
+                  PERFIL
                 </Link>
               </li>
-              <li className="nav-item">
-                <a className="nav-link float" aria-current="page" href="#">
+              <li className="nav-item nav-link float" aria-current="page">
                   <img
                     src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/shopping-bag-icon.png"
                     className="img-fluid nav-shopping-bag"
                     alt=""
                   />
-                </a>
               </li>
             </div>
           </ul>

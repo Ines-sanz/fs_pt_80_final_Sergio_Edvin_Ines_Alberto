@@ -3,8 +3,8 @@ border-radius: 10px;
 transition: all 0.4s ease;
 }
 .home-banners img:hover{
-    transform: scale(1.01);
-    border: solid 1px #FCEE21;
+    transform: scale(1.02);
+    box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.6);
     }
 
 .t-seccion{
@@ -50,4 +50,42 @@ transition: all 0.4s ease;
     background: #5c5c607f;
     border-radius: 10px;
   }
+
+  .faq-home h3{
+    font-family: inherit;
+    color: white;
+    font-weight: 600;
+    font-size: 40px;
+  }
   
+  .faq-home p{
+    color: #AFAFB2;
+    font-size: 32px;
+  }
+  .faq-home p a{
+    color: #08B5F9;
+  }
+
+  .faq-home-button{
+    margin-top: 20px;
+    background-color: #FCEE21;
+    border-radius: 10px;
+    font-weight: 500;
+    font-family: "Kode Mono", serif;
+    color: black;
+    border: none;
+    font-size: 40px;
+    padding: 3px 13px;
+    transition: all ease 0.4s;
+    text-decoration: none;
+  }
+
+  .faq-home-button:hover{
+    transform: scale(1.05);
+  }
+
+  @media(max-width: 992px){
+    .divider{
+      height: 20px;
+  }
+  }

@@ -20,3 +20,12 @@ background-position: center start;
     width: 70%;
     margin: auto;
 }
+
+
+@media(max-width: 992px){
+    .container{
+        width: 80%;
+        margin: auto;
+    }
+    
+  }
