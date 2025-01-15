@@ -11,7 +11,6 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
-from flask_jwt_extended import JWTManager
 
 # from models import Person
 
@@ -24,15 +23,13 @@ app.url_map.strict_slashes = False
 app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")  
 jwt = JWTManager(app)
 
-app.config["JWT_SECRET_KEY"] = os.getenv("JWT_SECRET_KEY")  
-jwt = JWTManager(app)
 
 # app.config["JWT_SECRET_KEY"] = "final-secret-super-boss"  
 # jwt = JWTManager(app)
 
-
 # >>>>>>> 761a4d467e04d943c47df102916c0cb61f7ef90e
 # database condiguration
+
 db_url = os.getenv("DATABASE_URL")
 if db_url is not None:
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace(
