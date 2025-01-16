@@ -42,7 +42,59 @@ export const Perfil = () => {
                         )}
                         {/* Si elige "Registrarse", muestra el formulario */}
                         {isRegister === true && (
-                            <form>
+                            <form
+                                onSubmit={async (e) => {
+                                    e.preventDefault(); 
+
+                                    // Extraemos los valores de los campos
+                                    const email = e.target.email.value;
+                                    const password = e.target.password.value;
+                                    const repeatPassword = e.target.repeatPassword.value;
+                                    const userName = e.target.nombre.value;
+                                    const address = e.target.direccion.value;
+                                    const postalCode = e.target.cp.value;
+                                    const city = e.target.ciudad.value;
+
+                                    // Verificamos que las contraseñas coincidan
+                                    if (password !== repeatPassword) {
+                                        alert("Las contraseñas no coinciden. Por favor, verifica e inténtalo de nuevo.");
+                                        return;
+                                    }
+
+                                    try {
+                                        const response = await fetch(`${process.env.BACKEND_URL}register`, {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                            },
+                                            body: JSON.stringify({
+                                                email,
+                                                password,
+                                                userName,
+                                                address,
+                                                postalCode,
+                                                city,
+                                            }),
+                                        });
+                                    
+                                        const data = await response.json();
+                                    
+                                        if (response.ok) {
+                                            // Registro exitoso
+                                            alert("Registro exitoso. Bienvenido!");
+                                            console.log("Token:", data.token);
+                                            console.log("Usuario:", data.user);
+                                            // Hay que decidir donde guardar el Token que se recibe
+                                        } else {
+                                            // Error en el registro
+                                            alert(data.msg || "Error durante el registro");
+                                        }
+                                    } catch (error) {
+                                        alert("Error al conectar con el servidor");
+                                        console.error(error);
+                                    }
+                                }}
+                            >
                             <div className="text-center mb-4">
                                 <img
                                     src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/user.png"
@@ -59,6 +111,7 @@ export const Perfil = () => {
                                     className="form-control bg-dark text-white border-0"
                                     id="email"
                                     placeholder="ejemplo@ejemplo.com"
+                                    required
                                 />
                             </div>
                             <div className="mb-3">
@@ -70,6 +123,7 @@ export const Perfil = () => {
                                     className="form-control bg-dark text-white border-0"
                                     id="password"
                                     placeholder="Contraseña"
+                                    required
                                 />
                             </div>
                             <div className="mb-3">
@@ -81,6 +135,7 @@ export const Perfil = () => {
                                     className="form-control bg-dark text-white border-0"
                                     id="repeatPassword"
                                     placeholder="Repite tu contraseña"
+                                    required
                                 />
                             </div>
                             <div className="mb-3">
@@ -92,6 +147,7 @@ export const Perfil = () => {
                                     className="form-control bg-dark text-white border-0"
                                     id="nombre"
                                     placeholder="Nombre"
+                                    required
                                 />
                             </div>
                             <div className="mb-3">
@@ -114,6 +170,7 @@ export const Perfil = () => {
                                     className="form-control bg-dark text-white border-0"
                                     id="direccion"
                                     placeholder="Dirección"
+                                    required
                                 />
                             </div>
                             <div className="row g-3">
@@ -126,6 +183,7 @@ export const Perfil = () => {
                                         className="form-control bg-dark text-white border-0"
                                         id="ciudad"
                                         placeholder="Ciudad"
+                                        required
                                     />
                                 </div>
                                 <div className="col-md-6">
@@ -137,6 +195,7 @@ export const Perfil = () => {
                                         className="form-control bg-dark text-white border-0"
                                         id="cp"
                                         placeholder="Código Postal"
+                                        required
                                     />
                                 </div>
                             </div>
