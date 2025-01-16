@@ -3,16 +3,15 @@
 body {
     background-color: #000;
     color: #fff;
-    font-family: Arial, sans-serif;
+    font-family: "Kode Mono", serif;
     text-align: center;
     margin: 0;
     padding: 0;
 }
 
-h2 {
+h3 {
     margin: 20px 0;
-    font-size: 2rem;
-    color: #fff;
+    color: #888888ea;
 }
 
 .card-container {
@@ -24,7 +23,7 @@ h2 {
 }
 
 .card {
-    width: 300px;
+    width: 500px;
     padding: 20px;
     border-radius: 10px;
     text-align: center;
@@ -43,32 +42,15 @@ h2 {
 }
 
 .premium {
-    background-color: #0033ff;
+    background-color: #1037d3;
     color: #fff;
 }
 
-/* Icon Styles */
-.icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto;
-    background-color: #fff;
-    border-radius: 50%;
-}
-
-.crown {
-    background: url("https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/premium-user.png") 
-        no-repeat center center;
-    background-size: contain;
-}
-
-/* Image Styling */
 .card img {
-    width: 100px;
+    width: 150px;
     margin: 20px auto;
 }
 
-/* List Styles */
 .card ul {
     list-style: none;
     padding: 0;
@@ -77,42 +59,34 @@ h2 {
 }
 
 .card ul li {
-    margin: 10px 0;
+    margin: 15px 0;
 }
 
-/* Premium-specific styles */
 .premium .price {
-    font-size: 1.5rem;
+    font-size: 2.5rem;
     color: #fff;
 }
 
 .premium button {
-    background-color: #ffcc00;
+    background-color: #f8f407;
     border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
+    padding: 10px 20px; 
+    font-size: 1.5rem;
     color: #000;
     border-radius: 5px;
     cursor: pointer;
     margin-top: 20px;
     transition: background-color 0.3s ease;
+    width: 250px; 
+
+
 }
 
 .premium button:hover {
     background-color: #ffdd33;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .card-container {
-        flex-direction: column;
-    }
+.text {
+    font-size: 1.15rem;
 }
 
-.bulleted-list {
-    list-style-type: disc;
-    list-style-position: inside;
-    margin: 20px 0;
-    padding: 0;
-    text-align: left;
-}
