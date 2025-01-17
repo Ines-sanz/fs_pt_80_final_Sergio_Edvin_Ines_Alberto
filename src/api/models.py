@@ -14,7 +14,7 @@ class Products(db.Model):
     brand = db.Column(db.String, nullable=False)
     platform = db.Column(db.String, nullable=False)
     type = db.Column(db.String, nullable=False)
-    category = db.Column(db.Enum('accessory', 'console', 'videogames', name='category_enum'), nullable=False)
+    category = db.Column(db.Enum('accesorios', 'consolas', 'videojuegos', name='category_enum'), nullable=False)
     state = db.Column(db.Boolean)
     promoted = db.Column(db.Boolean, default=False)
     price = db.Column(db.Float, nullable=False)

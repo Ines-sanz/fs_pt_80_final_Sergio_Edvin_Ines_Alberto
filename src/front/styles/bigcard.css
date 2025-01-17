@@ -1,68 +1,37 @@
-.product-sm-bg{
+.product-bg-bg{
     background-color: white;
-    width: 100%;
-    height: 250px;
     padding: 8px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;   
-}
-.promoted{
-    background-color: white;
-    width: 100%;
-    height: 250px;
-    padding: 8px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;  
     border: solid #FCEE21 6px;
-    
-}
-.promoted img{
-    max-height: 240px;
-}
-.product-sm-bg img{
-    max-height: 240px;
-}
-.videogame-sm-promoted{
-    border: #FCEE21 6px solid;
-    border-radius: 15px;
+    min-height: 350px;
 }
 
-.videogame-sm-bg img{
-    background-color: white;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    height: 400px;
-}
-
-
-.small-c-brand{
+.big-c-brand{
     font-family: "Kanit", serif;
     font-weight: 300; 
     color: #AFAFB2;
-    font-size: 15px;
+    font-size: 25px;
 }
 
-.small-c-name{
+.big-c-name{
     width: 100%;
     overflow: hidden;
     font-family: "Kanit", serif;
     font-weight: 400; 
     color: white;
-    font-size: 24px;
+    font-size: 34px;
 }
-.small-c-price{
+.big-c-price{
     font-family: "Kanit", serif;
     font-weight: 500; 
     letter-spacing: 1px; 
     color: white;
-    font-size: 16px;
+    font-size: 32px;
     background-color: #3A39FF;
-    padding: 3px 13px ;
+    padding: 6px 26px ;
     border-radius: 30px;
 }
 
