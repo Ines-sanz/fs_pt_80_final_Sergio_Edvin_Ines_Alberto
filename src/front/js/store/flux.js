@@ -1,10 +1,11 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      url: "https://fuzzy-robot-7vrw4x76wpj7cr5qq-3001.app.github.dev/",
-      consoles: [],
-      videogames: [],
-      accesorys: [],
+      url: "https://friendly-acorn-5g45p9vj5xrrhjp-3001.app.github.dev/",
+      consolas: [],
+      videojuegos: [],
+      accesorios: [],
+      promoted:[]
     },
     actions: {
       loadInfo: async () => {
@@ -14,20 +15,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           const response = await fetch(url);
           const data = await response.json();
 
-          const consoles = data.filter((item) => item.category === "console");
-          const videogames = data.filter(
-            (item) => item.category === "videogames"
+          const consolas = data.filter((item) => item.category === "consolas");
+          const videojuegos = data.filter(
+            (item) => item.category === "videojuegos"
           );
-          const accesorys = data.filter(
-            (item) => item.category === "accessory"
+          const accesorios = data.filter(
+            (item) => item.category === "accesorios"
+          );
+          const promoted = data.filter(
+            (item) => item.promoted === true
           );
 
           const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
 
           setStore({
-            consoles: shuffleArray(consoles),
-            videogames: shuffleArray(videogames),
-            accesorys: shuffleArray(accesorys),
+            consolas: shuffleArray(consolas),
+            videojuegos: shuffleArray(videojuegos),
+            accesorios: shuffleArray(accesorios),
+            promoted: shuffleArray(promoted)
           });
         } catch (error) {
           console.error("Error loading data:", error);

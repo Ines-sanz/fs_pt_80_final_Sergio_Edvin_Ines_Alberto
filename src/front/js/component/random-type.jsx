@@ -8,13 +8,13 @@ import { useNavigate } from "react-router-dom";
 
     const images = [
       { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/rpg.png", title: "RPG", type: "RPG" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/action.png", title: "Action", type: "Action" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/fighting.png", title: "Sports / Fighting", type: "Sports" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/adventure.png", title: "Adventure", type: "Adventure" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/strategy.png", title: "Strategy", type: "Strategy" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/terror.png", title: "Survival / Horror", type: "Survival" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/platform.png", title: "Platforms", type: "Platforms" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/indie.png", title: "Indie", type: "Indie" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/action.png", title: "Action", type: "action" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/fighting.png", title: "Sports / Fighting", type: "sports" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/adventure.png", title: "Adventure", type: "adventure" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/strategy.png", title: "Strategy", type: "atrategy" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/terror.png", title: "Survival / Horror", type: "aurvival" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/platform.png", title: "Platforms", type: "platforms" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/indie.png", title: "Indie", type: "indie" },
     ];
   
     const [randomImages, setRandomImages] = useState([]);
@@ -26,7 +26,7 @@ import { useNavigate } from "react-router-dom";
   
     
     const handleCategoryClick = (type) => {
-      navigate(`/videogames/${type}`);
+      navigate(`/store/videogames/${type}`);
     };
   
     return (

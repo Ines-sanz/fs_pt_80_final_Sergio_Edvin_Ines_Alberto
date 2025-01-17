@@ -8,8 +8,9 @@ export const Suscription = () => {
 
     return (
         <>
+        <div className="body-suscription">
                 <h2><strong>Conviértete en Premium Boss</strong></h2>
-                <h3>Únete a nuestra comunidad y disfruta de las mejores ventajas.</h3>
+                <h3 className="h3-suscription">Únete a nuestra comunidad y disfruta de las mejores ventajas.</h3>
             <div className="card-container">
                 <div className="card basic">
                     
@@ -50,6 +51,7 @@ export const Suscription = () => {
                     <button className="join-btn"><strong>¡Únete!</strong></button>
                     </div>
                 </div>
+            </div>
             </div>
         </>
     );

@@ -1,7 +1,6 @@
 
 
-body {
-    background-color: #000;
+.body-suscription {
     color: #fff;
     font-family: "Kode Mono", serif;
     text-align: center;
@@ -9,7 +8,7 @@ body {
     padding: 0;
 }
 
-h3 {
+.h3-suscription {
     margin: 20px 0;
     color: #888888ea;
 }
@@ -42,7 +41,7 @@ h3 {
 }
 
 .premium {
-    background-color: #1037d3;
+    background-color: #3A39FF;
     color: #fff;
 }
 
@@ -68,7 +67,7 @@ h3 {
 }
 
 .premium button {
-    background-color: #f8f407;
+    background-color: #FCEE21;
     border: none;
     padding: 10px 20px; 
     font-size: 1.5rem;
