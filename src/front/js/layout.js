@@ -11,8 +11,7 @@ import injectContext from "./store/appContext";
 import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { Suscription } from "./pages/suscription.jsx";
-import { SellView } from "./pages/sellView.jsx";
-
+import { SellView } from "./pages/sellview.jsx";
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
