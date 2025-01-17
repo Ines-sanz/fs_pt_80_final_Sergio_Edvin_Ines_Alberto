@@ -1,8 +1,152 @@
 body {
     font-family: "Kode Mono", sans-serif;
     background-color: black;
-    color: white;
-    margin: 0;
-    padding: 0;
+    color:white;
 }
 
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem; 
+}
+
+.title {
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+
+.__image__ {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.photo-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.__image_placeholder__ {
+    width: 10rem; 
+    height: 10rem; 
+    background-color:rgb(67, 64, 64);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px; 
+    margin-bottom: 10px; 
+    cursor: pointer;
+}
+
+.plus {
+    font-size: 2rem;
+    color: white;
+}
+
+.upload-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem; 
+}
+
+.upload-text {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+.promote_button {
+    background-color: rgb(19, 126, 241);
+    border: none;
+    color: white;
+    padding: 1rem 2rem; 
+    border-radius: 8px; 
+    cursor: pointer;
+    font-size: 1rem;
+    margin-right: 1rem;
+}
+
+.promote_button:hover {
+    background-color: rgb(3, 49, 157);
+}
+
+.premium_button {
+    background-color: rgba(20, 245, 17, 0.887);
+    border: none;
+    color: white;
+    padding: 1rem 2rem; 
+    border-radius: 8px; 
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.premium_button:hover {
+    background-color:green;
+}
+
+
+.form-section {
+    background-color: rgba(18, 18, 18, 0.88);
+    padding: 2rem; 
+    border-radius: 0.5rem; 
+}
+
+.__selling_form__ {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; 
+}
+
+.form-row {
+    display: flex;
+    gap: 1.5rem; 
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+input, select, textarea {
+    background-color:rgb(76, 74, 74);
+    border: none;
+    color: white;
+    padding: 1rem; 
+    border-radius: 0.5rem; 
+    font-size: 1rem;
+}
+
+textarea {
+    resize: none;
+}
+
+.sell-button {
+    background-color: rgb(240, 228, 5);
+    border: none;
+    color: black;
+    padding: 1rem 2rem; 
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.sell-button:hover {
+    background-color: rgb(196, 170, 19);
+}
