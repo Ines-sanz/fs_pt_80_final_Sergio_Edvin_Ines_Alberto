@@ -515,7 +515,7 @@ def add_to_checkout():
 #         return jsonify({'checkout': checkout_list}), 200
 #     except Exception as error:
 #         return jsonify({'error': str(error)}),400
-    
+ 
 # uSer to User followed
 
 @api.route('/users/following', methods=['GET'])
