@@ -12,7 +12,7 @@ export const Home = () => {
   const { store, actions } = useContext(Context);
 
   return (
-    <div className="container">
+    <div className="home-container">
       <section className="home-banners row my-5">
         <figure className=" col-12 col-lg-6">
           {" "}

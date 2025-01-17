@@ -18,7 +18,7 @@ export const Store = () => {
     };
 
     return (
-        <div className="container">
+        <div className="home-container">
             <div className="row d-flex justify-content-center my-5 icons-store">
                 <figure className="col-4 col-lg-2">
                     <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/c_thumb,w_200,g_face/v1737114585/icons-store-20_wbf0e6.png" alt="Consolas" onClick={() => handleCategoryClick("consolas")} className="img-fluid" />
