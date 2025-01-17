@@ -32,7 +32,7 @@ const{store, actions} = useContext(Context)
           </span>  
           <div>
           <div className="d-flex align-items-center">
-          <span class="fa-solid fa-plus plus-icon"></span>
+          <span className="fa-solid fa-plus plus-icon"></span>
         <span className="fa-solid fa-star fav-icon"></span>
         </div>
           </div>

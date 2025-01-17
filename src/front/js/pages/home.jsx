@@ -7,6 +7,7 @@ import { ProductCard } from "../component/product-small-card.jsx";
 import { VideogameCard } from "../component/videogame-small-card.jsx";
 import { GameType } from "../component/random-type.jsx";
 
+
 export const Home = () => {
   const { store, actions } = useContext(Context);
 
@@ -37,15 +38,15 @@ export const Home = () => {
         <h3 className="t-seccion">Consolas</h3>
         <div className="horizontal-scrollable">
           <div className="row flex-nowrap pt-1">
-            {store.consoles?.map((console) => (
+            {store.consolas?.map((consola) => (
               <ProductCard
-                key={console.id}
-                img={console.img}
-                name={console.name}
-                brand={console.brand}
-                price={console.price}
-                promoted={console.promoted}
-                id={console.id}
+                key={consola.id}
+                img={consola.img}
+                name={consola.name}
+                brand={consola.brand}
+                price={consola.price}
+                promoted={consola.promoted}
+                id={consola.id}
               />
             ))}
           </div>
@@ -56,15 +57,15 @@ export const Home = () => {
         <h3 className="t-seccion">Videojuegos</h3>
         <div className="horizontal-scrollable">
           <div className="row flex-nowrap pt-1">
-            {store.videogames?.map((videogame) => (
+            {store.videojuegos?.map((videojuego) => (
               <VideogameCard
-                key={videogame.id}
-                img={videogame.img}
-                name={videogame.name}
-                brand={videogame.brand}
-                price={videogame.price}
-                promoted={videogame.promoted}
-                id={videogame.id}
+                key={videojuego.id}
+                img={videojuego.img}
+                name={videojuego.name}
+                brand={videojuego.brand}
+                price={videojuego.price}
+                promoted={videojuego.promoted}
+                id={videojuego.id}
               />
             ))}
           </div>
@@ -78,15 +79,15 @@ export const Home = () => {
         <h3 className="t-seccion">Accesorios</h3>
         <div className="horizontal-scrollable">
           <div className="row flex-nowrap pt-1">
-            {store.accesorys?.map((accesory) => (
+            {store.accesorios?.map((accesorio) => (
               <ProductCard
-                key={accesory.id}
-                img={accesory.img}
-                name={accesory.name}
-                brand={accesory.brand}
-                price={accesory.price}
-                promoted={accesory.promoted}
-                id={accesory.id}
+                key={accesorio.id}
+                img={accesorio.img}
+                name={accesorio.name}
+                brand={accesorio.brand}
+                price={accesorio.price}
+                promoted={accesorio.promoted}
+                id={accesorio.id}
               />
             ))}
           </div>
@@ -94,16 +95,17 @@ export const Home = () => {
       </section>
       <div className="divider"></div>
       <section className="row faq-home">
-        <div className="col-8">
+        <div className="col-9">
           <h3>¿Tienes dudas?</h3>
           <p>Consulta nuestras <Link to="/contacto">preguntas frecuentes</Link></p>
           <Link to="/suscripcion" className="faq-home-button">Go premium</Link>
           <p>Contacto directo y mucho más...</p>
         </div>
-        <figure className="col-4 text-start">
+        <figure className="col-3 text-start">
           <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/c_thumb,w_200,g_face/v1736455865/web-illustrations/r5r3z9kfuqd95yennokv.png" alt="FAQ" className="img-fluid" />
         </figure>
       </section>
+      <div className="divider"></div>
     </div>
   );
 };

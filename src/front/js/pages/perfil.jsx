@@ -62,7 +62,7 @@ export const Perfil = () => {
                                     }
 
                                     try {
-                                        const response = await fetch(`${process.env.BACKEND_URL}register`, {
+                                        const response = await fetch(`${process.env.BACKEND_URL}/register`, {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json",
@@ -220,7 +220,7 @@ export const Perfil = () => {
                                     const password = e.target.password.value;
                                 
                                     try {
-                                        const response = await fetch(`${process.env.BACKEND_URL}login`, {
+                                        const response = await fetch(`${process.env.BACKEND_URL}/login`, {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json",

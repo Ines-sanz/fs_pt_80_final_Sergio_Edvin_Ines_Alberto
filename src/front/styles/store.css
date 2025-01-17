@@ -1,0 +1,17 @@
+.icons-store img{
+    cursor: pointer;
+    opacity: 0.4;
+    display: inline-block; 
+    position: relative; 
+    transition: transform 0.5s ease;
+}
+
+.icons-store img.selected{
+    opacity: 1;
+    transform: translateY(-15px);
+}
+
+.icons-store img:hover{
+opacity: 1;
+transform: translateY(-15px);
+}

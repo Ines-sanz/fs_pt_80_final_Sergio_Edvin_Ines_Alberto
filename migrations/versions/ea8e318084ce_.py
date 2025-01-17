@@ -1,8 +1,14 @@
 """empty message
 
-Revision ID: 76aa2fb54ea3
+<<<<<<<< HEAD:migrations/versions/443aeeec01a9_.py
+Revision ID: 443aeeec01a9
 Revises: 
-Create Date: 2025-01-15 17:40:17.213930
+Create Date: 2025-01-17 17:00:40.671842
+========
+Revision ID: ea8e318084ce
+Revises: 
+Create Date: 2025-01-15 20:12:32.159557
+>>>>>>>> 34a39dd987c5f2f68b9aa04c9cc756ec5cc1bb49:migrations/versions/ea8e318084ce_.py
 
 """
 from alembic import op
@@ -10,7 +16,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '76aa2fb54ea3'
+
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -68,7 +74,7 @@ def upgrade():
     sa.Column('brand', sa.String(), nullable=False),
     sa.Column('platform', sa.String(), nullable=False),
     sa.Column('type', sa.String(), nullable=False),
-    sa.Column('category', sa.Enum('accessory', 'console', 'videogames', name='category_enum'), nullable=False),
+    sa.Column('category', sa.Enum('accesorios', 'consolas', 'videojuegos', name='category_enum'), nullable=False),
     sa.Column('state', sa.Boolean(), nullable=True),
     sa.Column('promoted', sa.Boolean(), nullable=True),
     sa.Column('price', sa.Float(), nullable=False),

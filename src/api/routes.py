@@ -197,7 +197,7 @@ def login():
     
 
     ##·······················································  Cómo USER(buy/sell):
-# no funciona
+# funciona!!!!!
 @api.route('/product', methods=['POST']) 
 @jwt_required()     
 def create_product():
@@ -214,26 +214,28 @@ def create_product():
         brand = request.json.get('brand', None)
         platform = request.json.get('platform', None)
         type = request.json.get('type', None)
+        category = request.json.get('category', None)
         state = request.json.get('state', None)
         promoted = request.json.get('promoted', None) 
         price = request.json.get('price', None)
+        seller_id = id
         
 
         #validate required fields
-        if not name or not description or not img or not year or not brand or not platform or not type or not state or not promoted or not price:
+        if not name or not description or not img or not year or not brand or not platform or not category or not type or not state or not promoted or not price:
             return jsonify({'msg': 'Please fill all the data'}), 400
         
         #create a new product
-        new_product = Products(name=name, description=description, img=img, year=year, brand=brand, platform=platform, type=type, state=state, promoted=promoted, price=price)
+        new_product = Products(name=name, description=description, img=img, year=year, brand=brand, platform=platform, category=category, type=type, state=state, promoted=promoted, price=price, seller_id = id)
         db.session.add(new_product)
         db.session.commit()
 
-        return jsonify({'msg': 'Product created successfully', 'product': new_product}), 201
+        return jsonify({'msg': 'Product created successfully', 'product': new_product.serialize()}), 201
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-
+#FUNCIONAAAAAAA!!!!!!!!!!!!!
 @api.route('/product/<int:product_id>', methods=['PUT'])  
 @jwt_required()
 def update_product(product_id):
@@ -243,12 +245,17 @@ def update_product(product_id):
         if not user:
             return jsonify({'msg':'Unauthorized: User not found'}), 401
         # extract user_id from the request
-        user_id = request.json.get('user_id', None)
+        # user_id = request.json.get('user_id', None)
 
         # find the product by id
         product = Products.query.get(product_id)
-        if not product or product.user_id != user_id:
-            return jsonify({'msg': 'Product not found or not owned by the user'}), 404
+        if not product:
+            return jsonify({'msg': 'Product not found '}), 404
+        print(product.seller_id)
+
+        if product.seller_id != int(id):
+            return jsonify({'msg': 'not owned by the user', 'id': id, "seller_id": product.seller_id}), 404
+        print(id)
         
         #update product details
         product.name = request.json.get('name', product.name)
@@ -276,12 +283,10 @@ def delete_product(product_id):
         user = Users.query.get(id)
         if not user:
             return jsonify({'msg':'Unauthorized: User not found'}), 401
-        #extract user id from the request
-        user_id = request.json.get('user_id', None)
 
         #find product id
         product =  Products.query.get(product_id)
-        if not product_id or product.user_id != user_id:
+        if not product_id or product.seller_id != int(id):
             return jsonify({'msg': 'Product not found'}), 404
         
         #delete product
@@ -364,7 +369,7 @@ def add_to_favorites():
         if not user:
             return jsonify({'msg':'Unauthorized: User not found'}), 401
         #extract user_id and product_id from the request
-        user_id = request.json.get('user_id', None)                              ##revisar estos 2 lineas con Javi y comparar con modelos
+        user_id = request.json.get('user_id', None)     
         product_id = request.json.get('product_id', None)
 
         #validate required fields
@@ -394,21 +399,19 @@ def remove_from_favorite(product_id):
         user = Users.query.get(id)
         if not user:
             return jsonify({'msg':'Unauthorized: User not found'}), 401 
-        #extract user_id from the request
-        id = get_jwt_identity()                                          ##revisar estos 2 lineas con Javi y comparar con modelos
-        user_id = Users.query.get(id)  
+
 
         #validate required fields
-        if not user_id:
+        if not id:
             return jsonify({'msg': 'User ID is required'}), 400
         
         #find the favorite
-        favorite = Favorites.query.filter(user_id=user_id, product_id=product_id).first()
+        favorite = Favorites.query.filter_by(user_id = id, product_id=product_id).first()
         if not favorite:
             return jsonify({'msg': 'Favorite not found'}), 404
         
         #remove from favorites
-        db.session.remove(favorite)
+        db.session.delete(favorite)
         db.session.commit()
 
         return jsonify({'msg': 'Removed from favorites successfully'}), 200
@@ -422,14 +425,14 @@ def get_favorites():
     try:
         #extract user from the request
         id = get_jwt_identity()
-        user_id = Users.query.get(id)  
+        user = Users.query.get(id)  
 
         # validate required field
-        if not user_id:
+        if not user:
             return jsonify({'msg':'User ID is required'}), 400
         
         #brin all favorite products for the user
-        favorites = Favorites.query.filter_by(user_id=user_id).all()
+        favorites = Favorites.query.filter_by(user_id=id).all()
         favorites_list = [{'id': fav.id, 'product_id':fav.product_id} for fav in favorites]
 
         return jsonify({'favorites': favorites_list}), 200
@@ -512,7 +515,7 @@ def add_to_checkout():
 #         return jsonify({'checkout': checkout_list}), 200
 #     except Exception as error:
 #         return jsonify({'error': str(error)}),400
-    
+ 
 # uSer to User followed
 
 @api.route('/users/following', methods=['GET'])

@@ -1,0 +1,91 @@
+
+
+.body-suscription {
+    color: #fff;
+    font-family: "Kode Mono", serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.h3-suscription {
+    margin: 20px 0;
+    color: #888888ea;
+}
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    padding: 40px 0;
+}
+
+.card {
+    width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.basic {
+    background-color: #555;
+    color: #fff;
+}
+
+.premium {
+    background-color: #3A39FF;
+    color: #fff;
+}
+
+.card img {
+    width: 150px;
+    margin: 20px auto;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    color: #fff;
+}
+
+.card ul li {
+    margin: 15px 0;
+}
+
+.premium .price {
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.premium button {
+    background-color: #FCEE21;
+    border: none;
+    padding: 10px 20px; 
+    font-size: 1.5rem;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    width: 250px; 
+
+
+}
+
+.premium button:hover {
+    background-color: #ffdd33;
+}
+
+.text {
+    font-size: 1.15rem;
+}
+

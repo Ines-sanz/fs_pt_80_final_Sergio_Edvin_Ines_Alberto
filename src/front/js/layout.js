@@ -12,6 +12,8 @@ import { Navbar } from "./component/navbar.jsx";
 import { Footer } from "./component/footer.jsx";
 import { Suscription } from "./pages/suscription.jsx";
 import { SellView } from "./pages/sellview.jsx";
+import { CategoryPage } from "./pages/store-type.jsx";
+
 //create your first component
 const Layout = () => {
     //the basename is used when your project is published in a subdirectory and not in the root of the domain
@@ -32,6 +34,7 @@ const Layout = () => {
                         <Route element={<Perfil />} path="/perfil" />
                         <Route element={<SellView />} path="/sell" />
                         <Route element={<Suscription />} path="/suscripcion" />
+                        <Route element={<CategoryPage />} path="/store/:category"  />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
