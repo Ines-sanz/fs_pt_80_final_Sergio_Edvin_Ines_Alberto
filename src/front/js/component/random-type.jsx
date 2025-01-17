@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom";
 
     const images = [
       { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/rpg.png", title: "RPG", type: "RPG" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/action.png", title: "Action", type: "action" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/fighting.png", title: "Sports / Fighting", type: "sports" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/adventure.png", title: "Adventure", type: "adventure" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/strategy.png", title: "Strategy", type: "atrategy" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/terror.png", title: "Survival / Horror", type: "aurvival" },
-      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/platform.png", title: "Platforms", type: "platforms" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/action.png", title: "Acción", type: "accion" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/fighting.png", title: "Peleas", type: "pelea" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/fighting.png", title: "Deportes", type: "deporte" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/adventure.png", title: "Aventura", type: "aventura" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/strategy.png", title: "Estrategia", type: "estrategia" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/terror.png", title: "Horror", type: "horror" },
+      { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/platform.png", title: "Plataformas", type: "plataforma" },
       { src: "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/indie.png", title: "Indie", type: "indie" },
     ];
   
