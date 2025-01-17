@@ -1,7 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      url: "https://friendly-acorn-5g45p9vj5xrrhjp-3001.app.github.dev/",
+      url: `${process.env.BACKEND_URL}`,
       consolas: [],
       videojuegos: [],
       accesorios: [],
