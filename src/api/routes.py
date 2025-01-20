@@ -41,16 +41,8 @@ def register():
             db.session.add(new_user)                                         # aqui se agrego a la tabla
             db.session.commit()                                                #aqui se almacena cambios en la base de datos
             token = create_access_token(identity=str(new_user.id))
-            user_data = {
-                "id": new_user.id,
-                "email": new_user.email,
-                "userName": new_user.userName,
-                "address": new_user.address,
-                "city": new_user.city,
-                "postalCode": new_user.postalCode
-            }
 
-            return {"msg": "okey", 'token': token, 'user': user_data}, 201
+            return {"msg": "okey", 'token': token, 'user': new_user.serialize()}, 201
         # si existe usuario, devolvemos que ya hay una cuenta con ese correo
         return jsonify({"msg": "User already registered"}), 400
     except Exception as error:
@@ -179,7 +171,7 @@ def login():
 
         if check_user.password == password:
              access_token = create_access_token(identity=str(check_user.id))
-             return ({"msg": "ok", "token": access_token}), 201
+             return ({"msg": "ok", "token": access_token, "user":check_user.serialize()}), 201
         return jsonify({"msg": "Contraseña incorrecta"}), 400
     
     except Exception as error:
