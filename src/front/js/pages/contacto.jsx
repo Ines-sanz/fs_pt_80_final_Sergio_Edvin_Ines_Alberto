@@ -359,16 +359,17 @@ export const Contacto = () => {
                         <Link className="premium-button" to={"/suscripcion"}>
                             Go Premium
                         </Link>
-                        <p>
+                        <p className="mt-3">
                             Contacto directo y mucho más...
                         </p>
                         <img
                             src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736455865/web-illustrations/r5r3z9kfuqd95yennokv.png"
                             alt="Imagen FinalBoss Dudas"
-                            className="w-50"                        
+                            className="image w-50"                        
                             />
                     
                     </div>
+                    
                 </div>
             </div>
         </>
