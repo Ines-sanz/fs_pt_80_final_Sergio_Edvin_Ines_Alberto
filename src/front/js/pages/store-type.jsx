@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Context } from "../store/appContext";
+import { Context } from "../store/appContext.js";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
 import "../../styles/store.css";
@@ -7,7 +7,7 @@ import "../../styles/store.css";
 import { ProductCard } from "../component/product-small-card.jsx";
 import { ProductBCard } from "../component/product-big-card.jsx"
 import { VideogameCard } from "../component/videogame-small-card.jsx";
-
+import { AllType } from "../component/all-type.jsx";
 
 
 export const CategoryPage = () => {
@@ -20,7 +20,7 @@ export const CategoryPage = () => {
     };
 
     return (
-        <div className="container">
+        <div className="home-container">
             <div className="row d-flex justify-content-center my-5 icons-store">
                 <figure className="col-4 col-lg-2">
                     <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/c_thumb,w_200,g_face/v1737114585/icons-store-20_wbf0e6.png" alt="Consolas" className={category == "consolas" ? "selected img-fluid" : "img-fluid "} onClick={() => handleCategoryClick("consolas")} />
@@ -38,17 +38,17 @@ export const CategoryPage = () => {
                     <div className="row flex-nowrap pt-1">
                         {category === 'videojuegos' ? (
                             store[category]?.filter((item) => !item.promoted)
-                            .map((item) => (
-                                <VideogameCard
-                                    key={item.id}
-                                    img={item.img}
-                                    name={item.name}
-                                    brand={item.brand}
-                                    price={item.price}
-                                    promoted={item.promoted}
-                                    id={item.id}
-                                />
-                            ))
+                                .map((item) => (
+                                    <VideogameCard
+                                        key={item.id}
+                                        img={item.img}
+                                        name={item.name}
+                                        brand={item.brand}
+                                        price={item.price}
+                                        promoted={item.promoted}
+                                        id={item.id}
+                                    />
+                                ))
                         ) : (
                             store[category]
                                 ?.filter((item) => !item.promoted)
@@ -71,24 +71,24 @@ export const CategoryPage = () => {
             <section className="my-5">
                 <div className="horizontal-scrollable">
                     <div className="row flex-nowrap pt-1">
-                                                       {category === 'videojuegos' ? (
+                        {category === 'videojuegos' ? (
                             store.promoted
-                            ?.filter((promo) => promo.category === category)
-                            .map((promo) =>(
-                                <VideogameCard
-                                    key={promo.id}
-                                    img={promo.img}
-                                    name={promo.name}
-                                    brand={promo.brand}
-                                    price={promo.price}
-                                    promoted={promo.promoted}
-                                    id={promo.id}
-                                />
-                            ))
+                                ?.filter((promo) => promo.category === category)
+                                .map((promo) => (
+                                    <VideogameCard
+                                        key={promo.id}
+                                        img={promo.img}
+                                        name={promo.name}
+                                        brand={promo.brand}
+                                        price={promo.price}
+                                        promoted={promo.promoted}
+                                        id={promo.id}
+                                    />
+                                ))
                         ) : (
                             store.promoted
-                            ?.filter((promo) => promo.category === category)
-                            .map((promo) => (
+                                ?.filter((promo) => promo.category === category)
+                                .map((promo) => (
                                     <ProductCard
                                         key={promo.id}
                                         img={promo.img}
@@ -121,23 +121,28 @@ export const CategoryPage = () => {
                         ))}
                 </div>
             </section>
+            {category === "videojuegos" && (
+                <div className="row my-5 home-type g-2">
+                    <AllType />
+                </div>
+            )}
             <div className="divider"></div>
             <section className="my-5">
                 <div className="horizontal-scrollable">
                     <div className="row flex-nowrap pt-1">
-                    {category === 'videojuegos' ? (
+                        {category === 'videojuegos' ? (
                             store[category]?.filter((item) => !item.promoted).reverse()
-                            .map((item) => (
-                                <VideogameCard
-                                    key={item.id}
-                                    img={item.img}
-                                    name={item.name}
-                                    brand={item.brand}
-                                    price={item.price}
-                                    promoted={item.promoted}
-                                    id={item.id}
-                                />
-                            ))
+                                .map((item) => (
+                                    <VideogameCard
+                                        key={item.id}
+                                        img={item.img}
+                                        name={item.name}
+                                        brand={item.brand}
+                                        price={item.price}
+                                        promoted={item.promoted}
+                                        id={item.id}
+                                    />
+                                ))
                         ) : (
                             store[category]
                                 ?.filter((item) => !item.promoted).reverse()

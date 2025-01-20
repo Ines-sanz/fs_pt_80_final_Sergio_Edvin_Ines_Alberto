@@ -236,6 +236,8 @@ export const Perfil = () => {
                                             alert("Inicio de sesión exitoso");
                                             console.log("Token:", data.token);
                                             localStorage.setItem('Token', data.token)
+                                            // Hay que decidir donde guardar el Token que se recibe
+                                            // Creo que podriamos ver lo del localstorage y además hacer una funcion en el context de isLogged o algo así para poder comprobarlo en el resto de componentes.
                                         } else {
                                             alert(data.msg || "Error en el inicio de sesión");
                                         }

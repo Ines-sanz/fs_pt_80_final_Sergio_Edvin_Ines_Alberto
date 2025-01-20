@@ -10,7 +10,7 @@ const{store, actions} = useContext(Context)
   const isPromoted = props.promoted === true
 
   return (<>
-    <div className="col-10 col-md-5 col-xl-3">
+    <div className="col-10 col-md-5 col-xl-4">
       {/* <img className="img-fluid" src={props.img} alt={props.name} onClick={handleLink} /> */}
       <div className={ isPromoted ? "videogame-sm-bg videogame-sm-promoted": "videogame-sm-bg" } >
         
