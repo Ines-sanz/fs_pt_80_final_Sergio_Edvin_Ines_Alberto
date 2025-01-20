@@ -84,7 +84,7 @@ export const Perfil = () => {
                                             alert("Registro exitoso. Bienvenido!");
                                             console.log("Token:", data.token);
                                             console.log("Usuario:", data.user);
-                                            // Hay que decidir donde guardar el Token que se recibe
+                                            localStorage.setItem('Token', data.token)
                                         } else {
                                             // Error en el registro
                                             alert(data.msg || "Error durante el registro");
@@ -235,7 +235,7 @@ export const Perfil = () => {
                                         if (response.ok) {
                                             alert("Inicio de sesión exitoso");
                                             console.log("Token:", data.token);
-                                            // Hay que decidir donde guardar el Token que se recibe
+                                            localStorage.setItem('Token', data.token)
                                         } else {
                                             alert(data.msg || "Error en el inicio de sesión");
                                         }
