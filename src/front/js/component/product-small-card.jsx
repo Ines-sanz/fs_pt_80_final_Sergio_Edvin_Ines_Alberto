@@ -3,7 +3,6 @@ import { Navigate, useNavigate } from "react-router";
 import "../../styles/smallcard.css";
 import { Context } from "../store/appContext";
 
-
 export const ProductCard = (props) => {
   const{store, actions} = useContext(Context)
   const navigate = useNavigate();
