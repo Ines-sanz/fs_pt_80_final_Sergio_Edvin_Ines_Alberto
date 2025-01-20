@@ -359,22 +359,23 @@ def add_to_favorites():
         id = get_jwt_identity()
         user = Users.query.get(id)
         if not user:
-            return jsonify({'msg':'Unauthorized: User not found'}), 401
-        #extract user_id and product_id from the request
-        user_id = request.json.get('user_id', None)     
+            return jsonify({'msg':'Unauthorized: User not found'}), 403
+        #extractproduct_id from the request  
         product_id = request.json.get('product_id', None)
 
         #validate required fields
-        if not user_id or not product_id:
-            return jsonify({'msg': 'User ID and product ID are required'}), 400
+        if not product_id:
+            return jsonify({'msg': 'Product ID are required'}), 400
         
         # check if favorite already exist
-        existing_favorite = Favorites.query.filter_by(user_id=user_id, product_id=product_id).first()
+        existing_favorite = Favorites.query.filter_by(user_id=id, product_id=product_id).first()
         if existing_favorite:
-            return jsonify({'msg': 'Product already in favorites'}), 400
-        
+            db.session.delete(existing_favorite)
+            db.session.commit()
+            return jsonify({'msg': 'Product deleted'}), 200
+
         # add to favorites
-        new_favorite = Favorites(user_id=user_id, product_id=product_id)
+        new_favorite = Favorites(user_id=id, product_id=product_id)
         db.session.add(new_favorite)
         db.session.commit()
 
