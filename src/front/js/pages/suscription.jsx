@@ -50,7 +50,7 @@ export const Suscription = () => {
                     </ul>
                     <div className="container">
                     <p><strong className="price">9.99€</strong><span>/mes</span></p>
-                    <button className="join-btn"><strong>¡Únete!</strong></button>
+                    <Link className="join-btn" to={"/checkout"}><strong>¡Únete!</strong></Link>
                     </div>
                 </div>
             </div>

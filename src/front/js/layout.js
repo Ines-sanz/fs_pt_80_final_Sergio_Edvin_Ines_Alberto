@@ -14,6 +14,7 @@ import { Suscription } from "./pages/suscription.jsx";
 import { SellView } from "./pages/sellview.jsx";
 import { CategoryPage } from "./pages/store-type.jsx";
 import { VideogameType } from "./pages/videogame-type.jsx";
+import { Checkout } from "./pages/checkout.jsx";
 
 //create your first component
 const Layout = () => {
@@ -36,6 +37,7 @@ const Layout = () => {
                         <Route element={<SellView />} path="/sell" />
                         <Route element={<Suscription />} path="/suscripcion" />
                         <Route element={<CategoryPage />} path="/store/:category"  />
+                        <Route element={<Checkout />} path="/checkout" />
                         <Route element={<VideogameType />} path="/store/videogames/:type"  />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
