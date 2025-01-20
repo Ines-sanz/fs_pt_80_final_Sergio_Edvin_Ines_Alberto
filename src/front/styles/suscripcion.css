@@ -2,7 +2,7 @@
 
 .body-suscription {
     color: #fff;
-    font-family: "Kode Mono", serif;
+    font-family: "Kanit", serif;
     text-align: center;
     margin: 0;
     padding: 0;
@@ -33,16 +33,24 @@
 .card:hover {
     transform: scale(1.05);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    z-index: 1;
 }
 
 .basic {
     background-color: #555;
     color: #fff;
+    margin-right: -50px;
+    z-index: 0;
+    transition: all ease 0.7s;
+    width: 400px
 }
 
 .premium {
     background-color: #3A39FF;
     color: #fff;
+    margin-left: -50px;
+    z-index: 0;
+    transition: all ease 0.7s;
 }
 
 .card img {
