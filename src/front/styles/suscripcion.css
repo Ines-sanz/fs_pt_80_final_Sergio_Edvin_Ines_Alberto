@@ -74,7 +74,7 @@
     color: #fff;
 }
 
-.premium button {
+.join-btn {
     background-color: #FCEE21;
     border: none;
     padding: 10px 20px; 
@@ -85,11 +85,9 @@
     margin-top: 20px;
     transition: background-color 0.3s ease;
     width: 250px; 
-
-
 }
 
-.premium button:hover {
+.join-btn:hover {
     background-color: #ffdd33;
 }
 
