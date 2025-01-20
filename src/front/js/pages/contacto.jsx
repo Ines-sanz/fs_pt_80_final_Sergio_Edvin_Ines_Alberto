@@ -359,7 +359,7 @@ export const Contacto = () => {
                         <Link className="premium-button" to={"/suscripcion"}>
                             Go Premium
                         </Link>
-                        <p className="mt-3">
+                        <p className="mt-2">
                             Contacto directo y mucho más...
                         </p>
                         <img
