@@ -167,7 +167,7 @@ class Users(db.Model):
             "address": self.address,
             "postalCode": self.postalCode,
             "city": self.city,
-            "favorites": [fav.serilize() for fav in self.favorites],
+            "favorites": [fav.serialize() for fav in self.favorites],
             "followed_by": [follower.serialize() for follower in self.followed_by],
             "following_users": [followed.serialize() for followed in self.following_users],
             "subscription": self.subscription,

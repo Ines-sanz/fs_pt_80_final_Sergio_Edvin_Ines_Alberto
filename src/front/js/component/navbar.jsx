@@ -4,9 +4,11 @@ import "../../styles/navbar.css";
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
+import {CartItem} from "./shopping-cart-item.jsx"
+
 export const Navbar = () => {
-  const{store, actions} = useContext(Context)
-  
+  const { store, actions } = useContext(Context)
+
   const [isTransparent, setIsTransparent] = useState(false);
   let lastScrollTop = 0;
 
@@ -30,6 +32,7 @@ export const Navbar = () => {
     };
   }, []);
 
+  
   const navigate = useNavigate();
 
   const handleLink = (type) => {
@@ -39,34 +42,34 @@ export const Navbar = () => {
       navigate(`/store/${type}`);
     }
   };
-console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido");
+
+  console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido");
+  console.log(store );
+  console.log(store.user.shoppingCart) 
   return (
     <>
+      {/* Offcanvas del menú */}
       <div
         className={`offcanvas offcanvas-end ${isTransparent ? "transparent" : ""}`}
         tabIndex="-1"
         id="offcanvasNavbar"
         aria-labelledby="offcanvasNavbarLabel"
       >
-        <div className="offcanvas-header my-offcanvas">
-          
-      
-        </div>
         <div className="offcanvas-body my-offcanvas">
-          <ul className="navbar-nav  align-items-start flex-column">
+          <ul className="navbar-nav align-items-start flex-column">
             <li className="nav-item">
               <Link to="/contacto" className="nav-link my-offcanvas-text float" aria-current="page">
                 CONTACTO
               </Link>
             </li>
             <li className="nav-item">
-              <Link to="/perfil" className="nav-link  my-offcanvas-text float">
-             Perfil
+              <Link to="/perfil" className="nav-link my-offcanvas-text float">
+                PERFIL
               </Link>
             </li>
             <li className="nav-item dropdown">
               <a
-                className="nav-link dropdown-toggle  my-offcanvas-text float"
+                className="nav-link dropdown-toggle my-offcanvas-text float"
                 href="#"
                 role="button"
                 data-bs-toggle="dropdown"
@@ -77,7 +80,7 @@ console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido"
               <ul className="dropdown-menu my-dropdown">
                 <li>
                   <button
-                  className="dropdown-item"
+                    className="dropdown-item"
                     onClick={() => handleLink("all")}
                   >
                     Ver todo
@@ -85,7 +88,7 @@ console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido"
                 </li>
                 <li>
                   <button
-                  className="dropdown-item"
+                    className="dropdown-item"
                     onClick={() => handleLink("consolas")}
                   >
                     Consolas
@@ -93,7 +96,7 @@ console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido"
                 </li>
                 <li>
                   <button
-                  className="dropdown-item"
+                    className="dropdown-item"
                     onClick={() => handleLink("videojuegos")}
                   >
                     Videojuegos
@@ -101,7 +104,7 @@ console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido"
                 </li>
                 <li>
                   <button
-                  className="dropdown-item"
+                    className="dropdown-item"
                     onClick={() => handleLink("accesorios")}
                   >
                     Accesorios
@@ -113,10 +116,34 @@ console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido"
         </div>
       </div>
 
-     
-      <nav className={`navbar navbar-expand-lg my-navbar py-3 px-lg-3 px-0 sticky-top ${isTransparent ? "transparent" : ""}`}>
-        <div className="container-fluid">
+      {/* Offcanvas de la bolsa de compras */}
+      <div
+        className="offcanvas offcanvas-end offcanvas-shopping"
+        tabIndex="-1"
+        id="offcanvasShopping"
+        aria-labelledby="offcanvasShoppingLabel"
+      >
+        <div className="offcanvas-header">
+        </div>
+        {store.shoppingCart?.map((item) => (
+                      <CartItem
+                        key={item.id}
+                        img={item.img}
+                        name={item.name}
+                        seller_id={item.seller_id}
+                        price={item.price}
+                        id={item.id}
+                      />
+                    ))}
+        
+      </div>
 
+      {/* Navbar principal */}
+      <nav
+        className={`navbar navbar-expand-lg my-navbar py-3 px-lg-3 px-0 sticky-top ${isTransparent ? "transparent" : ""
+          }`}
+      >
+        <div className="container-fluid">
           <div className="col-2 text-center">
             <Link to="/">
               <img
@@ -126,19 +153,28 @@ console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido"
               />
             </Link>
           </div>
-
-          <button
-            className="my-navbar-toggler navbar-toggler"
-            type="button"
-            data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasNavbar"
-            aria-controls="offcanvasNavbar"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="fa-solid fa-bars menu-icon float"></span>
-          </button>
-
+          <div className="d-flex">
+            {/* Botón del menú */}
+            <button
+              className="my-navbar-toggler navbar-toggler"
+              type="button"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar"
+              aria-controls="offcanvasNavbar"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="fa-solid fa-bars menu-icon float"></span>
+            </button>
+            {/* Ícono de la bolsa de compras, se oculta en pantallas grandes */}
+            <span
+              className={store.Token ? "fa-solid fa-bag-shopping small-device float" : "oculto"}
+              alt="Shopping bag"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasShopping"
+              aria-controls="offcanvasShopping"
+            ></span>
+          </div>
           <div className="collapse navbar-collapse me-4" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 mt-5 d-flex justify-content-between align-items-start">
               <li className="nav-item dropdown">
@@ -198,14 +234,17 @@ console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido"
                     PERFIL
                   </Link>
                 </li>
-                <li className="nav-item nav-link float">
-                  <img
-                    src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/shopping-bag-icon.png"
-                    className={store.Token? "img-fluid nav-shopping-bag": "oculto"}
+                <li className="nav-item nav-link float" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                  {/* Ícono de la bolsa de compras pantallas grandes, tambien abre el offcanvas */}
+                  <span className={store.Token ? "fa-solid fa-bag-shopping nav-shopping-bag float" : "oculto"}
                     alt="Shopping bag"
-                  />
+                    data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasShopping"
+                    aria-controls="offcanvasShopping"
+                  ></span>
                 </li>
               </div>
+
             </ul>
           </div>
         </div>

@@ -66,6 +66,7 @@
     border-radius: 30px;
 }
 
+
 .fav-icon{
    cursor: pointer;
     font-size: 30px;
@@ -93,4 +94,40 @@
     color: #08B5F9;
     opacity: 1;
     transform: scale(1.1);
+}
+.shopping-c-item{
+    background-color: hsla(240, 2%, 37%, 0.4);
+    border-radius:10px ;
+    position: relative;
+}
+
+.img-shopping-cart{
+    border-radius: 10px;
+}
+
+.shopping-c-brand{
+    margin-top: -4px;
+    font-family: "Kanit", serif;
+    font-weight: 300; 
+    color: #AFAFB2;
+    font-size: 14px;
+}
+
+.shopping-c-name{
+    width: 100%;
+    overflow: hidden;
+    font-family: "Kanit", serif;
+    font-weight: 400; 
+    color: white;
+    font-size: 18px;
+}
+.shopping-c-price{
+    font-family: "Kanit", serif;
+    font-weight: 500; 
+    letter-spacing: 1px; 
+    color: white;
+    font-size: 14px;
+    background-color: #3A39FF;
+    padding: 3px 13px ;
+    border-radius: 30px;
 }

@@ -40,6 +40,8 @@ def setup_commands(app):
             data = json.load(file)
         with open('src/api/users.json', 'r') as file_2:
             data_user = json.load(file_2)
+        with open('src/api/favorites.json', 'r') as file_3:
+            favorites_data = json.load(file_3)
         print(data)
         for i in data['consoles']:
             print (i['name'])
@@ -108,4 +110,10 @@ def setup_commands(app):
             prod.role = i['role']
             prod.shoppingCart = i['shoppingCart']
             db.session.add(prod)
-            db.session.commit()        
+            db.session.commit()   
+        for i in favorites_data['favorites']:
+            prod = Favorites()
+            prod.user_id = i['user_id']
+            prod.product_id = i['product_id']
+            db.session.add(prod)
+            db.session.commit()         

@@ -63,21 +63,37 @@
     color: #FCEE21;
 }
 
+
 .nav-shopping-bag{
-height: 30px;
+font-size: 30px;
+margin-top: 5px;
+margin-left: 5px;
+
+}
+
+.small-device{
+    display: none;
+    font-size: 30px;
+margin-top: 5px;
+margin-left: 5px;
+
 }
 
 .menu-icon{
     color: white;
     font-size: 32px;
+    margin-left: 10%;
+    border: none;
 }
+
 
 .navbar-collapse {
     flex-direction: column !important;
  }
 
- .my-offcanvas{
-    background-color: black;
+ .my-offcanvas, .offcanvas-shopping{
+    border: none;
+    background-color: #19191D;
     
  }
 
@@ -86,3 +102,18 @@ height: 30px;
     color: white;
  }
 
+ .offcanvas{
+    border: none;
+    width:30%;
+ }
+
+
+ @media(max-width: 990px){
+    .small-device{
+        display: flex;
+    }
+    .offcanvas{
+    width:70%;
+   
+ }
+ }

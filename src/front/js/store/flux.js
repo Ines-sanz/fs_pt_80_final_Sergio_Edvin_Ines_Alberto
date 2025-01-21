@@ -6,37 +6,44 @@ const getState = ({ getStore, getActions, setStore }) => {
       videojuegos: [],
       accesorios: [],
       promoted:[],
-      isLogged: false,
-      Token:localStorage.getItem("Token")||null
+      isLogged: localStorage.getItem("Token") ? true : false, 
+      Token: localStorage.getItem("Token") || null,
+      user: JSON.parse(localStorage.getItem("user")) || "",
+      shoppingCart:[]
     },
     actions: {
 
-      login: async (formData1) =>{
+      login: async (formData1) => {
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              body: JSON.stringify(formData1),
-          });
-      
-          const data = await response.json();
-          if (response.ok) {
-              alert("Inicio de sesión exitoso");
-              console.log("Token:", data.token);
-              console.log("User:", data.user);
-              localStorage.setItem('Token', data.token)
-              console.log("Usuario recibido en el login:", data.user)
-              setStore({isLogged: true, Token:data.token, user: data.user})
-          } else {
-              alert(data.msg || "Error en el inicio de sesión" );
-          }
-      } catch (error) {
-          alert("Error al conectar con el servidor");
-          console.error(error);
-      }
-      },
+            const url = `${process.env.BACKEND_URL}/api/login`;
+            console.log("URL final:", url);
+            console.log("Datos enviados al servidor:", formData1);
+    
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData1),
+            });
+    
+            const data = await response.json();
+            console.log("Respuesta del servidor:", data);
+    
+            if (response.ok) {
+                alert("Inicio de sesión exitoso");
+                localStorage.setItem("Token", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user)); 
+                setStore({ isLogged: true, Token: data.token, user: data.user });
+                getActions().userShoppingCart();
+            } else {
+                alert(data.msg || "Error en el inicio de sesión");
+            }
+        } catch (error) {
+            console.error("Error al conectar con el servidor:", error);
+            alert("Error al conectar con el servidor");
+        }
+    },
 
       register: async (formData) =>{
         try {
@@ -57,7 +64,8 @@ const getState = ({ getStore, getActions, setStore }) => {
               alert("Registro exitoso. Bienvenido!");
               console.log("Token:", data.token);
               console.log("Usuario:", data.user);
-              localStorage.setItem('Token', data.token)
+              localStorage.setItem("Token", data.token);
+              localStorage.setItem("user", JSON.stringify(data.user));
               setStore({isLogged: true, Token:data.token, user: data.user})
           } else {
               // Error en el registro
@@ -75,7 +83,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (store.Token) {
             setStore({
-              isLogged: true
+              isLogged: true,
+              user: JSON.parse(localStorage.getItem("user")),
             });
           }
         }
@@ -84,6 +93,22 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      userShoppingCart: async () => {
+        try {
+          const store = getStore();
+          
+          if (store.user) {
+            const shoppingCartIds = store.user.shoppingCart;      
+            const allProducts = [...store.consolas, ...store.videojuegos, ...store.accesorios]; 
+            const productsInCart = allProducts.filter(product => shoppingCartIds.includes(parseInt(product.id))); 
+            console.log("Carrito actualizado:", productsInCart);
+            setStore({ shoppingCart: productsInCart });
+            
+          }
+        } catch (error) {
+          console.error("Error al cargar los productos del carrito:", error);
+        }
+      },
       loadInfo: async () => {
         try {
           const store = getStore();
@@ -129,7 +154,6 @@ const getState = ({ getStore, getActions, setStore }) => {
     
             const data = await response.json();
             if (response.ok) {
-                alert(data.msg);
                 console.log("Respuesta del servidor:", data);
                 const updatedFavorites = data.updatedFavorites || [];  
                 const user = { ...store.user, favorites: updatedFavorites };
