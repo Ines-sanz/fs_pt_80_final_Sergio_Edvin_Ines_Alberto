@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import "../../styles/navbar.css";
 import { useNavigate } from 'react-router-dom';
+import { Context } from "../store/appContext";
 
 export const Navbar = () => {
+  const{store, actions} = useContext(Context)
+  
   const [isTransparent, setIsTransparent] = useState(false);
   let lastScrollTop = 0;
 
@@ -36,7 +39,7 @@ export const Navbar = () => {
       navigate(`/store/${type}`);
     }
   };
-
+console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido");
   return (
     <>
       <div
@@ -58,7 +61,7 @@ export const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link to="/perfil" className="nav-link  my-offcanvas-text float">
-                PERFIL
+             Perfil
               </Link>
             </li>
             <li className="nav-item dropdown">
@@ -198,7 +201,7 @@ export const Navbar = () => {
                 <li className="nav-item nav-link float">
                   <img
                     src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/shopping-bag-icon.png"
-                    className="img-fluid nav-shopping-bag"
+                    className={store.Token? "img-fluid nav-shopping-bag": "oculto"}
                     alt="Shopping bag"
                   />
                 </li>

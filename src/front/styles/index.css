@@ -21,6 +21,9 @@ background-position: center start;
     margin: auto;
 }
 
+.oculto{
+    display:none;
+}
 
 @media(max-width: 992px){
     .container{
