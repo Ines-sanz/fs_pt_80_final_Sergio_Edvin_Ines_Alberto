@@ -30,7 +30,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               console.log("Usuario recibido en el login:", data.user)
               setStore({isLogged: true, Token:data.token, user: data.user})
           } else {
-              alert(data.msg || "Error en el inicio de sesión");
+              alert(data.msg || "Error en el inicio de sesión" );
           }
       } catch (error) {
           alert("Error al conectar con el servidor");
@@ -114,6 +114,34 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error loading data:", error);
         }
       },
+      toggleFav: async (newFav) => {
+        const store = getStore();
+        console.log("Datos enviados a favoritos:", newFav)
+        try {
+            const response = await fetch(`${store.url}/api/favorites`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${store.Token}` 
+                },
+                body: JSON.stringify(newFav), 
+            });
+    
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.msg);
+                console.log("Respuesta del servidor:", data);
+                const updatedFavorites = data.updatedFavorites || [];  
+                const user = { ...store.user, favorites: updatedFavorites };
+                setStore({ user });
+            } else {
+                alert(data.msg || "Error al manejar favoritos");
+            }
+        } catch (error) {
+            alert("Error al conectar con el servidor");
+            console.error(error);
+        }
+    }
     },
   };
 };

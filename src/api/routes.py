@@ -382,13 +382,14 @@ def add_to_favorites():
             db.session.delete(existing_favorite)
             db.session.commit()
             return jsonify({'msg': 'Product deleted'}), 200
-
+        else:
         # add to favorites
-        new_favorite = Favorites(user_id=id, product_id=product_id)
-        db.session.add(new_favorite)
-        db.session.commit()
+            new_favorite = Favorites(user_id=id, product_id=product_id)
+            db.session.add(new_favorite)
+            db.session.commit()
 
-        return jsonify({'msg': 'Added to favorites successfully'}), 201
+        updated_favorites = [fav.product_id for fav in user.favorites]
+        return jsonify({'msg': 'Added to favorites successfully', 'updatedFavorites': updated_favorites}), 201
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
