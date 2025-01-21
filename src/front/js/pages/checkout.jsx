@@ -12,10 +12,12 @@ export const Checkout = () => {
 
     return (
           <>
-        <h1>checkout</h1>
+          <div className="container">
+        <h1>Por favor, introduzca los datos de su tarjeta</h1>
         <Elements stripe={stripePromise}>
 				<CheckoutForm />
 			  </Elements>
+          </div>
           </>
     )
 }

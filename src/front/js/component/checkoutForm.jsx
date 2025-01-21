@@ -1,6 +1,8 @@
 
 import React, {useState, useEffect} from "react";
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { Link } from "react-router-dom";
+import "../../styles/checkoutform.css";
 
 
 
@@ -56,10 +58,10 @@ export const CheckoutForm = () => {
     };
   
     return (
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="stripey">
         <CardElement />
-        <button type="submit" disabled={!stripe || loading}>
-          Pay
+        <button className="btn-stripe" type="submit" disabled={!stripe || loading}>
+          <strong>Pay</strong>
         </button>
       </form>
     );
