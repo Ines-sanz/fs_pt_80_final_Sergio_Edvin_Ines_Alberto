@@ -8,6 +8,18 @@ export const ProductCard = (props) => {
   const navigate = useNavigate();
 
   const isPromoted = props.promoted === true
+
+  const handleFav = () => {
+    const newFav = {
+        user_id: store.user.id, 
+        product_id: props.id,
+    };
+    actions.toggleFav(newFav);
+};
+const isFavorite = store.user && store.user.favorites
+? store.user.favorites.some((fav) => fav === props.id)
+: false
+  
   return (<>
     <div className="col-10 col-md-6 col-xl-4" >
    
@@ -31,7 +43,7 @@ export const ProductCard = (props) => {
           </span>  
           <div className="d-flex align-items-center">
           <span className="fa-solid fa-plus plus-icon"></span>
-        <span className="fa-solid fa-star fav-icon"></span>
+        <span className="fa-solid fa-star fav-icon" style={{opacity: isFavorite ? 1 : 0.4, }}  onClick={handleFav}></span>
         </div></div>
         
       </div>
