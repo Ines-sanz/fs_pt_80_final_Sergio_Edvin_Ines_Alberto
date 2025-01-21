@@ -27,6 +27,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               console.log("Token:", data.token);
               console.log("User:", data.user);
               localStorage.setItem('Token', data.token)
+              console.log("Usuario recibido en el login:", data.user)
               setStore({isLogged: true, Token:data.token, user: data.user})
           } else {
               alert(data.msg || "Error en el inicio de sesión");
