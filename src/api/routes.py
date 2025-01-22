@@ -622,7 +622,7 @@ def delete_review(review_id):
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
-    
+
 
     ##nuevo STRIPE! pago para productos y suscripcion
 
@@ -691,3 +691,11 @@ def create_payment():
 #         return jsonify({'success': False, 'error': str(e)})
 
 
+#products = (urls)
+
+# @api.route('/products', methods=['GET'])
+# def get_products():
+#     try:
+#         return jsonify(products), 200
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
