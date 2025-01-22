@@ -622,7 +622,7 @@ def delete_review(review_id):
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
-    
+
 
     ##nuevo STRIPE! pago para productos y suscripcion
 

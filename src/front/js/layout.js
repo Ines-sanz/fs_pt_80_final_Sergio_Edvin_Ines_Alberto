@@ -44,6 +44,8 @@ const Layout = () => {
                         <Route element={<CategoryPage />} path="/store/:category"  />
                         <Route element={<Checkout />} path="/checkout" />
                         <Route element={<VideogameType />} path="/store/videogames/:type"  />
+                        <Route element={<Checkout />} path="/checkout" />
+                        <Route element={<VideogameType />} path="/store/videogames/:type"  />
                         <Route element={<h1>Not found!</h1>} />
                     </Routes>
                     <Footer />
