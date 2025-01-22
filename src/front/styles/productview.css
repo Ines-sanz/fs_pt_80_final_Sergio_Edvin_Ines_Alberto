@@ -1,0 +1,104 @@
+body {
+    font-family: "Kode Mono", sans-serif;
+    background-color: black;
+    color: white;
+    margin: 0;
+    padding: 0;
+}
+
+.product-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: rgb(26, 26, 26);
+    border-radius: 8px;
+}
+
+.product-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.row {
+    display: flex;
+    justify-content:end;
+
+}
+
+.product-title {
+    text-align: left;
+}
+
+.brand {
+    font-size: 1rem;
+    color:rgb(141, 140, 140);
+}
+
+.product-name {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.product-info {
+    text-align: right;
+}
+
+.product-info p {
+    margin: 0.5rem 0;
+}
+
+.rating span {
+    font-size: 1.2rem;
+    color: rgb(249, 214, 14);
+}
+
+.product-body {
+    display:block;
+    justify-content: auto;
+}
+
+.product-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+.product-price {
+    text-align: center;
+}
+
+.product-price p {
+    margin: 0.5rem 0;
+}
+
+.price-value {
+    font-size: 2rem;
+    color:rgb(75, 173, 233);
+    font-weight: bold;
+}
+
+.product-description {
+    margin-bottom: 2rem;
+    line-height: 1.5;
+    color: rgb(207, 198, 198);
+}
+
+.product-button {
+    text-align: center;
+}
+
+.buy-button {
+    background-color: rgb(255, 217, 0);
+    border: none;
+    padding: 1rem 2rem;
+    color: black;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.buy-button:hover {
+    background-color:rgba(195, 161, 9, 0.992);
+    transform: scale(1.1);
+}

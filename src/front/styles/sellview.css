@@ -4,7 +4,7 @@ body {
     color:white;
 }
 
-.container {
+.sell-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem; 
@@ -22,12 +22,16 @@ body {
     font-size: 1.2rem;
 }
 
-
 .__image__ {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     margin-bottom: 2rem;
+    
+}
+
+.__details__{
+    justify-content:right ;
 }
 
 .photo-upload {
@@ -38,8 +42,8 @@ body {
 }
 
 .__image_placeholder__ {
-    width: 10rem; 
-    height: 10rem; 
+    width: 15rem; 
+    height: 15rem; 
     background-color:rgb(67, 64, 64);
     display: flex;
     justify-content: center;
@@ -47,6 +51,11 @@ body {
     border-radius: 8px; 
     margin-bottom: 10px; 
     cursor: pointer;
+}
+
+.photo-input {
+    display: none;
+    width: 50;
 }
 
 .plus {
@@ -75,10 +84,13 @@ body {
     cursor: pointer;
     font-size: 1rem;
     margin-right: 1rem;
+    transition: transform 0.2s ease;
 }
+
 
 .promote_button:hover {
     background-color: rgb(3, 49, 157);
+    transform: scale(1.09);
 }
 
 .premium_button {
@@ -89,14 +101,17 @@ body {
     border-radius: 8px; 
     cursor: pointer;
     font-size: 1rem;
+    transition: transform 0.2s ease;
 }
+
 
 .premium_button:hover {
     background-color:green;
+    transform: scale(1.09);
 }
 
 
-.form-section {
+.__form_section__ {
     background-color: rgba(18, 18, 18, 0.88);
     padding: 2rem; 
     border-radius: 0.5rem; 
@@ -108,20 +123,39 @@ body {
     gap: 1.5rem; 
 }
 
-.form-row {
+.__form_data__ {
     display: flex;
     gap: 1.5rem; 
 }
 
-.form-group {
+.__form_group__ {
     flex: 1;
     display: flex;
     flex-direction: column;
+    border-radius: 40px; 
 }
 
 label {
     font-size: 1rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem; 
+}
+
+.__form_data_horizontal__ {
+    display: flex;
+    gap: 1rem; 
+    justify-content: space-between; 
+}
+
+
+.__form_data_horizontal__ .__form_group__{
+    flex: 1;
+}
+
+input, select {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    font-size: 1rem;
 }
 
 input, select, textarea {
@@ -129,7 +163,7 @@ input, select, textarea {
     border: none;
     color: white;
     padding: 1rem; 
-    border-radius: 0.5rem; 
+    border-radius: 2rem; 
     font-size: 1rem;
 }
 
@@ -137,16 +171,33 @@ textarea {
     resize: none;
 }
 
-.sell-button {
+.__price_group__{
+    width: 20%;
+    ;
+
+}
+
+.__sell_button__ {
     background-color: rgb(240, 228, 5);
     border: none;
     color: black;
     padding: 1rem 2rem; 
     border-radius: 0.5rem;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.5rem;
+    margin: 0 auto;
+    display: block;
+    transition: transform 0.2s ease;
 }
 
-.sell-button:hover {
+.__sell_button__:hover {
     background-color: rgb(196, 170, 19);
+    justify-content: center;
+    transform: scale(1.25);
+    
+}
+
+input[type="number"] {
+    background-color: rgba(6, 87, 239, 0.78); 
+    border: none; 
 }

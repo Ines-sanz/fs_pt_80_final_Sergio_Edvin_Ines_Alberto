@@ -13,6 +13,7 @@ import { Footer } from "./component/footer.jsx";
 import { Suscription } from "./pages/suscription.jsx";
 import { SellView } from "./pages/sellview.jsx";
 import { CategoryPage } from "./pages/store-type.jsx";
+import { ProductView } from "./pages/productview.jsx";
 
 //create your first component
 const Layout = () => {
@@ -32,6 +33,7 @@ const Layout = () => {
                         <Route element={<Store />} path="/store" />
                         <Route element={<Contacto />} path="/contacto" />
                         <Route element={<Perfil />} path="/perfil" />
+                        <Route element={<ProductView />} path="/product/" />
                         <Route element={<SellView />} path="/sell" />
                         <Route element={<Suscription />} path="/suscripcion" />
                         <Route element={<CategoryPage />} path="/store/:category"  />
