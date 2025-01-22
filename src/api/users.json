@@ -11,8 +11,7 @@
     "city": "Cartagena",
     "following": [],
     "subscription": true,
-    "role": "buyer",
-    "shoppingCart": [141,27]
+    "role": "buyer"
   },
   {
     "email": "carmen.vazguez8@yahoo.com",
@@ -25,8 +24,7 @@
     "city": "Sevilla",
     "following": [],
     "subscription": false,
-    "role": "user",
-    "shoppingCart": []
+    "role": "user"
   },
   {
     "email": "valentin.morreira@gmail.com",
@@ -39,8 +37,7 @@
     "city": "Madrid",
     "following": [],
     "subscription": true,
-    "role": ["buyer", "seller"],
-    "shoppingCart": []
+    "role": ["buyer", "seller"]
   },
   {
     "email": "aarongarcia@gmail.com",
@@ -53,8 +50,7 @@
     "city": "Sevilla",
     "following": [],
     "subscription": true,
-    "role": "buyer",
-    "shoppingCart": []
+    "role": "buyer"
   },
   {
     "email": "andrea.retrogames@yahoo.com",
@@ -67,8 +63,7 @@
     "city": "Valencia",
     "following": [],
     "subscription": false,
-    "role": ["buyer", "seller"],
-    "shoppingCart": []
+    "role": ["buyer", "seller"]
   },
   {
     "email": "lucas.gamer@gmail.com",
@@ -81,8 +76,7 @@
     "city": "Barcelona",
     "following": [],
     "subscription": true,
-    "role": "buyer",
-    "shoppingCart": []
+    "role": "buyer"
   },
     {
       "email": "juanmorales@gmail.com",
@@ -95,8 +89,7 @@
       "city": "Cartagena",
       "following": [],
       "subscription": true,
-      "role": "buyer",
-      "shoppingCart": []
+      "role": "buyer"
     },
     {
       "email": "carmen.vazguez8@yahoo.com",
@@ -109,8 +102,7 @@
       "city": "Sevilla",
       "following": [],
       "subscription": false,
-      "role": "user",
-      "shoppingCart": []
+      "role": "user"
     },
     {
       "email": "valentin.morreira@gmail.com",
@@ -123,8 +115,7 @@
       "city": "Madrid",
       "following": [],
       "subscription": true,
-      "role": ["buyer", "seller"],
-      "shoppingCart": []
+      "role": ["buyer", "seller"]
     },
     {
       "email": "aarongarcia@gmail.com",
@@ -137,8 +128,7 @@
       "city": "Sevilla",
       "following": [],
       "subscription": true,
-      "role": "buyer",
-      "shoppingCart": []
+      "role": "buyer"
     },
     {
       "email": "andrea.retrogames@yahoo.com",
@@ -151,8 +141,7 @@
       "city": "Valencia",
       "following": [],
       "subscription": false,
-      "role": ["buyer", "seller"],
-      "shoppingCart": []
+      "role": ["buyer", "seller"]
     },
     {
       "email": "lucas.gamer@gmail.com",
@@ -165,8 +154,7 @@
       "city": "Barcelona",
       "following": [],
       "subscription": true,
-      "role": "buyer",
-      "shoppingCart": []
+      "role": "buyer"
     },
     {
       "email": "lauragaming@outlook.com",
@@ -179,8 +167,7 @@
       "city": "Málaga",
       "following": [],
       "subscription": true,
-      "role": "buyer",
-      "shoppingCart": []
+      "role": "buyer"
     },
     {
       "email": "martin.retrogamer@gmail.com",
@@ -193,8 +180,7 @@
       "city": "Granada",
       "following": [],
       "subscription": false,
-      "role": ["buyer", "seller"],
-      "shoppingCart": []
+      "role": ["buyer", "seller"]
     },
     {
       "email": "sofiagames@gmail.com",
@@ -207,8 +193,7 @@
       "city": "Alicante",
       "following": [],
       "subscription": true,
-      "role": "buyer",
-      "shoppingCart": []
+      "role": "buyer"
     },
     {
       "email": "raul.collector@yahoo.com",
@@ -221,8 +206,7 @@
       "city": "Valencia",
       "following": [],
       "subscription": true,
-      "role": "user",
-      "shoppingCart": []
+      "role": "user"
     },
     {
       "email": "marianagamer@hotmail.com",
@@ -235,8 +219,7 @@
       "city": "Madrid",
       "following": [],
       "subscription": false,
-      "role": "buyer",
-      "shoppingCart": []
+      "role": "buyer"
     },
     {
       "email": "albertogaming@live.com",
@@ -249,8 +232,7 @@
       "city": "Zaragoza",
       "following": [],
       "subscription": true,
-      "role": "buyer",
-      "shoppingCart": []
+      "role": "buyer"
     }
   ]
 }
