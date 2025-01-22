@@ -6,7 +6,23 @@ export const Perfil = () => {
     const { store, actions } = useContext(Context);
 
     // Estado para controlar si se muestra "Registrarse" o "Login"
-    const [isRegister, setIsRegister] = useState(null);
+    const [isRegister, setIsRegister] = useState(false);
+    const [formData, setFormData] = useState({
+        email:"",
+        password:"",
+        repeatPassword:"",
+        userName:""
+    });
+
+    const [formData1, setFormData1] = useState({
+        email:"",
+        password:""
+    });
+
+    const handleChange=e => setFormData({...formData,[e.target.name]:e.target.value})
+    const handleChange1=e => setFormData1({...formData1,[e.target.name]:e.target.value})
+
+
 
     return (
         <div className="container-fluid min-vh-100">
@@ -22,24 +38,7 @@ export const Perfil = () => {
                 {/* Sección del formulario o botones iniciales */}
                 <div className="col-md-5 d-flex align-items-center justify-content-center form-alt">
                     <div className="form-container p-5 rounded text-center">
-                        {/* Si no se ha elegido nada, mostramos los botones */}
-                        {isRegister === null && (
-                            <>
-                                <h2 className="mb-4">¿Qué deseas hacer?</h2>
-                                <button
-                                    className="btn btn-primary w-100 mb-3"
-                                    onClick={() => setIsRegister(true)}
-                                >
-                                    Registrarse
-                                </button>
-                                <button
-                                    className="btn btn-secondary w-100"
-                                    onClick={() => setIsRegister(false)}
-                                >
-                                    Login
-                                </button>
-                            </>
-                        )}
+                        
                         {/* Si elige "Registrarse", muestra el formulario */}
                         {isRegister === true && (
                             <form
@@ -51,48 +50,16 @@ export const Perfil = () => {
                                     const password = e.target.password.value;
                                     const repeatPassword = e.target.repeatPassword.value;
                                     const userName = e.target.nombre.value;
-                                    const address = e.target.direccion.value;
-                                    const postalCode = e.target.cp.value;
-                                    const city = e.target.ciudad.value;
+
 
                                     // Verificamos que las contraseñas coincidan
-                                    if (password !== repeatPassword) {
+                                    if (formData.password !== formData.repeatPassword) {
                                         alert("Las contraseñas no coinciden. Por favor, verifica e inténtalo de nuevo.");
                                         return;
                                     }
 
-                                    try {
-                                        const response = await fetch(`${process.env.BACKEND_URL}/register`, {
-                                            method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                            },
-                                            body: JSON.stringify({
-                                                email,
-                                                password,
-                                                userName,
-                                                address,
-                                                postalCode,
-                                                city,
-                                            }),
-                                        });
+                                    actions.register(formData)
                                     
-                                        const data = await response.json();
-                                    
-                                        if (response.ok) {
-                                            // Registro exitoso
-                                            alert("Registro exitoso. Bienvenido!");
-                                            console.log("Token:", data.token);
-                                            console.log("Usuario:", data.user);
-                                            // Hay que decidir donde guardar el Token que se recibe
-                                        } else {
-                                            // Error en el registro
-                                            alert(data.msg || "Error durante el registro");
-                                        }
-                                    } catch (error) {
-                                        alert("Error al conectar con el servidor");
-                                        console.error(error);
-                                    }
                                 }}
                             >
                             <div className="text-center mb-4">
@@ -112,6 +79,9 @@ export const Perfil = () => {
                                     id="email"
                                     placeholder="ejemplo@ejemplo.com"
                                     required
+                                    name="email"
+                                    value = {formData.email}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="mb-3">
@@ -124,6 +94,9 @@ export const Perfil = () => {
                                     id="password"
                                     placeholder="Contraseña"
                                     required
+                                    name="password"
+                                    value = {formData.password}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="mb-3">
@@ -136,6 +109,9 @@ export const Perfil = () => {
                                     id="repeatPassword"
                                     placeholder="Repite tu contraseña"
                                     required
+                                    name="repeatPassword"
+                                    value = {formData.repeatPassword}
+                                    onChange={handleChange}
                                 />
                             </div>
                             <div className="mb-3">
@@ -145,9 +121,14 @@ export const Perfil = () => {
                                 <input
                                     type="text"
                                     className="form-control bg-dark text-white border-0"
-                                    id="nombre"
-                                    placeholder="Nombre"
+                                    id="userName"
+                                    placeholder="Username"
                                     required
+                                    name="userName"
+                                    value = {formData.userName}
+                                    onChange={handleChange}
+
+                        
                                 />
                             </div>
                             <div className="mb-3">
@@ -204,11 +185,10 @@ export const Perfil = () => {
                             </button>
 
                             <button
-                                    type="button"
-                                    className="btn btn-link mt-3"
-                                    onClick={() => setIsRegister(null)}
+                                    className="btn btn-secondary w-100 mt-4"
+                                    onClick={() => setIsRegister(false)}
                                 >
-                                    Volver
+                                    Login
                                 </button>
                         </form>
                         )}
@@ -218,31 +198,9 @@ export const Perfil = () => {
                                     e.preventDefault(); 
                                     const email = e.target.email.value;
                                     const password = e.target.password.value;
+
+                                    actions.login(formData1)
                                 
-                                    try {
-                                        const response = await fetch(`${process.env.BACKEND_URL}/login`, {
-                                            method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                            },
-                                            body: JSON.stringify({
-                                                email,
-                                                password,
-                                            }),
-                                        });
-                                    
-                                        const data = await response.json();
-                                        if (response.ok) {
-                                            alert("Inicio de sesión exitoso");
-                                            console.log("Token:", data.token);
-                                            // Hay que decidir donde guardar el Token que se recibe
-                                        } else {
-                                            alert(data.msg || "Error en el inicio de sesión");
-                                        }
-                                    } catch (error) {
-                                        alert("Error al conectar con el servidor");
-                                        console.error(error);
-                                    }
                                 }}
                             >
                                 <div className="mb-3">
@@ -256,6 +214,8 @@ export const Perfil = () => {
                                         name="email"
                                         placeholder="ejemplo@ejemplo.com"
                                         required
+                                    value = {formData1.email}
+                                    onChange={handleChange1}
                                     />
                                 </div>
                                 <div className="mb-3">
@@ -269,17 +229,18 @@ export const Perfil = () => {
                                         name="password"
                                         placeholder="Contraseña"
                                         required
+                                    value = {formData1.password}
+                                    onChange={handleChange1}
                                     />
                                 </div>
                                 <button type="submit" className="btn btn-primary w-100 mt-4">
                                     Iniciar sesión
                                 </button>
                                 <button
-                                    type="button"
-                                    className="btn btn-link mt-3"
-                                    onClick={() => setIsRegister(null)}
+                                    className="btn btn-primary w-100 mb-3 mt-4"
+                                    onClick={() => setIsRegister(true)}
                                 >
-                                    Volver
+                                    Registrarse
                                 </button>
                             </form>
                         )}

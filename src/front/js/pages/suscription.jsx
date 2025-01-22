@@ -21,11 +21,11 @@ export const Suscription = () => {
                         />
                     </div>
                     <ul className="text">
-                        <li className="bulleted-list d-flex flex-start">Descuentos estándar</li>
-                        <li className="bulleted-list d-flex flex-start">Tarifas de envío regulares</li>
-                        <li className="bulleted-list d-flex flex-start">Visibilidad limitada de tus productos</li>
-                        <li className="bulleted-list d-flex flex-start">Acceso a contenido general</li>
-                        <li className="bulleted-list d-flex flex-start">Soporte y asistencia estándar</li>
+                        <li className="bulleted-list d-flex flex-start">• Descuentos estándares</li>
+                        <li className="bulleted-list d-flex flex-start">• Tarifas de envío regulares</li>
+                        <li className="bulleted-list d-flex flex-start">• Visibilidad limitada de tus productos</li>
+                        <li className="bulleted-list d-flex flex-start">• Acceso a contenido general</li>
+                        <li className="bulleted-list d-flex flex-start">• Soporte y asistencia estándar</li>
                     </ul>
                  
                 </div>
@@ -38,17 +38,19 @@ export const Suscription = () => {
                             alt="Premium subscription user illustration"
                         />
                     </div>
-                    <h2>PREMIUM BOSS</h2>
+                    <img className="img-fluid"
+                    src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1737132420/Manual-Final-Boss-26_efcv6i.png"
+                    alt="premium boss"/>
                     <ul className="text">
-                        <li className="bulleted-list d-flex flex-start">Descuentos exclusivos</li>
-                        <li className="bulleted-list d-flex flex-start">Envíos gratuitos</li>
-                        <li className="bulleted-list d-flex flex-start">Mejora de la visibilidad de sus productos</li>
-                        <li className="bulleted-list d-flex flex-start">Acceso anticipado a contenido exclusivo</li>
-                        <li className="bulleted-list d-flex flex-start">Soporte y asistencia mejorado</li>
+                        <li className="bulleted-list d-flex flex-start">• Descuentos exclusivos</li>
+                        <li className="bulleted-list d-flex flex-start">• Envíos gratuitos</li>
+                        <li className="bulleted-list d-flex flex-start">• Mejora de la visibilidad de tus productos</li>
+                        <li className="bulleted-list d-flex flex-start">• Acceso anticipado a contenido exclusivo</li>
+                        <li className="bulleted-list d-flex flex-start">• Soporte y asistencia mejorado</li>
                     </ul>
                     <div className="container">
                     <p><strong className="price">9.99€</strong><span>/mes</span></p>
-                    <button className="join-btn"><strong>¡Únete!</strong></button>
+                    <Link className="join-btn" to={"/checkout"}><strong>¡Únete!</strong></Link>
                     </div>
                 </div>
             </div>

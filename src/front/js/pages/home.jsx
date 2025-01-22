@@ -6,13 +6,16 @@ import "../../styles/home.css";
 import { ProductCard } from "../component/product-small-card.jsx";
 import { VideogameCard } from "../component/videogame-small-card.jsx";
 import { GameType } from "../component/random-type.jsx";
-
+import { LoginModal } from "../component/login-modal.jsx";
+import { PremiumModal } from "../component/premium-modal.jsx";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+  console.log()
 
   return (
     <div className="home-container">
+      <LoginModal/> <PremiumModal/>
       <section className="home-banners row my-5">
         <figure className=" col-12 col-lg-6">
           {" "}

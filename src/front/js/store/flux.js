@@ -5,9 +5,85 @@ const getState = ({ getStore, getActions, setStore }) => {
       consolas: [],
       videojuegos: [],
       accesorios: [],
-      promoted:[]
+      promoted:[],
+      isLogged: false,
+      Token:localStorage.getItem("Token")||null
     },
     actions: {
+
+      login: async (formData1) =>{
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData1),
+          });
+      
+          const data = await response.json();
+          if (response.ok) {
+              alert("Inicio de sesión exitoso");
+              console.log("Token:", data.token);
+              console.log("User:", data.user);
+              localStorage.setItem('Token', data.token)
+              console.log("Usuario recibido en el login:", data.user)
+              setStore({isLogged: true, Token:data.token, user: data.user})
+          } else {
+              alert(data.msg || "Error en el inicio de sesión" );
+          }
+      } catch (error) {
+          alert("Error al conectar con el servidor");
+          console.error(error);
+      }
+      },
+
+      register: async (formData) =>{
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/register`, {
+              method: "POST",
+              headers: {
+                  "Content-Type": "application/json",
+              },
+              body: JSON.stringify(
+                formData
+              ),
+          });
+      
+          const data = await response.json();
+      
+          if (response.ok) {
+              // Registro exitoso
+              alert("Registro exitoso. Bienvenido!");
+              console.log("Token:", data.token);
+              console.log("Usuario:", data.user);
+              localStorage.setItem('Token', data.token)
+              setStore({isLogged: true, Token:data.token, user: data.user})
+          } else {
+              // Error en el registro
+              alert(data.msg || "Error durante el registro");
+          }
+      } catch (error) {
+          alert("Error al conectar con el servidor");
+          console.error(error);
+      }
+      },
+
+      isLogged: async () => {
+        try{
+          const store = getStore();
+
+          if (store.Token) {
+            setStore({
+              isLogged: true
+            });
+          }
+        }
+        catch (error) {
+          console.error("Error loading data:", error);
+        }
+      },
+
       loadInfo: async () => {
         try {
           const store = getStore();
@@ -38,6 +114,34 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error loading data:", error);
         }
       },
+      toggleFav: async (newFav) => {
+        const store = getStore();
+        console.log("Datos enviados a favoritos:", newFav)
+        try {
+            const response = await fetch(`${store.url}/api/favorites`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${store.Token}` 
+                },
+                body: JSON.stringify(newFav), 
+            });
+    
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.msg);
+                console.log("Respuesta del servidor:", data);
+                const updatedFavorites = data.updatedFavorites || [];  
+                const user = { ...store.user, favorites: updatedFavorites };
+                setStore({ user });
+            } else {
+                alert(data.msg || "Error al manejar favoritos");
+            }
+        } catch (error) {
+            alert("Error al conectar con el servidor");
+            console.error(error);
+        }
+    }
     },
   };
 };

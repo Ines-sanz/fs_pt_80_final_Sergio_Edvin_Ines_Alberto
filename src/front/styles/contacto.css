@@ -1,0 +1,15 @@
+.premium-button {
+    background-color: #FCEE21;
+    border: none;
+    padding: 10px 20px; 
+    font-size: 1.5rem;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    width: 250px; 
+}
+.premium-button:hover {
+    background-color: #ffdd33;
+}
