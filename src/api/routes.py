@@ -628,7 +628,7 @@ def delete_review(review_id):
 
 def getPrice(ids):
     total = 0
-    #bnuscar los ids de los productos
+    #buscar los ids de los productos
     #sumar los precios para generar un total
     #devolver ese total
     return total
