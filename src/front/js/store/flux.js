@@ -1,3 +1,5 @@
+import { act } from "react";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -6,37 +8,43 @@ const getState = ({ getStore, getActions, setStore }) => {
       videojuegos: [],
       accesorios: [],
       promoted:[],
-      isLogged: false,
-      Token:localStorage.getItem("Token")||null
+      isLogged: localStorage.getItem("Token") ? true : false, 
+      Token: localStorage.getItem("Token") || null,
+      user: JSON.parse(localStorage.getItem("user")) || "",
+      shoppingCart:[]
     },
     actions: {
 
-      login: async (formData1) =>{
+      login: async (formData1) => {
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/login`, {
-              method: "POST",
-              headers: {
-                  "Content-Type": "application/json",
-              },
-              body: JSON.stringify(formData1),
-          });
-      
-          const data = await response.json();
-          if (response.ok) {
-              alert("Inicio de sesión exitoso");
-              console.log("Token:", data.token);
-              console.log("User:", data.user);
-              localStorage.setItem('Token', data.token)
-              console.log("Usuario recibido en el login:", data.user)
-              setStore({isLogged: true, Token:data.token, user: data.user})
-          } else {
-              alert(data.msg || "Error en el inicio de sesión" );
-          }
-      } catch (error) {
-          alert("Error al conectar con el servidor");
-          console.error(error);
-      }
-      },
+            const url = `${process.env.BACKEND_URL}/api/login`;
+            console.log("URL final:", url);
+            console.log("Datos enviados al servidor:", formData1);
+    
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData1),
+            });
+    
+            const data = await response.json();
+            console.log("Respuesta del servidor:", data);
+    
+            if (response.ok) {
+                alert("Inicio de sesión exitoso");
+                localStorage.setItem("Token", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user)); 
+                setStore({ isLogged: true, Token: data.token, user: data.user });
+            } else {
+                alert(data.msg || "Error en el inicio de sesión");
+            }
+        } catch (error) {
+            console.error("Error al conectar con el servidor:", error);
+            alert("Error al conectar con el servidor");
+        }
+    },
 
       register: async (formData) =>{
         try {
@@ -57,7 +65,8 @@ const getState = ({ getStore, getActions, setStore }) => {
               alert("Registro exitoso. Bienvenido!");
               console.log("Token:", data.token);
               console.log("Usuario:", data.user);
-              localStorage.setItem('Token', data.token)
+              localStorage.setItem("Token", data.token);
+              localStorage.setItem("user", JSON.stringify(data.user));
               setStore({isLogged: true, Token:data.token, user: data.user})
           } else {
               // Error en el registro
@@ -75,7 +84,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (store.Token) {
             setStore({
-              isLogged: true
+              isLogged: true,
+              user: JSON.parse(localStorage.getItem("user")),
             });
           }
         }
@@ -84,6 +94,26 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      userShoppingCart: async () => {
+        try {
+          const store = getStore();
+          
+          if (store.user) {
+            const shoppingCartIds = store.user.shoppingCart
+
+            console.log("IDs del carrito:", shoppingCartIds);
+            
+            const allProducts = [...store.consolas, ...store.videojuegos, ...store.accesorios]; 
+            const productsInCart = allProducts.filter(product => shoppingCartIds.includes(product.id)); 
+            
+            console.log("Productos en el carrito:", productsInCart);
+      
+            setStore({ shoppingCart: productsInCart });
+          }
+        } catch (error) {
+          console.error("Error al cargar los productos del carrito:", error);
+        }
+      },
       loadInfo: async () => {
         try {
           const store = getStore();
@@ -129,7 +159,6 @@ const getState = ({ getStore, getActions, setStore }) => {
     
             const data = await response.json();
             if (response.ok) {
-                alert(data.msg);
                 console.log("Respuesta del servidor:", data);
                 const updatedFavorites = data.updatedFavorites || [];  
                 const user = { ...store.user, favorites: updatedFavorites };
@@ -141,7 +170,38 @@ const getState = ({ getStore, getActions, setStore }) => {
             alert("Error al conectar con el servidor");
             console.error(error);
         }
-    }
+    },
+    toggleCart: async (newShoppingItem) => {
+      const store = getStore();
+      const actions = getActions();
+      console.log("Datos enviados al carrito:", newShoppingItem);
+      try {
+        const response = await fetch(`${store.url}/api/shopping_cart`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${store.Token}`,
+          },
+          body: JSON.stringify(newShoppingItem),
+        });
+    
+        const data = await response.json();
+        if (response.ok) {
+          console.log("Respuesta del servidor:", data);
+          const updatedUserShopping = data.updatedCart|| [];  
+          const user = { ...store.user, shoppingCart: updatedUserShopping }
+          setStore({ user });
+          await actions.userShoppingCart()
+    
+          
+        } else {
+          alert(data.msg || "Error al manejar el carrito de compras");
+        }
+      } catch (error) {
+        alert("Error al conectar con el servidor");
+        console.error(error);
+      }
+    },
     },
   };
 };
