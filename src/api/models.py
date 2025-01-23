@@ -197,7 +197,6 @@ class ShoppingCart(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
 
-
     def serialize(self):
         return {
             "id": self.id,

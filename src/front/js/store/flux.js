@@ -35,7 +35,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 localStorage.setItem("Token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user)); 
                 setStore({ isLogged: true, Token: data.token, user: data.user });
-                getActions().userShoppingCart();
             } else {
                 alert(data.msg || "Error en el inicio de sesión");
             }
@@ -98,12 +97,15 @@ const getState = ({ getStore, getActions, setStore }) => {
           const store = getStore();
           
           if (store.user) {
-            const shoppingCartIds = store.user.shoppingCart;      
-            const allProducts = [...store.consolas, ...store.videojuegos, ...store.accesorios]; 
-            const productsInCart = allProducts.filter(product => shoppingCartIds.includes(parseInt(product.id))); 
-            console.log("Carrito actualizado:", productsInCart);
-            setStore({ shoppingCart: productsInCart });
+            const shoppingCartIds = store.user.shoppingCart.map(item => item.product_id); 
+            console.log(shoppingCartIds)
             
+            const allProducts = [...store.consolas, ...store.videojuegos, ...store.accesorios]; 
+            const productsInCart = allProducts.filter(product => shoppingCartIds.includes(product.id)); 
+            
+            console.log("Productos en el carrito:", productsInCart);
+      
+            setStore({ shoppingCart: productsInCart });
           }
         } catch (error) {
           console.error("Error al cargar los productos del carrito:", error);

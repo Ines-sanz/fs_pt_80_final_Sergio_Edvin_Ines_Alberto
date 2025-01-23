@@ -29,11 +29,15 @@ const injectContext = PassedComponent => {
 			 * store, instead use actions, like this:
 			 **/
 			Promise.all([
-				state.actions.loadInfo()
+				state.actions.loadInfo()  // Primero, cargamos la info de los productos
 			  ])
+				.then(() => {
+				  console.log("Productos cargados, ahora cargamos el carrito.");
+				  // Después de que la info se haya cargado, cargamos los productos en el carrito
+				  return state.actions.userShoppingCart();
+				})
 				.then(() => console.log("Data pre-loaded!"))
-				.catch((error) => console.error("Error pre-loading data:", error));
-			
+				.catch((error) => console.error("Error pre-cargando los datos:", error));
 			}, []);
 
 

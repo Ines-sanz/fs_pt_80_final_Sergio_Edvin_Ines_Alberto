@@ -4,7 +4,7 @@ import "../../styles/navbar.css";
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
-import {CartItem} from "./shopping-cart-item.jsx"
+import { CartItem } from "./shopping-cart-item.jsx"
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context)
@@ -32,7 +32,7 @@ export const Navbar = () => {
     };
   }, []);
 
-  
+
   const navigate = useNavigate();
 
   const handleLink = (type) => {
@@ -43,9 +43,14 @@ export const Navbar = () => {
     }
   };
 
+  useEffect(() => {
+
+    actions.userShoppingCart();
+  }, []);
+
   console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido");
-  console.log(store );
-  console.log(store.user.shoppingCart) 
+  console.log(store);
+  console.log(store.shoppingCart)
   return (
     <>
       {/* Offcanvas del menú */}
@@ -123,21 +128,30 @@ export const Navbar = () => {
         id="offcanvasShopping"
         aria-labelledby="offcanvasShoppingLabel"
       >
-        <div className="offcanvas-header">
-        </div>
-        {store.shoppingCart?.map((item) => (
-                      <CartItem
-                        key={item.id}
-                        img={item.img}
-                        name={item.name}
-                        seller_id={item.seller_id}
-                        price={item.price}
-                        id={item.id}
-                      />
-                    ))}
-        
-      </div>
 
+        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+        <div className="offcanvas-body">
+          {store.shoppingCart?.map((item) => (
+            <CartItem
+              key={item.id}
+              img={item.img}
+              name={item.name}
+              seller_id={item.seller_id}
+              price={item.price}
+              id={item.id}
+            />
+          ))}
+          <div className="divider"></div>
+    <div className="text-center">
+            <div className="total text-center">
+            {store.shoppingCart?.reduce((total, item) => total + item.price, 0)}€
+          </div>
+          
+          <Link to="/suscripcion" className="shopping-bar-button mt-5">Hacer pedido</Link>
+          <div className="divider"></div></div>
+        </div>
+      </div>
       {/* Navbar principal */}
       <nav
         className={`navbar navbar-expand-lg my-navbar py-3 px-lg-3 px-0 sticky-top ${isTransparent ? "transparent" : ""
@@ -167,6 +181,7 @@ export const Navbar = () => {
               <span className="fa-solid fa-bars menu-icon float"></span>
             </button>
             {/* Ícono de la bolsa de compras, se oculta en pantallas grandes */}
+            <div>
             <span
               className={store.Token ? "fa-solid fa-bag-shopping small-device float" : "oculto"}
               alt="Shopping bag"
@@ -174,6 +189,7 @@ export const Navbar = () => {
               data-bs-target="#offcanvasShopping"
               aria-controls="offcanvasShopping"
             ></span>
+            </div>
           </div>
           <div className="collapse navbar-collapse me-4" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0 mt-5 d-flex justify-content-between align-items-start">
