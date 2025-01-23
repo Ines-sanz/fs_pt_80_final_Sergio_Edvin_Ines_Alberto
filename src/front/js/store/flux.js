@@ -16,6 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
 
       login: async (formData1) => {
+        const actions = getActions();
         try {
             const url = `${process.env.BACKEND_URL}/api/login`;
             console.log("URL final:", url);
@@ -37,6 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
                 localStorage.setItem("Token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user)); 
                 setStore({ isLogged: true, Token: data.token, user: data.user });
+                await actions.userShoppingCart()
             } else {
                 alert(data.msg || "Error en el inicio de sesión");
             }
@@ -99,7 +101,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           const store = getStore();
           
           if (store.user) {
-            const shoppingCartIds = store.user.shoppingCart
+            const shoppingCartIds =  await store.user.shoppingCart
 
             console.log("IDs del carrito:", shoppingCartIds);
             
