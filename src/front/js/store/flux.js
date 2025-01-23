@@ -1,3 +1,5 @@
+import { act } from "react";
+
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
@@ -190,7 +192,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           const user = { ...store.user, shoppingCart: updatedUserShopping }
           setStore({ user });
           await actions.userShoppingCart()
-          console.log( user)
     
           
         } else {

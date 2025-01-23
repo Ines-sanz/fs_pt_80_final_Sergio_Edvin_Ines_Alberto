@@ -6,7 +6,14 @@ import { Context } from "../store/appContext";
 export const CartItem = (props) => {
     const { store, actions } = useContext(Context)
 
-
+    const handleShopping = () => {
+        const newShoppingItem = {
+            user_id: store.user.id, 
+            product_id: props.id,
+        };
+        actions.toggleCart(newShoppingItem);
+      };
+    
     return (<>
         <div className="d-flex shopping-c-item p-1" >
             <figure>
@@ -18,7 +25,7 @@ export const CartItem = (props) => {
 
             <div className="px-0 mt-2 d-flex">
                 <div className="align-self-start ">
-                    <span class="fa-solid fa-x close-shopping"></span>
+                    <span class="fa-solid fa-x close-shopping" onClick={handleShopping}></span>
                 </div>
                 <div className="align-self-end mb-2">
                     <h5 className="shopping-c-name">{props.name}</h5>
