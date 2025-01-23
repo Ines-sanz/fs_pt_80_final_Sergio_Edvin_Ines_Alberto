@@ -30,6 +30,7 @@ const isFavorite = store.user && store.user.favorites
 const isInShopping = store.shoppingCart 
 ? store.shoppingCart.some((item) => item.id === props.id)
 : false
+
   return (<>
     <div className="col-10 col-md-6 col-xl-4" >
    
