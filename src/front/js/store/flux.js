@@ -142,6 +142,34 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error(error);
         }
     }
+
+    //prueba de favorites
+    // getFavorites: async () => {
+    //   const store = getStore();
+    //   try {
+    //     const response = await fetch(`${store.url}/api/favorites`, {
+    //       method: "GET",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Bearer ${store.Token}`,
+    //       },
+    //     });
+    
+    //     if (response.ok) {
+    //       const data = await response.json();
+    //       console.log("Favorites fetched from backend:", data);
+    //       setStore({ user: { ...store.user, favorites: data.favorites || [] } });
+    //     } else {
+    //       const errorData = await response.json();
+    //       console.error("Error fetching favorites:", errorData.msg || "Unknown error");
+    //       alert(errorData.msg || "Failed to fetch favorites");
+    //     }
+    //   } catch (error) {
+    //     console.error("Error connecting to server:", error);
+    //     alert("Error connecting to server");
+    //   }
+    // },
+// hasta aqui    
     },
   };
 };
