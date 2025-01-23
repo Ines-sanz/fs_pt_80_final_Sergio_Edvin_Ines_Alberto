@@ -719,10 +719,13 @@ def add_to_shopping_cart():
         # Verificar si el producto ya está en el carrito
         existing_item = ShoppingCart.query.filter_by(user_id=id, product_id=product_id).first()
         if existing_item:
-            # Si ya existe, eliminarlo del carrito
             db.session.delete(existing_item)
             db.session.commit()
-            return jsonify({'msg': 'Product removed from shopping cart'}), 200
+
+            db.session.refresh(user)
+
+            updated_cart = [item.product_id for item in user.shoppingCart]
+            return jsonify({'msg': 'Product removed from shopping cart' , 'updatedCart': updated_cart}), 200
         else:
         
             new_item = ShoppingCart(user_id=id, product_id=product_id)

@@ -97,8 +97,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           const store = getStore();
           
           if (store.user) {
-            const shoppingCartIds = store.user.shoppingCart.map(item => item.product_id); 
-            console.log(shoppingCartIds)
+            const shoppingCartIds = store.user.shoppingCart
+
+            console.log("IDs del carrito:", shoppingCartIds);
             
             const allProducts = [...store.consolas, ...store.videojuegos, ...store.accesorios]; 
             const productsInCart = allProducts.filter(product => shoppingCartIds.includes(product.id)); 
@@ -167,7 +168,39 @@ const getState = ({ getStore, getActions, setStore }) => {
             alert("Error al conectar con el servidor");
             console.error(error);
         }
-    }
+    },
+    toggleCart: async (newShoppingItem) => {
+      const store = getStore();
+      const actions = getActions();
+      console.log("Datos enviados al carrito:", newShoppingItem);
+      try {
+        const response = await fetch(`${store.url}/api/shopping_cart`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${store.Token}`,
+          },
+          body: JSON.stringify(newShoppingItem),
+        });
+    
+        const data = await response.json();
+        if (response.ok) {
+          console.log("Respuesta del servidor:", data);
+          const updatedUserShopping = data.updatedCart|| [];  
+          const user = { ...store.user, shoppingCart: updatedUserShopping }
+          setStore({ user });
+          await actions.userShoppingCart()
+          console.log( user)
+    
+          
+        } else {
+          alert(data.msg || "Error al manejar el carrito de compras");
+        }
+      } catch (error) {
+        alert("Error al conectar con el servidor");
+        console.error(error);
+      }
+    },
     },
   };
 };
