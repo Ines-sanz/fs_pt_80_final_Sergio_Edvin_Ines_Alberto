@@ -11,7 +11,6 @@ import { PremiumModal } from "../component/premium-modal.jsx";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
-  console.log()
 
   return (
     <div className="home-container">

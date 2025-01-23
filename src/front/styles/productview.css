@@ -20,11 +20,12 @@ body {
     margin-bottom: 2rem;
 }
 
-.row {
+.row-product {
     display: flex;
     justify-content:end;
 
 }
+
 
 .product-title {
     text-align: left;
