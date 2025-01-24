@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { useNavigate } from "react-router-dom";
 import "../../styles/store.css";
@@ -16,6 +16,10 @@ export const Store = () => {
     const handleCategoryClick = (category) => {
         navigate(`/store/${category}`);
     };
+
+    useEffect(() => {
+                window.scrollTo(0, 0); 
+            }, []);
 
     return (
         <div className="home-container">

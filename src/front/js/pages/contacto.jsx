@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect} from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/contacto.css";
 
 export const Contacto = () => {
     const { store, actions } = useContext(Context);
+    useEffect(() => {
+            window.scrollTo(0, 0); 
+        }, []);
 
     return (
         <>
