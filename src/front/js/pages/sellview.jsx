@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/sellview.css";
 import { useNavigate } from "react-router-dom";
-//import { ImageSelector } from "../../imageselector.jsx";
 
 export const SellView = () => {
     const { store, actions } = useContext(Context);
@@ -31,7 +30,7 @@ export const SellView = () => {
             setTypeOptions([]);
         }
     };
-    
+
     const handleGoToPremium = () => {
         navigate("/suscripcion");
     };
@@ -161,7 +160,11 @@ export const SellView = () => {
                         />
                     </div>
                     <div className="button-wrapper">
-                        <button type="submit" className="__sell_button__">
+                        <button
+                            type="button"
+                            className="__sell_button__"
+                            
+                        >
                             Vender
                         </button>
                     </div>

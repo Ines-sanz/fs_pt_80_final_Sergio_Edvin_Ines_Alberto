@@ -8,6 +8,10 @@ export const ProductBCard = (props) => {
   const { store, actions } = useContext(Context)
   const navigate = useNavigate();
 
+  const handleCardClick = () => {
+    navigate(`/product/${props.id}`);
+  };
+
   const handleFav = () => {
     const newFav = {
       user_id: store.user.id,
@@ -29,7 +33,7 @@ export const ProductBCard = (props) => {
 ? store.shoppingCart.some((item) => item.id === props.id)
 : false
   return (<>
-    <div className="row d-flex align-items-stretch" >
+    <div className="row d-flex align-items-stretch" onClick={handleCardClick} >
 
       <figure className="col-7 product-bg-bg" >
         <img
@@ -39,7 +43,7 @@ export const ProductBCard = (props) => {
         />
       </figure>
 
-      <div className="px-3 mt-2 col-5 d-flex flex-column justify-content-between py-5">
+      <div className="px-3 mt-2 col-5 d-flex flex-column justify-content-between py-5 ">
         <div className="divider"></div>
         <figure>
           <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1737124509/final-boss-selection-25_g3brv4.png" alt="FinalBossSelection" className="img-fluid" />
