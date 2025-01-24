@@ -1,0 +1,26 @@
+.card-review{
+    background-color: hsla(240, 6%, 93%, 0.6);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.card-review-h3{
+    text-align: center;
+    text-transform: uppercase;
+    font-family:"Kanit", serif;
+    font-weight: 400;
+      color: #3A39FF;
+}
+
+.card-review-h5{
+    font-family:"Kanit", serif;
+      color: #08B5F9;
+      margin-left: 5px;
+}
+
+.card-review-p{
+    font-family:"Kanit", serif;
+    color: black;
+    font-size: 16px;
+    margin-left: 5px;
+}
