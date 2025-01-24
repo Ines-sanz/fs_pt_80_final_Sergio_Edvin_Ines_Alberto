@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import validates
 
 db = SQLAlchemy()
 
@@ -26,6 +27,7 @@ class Products(db.Model):
     #Relationships
     products_in_order = db.relationship('ProductsInOrder', backref= 'products') 
     favorites = db.relationship('Favorites', backref= 'products')
+    shoppingCart = db.relationship('ShoppingCart', backref='products')
     reviews = db.relationship('Reviews', backref= 'products')
 
     def serialize(self):
@@ -144,10 +146,10 @@ class Users(db.Model):
     following = db.Column(db.ARRAY(db.Integer))
     subscription = db.Column(db.Boolean, default=False)
     role = db.Column(db.String)
-    shoppingCart = db.Column(db.ARRAY(db.Integer))
 
     #Relationships
     favorites = db.relationship("Favorites", backref='user', lazy=True)
+    shoppingCart = db.relationship("ShoppingCart", backref='user', lazy=True)
     reviews = db.relationship('Reviews', backref='users')
     orders_as_buyer = db.relationship("Orders", foreign_keys=[Orders.buyer_id], backref='buyer', lazy=True)
     orders_as_seller = db.relationship("Orders", foreign_keys=[Orders.seller_id], backref='seller', lazy=True)
@@ -172,12 +174,26 @@ class Users(db.Model):
             "following_users": [followed.serialize() for followed in self.following_users],
             "subscription": self.subscription,
             "role": self.role,
-            "shoppingCart": self.shoppingCart
+            "shoppingCart": [produc.serialize() for produc in self.shoppingCart]
         }
 
 # table Favorites
 class Favorites(db.Model):
     __tablename__ = 'favorites'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "product_id": self.product_id
+        }
+    
+#table Shopping Cart
+class ShoppingCart(db.Model):
+    __tablename__ = 'shoppingCart'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
@@ -197,6 +213,12 @@ class Reviews(db.Model):
     comment = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+
+    @validates('rating')
+    def validate_rating(self, key, value):
+        if value < 1 or value > 5:
+            raise ValueError("Rating must be between 1 and 5")
+        return value
 
     def serialize(self):
         return {

@@ -8,7 +8,7 @@ export const ProductView = () => {
     return (
         <div className="product-container">
             <section className="product-header">
-                <div className="row">
+                <div className="row row-product">
                     <div className="product-body">
                         {/* <div className="col-md-6 product-title">
                             <p className="brand">Nintendo</p>

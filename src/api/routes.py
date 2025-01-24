@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Favorites, Reviews
+from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Favorites, Reviews,ShoppingCart
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
@@ -570,6 +570,16 @@ def unfollow_user(followed_id):
 
 # User to Review
 
+#todas las review sin jwt para que se carguen en la home 
+@api.route('/reviews', methods=['GET'])
+def get_all_reviews():
+    try:
+        reviews = Reviews.query.all()  
+        return jsonify([r.serialize() for r in reviews]), 200
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400
+
+#reviews del usuario, quiza no sea necesario
 @api.route('/users/reviews', methods=['GET'])
 @jwt_required()
 def get_reviews():
@@ -628,7 +638,7 @@ def delete_review(review_id):
 
 def getPrice(ids):
     total = 0
-    #bnuscar los ids de los productos
+    #buscar los ids de los productos
     #sumar los precios para generar un total
     #devolver ese total
     return total
@@ -699,3 +709,87 @@ def create_payment():
 #         return jsonify(products), 200
 #     except Exception as e:
 #         return jsonify({"error": str(e)}), 500
+
+
+#Shopping Cart
+@api.route('/shopping_cart', methods=['POST'])
+@jwt_required()
+def add_to_shopping_cart():
+    try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 403
+        
+        # Extraer product_id 
+        product_id = request.json.get('product_id', None)
+        if not product_id:
+            return jsonify({'msg': 'Product ID is required'}), 400
+        
+        # Verificar si el producto ya está en el carrito
+        existing_item = ShoppingCart.query.filter_by(user_id=id, product_id=product_id).first()
+        if existing_item:
+            db.session.delete(existing_item)
+            db.session.commit()
+
+            db.session.refresh(user)
+
+            updated_cart = [item.product_id for item in user.shoppingCart]
+            return jsonify({'msg': 'Product removed from shopping cart' , 'updatedCart': updated_cart}), 200
+        else:
+        
+            new_item = ShoppingCart(user_id=id, product_id=product_id)
+            db.session.add(new_item)
+            db.session.commit()
+
+        # Actualizar la lista del carrito
+        updated_cart = [item.product_id for item in user.shoppingCart]
+        return jsonify({'msg': 'Added to shopping cart successfully', 'updatedCart': updated_cart}), 201
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({'error': str(error)}), 400
+    
+    
+@api.route('/shopping_cart/<int:product_id>', methods=['DELETE'])
+@jwt_required()
+def remove_from_shopping_cart(product_id):
+    try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401 
+        if not id:
+            return jsonify({'msg': 'User ID is required'}), 400
+        
+        item = ShoppingCart.query.filter_by(user_id=id, product_id=product_id).first()
+        if not item:
+            return jsonify({'msg': 'Item not found in shopping cart'}), 404
+        
+        # Eliminar el producto del carrito
+        db.session.delete(item)
+        db.session.commit()
+
+        return jsonify({'msg': 'Removed from shopping cart successfully'}), 200
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({'error': str(error)}), 400
+
+@api.route('/shopping_cart', methods=['GET'])
+@jwt_required()
+def get_shopping_cart():
+    try:
+        # Extraer usuario de la solicitud
+        id = get_jwt_identity()
+        user = Users.query.get(id)  
+
+        # Validar campo requerido
+        if not user:
+            return jsonify({'msg':'User not found'}), 400
+        
+        # Obtener todos los productos en el carrito del usuario
+        shopping_cart = ShoppingCart.query.filter_by(user_id=id).all()
+        cart_items = [{'id': item.id, 'product_id': item.product_id} for item in shopping_cart]
+
+        return jsonify({'shopping_cart': cart_items}), 200
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400
