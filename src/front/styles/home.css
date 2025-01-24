@@ -1,42 +1,40 @@
 .home-banners img{
-border-radius: 10px;
-transition: all 0.4s ease;
-}
-.home-banners img:hover{
-    transform: scale(1.02);
-    box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.6);
-    }
-
-.t-seccion{
-    text-transform: uppercase;
-    font-weight: 300;
-    font-family: "Kode Mono", serif;
-    color: white;
-    font-size: 32px;
-
-}
-
-.home-type img{
-    border-radius: 10px !important;
-    object-fit: cover !important;
-}
-
-.divider{
+  border-radius: 10px;
+  transition: all 0.4s ease;
+  }
+  .home-banners img:hover{
+      transform: scale(1.02);
+      box-shadow: 0 0 10px 3px rgba(255, 255, 255, 0.6);
+      }
+  
+  .t-seccion{
+      text-transform: uppercase;
+      font-weight: 300;
+      font-family: "Kode Mono", serif;
+      color: white;
+      font-size: 32px;
+  
+  }
+  
+  .home-type img{
+      border-radius: 10px !important;
+      object-fit: cover !important;
+  }
+  
+  .divider{
     height: 60px;
 }
 .horizontal-scrollable {
-    overflow-x: auto;
-    white-space: nowrap;
-    padding: 10px;
+    overflow-x: auto ;
+    padding: 10px ;
   }
-  
   .horizontal-scrollable .row {
-    flex-wrap: nowrap;
-    display: flex;
+    flex-wrap: nowrap ;
+    display: flex ;
   }
+ 
 
   .horizontal-scrollable::-webkit-scrollbar {
-    
     height: 8px;
   }
   
@@ -45,47 +43,49 @@ transition: all 0.4s ease;
     border-radius: 10px;
 
   }
+    
+    .horizontal-scrollable::-webkit-scrollbar-thumb {
+      background: #5c5c607f;
+      border-radius: 10px;
+    }
   
-  .horizontal-scrollable::-webkit-scrollbar-thumb {
-    background: #5c5c607f;
-    border-radius: 10px;
-  }
-
-  .faq-home h3{
-    font-family: inherit;
-    color: white;
-    font-weight: 600;
-    font-size: 40px;
-  }
+    .faq-home-h3{
+      font-family:"Kanit", serif;
+      color: white;
+      font-weight: 400;
+      font-size: 45px;
+    }
+    
+    .faq-home-p{
+      font-family:"Kanit", serif;
+      color: #AFAFB2;
+      font-size: 36px;
+    }
+    .faq-home-p-a{
+      font-family:"Kanit", serif;
+      color: #08B5F9;
+    }
   
-  .faq-home p{
-    color: #AFAFB2;
-    font-size: 32px;
-  }
-  .faq-home p a{
-    color: #08B5F9;
-  }
-
-  .faq-home-button{
-    margin-top: 20px;
-    background-color: #FCEE21;
-    border-radius: 10px;
-    font-weight: 500;
-    font-family: "Kode Mono", serif;
-    color: black;
-    border: none;
-    font-size: 40px;
-    padding: 3px 13px;
-    transition: all ease 0.4s;
-    text-decoration: none;
-  }
-
-  .faq-home-button:hover{
-    transform: scale(1.05);
-  }
-
-  @media(max-width: 992px){
-    .divider{
-      height: 20px;
-  }
-  }
+    .faq-home-button{
+      margin-top: 20px;
+      background-color: #FCEE21;
+      border-radius: 10px;
+      font-weight: 500;
+      font-family: "Kode Mono", serif;
+      color: black;
+      border: none;
+      font-size: 40px;
+      padding: 3px 13px;
+      transition: all ease 0.4s;
+      text-decoration: none;
+    }
+  
+    .faq-home-button:hover{
+      transform: scale(1.05);
+    }
+  
+    @media(max-width: 992px){
+      .divider{
+        height: 20px;
+    }
+    }

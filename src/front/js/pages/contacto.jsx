@@ -1,10 +1,13 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect} from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/contacto.css";
 
 export const Contacto = () => {
     const { store, actions } = useContext(Context);
+    useEffect(() => {
+            window.scrollTo(0, 0); 
+        }, []);
 
     return (
         <>
@@ -349,24 +352,29 @@ export const Contacto = () => {
                                     
 
                     <div className="container">
-                        <p>
+                        <p className="mt-5">
                             Para solicitar ayuda con un pedido escriba a <br />
                             <a href="mailto:finalbosshelp@finalboss.com" style={{ color: "#00aaff" }}>
                                 finalbosshelp@finalboss.com
                             </a>
                         </p>
                 
-                        <Link className="premium-button" to={"/suscripcion"}>
-                            Go Premium
-                        </Link>
-                        <p className="mt-2">
-                            Contacto directo y mucho más...
-                        </p>
-                        <img
-                            src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736455865/web-illustrations/r5r3z9kfuqd95yennokv.png"
-                            alt="Imagen FinalBoss Dudas"
-                            className="image w-50"                        
-                            />
+                        <div className="premium-container" style={{ display: 'flex', alignItems: 'center' }}>
+    <Link className="premium-button" to="/suscripcion" style={{ marginRight: '10px' }}>
+        Go Premium
+    </Link>
+    <img
+        src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736455865/web-illustrations/r5r3z9kfuqd95yennokv.png"
+        alt="Imagen FinalBoss Dudas"
+        className="image"
+        style={{ width: '10%', marginLeft: 'auto' }}
+    />
+</div>
+
+
+<p>
+    Contacto directo y mucho más...
+</p>
                     
                     </div>
                     

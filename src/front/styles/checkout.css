@@ -1,0 +1,88 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.shipping-address,
+.product-list {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.shipping-address h2,
+.product-list h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.shipping-address p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.6;
+}
+
+.product-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.product-list li {
+  font-size: 1rem;
+  color: #444;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.product-list li:last-child {
+  border-bottom: none;
+}
+
+.sinproductos {
+  font-size: 1rem;
+  color: #999;
+}
+
+.order-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.shipping-address,
+.product-list {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+h3 {
+  margin-top: 15px;
+  font-size: 1.2rem;
+  color: #000;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .order-summary {
+    padding: 10px;
+  }
+
+  h2, h3 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+}
