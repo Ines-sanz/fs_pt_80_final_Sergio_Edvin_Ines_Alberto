@@ -9,6 +9,10 @@ export const ProductCard = (props) => {
 
   const isPromoted = props.promoted === true
 
+  const handleCardClick = () => {
+    navigate(`/product/${props.id}`);
+  };
+
   const handleFav = () => {
     const newFav = {
         user_id: store.user.id, 
@@ -23,6 +27,7 @@ const handleShopping = () => {
   };
   actions.toggleCart(newShoppingItem);
 };
+
 const isFavorite = store.user && store.user.favorites
 ? store.user.favorites.some((fav) => fav === props.id)
 : false
@@ -32,7 +37,7 @@ const isInShopping = store.shoppingCart
 : false
 
   return (<>
-    <div className="col-10 col-md-6 col-xl-4" >
+    <div className="col-10 col-md-6 col-xl-4" onClick={handleCardClick} >
    
       <div className={ isPromoted ? "promoted": "product-sm-bg" } >
         

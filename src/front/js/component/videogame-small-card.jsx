@@ -8,6 +8,11 @@ export const VideogameCard = (props) => {
   const navigate = useNavigate();
 
   const isPromoted = props.promoted === true
+
+  const handleCardClick = () => {
+    navigate(`/product/${props.id}`);
+  };
+
   const handleFav = () => {
     const newFav = {
       user_id: store.user.id,
@@ -19,18 +24,18 @@ export const VideogameCard = (props) => {
     ? store.user.favorites.some((fav) => fav === props.id)
     : false
 
-    const handleShopping = () => {
-      const newShoppingItem = {
-          user_id: store.user.id, 
-          product_id: props.id,
-      };
-      actions.toggleCart(newShoppingItem);
+  const handleShopping = () => {
+    const newShoppingItem = {
+      user_id: store.user.id,
+      product_id: props.id,
     };
-    const isInShopping = store.shoppingCart 
-? store.shoppingCart.some((item) => item.id === props.id)
-: false
+    actions.toggleCart(newShoppingItem);
+  };
+  const isInShopping = store.shoppingCart
+    ? store.shoppingCart.some((item) => item.id === props.id)
+    : false
   return (<>
-    <div className="col-10 col-md-5 col-xl-4">
+    <div className="col-10 col-md-5 col-xl-4" onClick={handleCardClick}>
       {/* <img className="img-fluid" src={props.img} alt={props.name} onClick={handleLink} /> */}
       <div className={isPromoted ? "videogame-sm-bg videogame-sm-promoted" : "videogame-sm-bg"} >
 
@@ -52,11 +57,11 @@ export const VideogameCard = (props) => {
           </span>
           <div>
             <div className="d-flex align-items-center">
-            <span className="fa-solid fa-plus plus-icon" style={{
-    opacity: isInShopping ? 1 : 0.4,
-    color: isInShopping ? "#15a3f5" : "#FFFFFF" 
-  }} onClick={handleShopping}></span>
-              <span className="fa-solid fa-star fav-icon" style={{opacity: isFavorite ? 1 : 0.4, }}  onClick={handleFav}></span>
+              <span className="fa-solid fa-plus plus-icon" style={{
+                opacity: isInShopping ? 1 : 0.4,
+                color: isInShopping ? "#15a3f5" : "#FFFFFF"
+              }} onClick={handleShopping}></span>
+              <span className="fa-solid fa-star fav-icon" style={{ opacity: isFavorite ? 1 : 0.4, }} onClick={handleFav}></span>
             </div>
           </div>
 
