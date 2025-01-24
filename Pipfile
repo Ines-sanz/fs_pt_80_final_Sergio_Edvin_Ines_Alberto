@@ -22,6 +22,8 @@ flask-jwt-extended = "*"
 wtforms = "==3.1.2"
 stripe = "*"
 alembic = "*"
+shell = "*"
+l = "*"
 
 [requires]
 python_version = "3.10"

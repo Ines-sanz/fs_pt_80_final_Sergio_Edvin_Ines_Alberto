@@ -20,31 +20,31 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: async (formData1) => {
         const actions = getActions();
         try {
-          const url = `${process.env.BACKEND_URL}/api/login`;
-          console.log("URL final:", url);
-          console.log("Datos enviados al servidor:", formData1);
+            const url = `${process.env.BACKEND_URL}/api/login`;
+            console.log("URL final:", url);
+            console.log("Datos enviados al servidor:", formData1);
+    
+            const response = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData1),
+            });
+    
+            const data = await response.json();
+            console.log("Respuesta del servidor:", data);
+    
+            if (response.ok) {
+                alert("Inicio de sesión exitoso");
+                localStorage.setItem("Token", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user)); 
+                setStore({ isLogged: true, Token: data.token, user: data.user });
 
-          const response = await fetch(url, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData1),
-          });
-
-          const data = await response.json();
-          console.log("Respuesta del servidor:", data);
-
-          if (response.ok) {
-            alert("Inicio de sesión exitoso");
-            localStorage.setItem("Token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
-            setStore({ isLogged: true, Token: data.token, user: data.user });
-
-            await actions.userShoppingCart()
-          } else {
-            alert(data.msg || "Error en el inicio de sesión");
-          }
+                await actions.userShoppingCart()
+            } else {
+                alert(data.msg || "Error en el inicio de sesión");
+            }
         } catch (error) {
           console.error("Error al conectar con el servidor:", error);
           alert("Error al conectar con el servidor");
@@ -106,7 +106,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           const store = getStore();
 
           if (store.user) {
-            const shoppingCartIds = store.user.shoppingCart || [];
+            const shoppingCartIds =  await store.user.shoppingCart
+
             console.log("IDs del carrito:", shoppingCartIds);
 
             if (

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/perfil.css";
 
@@ -22,7 +22,9 @@ export const Perfil = () => {
     const handleChange=e => setFormData({...formData,[e.target.name]:e.target.value})
     const handleChange1=e => setFormData1({...formData1,[e.target.name]:e.target.value})
 
-
+    useEffect(() => {
+            window.scrollTo(0, 0); 
+        }, []);
 
     return (
         <div className="container-fluid min-vh-100">
