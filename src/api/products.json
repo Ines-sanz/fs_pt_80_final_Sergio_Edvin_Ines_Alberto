@@ -210,7 +210,8 @@
     "stock": 1,
     "state": false,
     "promoted": false,
-    "price": 110.00
+    "price": 110.00,
+    "seller_id": 4
   },
   {
     "name": "PlayStation 3",

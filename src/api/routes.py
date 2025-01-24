@@ -2,12 +2,16 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Favorites, Reviews
+from api.models import db, Products, Orders, ProductsInOrder, Checkout, Followers, Users, Favorites, Reviews,ShoppingCart
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+import stripe
+import os
+import datetime
 
 api = Blueprint('api', __name__)
+stripe.api_key = os.getenv("STRIPE_API_KEY")
 
 # Allow CORS requests to this API
 CORS(api)
@@ -40,17 +44,12 @@ def register():
             new_user = Users(email=email, password=password, userName=userName, address=address, city=city, postalCode=postalCode)  # aqui se creo nuevo usuario
             db.session.add(new_user)                                         # aqui se agrego a la tabla
             db.session.commit()                                                #aqui se almacena cambios en la base de datos
-            token = create_access_token(identity=str(new_user.id))
-            user_data = {
-                "id": new_user.id,
-                "email": new_user.email,
-                "userName": new_user.userName,
-                "address": new_user.address,
-                "city": new_user.city,
-                "postalCode": new_user.postalCode
-            }
+            expires = datetime.timedelta(days=1)
+            access_token = create_access_token(identity=str(check_user.id), expires_delta=expires)
+            
 
-            return {"msg": "okey", 'token': token, 'user': user_data}, 201
+
+            return {"msg": "okey", 'token': access_token, 'user': new_user.serialize()}, 201
         # si existe usuario, devolvemos que ya hay una cuenta con ese correo
         return jsonify({"msg": "User already registered"}), 400
     except Exception as error:
@@ -178,8 +177,10 @@ def login():
         check_user= Users.query.filter_by(email=email).first()
 
         if check_user.password == password:
-             access_token = create_access_token(identity=str(check_user.id))
-             return ({"msg": "ok", "token": access_token}), 201
+             expires = datetime.timedelta(days=1)
+            
+             access_token = create_access_token(identity=str(check_user.id), expires_delta=expires)
+             return ({"msg": "ok", "token": access_token, "user":check_user.serialize()}), 201
         return jsonify({"msg": "Contraseña incorrecta"}), 400
     
     except Exception as error:
@@ -367,26 +368,28 @@ def add_to_favorites():
         id = get_jwt_identity()
         user = Users.query.get(id)
         if not user:
-            return jsonify({'msg':'Unauthorized: User not found'}), 401
-        #extract user_id and product_id from the request
-        user_id = request.json.get('user_id', None)     
+            return jsonify({'msg':'Unauthorized: User not found'}), 403
+        #extractproduct_id from the request  
         product_id = request.json.get('product_id', None)
 
         #validate required fields
-        if not user_id or not product_id:
-            return jsonify({'msg': 'User ID and product ID are required'}), 400
+        if not product_id:
+            return jsonify({'msg': 'Product ID are required'}), 400
         
         # check if favorite already exist
-        existing_favorite = Favorites.query.filter_by(user_id=user_id, product_id=product_id).first()
+        existing_favorite = Favorites.query.filter_by(user_id=id, product_id=product_id).first()
         if existing_favorite:
-            return jsonify({'msg': 'Product already in favorites'}), 400
-        
+            db.session.delete(existing_favorite)
+            db.session.commit()
+            return jsonify({'msg': 'Product deleted'}), 200
+        else:
         # add to favorites
-        new_favorite = Favorites(user_id=user_id, product_id=product_id)
-        db.session.add(new_favorite)
-        db.session.commit()
+            new_favorite = Favorites(user_id=id, product_id=product_id)
+            db.session.add(new_favorite)
+            db.session.commit()
 
-        return jsonify({'msg': 'Added to favorites successfully'}), 201
+        updated_favorites = [fav.product_id for fav in user.favorites]
+        return jsonify({'msg': 'Added to favorites successfully', 'updatedFavorites': updated_favorites}), 201
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
@@ -567,6 +570,16 @@ def unfollow_user(followed_id):
 
 # User to Review
 
+#todas las review sin jwt para que se carguen en la home 
+@api.route('/reviews', methods=['GET'])
+def get_all_reviews():
+    try:
+        reviews = Reviews.query.all()  
+        return jsonify([r.serialize() for r in reviews]), 200
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400
+
+#reviews del usuario, quiza no sea necesario
 @api.route('/users/reviews', methods=['GET'])
 @jwt_required()
 def get_reviews():
@@ -620,6 +633,74 @@ def delete_review(review_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
 
+
+    ##nuevo STRIPE! pago para productos y suscripcion
+
+def getPrice(ids):
+    total = 0
+    #buscar los ids de los productos
+    #sumar los precios para generar un total
+    #devolver ese total
+    return total
+
+@api.route('/create-payment', methods=['POST'])
+@jwt_required()
+def create_payment():
+    try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg': 'Unauthorized: User not found'}), 401
+        data = request.json
+        if data["products"]:
+            #PODEMOS PASAR TODOS LOS ELEMENTOS QUE PERMITA EL OBJETO DE PAYMENTINTENT.CREATE 
+            intent = stripe.PaymentIntent.create(
+                #amount=getPrice(data['products']), # se deberia de calcular el precio en el back, no recibirse del front
+                currency=data['currency'],
+                automatic_payment_methods={
+                    'enabled': True
+                }
+            )
+            return jsonify({
+                'clientSecret': intent['client_secret']
+            })
+        if data["suscripcion"]:
+            intent = stripe.PaymentIntent.create(
+                amount= 9.99,
+                currency="eur",
+                automatic_payment_methods={
+                    'enabled': True
+                }
+            )
+            return jsonify({
+                'clientSecret': intent['client_secret']
+            })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)})
+    
+    
+#     ## pago de subscricpion con stripe
+
+# @api.route('/suscripcion-payment', methods=['POST'])
+# def suscripcion():
+#     try:
+#         data = request.json
+#         #PODEMOS PASAR TODOS LOS ELEMENTOS QUE PERMITA EL OBJETO DE PAYMENTINTENT.CREATE 
+#         intent = stripe.PaymentIntent.create(
+#             #amount=getPrice(data['products']), # se deberia de calcular el precio en el back, no recibirse del front
+#             amount= 9.99, 
+#             currency=data['eur'],
+#             automatic_payment_methods={
+#                 'enabled': True
+#             }
+#         )
+#         return jsonify({
+#             'clientSecret': intent['client_secret']
+#         })
+#     except Exception as e:
+#         return jsonify({'success': False, 'error': str(e)})
+
+
 #products = (urls)
 
 # @api.route('/products', methods=['GET'])
@@ -628,3 +709,87 @@ def delete_review(review_id):
 #         return jsonify(products), 200
 #     except Exception as e:
 #         return jsonify({"error": str(e)}), 500
+
+
+#Shopping Cart
+@api.route('/shopping_cart', methods=['POST'])
+@jwt_required()
+def add_to_shopping_cart():
+    try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 403
+        
+        # Extraer product_id 
+        product_id = request.json.get('product_id', None)
+        if not product_id:
+            return jsonify({'msg': 'Product ID is required'}), 400
+        
+        # Verificar si el producto ya está en el carrito
+        existing_item = ShoppingCart.query.filter_by(user_id=id, product_id=product_id).first()
+        if existing_item:
+            db.session.delete(existing_item)
+            db.session.commit()
+
+            db.session.refresh(user)
+
+            updated_cart = [item.product_id for item in user.shoppingCart]
+            return jsonify({'msg': 'Product removed from shopping cart' , 'updatedCart': updated_cart}), 200
+        else:
+        
+            new_item = ShoppingCart(user_id=id, product_id=product_id)
+            db.session.add(new_item)
+            db.session.commit()
+
+        # Actualizar la lista del carrito
+        updated_cart = [item.product_id for item in user.shoppingCart]
+        return jsonify({'msg': 'Added to shopping cart successfully', 'updatedCart': updated_cart}), 201
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({'error': str(error)}), 400
+    
+    
+@api.route('/shopping_cart/<int:product_id>', methods=['DELETE'])
+@jwt_required()
+def remove_from_shopping_cart(product_id):
+    try:
+        id = get_jwt_identity()
+        user = Users.query.get(id)
+        if not user:
+            return jsonify({'msg':'Unauthorized: User not found'}), 401 
+        if not id:
+            return jsonify({'msg': 'User ID is required'}), 400
+        
+        item = ShoppingCart.query.filter_by(user_id=id, product_id=product_id).first()
+        if not item:
+            return jsonify({'msg': 'Item not found in shopping cart'}), 404
+        
+        # Eliminar el producto del carrito
+        db.session.delete(item)
+        db.session.commit()
+
+        return jsonify({'msg': 'Removed from shopping cart successfully'}), 200
+    except Exception as error:
+        db.session.rollback()
+        return jsonify({'error': str(error)}), 400
+
+@api.route('/shopping_cart', methods=['GET'])
+@jwt_required()
+def get_shopping_cart():
+    try:
+        # Extraer usuario de la solicitud
+        id = get_jwt_identity()
+        user = Users.query.get(id)  
+
+        # Validar campo requerido
+        if not user:
+            return jsonify({'msg':'User not found'}), 400
+        
+        # Obtener todos los productos en el carrito del usuario
+        shopping_cart = ShoppingCart.query.filter_by(user_id=id).all()
+        cart_items = [{'id': item.id, 'product_id': item.product_id} for item in shopping_cart]
+
+        return jsonify({'shopping_cart': cart_items}), 200
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400

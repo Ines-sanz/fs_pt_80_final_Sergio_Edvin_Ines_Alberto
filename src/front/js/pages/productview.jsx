@@ -8,15 +8,16 @@ export const ProductView = () => {
     const { store, actions } = useContext(Context);
     const [product, setProduct] = useState(null);
 
-    // Obtener la información del producto al montar el componente
+    
     useEffect(() => {
         const fetchProduct = async () => {
-            const fetchedProduct = await actions.getProductById(id); 
+            const fetchedProduct = await actions.getProductById(id);
             setProduct(fetchedProduct);
         };
         fetchProduct();
     }, [id]);
 
+    
     if (!product) {
         return <p>Cargando producto...</p>;
     }
@@ -24,24 +25,24 @@ export const ProductView = () => {
     return (
         <div className="product-container">
             <section className="product-header">
-                <div className="row row-product">
-                    <div className="product-body">
-                        <div className="col-md-6 product-title">
+                <div className="row __product__">
+                    <article className="__product_body__">
+                        <div className="col-md-6 __product_title__">
                             <p className="brand">{product.brand}</p>
                             <h1 className="product-name mb-3">{product.name}</h1>
                         </div>
                         <div className="product-image">
                             <img src={product.img} alt={product.name} />
                         </div>
-                    </div>
-                    <div className="col-md-6 product-info">
+                    </article>
+                    <div className="col-md-6 __product_info__">
                         <p><strong>Año:</strong> {product.year}</p>
                         <p><strong>Estado:</strong> {product.state ? "Nuevo" : "Usado"}</p>
                         <p><strong>Plataforma:</strong> {product.platform}</p>
                         <p><strong>Tipo:</strong> {product.type}</p>
                         {/*<p><strong>Vendido por:</strong> {product.seller_id}</p>*/}
                         <div className="rating">
-                            <span>⭐⭐⭐⭐☆</span> {/* Modificar cuando estén concluidas las Reviews*/}
+                            <span>⭐⭐⭐⭐☆</span>  {/*A modificar cuando tengamos hecho el review*/}
                         </div>
                         <div className="product-price">
                             <p>Precio</p>

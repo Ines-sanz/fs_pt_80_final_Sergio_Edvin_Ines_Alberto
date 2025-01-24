@@ -1,96 +1,186 @@
-.product-sm-bg{
-    background-color: white;
-    width: 100%;
-    height: 250px;
-    padding: 8px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;   
+.product-sm-bg {
+  background-color: white;
+  width: 100%;
+  height: 250px;
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.promoted{
-    background-color: white;
-    width: 100%;
-    height: 250px;
-    padding: 8px;
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;  
-    border: solid #FCEE21 6px;
-    
+.promoted {
+  background-color: white;
+  width: 100%;
+  height: 250px;
+  padding: 8px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid #fcee21 6px;
 }
-.promoted img{
-    max-height: 240px;
+.promoted img {
+  max-height: 240px;
 }
-.product-sm-bg img{
-    max-height: 240px;
+.product-sm-bg img {
+  max-height: 240px;
 }
-.videogame-sm-promoted{
-    border: #FCEE21 6px solid;
-    border-radius: 15px;
-}
-
-.videogame-sm-bg img{
-    background-color: white;
-    width: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    height: 400px;
+.videogame-sm-promoted {
+  border: #fcee21 6px solid;
+  border-radius: 15px;
 }
 
-
-.small-c-brand{
-    font-family: "Kanit", serif;
-    font-weight: 300; 
-    color: #AFAFB2;
-    font-size: 15px;
+.videogame-sm-bg img {
+  background-color: white;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  height: 35vw;
 }
 
-.small-c-name{
-    width: 100%;
-    overflow: hidden;
-    font-family: "Kanit", serif;
-    font-weight: 400; 
-    color: white;
-    font-size: 24px;
-}
-.small-c-price{
-    font-family: "Kanit", serif;
-    font-weight: 500; 
-    letter-spacing: 1px; 
-    color: white;
-    font-size: 16px;
-    background-color: #3A39FF;
-    padding: 3px 13px ;
-    border-radius: 30px;
+.small-c-brand {
+  font-family: "Kanit", serif;
+  font-weight: 300;
+  color: #afafb2;
+  font-size: 15px;
 }
 
-.fav-icon{
-   cursor: pointer;
-    font-size: 30px;
-    color: rgba(255, 255, 255);
-    opacity: 0.4;
-    transform: ease 0.2s;
+.small-c-name {
+  width: 100%;
+  overflow: hidden;
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  color: white;
+  font-size: 24px;
+}
+.small-c-price {
+  font-family: "Kanit", serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: white;
+  font-size: 16px;
+  background-color: #3a39ff;
+  padding: 3px 13px;
+  border-radius: 30px;
+}
+
+.fav-icon {
+  cursor: pointer;
+  font-size: 30px;
+  color: rgba(255, 255, 255);
+  opacity: 0.4;
+  transform: ease 0.2s;
 }
 
 .fav-icon:hover {
-    color: white;
-    opacity: 0.7;
-    transform: scale(1.1);
+  color: white;
+  opacity: 0.7;
+  transform: scale(1.1);
 }
 
-.plus-icon{
-    cursor: pointer;
-    font-size: 32px;
-    color: rgba(255, 255, 255);
-    opacity: 0.4;
-    transform: ease 0.2s;
-    margin-right: 10px;
+.plus-icon {
+  cursor: pointer;
+  font-size: 32px;
+  color: rgba(255, 255, 255);
+  opacity: 0.4;
+  transform: ease 0.2s;
+  margin-right: 10px;
 }
 
 .plus-icon:hover {
-    color: #08B5F9;
-    opacity: 1;
-    transform: scale(1.1);
+  color: #08b5f9;
+  opacity: 1;
+  transform: scale(1.1);
 }
+.shopping-c-item {
+  background-color: hsla(240, 2%, 37%, 0.4);
+  margin: 8px;
+  border-radius: 10px;
+  position: relative;
+  transition: all ease 0.5s;
+  position: relative;
+}
+.close-shopping {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
+.shopping-c-item:hover {
+  background-color: hsla(240, 2%, 37%, 0.6);
+  transform: scale(1.03);
+}
+
+.shopping-c-item figure {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  padding: 5px;
+  margin: 2px;
+  margin-right: 15px;
+  border-radius: 10px;
+  min-width: 150px;
+  width: 150px;
+  height: 170px;
+  overflow: hidden;
+}
+.shopping-c-item figure img {
+  max-height: 150px;
+}
+.seller-user{
+    color: #08b5f9;
+}
+.img-shopping-cart {
+  border-radius: 10px;
+}
+
+.shopping-c-brand {
+  margin-top: -4px;
+  font-family: "Kanit", serif;
+  font-weight: 300;
+  color: #afafb2;
+  font-size: 14px;
+}
+
+.shopping-c-name {
+  width: 100%;
+  overflow: hidden;
+  font-family: "Kanit", serif;
+  font-weight: 400;
+  color: white;
+  font-size: 18px;
+}
+.shopping-c-price {
+  font-family: "Kanit", serif;
+  font-weight: 500;
+  letter-spacing: 1px;
+  color: white;
+  font-size: 14px;
+  background-color: #3a39ff;
+  padding: 3px 13px;
+  border-radius: 30px;
+}
+
+.total{
+    background-color: #08b5f9;
+    padding: 2px 8px;
+    font-size: 25px;
+    font-weight: 600;
+    border-radius: 50px;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 20px;
+
+}
+.shopping-bar-button{
+    background-color: #FCEE21;
+    border-radius: 10px;
+    font-weight: 500;
+    font-family: "Kode Mono", serif;
+    color: black;
+    border: none;
+    font-size: 30px;
+    padding: 3px 13px;
+    transition: all ease 0.4s;
+    text-decoration: none;
+  }

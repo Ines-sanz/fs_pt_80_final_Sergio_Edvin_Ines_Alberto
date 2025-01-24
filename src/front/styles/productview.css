@@ -20,13 +20,14 @@ body {
     margin-bottom: 2rem;
 }
 
-.row {
+.__product__ {
     display: flex;
     justify-content:end;
 
 }
 
-.product-title {
+
+.__product_title__ {
     text-align: left;
 }
 
@@ -40,11 +41,11 @@ body {
     margin: 0;
 }
 
-.product-info {
+.__product_info__ {
     text-align: right;
 }
 
-.product-info p {
+.__product_info__ p {
     margin: 0.5rem 0;
 }
 
@@ -53,7 +54,7 @@ body {
     color: rgb(249, 214, 14);
 }
 
-.product-body {
+.__product_body__ {
     display:block;
     justify-content: auto;
 }
