@@ -28,17 +28,23 @@ const injectContext = PassedComponent => {
 			 * you should do your ajax requests or fetch api requests here. Do not use setState() to save data in the
 			 * store, instead use actions, like this:
 			 **/
-			Promise.all([
-				state.actions.loadInfo()  // Primero, cargamos la info de los productos
-			  ])
-				.then(() => {
-				  console.log("Productos cargados, ahora cargamos el carrito.");
-				  // Después de que la info se haya cargado, cargamos los productos en el carrito
-				  return state.actions.userShoppingCart();
-				})
-				.then(() => console.log("Data pre-loaded!"))
-				.catch((error) => console.error("Error pre-cargando los datos:", error));
-			}, []);
+			const loadInitialData = async () => {
+				try {
+				  
+				  await state.actions.loadInfo();  
+				  console.log("Productos cargados.");
+		
+				  await state.actions.getAllReviews();
+				  console.log("Reseñas cargadas.");
+
+				  await state.actions.getAllUsers();
+				  console.log("Usuarios cargados.");
+				} catch (error) {
+				  console.error("Error al cargar los datos iniciales:", error);
+				}
+			  };
+			  loadInitialData();
+			}, []); 
 
 
 		// The initial value for the context is not null anymore, but the current state of this component,

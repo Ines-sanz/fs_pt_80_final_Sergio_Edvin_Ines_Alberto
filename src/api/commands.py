@@ -1,6 +1,6 @@
 
 import click
-from api.models import db, Users, Products, Orders, ProductsInOrder, Checkout, Followers, Favorites, Reviews,ShoppingCart
+from api.models import db, Users, Products, Orders, ProductsInOrder, Checkout, Followers, Favorites, Reviews, ShoppingCart
 import json
 
 
@@ -44,6 +44,8 @@ def setup_commands(app):
             favorites_data = json.load(file_3)
         with open('src/api/shoppingcart.json', 'r') as file_4:
             shopping_data = json.load(file_4)
+        with open('src/api/reviews.json', 'r') as file_5:
+            reviews_data = json.load(file_5)
         for i in data['consoles']:
             print (i['name'])
             prod = Products()
@@ -124,4 +126,17 @@ def setup_commands(app):
             prod.user_id = i['user_id']
             prod.product_id = i['product_id']
             db.session.add(prod)
-            db.session.commit()       
+            db.session.commit()  
+        for i in reviews_data['reviews']:
+            print (i['comment'])
+            prod = Reviews()
+            prod.rating = i['rating']
+            prod.comment = i['comment']
+            prod.user_id = i['user_id']
+            prod.product_id = i['product_id']
+            db.session.add(prod)
+            db.session.commit()         
+
+
+
+      

@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.orm import validates
 
 db = SQLAlchemy()
 
@@ -212,6 +213,12 @@ class Reviews(db.Model):
     comment = db.Column(db.Text)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('products.id'), nullable=False)
+
+    @validates('rating')
+    def validate_rating(self, key, value):
+        if value < 1 or value > 5:
+            raise ValueError("Rating must be between 1 and 5")
+        return value
 
     def serialize(self):
         return {
