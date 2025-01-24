@@ -16,6 +16,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     actions: {
 
       login: async (formData1) => {
+        const actions = getActions();
         try {
             const url = `${process.env.BACKEND_URL}/api/login`;
             console.log("URL final:", url);
@@ -37,6 +38,8 @@ const getState = ({ getStore, getActions, setStore }) => {
                 localStorage.setItem("Token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user)); 
                 setStore({ isLogged: true, Token: data.token, user: data.user });
+
+                await actions.userShoppingCart()
             } else {
                 alert(data.msg || "Error en el inicio de sesión");
             }
@@ -87,6 +90,7 @@ const getState = ({ getStore, getActions, setStore }) => {
               isLogged: true,
               user: JSON.parse(localStorage.getItem("user")),
             });
+            await getActions().userShoppingCart();
           }
         }
         catch (error) {
@@ -95,20 +99,35 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       userShoppingCart: async () => {
+        
         try {
           const store = getStore();
-          
-          if (store.user) {
-            const shoppingCartIds = store.user.shoppingCart
-
-            console.log("IDs del carrito:", shoppingCartIds);
-            
-            const allProducts = [...store.consolas, ...store.videojuegos, ...store.accesorios]; 
-            const productsInCart = allProducts.filter(product => shoppingCartIds.includes(product.id)); 
-            
-            console.log("Productos en el carrito:", productsInCart);
       
-            setStore({ shoppingCart: productsInCart });
+          if (store.user) {
+            const shoppingCartIds = store.user.shoppingCart || [];
+            console.log("IDs del carrito:", shoppingCartIds);
+      
+            if (
+              store.consolas.length > 0 &&
+              store.videojuegos.length > 0 &&
+              store.accesorios.length > 0
+            ) {
+              const allProducts = [
+                ...store.consolas,
+                ...store.videojuegos,
+                ...store.accesorios,
+              ];
+              const productsInCart = allProducts.filter((product) =>
+                shoppingCartIds.includes(product.id)
+              );
+      
+              console.log("Productos en el carrito:", productsInCart);
+              setStore({ shoppingCart: productsInCart });
+            } else {
+              console.log(
+                "Los productos aún no están cargados. userShoppingCart no se ejecutará."
+              );
+            }
           }
         } catch (error) {
           console.error("Error al cargar los productos del carrito:", error);

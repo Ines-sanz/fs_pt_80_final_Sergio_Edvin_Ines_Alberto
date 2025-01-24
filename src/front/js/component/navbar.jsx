@@ -43,11 +43,6 @@ export const Navbar = () => {
     }
   };
 
-  useEffect(() => {
-
-    actions.userShoppingCart();
-  }, []);
-
   console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido");
   console.log(store);
   console.log(store.shoppingCart)
@@ -145,7 +140,7 @@ export const Navbar = () => {
           <div className="divider"></div>
     <div className="text-center">
             <div className="total text-center">
-            {store.shoppingCart?.reduce((total, item) => total + item.price, 0)}€
+            {store.shoppingCart?.reduce((total, item) => total + item.price, 0).toFixed(2)}€
           </div>
           
           <Link to="/suscripcion" className="shopping-bar-button mt-5">Hacer pedido</Link>
