@@ -10,10 +10,10 @@ export const ProductView = () => {
             <section className="product-header">
                 <div className="row">
                     <div className="product-body">
-                        <div className="col-md-6 product-title">
+                        {/* <div className="col-md-6 product-title">
                             <p className="brand">Nintendo</p>
                             <h1 className="product-name mb-3">Nintendo GameCube</h1>
-                        </div>
+                        </div> */}
                         <div className="product-image">
                             <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397962/GameCube-Set_vokzkr.jpg" alt="Producto" />
                         </div>
