@@ -30,20 +30,21 @@ const injectContext = PassedComponent => {
 			 **/
 			const loadInitialData = async () => {
 				try {
-				  // Carga los datos de los productos primero
-				  await state.actions.loadInfo();
-				  console.log("Productos cargados correctamente.");
-			
-				  // Luego carga los productos del carrito
-				  await state.actions.userShoppingCart();
-				  console.log("Carrito cargado correctamente.");
+				  
+				  await state.actions.loadInfo();  
+				  console.log("Productos cargados.");
+		
+				  await state.actions.getAllReviews();
+				  console.log("Reseñas cargadas.");
+
+				  await state.actions.getAllUsers();
+				  console.log("Usuarios cargados.");
 				} catch (error) {
 				  console.error("Error al cargar los datos iniciales:", error);
 				}
 			  };
-			
 			  loadInitialData();
-			}, []);
+			}, []); 
 
 
 		// The initial value for the context is not null anymore, but the current state of this component,

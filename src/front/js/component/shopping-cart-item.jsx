@@ -13,6 +13,10 @@ export const CartItem = (props) => {
         };
         actions.toggleCart(newShoppingItem);
       };
+
+    const user = store.users.find((user) => user.id === props.seller_id);
+
+    const userName = user ? user.userName : null
     
     return (<>
         <div className="d-flex shopping-c-item p-1" >
@@ -31,8 +35,8 @@ export const CartItem = (props) => {
                     <h5 className="shopping-c-name">{props.name}</h5>
                     <span className="shopping-c-brand">
                         Vendido por: <span className="seller-user">{
-                            props.seller_id
-                                ? users.find(user => user.id === props.seller_id)?.userName || "FinalBoss Store"
+                            userName
+                                ? userName
                                 : "FinalBoss Store"
                         }</span>
                     </span>

@@ -6,7 +6,7 @@ import { Context } from "../store/appContext";
 export const Reviews = (props) => {
     const { store, actions } = useContext(Context)
     const navigate = useNavigate();
-    const rating = 1;
+    const rating = props.rating;
     const getStarStyle = (starIndex) => {
         if (starIndex <= rating) {
             return {
@@ -20,8 +20,18 @@ export const Reviews = (props) => {
             };
         }
     };
+
+    const product = store.consolas.concat(store.videojuegos, store.accesorios)
+    .find((prod) => prod.id === props.product_id);
+
+    const productName = product ? product.name : "Producto no encontrado"; 
+
+    const user = store.users.find((user) => user.id === props.user_id);
+
+    const userName = user ? user.userName : "Usuario no encontrado"; 
+
     return (<>
-        <div className="col-10 col-md-4 col-xl-3 px-5" >
+        <div className="col-10 col-md-4 col-xl-3 my-4" >
             <div className="d-flex justify-content-center mb-3">
                 <span className="fa-solid fa-star fav-icon" style={getStarStyle(1)}></span>
                 <span className="fa-solid fa-star fav-icon" style={getStarStyle(2)}></span>
@@ -30,9 +40,9 @@ export const Reviews = (props) => {
                 <span className="fa-solid fa-star fav-icon" style={getStarStyle(5)}></span>
             </div>
             <div className="card-review px-2">
-            <h3 className="card-review-h3">User Name</h3>
-            <p className="card-review-p">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit laboriosam saepe soluta molestiae in iste atque quam qui odit rerum enim quae nam amet cupiditate, deserunt modi ullam necessitatibus et.</p>
-            <h5 className="card-review-h5">Product Name</h5>
+            <h3 className="card-review-h3">{userName}</h3> 
+            <p className="card-review-p">{props.comment}</p>
+            <h5 className="card-review-h5">{productName}</h5>
             </div>
         </div>
     </>)

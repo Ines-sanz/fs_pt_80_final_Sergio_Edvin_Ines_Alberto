@@ -1,4 +1,4 @@
-import { act } from "react";
+import { React } from "react";
 
 const getState = ({ getStore, getActions, setStore }) => {
   return {
@@ -11,7 +11,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       isLogged: localStorage.getItem("Token") ? true : false, 
       Token: localStorage.getItem("Token") || null,
       user: JSON.parse(localStorage.getItem("user")) || "",
-      shoppingCart:[]
+      shoppingCart:[],
+      users:[]
     },
     actions: {
 
@@ -219,6 +220,49 @@ const getState = ({ getStore, getActions, setStore }) => {
       } catch (error) {
         alert("Error al conectar con el servidor");
         console.error(error);
+      }
+    },
+
+    getAllReviews: async () => {
+      const store = getStore();
+      const actions = getActions();
+
+      try {
+        const response = await fetch(`${store.url}/api/reviews`, {
+          method: "GET",
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
+          setStore({ reviews: shuffleArray(data) });
+        } else {
+          console.error("Error al cargar las reseñas:", error);
+        }
+      } catch (error) {
+        console.error("Error al cargar las reseñas:", error);
+        alert("Error al conectar con el servidor");
+      }
+    },
+    getAllUsers: async () => {
+      try {
+        const store = getStore();
+        const response = await fetch(`${store.url}/api/users`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          }
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok) {
+          setStore({ users: data });
+        } else {
+          console.error("Error al cargar los usuarios:", data);
+        }
+      } catch (error) {
+        console.error("Error en la solicitud de usuarios:", error);
       }
     },
     },

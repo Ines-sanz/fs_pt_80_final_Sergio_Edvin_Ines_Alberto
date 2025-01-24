@@ -100,9 +100,18 @@ export const Home = () => {
       <section className="my-5 row">
         <h3 className="faq-home-h3">La mejor plataforma para comprar y vender.</h3>
         <p className="faq-home-p">Nuestros clientes nos avalan</p>
-          <div className="row flex-nowrap pt-1">
-              <Reviews/>
+          <div className="row pt-1 d-flex justify-content-center">
+          {store.reviews?.slice(0, 4).map((review) => (
+              <Reviews
+                key={review.id}
+                user_id={review.user_id}
+                rating={review.rating}
+                comment={review.comment}
+                product_id={review.product_id}
+              />
+            ))}
           </div>
+
       </section>
       <div className="divider"></div>
       <section className="row faq-home">
