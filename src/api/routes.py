@@ -570,6 +570,16 @@ def unfollow_user(followed_id):
 
 # User to Review
 
+#todas las review sin jwt para que se carguen en la home 
+@api.route('/reviews', methods=['GET'])
+def get_all_reviews():
+    try:
+        reviews = Reviews.query.all()  
+        return jsonify([r.serialize() for r in reviews]), 200
+    except Exception as error:
+        return jsonify({'error': str(error)}), 400
+
+#reviews del usuario, quiza no sea necesario
 @api.route('/users/reviews', methods=['GET'])
 @jwt_required()
 def get_reviews():
