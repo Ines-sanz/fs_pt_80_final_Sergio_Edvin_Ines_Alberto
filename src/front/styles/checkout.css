@@ -71,18 +71,52 @@ h3 {
 .mt-4 {
   margin-top: 1.5rem;
 }
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .order-summary {
-    padding: 10px;
+.user-info > div {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+ }
+ 
+ .user-info img {
+  width: 175px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 20px;
+ }
+ 
+ @media (max-width: 768px) {
+  .user-info > div {
+    flex-direction: column;
   }
-
-  h2, h3 {
-    font-size: 1.2rem;
+  
+  .user-info img {
+    margin: 0 auto 10px;
   }
+ }
+ .subscription-option {
+ margin: 20px 0;
+ padding: 15px;
+ border: 1px solid #000000;
+ border-radius: 8px;
+ background-color: #4dacd1;
+ color: #000000;
+}
 
-  p {
-    font-size: 0.9rem;
-  }
+.subscription-option label {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+}
+
+.subscription-option p {
+ margin: 0;
+ font-size: 1rem;
+ font-weight: 500;
+}
+
+.subscription-option input[type="checkbox"] {
+ width: 18px;
+ height: 18px;
 }

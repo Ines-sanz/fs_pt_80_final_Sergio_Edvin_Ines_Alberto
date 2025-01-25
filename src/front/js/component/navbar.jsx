@@ -143,7 +143,7 @@ export const Navbar = () => {
             {store.shoppingCart?.reduce((total, item) => total + item.price, 0).toFixed(2)}€
           </div>
           
-          <Link to="/suscripcion" className="shopping-bar-button mt-5">Hacer pedido</Link>
+          <Link to="/checkout" className="shopping-bar-button mt-5">Hacer pedido</Link>
           <div className="divider"></div></div>
         </div>
       </div>

@@ -1,10 +1,21 @@
 import React, { useContext } from "react";
 import { Context } from "../store/appContext";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../styles/suscripcion.css";
 
 export const Suscription = () => {
     const { store, actions } = useContext(Context);
+    const navigate = useNavigate();
+
+    const handleSubscriptionClick = (e) => {
+        e.preventDefault();
+
+        const subscriptionId = "premium";
+        actions.toggleSubscription(subscriptionId);
+
+        navigate("/checkout");
+    };
+
 
     return (
         <>
@@ -12,8 +23,8 @@ export const Suscription = () => {
                 <h2><strong>Conviértete en Premium Boss</strong></h2>
                 <h3 className="h3-suscription">Únete a nuestra comunidad y disfruta de las mejores ventajas.</h3>
             <div className="card-container">
+
                 <div className="card basic">
-                    
                     <div className="circle-icon">
                         <img
                             src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/user.png"
@@ -50,7 +61,14 @@ export const Suscription = () => {
                     </ul>
                     <div className="container">
                     <p><strong className="price">9.99€</strong><span>/mes</span></p>
-                    <Link className="join-btn" to={"/checkout"}><strong>¡Únete!</strong></Link>
+                    <Link
+                     className="join-btn" 
+                     to="/checkout"
+                     onClick={handleSubscriptionClick}
+                    >
+                        <strong>¡Únete!</strong>
+                    </Link>
+
                     </div>
                 </div>
             </div>
