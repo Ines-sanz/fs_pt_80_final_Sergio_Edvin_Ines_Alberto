@@ -7,6 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       consolas: [],
       videojuegos: [],
       accesorios: [],
+      subscriptions: [],
       selectedProduct: null,
       promoted: [],
       isLogged: localStorage.getItem("Token") ? true : false,
@@ -124,12 +125,16 @@ const getState = ({ getStore, getActions, setStore }) => {
                 shoppingCartIds.includes(product.id)
               );
 
-              console.log("Productos en el carrito:", productsInCart);
-              setStore({ shoppingCart: productsInCart });
-            } else {
-              console.log(
-                "Los productos aún no están cargados. userShoppingCart no se ejecutará."
+              const selectedSubscriptions = store.subscriptions.filter(
+                (sub) => store.selectedSubscriptions.includes(sub.id)
               );
+
+              const combinedCart = [...productsInCart, ...selectedSubscriptions];
+
+              console.log("Combined Cart:", combinedCart);
+              setStore({ shoppingCart: combinedCart });
+            } else {
+              console.log("Los productos aún no están cargados. userShoppingCart no se ejecutará.");
             }
           }
         } catch (error) {
@@ -283,6 +288,35 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error en la solicitud de usuarios:", error);
         }
       },
+      loadSubscriptions: async() => {
+        try {
+          const store = getStore();
+          const response = await fetch(`${store.url}/api/subscriptions`)
+          const data = await response.json();
+
+          if (response.ok) {
+            setStore({subscriptions: data});
+          } else{
+            console.error("Error loading suscriptions")
+          }
+        } catch (error) {
+          console.error("Error fetching suscriptions", error)
+        }
+      },
+      toggleSubscription: async(subscripionId) => {
+        const store = getStore();
+        let selectedSubscriptions = [...store.selectedSubscriptions]
+
+        if (selectedSubscriptions.includes(subscripionId)) {
+          selectedSubscriptions = selectedSubscriptions.filter(
+            (id) => id !== subscripionId
+          );
+        } else {
+          selectedSubscriptions.push(subscripionId);
+        }
+        setStore({selectedSubscriptions});
+      },
+      /* termina aqui */
     },
   };
 };
