@@ -93,7 +93,7 @@ export const Checkout = () => {
               )}
             </div>
             {/*end of sending location part */}
-            
+
           </div>
         </div>
       </div>
@@ -116,13 +116,15 @@ export const Checkout = () => {
           <p className="sinproductos">No hay productos en el carrito.</p>
         )}
 
-        <div className="subscription-option">
+          {/* subscription part start */}
+          {!store.user?.subscription && (
+            <div className="subscription-option">
           <label>
             <input
               type="checkbox"
               checked={Boolean(selectedSubscription)}
               onChange={handleSubscriptionToggle}
-            />
+              />
             <p><strong>
 
               Añadir Subscripción Premium (9.99€/mes)
@@ -130,6 +132,9 @@ export const Checkout = () => {
             </p>
           </label>
         </div>
+            )}
+
+        {/* subscription part end */}
 
         <h3 className="total">Total: {calculateTotalPrice().toFixed(2)}€</h3>
       </div>
