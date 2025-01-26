@@ -117,7 +117,7 @@ export const Checkout = () => {
         )}
 
           {/* subscription part start */}
-          {!store.user?.subscription && (
+          {!store.user?.subscription (
             <div className="subscription-option">
           <label>
             <input
