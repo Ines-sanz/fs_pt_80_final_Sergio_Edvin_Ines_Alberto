@@ -62,10 +62,10 @@ export const Checkout = () => {
         )}
       </div>
 
-      <div class="accordion-item">
-        <h2 class="accordion-header">
+      <div className="accordion-item">
+        <h2 className="accordion-header">
           <button
-            class="accordion-button collapsed bg-light text-dark"
+            className="accordion-button collapsed bg-light text-dark"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#flush-collapseOne"
@@ -74,8 +74,8 @@ export const Checkout = () => {
             <h4>Direccion de envio</h4>
           </button>
         </h2>
-        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-          <div class="accordion-body bg-light text-dark">
+        <div id="flush-collapseOne" className="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+          <div className="accordion-body bg-light text-dark">
 
             {/* in bootstrap*/}
             <div className="shipping-address">
