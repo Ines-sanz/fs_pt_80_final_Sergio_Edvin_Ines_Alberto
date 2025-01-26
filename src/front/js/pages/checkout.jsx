@@ -17,7 +17,8 @@ export const Checkout = () => {
     ) || 0;
 
     const subscriptionPrice = selectedSubscription ? 9.99 : 0;
-    return cartTotal + subscriptionPrice;
+    const shippingPrice = (store.user?.subscription || isSubscriptionOnly) ? 0: 7;
+    return cartTotal + subscriptionPrice + shippingPrice;
   };
 
   useEffect(() => {
@@ -32,6 +33,12 @@ export const Checkout = () => {
     }
   }, [store.user]);
 
+  useEffect(() => {
+    if (store.selectedSubscriptions?.includes("premium")) {
+      setSelectedSubscription("premium")
+    }
+  },[]);
+
   const handleSubscriptionToggle = () => {
     if (selectedSubscription) {
       setSelectedSubscription(null);
@@ -41,6 +48,9 @@ export const Checkout = () => {
       actions.toggleSubscription("premium");
     }
   };
+
+  const isSubscriptionOnly = (store.shoppingCart?.length === 0) && 
+  (selectedSubscription || store.selectedSubscriptions?.includes("premium"))
 
   return (
     <div className="container order-summary">
@@ -106,7 +116,7 @@ export const Checkout = () => {
           <ul>
             {store.shoppingCart.map((product, index) => (
               <li className="Card" key={index}>
-                <p>
+                <p className="product-incart">
                   {product.name} - {parseFloat(product.price).toFixed(2)}€
                 </p>
               </li>
@@ -116,25 +126,36 @@ export const Checkout = () => {
           <p className="sinproductos">No hay productos en el carrito.</p>
         )}
 
-          {/* subscription part start */}
-          {!store.user?.subscription && (
-            <div className="subscription-option">
-          <label>
-            <input
-              type="checkbox"
-              checked={Boolean(selectedSubscription)}
-              onChange={handleSubscriptionToggle}
+        {/* subscription part start */}
+        {!store.user?.subscription && (
+          <div className="subscription-option">
+            <label>
+              <input
+                type="checkbox"
+                checked={Boolean(selectedSubscription)}
+                onChange={handleSubscriptionToggle}
               />
-            <p><strong>
+              <p><strong>
 
-              Añadir Subscripción Premium (9.99€/mes)
-            </strong>
-            </p>
-          </label>
-        </div>
-            )}
+                Añadir Suscripción Premium (9.99€/mes)
+              </strong>
+              </p>
+            </label>
+          </div>
+        )}
 
         {/* subscription part end */}
+
+        {!isSubscriptionOnly && (
+          store.user?.subscription ? (
+            <p className="shipping-fee">
+              <span className="text-decoration-line-through text-dark">Gastos de envio: 7.00€</span>
+              <span className="text-success ms-2">Gratis por ser usuario Premium!</span>
+            </p>
+          ) : (
+            <p className="shipping-price">Gastos de envio: 7:00€</p>
+          )
+        )}
 
         <h3 className="total">Total: {calculateTotalPrice().toFixed(2)}€</h3>
       </div>
