@@ -49,6 +49,10 @@
   color: #999;
 }
 
+.product-incart{
+  color: #000;
+}
+
 .order-summary {
   display: flex;
   flex-direction: column;
@@ -99,7 +103,7 @@
  margin: 20px 0;
  padding: 15px;
  background-color: #eeea0fee;
- color: #000000;
+ color: #000;
 }
 
 .subscription-option label {
@@ -117,4 +121,8 @@
 .subscription-option input[type="checkbox"] {
  width: 18px;
  height: 18px;
+}
+
+.shipping-price{
+  color: #000;
 }
