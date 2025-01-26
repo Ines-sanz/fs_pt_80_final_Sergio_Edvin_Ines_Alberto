@@ -45,37 +45,60 @@ export const Checkout = () => {
   return (
     <div className="container order-summary">
 
-<div className="user-info">
-       <h2>Información del Usuario</h2>
-       {store.user && (
-         <div>
-           <img 
-             src={store.user.avatar || '/default-avatar.png'} 
-             alt="User avatar" 
-           />
-           <div>
-             <p>{store.user.userName}</p>
-             <p>{store.user.email}</p>
-             <p>Estado: {store.user.subscription ? 'Premium' : 'Basic'}</p>
-           </div>
-         </div>
-       )}
-     </div>
-      
-     <div className="shipping-address">
-       <h2>Dirección de Envío</h2>
-       {store.user && (
-         <>
-           <p>{store.user.address || 'No address provided'}</p>
-           <p>
-             {[
-               store.user.city,
-               store.user.postalCode,
-             ].filter(Boolean).join(", ")}
-           </p>
-         </>
-       )}
-     </div>
+      <div className="user-info">
+        <h2>Información del Usuario</h2>
+        {store.user && (
+          <div>
+            <img
+              src={store.user.avatar || '/default-avatar.png'}
+              alt="User avatar"
+            />
+            <div>
+              <p>{store.user.userName}</p>
+              <p>{store.user.email}</p>
+              <p>Estado: {store.user.subscription ? 'Premium' : 'Basic'}</p>
+            </div>
+          </div>
+        )}
+      </div>
+
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button
+            class="accordion-button collapsed bg-light text-dark"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#flush-collapseOne"
+            aria-expanded="false"
+            aria-controls="flush-collapseOne">
+            <h4>Direccion de envio</h4>
+          </button>
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+          <div class="accordion-body bg-light text-dark">
+
+            {/* in bootstrap*/}
+            <div className="shipping-address">
+              <h2>Dirección de Envío</h2>
+              {store.user && (
+                <>
+                  <p>{store.user.address || 'No address provided'}</p>
+                  <p>
+                    {[
+                      store.user.city,
+                      store.user.postalCode,
+                    ].filter(Boolean).join(", ")}
+                  </p>
+                </>
+              )}
+            </div>
+            {/*end of sending location part */}
+            
+          </div>
+        </div>
+      </div>
+
+
 
       <div className="product-list">
         <h2>Lista de mis compras</h2>
@@ -95,7 +118,7 @@ export const Checkout = () => {
 
         <div className="subscription-option">
           <label>
-            <input 
+            <input
               type="checkbox"
               checked={Boolean(selectedSubscription)}
               onChange={handleSubscriptionToggle}
@@ -108,7 +131,7 @@ export const Checkout = () => {
           </label>
         </div>
 
-        <h3>Total: {calculateTotalPrice().toFixed(2)}€</h3>
+        <h3 className="total">Total: {calculateTotalPrice().toFixed(2)}€</h3>
       </div>
 
       <div className="container mt-4">
