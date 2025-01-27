@@ -165,30 +165,12 @@ export const Contacto = () => {
                         <div id="flush-collapseEight" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                             <div class="accordion-body bg-dark text-white">
                             <p>La suscripción ofrece una experiencia mejorada, acceso prioritario a ofertas especiales, 
-                            descuentos exclusivos y soporte al cliente prioritario.</p>
+                            envio gratis y soporte al cliente prioritario.</p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button
-                                class="accordion-button collapsed bg-dark text-white"
-                                type="button"
-                                data-bs-toggle="collapse"
-                                data-bs-target="#flush-collapseNine"
-                                aria-expanded="false"
-                                aria-controls="flush-collapseNine">
-                                <h4>¿Qué ventajas tiene la suscripción?</h4>
-                            </button>
-                        </h2>
-                        <div id="flush-collapseNine" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body bg-dark text-white">
-                            <p>La suscripción ofrece una experiencia mejorada, acceso prioritario a ofertas especiales, 
-                            descuentos exclusivos y soporte al cliente prioritario.</p>
-                            </div>
-                        </div>
-                    </div>
+                
 
                     <div class="accordion-item">
                         <h2 class="accordion-header">
