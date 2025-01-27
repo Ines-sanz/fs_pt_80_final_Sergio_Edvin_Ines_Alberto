@@ -44,28 +44,6 @@ body {
     display: block;
 }
 
-.info-label {
-    font-size: 1rem;
-    color: #cccccc;
-    margin-bottom: 0.3rem;
-}
-
-/* Valores resaltados */
-.info-value {
-    font-size: 1.5rem; /* Más grande para resaltar */
-    font-weight: bold;
-    color: white; /* Blanco para destacar */
-    margin-bottom: 1rem;
-}
-
-/* Avatar del vendedor */
-.seller-avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%; /* Avatar circular */
-    object-fit: cover;
-    margin-right: 0.5rem;
-} 
 .product-info p {
     margin-bottom: 2rem; /* Mayor separación entre líneas */
 }
@@ -76,6 +54,26 @@ body {
     margin-left: 1rem;
 }
 
+.info-label {
+    font-size: 1rem;
+    color: #cccccc;
+    margin-bottom: 0.3rem;
+}
+
+.info-value {
+    font-size: 1.5rem; /* Resaltar valores */
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.seller-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Circular */
+    object-fit: cover;
+    margin-right: 0.5rem;
+}
 
 .price-wrapper {
     text-align: right;
