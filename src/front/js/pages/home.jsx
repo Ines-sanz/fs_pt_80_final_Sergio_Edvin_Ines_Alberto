@@ -8,7 +8,7 @@ import { VideogameCard } from "../component/videogame-small-card.jsx";
 import { Reviews } from "../component/reviews.jsx";
 import { GameType } from "../component/random-type.jsx";
 import { LoginModal } from "../component/login-modal.jsx";
-import { PremiumModal } from "../component/premium-modal.jsx";
+//import { PremiumModal } from "../component/premium-modal.jsx";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
@@ -20,7 +20,7 @@ export const Home = () => {
   return (
     <div className="home-container">
        {store.showLoginModal && <LoginModal />}
-        <PremiumModal/>
+        {/* <PremiumModal/> */}
       <section className="home-banners row my-5">
         <figure className=" col-12 col-lg-6">
           {" "}
