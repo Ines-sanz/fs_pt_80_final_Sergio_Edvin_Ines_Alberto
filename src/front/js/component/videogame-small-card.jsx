@@ -37,9 +37,8 @@ export const VideogameCard = (props) => {
     ? store.shoppingCart.some((item) => item.id === props.id)
     : false
   return (<>
-    <div className="col-10 col-md-5 col-xl-4" onClick={handleCardClick}>
-      {/* <img className="img-fluid" src={props.img} alt={props.name} onClick={handleLink} /> */}
-      <div className={isPromoted ? "videogame-sm-bg videogame-sm-promoted" : "videogame-sm-bg"} >
+    <div className="col-10 col-md-5 col-xl-4" >
+      <div className={isPromoted ? "videogame-sm-bg videogame-sm-promoted" : "videogame-sm-bg"} onClick={handleCardClick} >
 
         <img
           className="img-fluid"
@@ -49,8 +48,8 @@ export const VideogameCard = (props) => {
       </div>
 
       <div className="px-0 mt-2">
-        <span className="small-c-brand">{props.brand}</span>
-        <h5 className="small-c-name">{props.name}</h5>
+        <span className="small-c-brand"onClick={handleCardClick}>{props.brand}</span>
+        <h5 className="small-c-name" onClick={handleCardClick}>{props.name}</h5>
         <div className="d-flex justify-content-between">
           <span className="small-c-price">
             {props.price !== undefined && !isNaN(props.price)

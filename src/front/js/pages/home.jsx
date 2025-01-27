@@ -15,7 +15,8 @@ export const Home = () => {
 
   return (
     <div className="home-container">
-      <LoginModal/> <PremiumModal/>
+       {store.showLoginModal && <LoginModal />}
+        <PremiumModal/>
       <section className="home-banners row my-5">
         <figure className=" col-12 col-lg-6">
           {" "}

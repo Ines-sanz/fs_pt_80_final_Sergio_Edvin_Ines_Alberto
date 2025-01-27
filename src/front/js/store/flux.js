@@ -14,7 +14,8 @@ const getState = ({ getStore, getActions, setStore }) => {
       Token: localStorage.getItem("Token") || null,
       user: JSON.parse(localStorage.getItem("user")) || "",
       shoppingCart: [],
-      users: []
+      users: [],
+      setShowLoginModal: false
     },
     actions: {
 
@@ -304,6 +305,14 @@ const getState = ({ getStore, getActions, setStore }) => {
           selectedSubscriptions.push(subscripionId);
         }
         setStore({selectedSubscriptions});
+      },
+
+      setShowLoginModal: (show) => {
+         const store = getStore();
+        setStore({
+          ...store,
+          showLoginModal: show,  
+        });
       },
       /* termina aqui */
     },

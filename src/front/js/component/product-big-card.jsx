@@ -37,9 +37,9 @@ export const ProductBCard = (props) => {
     : false;
 
   return (<>
-    <div className="row d-flex align-items-stretch" onClick={handleCardClick} >
+    <div className="row d-flex align-items-stretch"  >
 
-      <figure className="col-7 product-bg-bg" >
+      <figure className="col-7 product-bg-bg" onClick={handleCardClick}>
         <img
           className="img-fluid"
           src={props.img}
@@ -54,8 +54,8 @@ export const ProductBCard = (props) => {
         </figure>
 
         <div>
-          <span className="big-c-brand">{props.brand}</span>
-          <h5 className="big-c-name">{props.name}</h5>
+          <span className="big-c-brand" onClick={handleCardClick}>{props.brand}</span>
+          <h5 className="big-c-name" onClick={handleCardClick}>{props.name}</h5>
           <div className="d-flex justify-content-between">
             <span className="big-c-price">
               {props.price !== undefined && !isNaN(props.price)
