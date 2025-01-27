@@ -120,7 +120,7 @@ body {
 .__selling_form__ {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem; 
+    gap: 0.5rem; 
 }
 
 .__form_data__ {
