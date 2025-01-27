@@ -21,9 +21,13 @@ font-size: 1.5rem;
 color: #000;
 border-radius: 5px;
 cursor: pointer;
-margin-top: 20px;
+margin-top: 2rem;
+margin-bottom: 2rem;
 transition: background-color 0.3s ease;
 width: 250px; 
+display: block;
+margin-left: auto;
+margin-right: auto;
 }
 
 .btn-stripe:hover {
