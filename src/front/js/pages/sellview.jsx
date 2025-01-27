@@ -1,9 +1,10 @@
-import React, { useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/sellview.css";
 import { useNavigate } from "react-router-dom";
+import { PhotoUpload } from "../component/photoupload.jsx";
 
-import { LoginModal } from "../component/login-modal.jsx";
+//import { LoginModal } from "../component/login-modal.jsx";
 
 export const SellView = () => {
     const { store, actions } = useContext(Context);
@@ -38,64 +39,73 @@ export const SellView = () => {
         navigate("/suscripcion");
     };
 
-    useEffect(() => {
-                        window.scrollTo(0, 0); 
-                        actions.setShowLoginModal(false); 
-                    }, []);
+    const handleSell = () => {
+        // Aquí puedes manejar el envío del formulario junto con la URL de la foto cargada
+        console.log("Foto cargada:", uploadedPhoto);
+        // Resto de lógica para enviar el formulario
+    };
 
- 
+    // useEffect(() => {
+    //                     window.scrollTo(0, 0); 
+    //                     actions.setShowLoginModal(false); 
+    //                 }, []);
+
+
     return (
         <div className="sell-container">
-            {store.showLoginModal && <LoginModal />}
-            <section className="sell-header">
+            {/*{store.showLoginModal && <LoginModal />*/}
+            <section className="text-center mb-4">
                 <h1 className="title">¡Empieza a vender!</h1>
                 <p className="subtitle">Fácil y rápido, con total seguridad. Garantía Final Boss.</p>
             </section>
 
-            <section className="row __image__">
-                <div className="col-md-4 __photo__">
+            <section className="row align-items-center mb-4">
+                <div className="col-md-4 d-flex justify-content-center">
                     <PhotoUpload onUploadSuccess={setUploadedPhoto} />
                 </div>
-                <div className="col-md-8 __details__">
-                    <p className="upload-text">
+                <div className="col-md-8 d-flex flex-column justify-content-center">
+                    <p className="mb-3">
                         Sube tu foto, añade los datos y empieza a vender. Recuerda que puedes promocionar hasta dos
                         artículos sin coste extra con tu suscripción.
                     </p>
-                    <div className="button-group">
-                        <button className="promote_button">Promocionar</button>
-                        <button className="premium_button" onClick={handleGoToPremium}>Go to Premium</button>
+                    <div className="d-flex gap-2">
+                        <button className="btn btn-primary px-4 __promote_button__">Promocionar</button>
+                        <button className="btn btn-success px-4 __premium_button__" onClick={handleGoToPremium}>Go to Premium</button>
                     </div>
                 </div>
             </section>
 
-            <section className="__form_section__">
-                <form className="__selling_form__">
-                    <div className="__form_data__">
-                        <div className="col-md-6 __form_group__">
-                            <label htmlFor="name">Nombre</label>
+            <section className="bg-dark text-light p-4 rounded">
+                <form className="d-flex flex-column gap-4">
+                    <div className="row">
+                        <div className="col-md-6 d-flex flex-column __form_properties__">
+                            <label htmlFor="name" className="mb-2">Nombre</label>
                             <input
                                 type="text"
+                                className="form-control"
                                 id="name"
                                 placeholder="Nombre"
                             />
                         </div>
                         <div className="col-md-6">
-                            <div className="__form_data_horizontal__">
-                                <div className="__form_group__">
-                                    <label htmlFor="category">Categoría</label>
+                            <div className="row g-2">
+                                <div className="col-6 d-flex flex-column __form_properties__">
+                                    <label htmlFor="category" className="mb-2">Categoría</label>
                                     <select
+                                        className="form-select"
                                         id="category"
-                                        onChange={(e) => updateTypeOptions(e.target.value)}
-                                    >
+                                        onChange={(e) => updateTypeOptions(e.target.value)}>
                                         <option value="">Selecciona</option>
                                         <option value="consola">Consola</option>
                                         <option value="juego">Juego</option>
                                         <option value="accesorio">Accesorio</option>
                                     </select>
                                 </div>
-                                <div className="__form_group__">
-                                    <label htmlFor="state">Estado</label>
-                                    <select id="state">
+                                <div className="col-6 d-flex flex-column __form_properties__">
+                                    <label htmlFor="state" className="mb-2">Estado</label>
+                                    <select
+                                        className="form-select"
+                                        id="state">
                                         <option value="">Selecciona</option>
                                         <option value="nuevo">Nuevo</option>
                                         <option value="usado">Usado</option>
@@ -104,36 +114,39 @@ export const SellView = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="__form_data__">
-                        <div className="__form_group__">
-                            <label htmlFor="brand">Marca</label>
+                    <div className="row">
+                        <div className="col-md-6 d-flex flex-column __form_properties__">
+                            <label htmlFor="brand" className="mb-2">Marca</label>
                             <input
                                 type="text"
+                                className="form-control"
                                 id="brand"
                                 placeholder="Marca"
                             />
                         </div>
-                        <div className="__form_group__">
-                            <label htmlFor="year">Año</label>
+                        <div className="col-md-6 d-flex flex-column __form_properties__">
+                            <label htmlFor="year" className="mb-2">Año</label>
                             <input
                                 type="text"
+                                className="form-control"
                                 id="year"
                                 placeholder="Año"
                             />
                         </div>
                     </div>
-                    <div className="__form_data__">
-                        <div className="__form_group__">
-                            <label htmlFor="platform">Plataforma</label>
+                    <div className="row">
+                        <div className="col-md-6 d-flex flex-column __form_properties__">
+                            <label htmlFor="platform" className="mb-2">Plataforma</label>
                             <input
                                 type="text"
+                                className="form-control"
                                 id="platform"
                                 placeholder="Plataforma"
                             />
                         </div>
-                        <div className="__form_group__">
-                            <label htmlFor="type">Tipo</label>
-                            <select id="type">
+                        <div className="col-md-6 d-flex flex-column __form_properties__">
+                            <label htmlFor="type" className="mb-2">Tipo</label>
+                            <select id="type" className="form-select">
                                 <option value="">Selecciona</option>
                                 {typeOptions.map((option, index) => (
                                     <option key={index} value={option}>
@@ -143,29 +156,29 @@ export const SellView = () => {
                             </select>
                         </div>
                     </div>
-                    <div className="__form_group__">
-                        <label htmlFor="description">Descripción</label>
+                    <div className="d-flex flex-column __form_properties__">
+                        <label htmlFor="description" className="mb-2">Descripción</label>
                         <textarea
                             id="description"
+                            className="form-control"
                             placeholder="Escribe una descripción..."
+                            rows="3"
                         ></textarea>
                     </div>
-                    <div className="__price_group__">
-                        <label htmlFor="price">Precio</label>
+                    <div className="d-flex flex-column w-50">
+                        <label htmlFor="price" className="mb-2">Precio</label>
                         <input
                             type="number"
+                            className="price-input"
                             id="price"
-                            min="0"
-                            step="0.01"
                             placeholder="€uros"
                         />
                     </div>
-                    <div className="button-wrapper">
+                    <div className="d-flex justify-content-center __sell_button__">
                         <button
                             type="button"
-                            className="__sell_button__"
-                            onClick={handleSell}
-                        >
+                            className="btn btsell px-5"
+                            onClick={handleSell}>
                             Vender
                         </button>
                     </div>
