@@ -14,25 +14,44 @@ export const VideogameCard = (props) => {
   };
 
   const handleFav = (e) => {
-    e.stopPropagation()
-    const newFav = {
-      user_id: store.user.id,
-      product_id: props.id,
-    };
-    actions.toggleFav(newFav);
-  };
+    e.stopPropagation();
+    if (!store.isLogged) {
+      if (!store.showLoginModal) {
+        actions.setShowLoginModal(true);
+      }else {
+        alert("Debes iniciar sesión para añadir artículos a favoritos");
+      }
+    } else {
   
-  const isFavorite = store.user?.favorites?.some((fav) => 
-    fav === props.id) || false;
-
-  const handleShopping = () => {
+      const newFav = {
+        user_id: store.user.id,
+        product_id: props.id,
+      };
+      actions.toggleFav(newFav);
+    }
+  };
+const handleShopping = () => {
+  if (!store.isLogged) {
+    if (!store.showLoginModal) {
+      
+      actions.setShowLoginModal(true); 
+    } else {
+      alert("Debes iniciar sesión para añadir artículos al carrito");
+    }
+  } else {
+   
     const newShoppingItem = {
       user_id: store.user.id,
       product_id: props.id,
     };
     actions.toggleCart(newShoppingItem);
-  };
+  }
+};
   
+  const isFavorite = store.user?.favorites?.some((fav) => 
+    fav === props.id) || false;
+
+
   const isInShopping = store.shoppingCart
     ? store.shoppingCart.some((item) => item.id === props.id)
     : false

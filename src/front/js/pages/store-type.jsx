@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext.js";
 import { useParams } from "react-router";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ import { ProductCard } from "../component/product-small-card.jsx";
 import { ProductBCard } from "../component/product-big-card.jsx"
 import { VideogameCard } from "../component/videogame-small-card.jsx";
 import { AllType } from "../component/all-type.jsx";
+import { LoginModal } from "../component/login-modal.jsx";
 
 
 export const CategoryPage = () => {
@@ -19,8 +20,14 @@ export const CategoryPage = () => {
         navigate(`/store/${category}`);
     };
 
+     useEffect(() => {
+                    window.scrollTo(0, 0); 
+                    actions.setShowLoginModal(false); 
+                }, []);
+
     return (
         <div className="home-container">
+            {store.showLoginModal && <LoginModal />}
             <div className="row d-flex justify-content-center my-5 icons-store">
                 <figure className="col-4 col-lg-2">
                     <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/c_thumb,w_200,g_face/v1737114585/icons-store-20_wbf0e6.png" alt="Consolas" className={category == "consolas" ? "selected img-fluid" : "img-fluid "} onClick={() => handleCategoryClick("consolas")} />

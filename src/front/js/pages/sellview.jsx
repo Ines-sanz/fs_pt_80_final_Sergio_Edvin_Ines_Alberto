@@ -1,7 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect} from "react";
 import { Context } from "../store/appContext";
 import "../../styles/sellview.css";
 import { useNavigate } from "react-router-dom";
+
+import { LoginModal } from "../component/login-modal.jsx";
 
 export const SellView = () => {
     const { store, actions } = useContext(Context);
@@ -35,9 +37,15 @@ export const SellView = () => {
         navigate("/suscripcion");
     };
 
+    useEffect(() => {
+                        window.scrollTo(0, 0); 
+                        actions.setShowLoginModal(false); 
+                    }, []);
 
+ 
     return (
         <div className="sell-container">
+            {store.showLoginModal && <LoginModal />}
             <section className="sell-header">
                 <h1 className="title">¡Empieza a vender!</h1>
                 <p className="subtitle">Fácil y rápido, con total seguridad. Garantía Final Boss.</p>

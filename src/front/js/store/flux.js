@@ -15,7 +15,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: JSON.parse(localStorage.getItem("user")) || "",
       shoppingCart: [],
       users: [],
-      setShowLoginModal: false
+    
     },
     actions: {
 
@@ -307,11 +307,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         setStore({selectedSubscriptions});
       },
 
-      setShowLoginModal: (show) => {
+      setShowLoginModal: (value) => {
          const store = getStore();
         setStore({
           ...store,
-          showLoginModal: show,  
+          showLoginModal: value
         });
       },
       /* termina aqui */

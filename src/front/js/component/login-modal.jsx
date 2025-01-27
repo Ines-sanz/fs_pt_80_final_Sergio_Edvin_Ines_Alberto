@@ -30,9 +30,6 @@ export const LoginModal = () => {
     }
   }, [store.showLoginModal]); 
 
-  if (!store.showLoginModal) {
-    return null; 
-  }
 
   return (
     <div className="modal fade" id="loginModal" tabIndex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
