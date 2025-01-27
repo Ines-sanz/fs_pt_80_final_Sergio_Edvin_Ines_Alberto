@@ -57,7 +57,7 @@ export const Suscription = () => {
                         <li className="bulleted-list d-flex flex-start">• Envíos gratuitos</li>
                         <li className="bulleted-list d-flex flex-start">• Mejora de la visibilidad de tus productos</li>
                         <li className="bulleted-list d-flex flex-start">• Acceso anticipado a contenido exclusivo</li>
-                        <li className="bulleted-list d-flex flex-start">• Soporte mejorado y soporte 24 horas al día, 7 días a la semana</li>
+                        <li className="bulleted-list d-flex flex-start">• Soporte mejorado incluyendo servicio 24 horas al día, 7 días a la semana</li>
                     </ul>
                     <div className="container">
                     <p><strong className="price">9.99€</strong><span>/mes</span></p>
