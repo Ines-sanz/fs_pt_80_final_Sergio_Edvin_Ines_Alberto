@@ -13,31 +13,51 @@ export const VideogameCard = (props) => {
     navigate(`/product/${props.id}`);
   };
 
-  const handleFav = () => {
-    const newFav = {
-      user_id: store.user.id,
-      product_id: props.id,
-    };
-    actions.toggleFav(newFav);
+  const handleFav = (e) => {
+    e.stopPropagation();
+    if (!store.isLogged) {
+      if (!store.showLoginModal) {
+        actions.setShowLoginModal(true);
+      }else {
+        alert("Debes iniciar sesión para añadir artículos a favoritos");
+      }
+    } else {
+  
+      const newFav = {
+        user_id: store.user.id,
+        product_id: props.id,
+      };
+      actions.toggleFav(newFav);
+    }
   };
-  const isFavorite = store.user && store.user.favorites
-    ? store.user.favorites.some((fav) => fav === props.id)
-    : false
-
-  const handleShopping = () => {
+const handleShopping = () => {
+  if (!store.isLogged) {
+    if (!store.showLoginModal) {
+      
+      actions.setShowLoginModal(true); 
+    } else {
+      alert("Debes iniciar sesión para añadir artículos al carrito");
+    }
+  } else {
+   
     const newShoppingItem = {
       user_id: store.user.id,
       product_id: props.id,
     };
     actions.toggleCart(newShoppingItem);
-  };
+  }
+};
+  
+  const isFavorite = store.user?.favorites?.some((fav) => 
+    fav === props.id) || false;
+
+
   const isInShopping = store.shoppingCart
     ? store.shoppingCart.some((item) => item.id === props.id)
     : false
   return (<>
-    <div className="col-10 col-md-5 col-xl-4" onClick={handleCardClick}>
-      {/* <img className="img-fluid" src={props.img} alt={props.name} onClick={handleLink} /> */}
-      <div className={isPromoted ? "videogame-sm-bg videogame-sm-promoted" : "videogame-sm-bg"} >
+    <div className="col-10 col-md-5 col-xl-4" >
+      <div className={isPromoted ? "videogame-sm-bg videogame-sm-promoted" : "videogame-sm-bg"} onClick={handleCardClick} >
 
         <img
           className="img-fluid"
@@ -47,8 +67,8 @@ export const VideogameCard = (props) => {
       </div>
 
       <div className="px-0 mt-2">
-        <span className="small-c-brand">{props.brand}</span>
-        <h5 className="small-c-name">{props.name}</h5>
+        <span className="small-c-brand"onClick={handleCardClick}>{props.brand}</span>
+        <h5 className="small-c-name" onClick={handleCardClick}>{props.name}</h5>
         <div className="d-flex justify-content-between">
           <span className="small-c-price">
             {props.price !== undefined && !isNaN(props.price)
@@ -64,9 +84,7 @@ export const VideogameCard = (props) => {
               <span className="fa-solid fa-star fav-icon" style={{ opacity: isFavorite ? 1 : 0.4, }} onClick={handleFav}></span>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   </>)

@@ -2,7 +2,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  font-family: Arial, sans-serif;
+
 }
 
 .shipping-address,
@@ -11,7 +11,7 @@
   border: 1px solid #ddd;
   padding: 15px;
   border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
 .shipping-address h2,
@@ -22,7 +22,7 @@
 }
 
 .shipping-address p {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: #555;
   line-height: 1.6;
 }
@@ -49,6 +49,10 @@
   color: #999;
 }
 
+.product-incart{
+  color: #000;
+}
+
 .order-summary {
   display: flex;
   flex-direction: column;
@@ -62,7 +66,7 @@
   border-radius: 8px;
 }
 
-h3 {
+.total {
   margin-top: 15px;
   font-size: 1.2rem;
   color: #000;
@@ -71,18 +75,54 @@ h3 {
 .mt-4 {
   margin-top: 1.5rem;
 }
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .order-summary {
-    padding: 10px;
+.user-info > div {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: space-between;
+ }
+ 
+ .user-info img {
+  width: 175px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-left: 20px;
+ }
+ 
+ @media (max-width: 768px) {
+  .user-info > div {
+    flex-direction: column;
   }
-
-  h2, h3 {
-    font-size: 1.2rem;
+  
+  .user-info img {
+    margin: 0 auto 10px;
   }
+ }
+ .subscription-option {
+ margin: 20px 0;
+ padding: 15px;
+ background-color: #eeea0fee;
+ color: #000;
+}
 
-  p {
-    font-size: 0.9rem;
-  }
+.subscription-option label {
+ display: flex;
+ align-items: center;
+ gap: 10px;
+}
+
+.subscription-option p {
+ margin: 0;
+ font-size: 1rem;
+ font-weight: 500;
+}
+
+.subscription-option input[type="checkbox"] {
+ width: 18px;
+ height: 18px;
+}
+
+.shipping-price{
+  color: #000;
 }

@@ -26,6 +26,8 @@ export const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    actions.userShoppingCart()
+    actions.setShowLoginModal(false); 
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -45,7 +47,7 @@ export const Navbar = () => {
 
   console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido");
   console.log(store);
-  console.log(store.shoppingCart)
+  console.log("ShoppingCart------->",store.shoppingCart)
   return (
     <>
       {/* Offcanvas del menú */}
@@ -143,7 +145,7 @@ export const Navbar = () => {
             {store.shoppingCart?.reduce((total, item) => total + item.price, 0).toFixed(2)}€
           </div>
           
-          <Link to="/suscripcion" className="shopping-bar-button mt-5">Hacer pedido</Link>
+          <Link to="/checkout" className="shopping-bar-button mt-5">Hacer pedido</Link>
           <div className="divider"></div></div>
         </div>
       </div>

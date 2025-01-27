@@ -7,13 +7,15 @@ const getState = ({ getStore, getActions, setStore }) => {
       consolas: [],
       videojuegos: [],
       accesorios: [],
+      subscriptions: [],
       selectedProduct: null,
       promoted: [],
       isLogged: localStorage.getItem("Token") ? true : false,
       Token: localStorage.getItem("Token") || null,
       user: JSON.parse(localStorage.getItem("user")) || "",
       shoppingCart: [],
-      users: []
+      users: [],
+    
     },
     actions: {
 
@@ -101,39 +103,25 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       userShoppingCart: async () => {
-
+        const store = getStore();
+        const url = `${store.url}/api/shopping-cart`; 
         try {
-          const store = getStore();
-
-          if (store.user) {
-            const shoppingCartIds =  await store.user.shoppingCart
-
-            console.log("IDs del carrito:", shoppingCartIds);
-
-            if (
-              store.consolas.length > 0 &&
-              store.videojuegos.length > 0 &&
-              store.accesorios.length > 0
-            ) {
-              const allProducts = [
-                ...store.consolas,
-                ...store.videojuegos,
-                ...store.accesorios,
-              ];
-              const productsInCart = allProducts.filter((product) =>
-                shoppingCartIds.includes(product.id)
-              );
-
-              console.log("Productos en el carrito:", productsInCart);
-              setStore({ shoppingCart: productsInCart });
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${store.Token}`,
+                },
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                setStore({ shoppingCart: data.shopping_cart_products }); 
             } else {
-              console.log(
-                "Los productos aún no están cargados. userShoppingCart no se ejecutará."
-              );
+                console.error("Error al obtener el carrito de compras:", response.status);
             }
-          }
         } catch (error) {
-          console.error("Error al cargar los productos del carrito:", error);
+            console.error("Error al conectar con el servidor:", error);
         }
       },
       loadInfo: async () => {
@@ -184,29 +172,36 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       toggleFav: async (newFav) => {
         const store = getStore();
-        console.log("Datos enviados a favoritos:", newFav)
-        try {
-          const response = await fetch(`${store.url}/api/favorites`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${store.Token}`
-            },
-            body: JSON.stringify(newFav),
-          });
+        if (!store.Token) {
+          alert("Debes iniciar sesión para añadir favoritos.");
+          return;
+        }
+        console.log("Datos enviados a favoritos:", newFav);
 
-          const data = await response.json();
-          if (response.ok) {
-            console.log("Respuesta del servidor:", data);
-            const updatedFavorites = data.updatedFavorites || [];
-            const user = { ...store.user, favorites: updatedFavorites };
-            setStore({ user });
-          } else {
-            alert(data.msg || "Error al manejar favoritos");
-          }
+        try {
+            const response = await fetch(`${store.url}/api/favorites`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: store.Token ? `Bearer ${store.Token}` : "",
+                },
+                body: JSON.stringify(newFav),
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                console.log("Respuesta del servidor:", data);
+                const updatedFavorites = data.updatedFavorites || [];
+                const user = { ...store.user, favorites: updatedFavorites };
+                setStore({ user });
+            } else {
+                alert(data.msg || "Error al manejar favoritos");
+                console.error("Error del servidor:", data);
+            }
         } catch (error) {
-          alert("Error al conectar con el servidor");
-          console.error(error);
+            alert("Error al conectar con el servidor");
+            console.error("Error de red:", error);
         }
       },
       toggleCart: async (newShoppingItem) => {
@@ -283,6 +278,43 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error en la solicitud de usuarios:", error);
         }
       },
+      loadSubscriptions: async() => {
+        try {
+          const store = getStore();
+          const response = await fetch(`${store.url}/api/subscriptions`)
+          const data = await response.json();
+
+          if (response.ok) {
+            setStore({subscriptions: data});
+          } else{
+            console.error("Error loading suscriptions")
+          }
+        } catch (error) {
+          console.error("Error fetching suscriptions", error)
+        }
+      },
+      toggleSubscription: async(subscripionId) => {
+        const store = getStore();
+        let selectedSubscriptions = [...store.selectedSubscriptions]
+
+        if (selectedSubscriptions.includes(subscripionId)) {
+          selectedSubscriptions = selectedSubscriptions.filter(
+            (id) => id !== subscripionId
+          );
+        } else {
+          selectedSubscriptions.push(subscripionId);
+        }
+        setStore({selectedSubscriptions});
+      },
+
+      setShowLoginModal: (value) => {
+         const store = getStore();
+        setStore({
+          ...store,
+          showLoginModal: value
+        });
+      },
+      /* termina aqui */
     },
   };
 };
