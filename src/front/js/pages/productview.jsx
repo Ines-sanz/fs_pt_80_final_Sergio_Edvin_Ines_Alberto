@@ -1,49 +1,96 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 import "../../styles/productview.css";
 
 export const ProductView = () => {
+    const { id } = useParams();
     const { store, actions } = useContext(Context);
+    const [product, setProduct] = useState(null);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const fetchedProduct = await actions.getProductById(id);
+            setProduct(fetchedProduct);
+        };
+        fetchProduct();
+    }, [id]);
+
+    if (!product) {
+        return <p>Cargando producto...</p>;
+    }
 
     return (
         <div className="product-container">
-            <section className="product-header">
-                <div className="row row-product">
-                    <div className="product-body">
-                        <div className="col-md-6 product-title">
-                            <p className="brand">Nintendo</p>
-                            <h1 className="product-name mb-3">Nintendo GameCube</h1>
-                        </div>
-                        <div className="product-image">
-                            <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1735397962/GameCube-Set_vokzkr.jpg" alt="Producto" />
+            <section className="__product_header__">
+                <div className="row align-items-center">
+                    {/* Columna izquierda */}
+                    <div className="col-md-6 d-flex flex-column align-items-start">
+                        <p className="brand">{product.brand}</p>
+                        <h1 className="product-name">{product.name}</h1>
+                        <div className="d-flex justify-content-center mt-3">
+                            <img
+                                src={product.img}
+                                alt={product.name}
+                                className="img-fluid product-image"
+                            />
                         </div>
                     </div>
+                    {/* Columna derecha */}
                     <div className="col-md-6 product-info">
-                        <p><strong>Año:</strong> 2001</p>
-                        <p><strong>Estado:</strong> Used</p>
-                        <p><strong>Plataforma:</strong> Game Cube</p>
-                        <p><strong>Tipo:</strong> Sobremesa</p>
-                        <p><strong>Vendido por:</strong> Machete</p>
-                        <div className="rating">
-                            <span>⭐⭐⭐⭐☆</span>
-                        </div>
-                        <div className="product-price">
-                            <p>Precio</p>
-                            <p className="price-value">90€</p>
+                        <div className="row">
+                            <div className="col-6">
+                                <p className="info-label">Año:</p>
+                                <p className="info-value">{product.year}</p>
+                            </div>
+                            <div className="col-6">
+                                <p className="info-label">Estado:</p>
+                                <p className="info-value">{product.state ? "Nuevo" : "Usado"}</p>
+                            </div>
+                            <div className="col-12">
+                                <p className="info-label">Plataforma:</p>
+                                <p className="info-value">{product.platform}</p>
+                            </div>
+                            <div className="col-12">
+                                <p className="info-label">Tipo:</p>
+                                <p className="info-value">{product.type}</p>
+                            </div>
+                            <div className="col-12 d-flex align-items-start mb-4">
+                                <p className="info-label">Vendido por:</p>
+                                <div className="d-flex align-items-col ms-2">
+                                    <img
+                                        src={"URl Avatar"}
+                                        className="seller-avatar"
+                                    />
+                                    <span className="ms-2">{"Usuario"}</span>
+                                </div>
+                            </div>
+                            <div className="col-12 d-flex justify-content-between align-items-center">
+                                <span className="rating">⭐⭐⭐⭐☆</span>   {/* Poner Ratting según experiecnias del User*/}
+                                <div className="product-price">
+                                    <p className="price-value">{product.price.toFixed(2)}€</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </section >
-
-            <section className="product-description">
-                <p>
-                    La Nintendo GameCube es una consola que destacó por sus juegos exclusivos y su diseño compacto. Ideal para\nFans de Nintendo que quieren revivir una consola muy querida.
-                </p>
             </section>
 
-            <section className="product-button">
-                <button className="buy-button">Comprar</button>
+            <section className="product-description mt-4">
+                <div className="row">
+                    <div className="col-12">
+                        <p>{product.description}</p>
+                    </div>
+                </div>
             </section>
-        </div >
+
+            <section className="product-button mt-4">
+                <div className="row">
+                    <div className="col-12 d-flex justify-content-center">
+                        <button className="btn btn-warning">Comprar</button>
+                    </div>
+                </div>
+            </section>
+        </div>
     );
 };

@@ -70,8 +70,8 @@ export const Perfil = () => {
                     <h2>Favoritos</h2>
                     <div className="horizontal-scrollable">
                         <div className="row flex-nowrap pt-1">
-                            {store.favoriteProducts?.length > 0 ? (
-                                store.favoriteProducts.map((product) => (
+                            {store.favorites?.length > 0 ? (
+                                store.favorites.map((product) => (
                                     <div key={product.id} className="favorite-item-log">
                                         <img src={product.img} alt={product.name} className="favorite-img-log" />
                                         <p>{product.name}</p>
