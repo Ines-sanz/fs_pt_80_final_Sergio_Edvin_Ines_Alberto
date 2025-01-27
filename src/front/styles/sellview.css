@@ -1,7 +1,6 @@
 body {
     font-family: "Kode Mono", sans-serif;
     background-color: black;
-    color:white;
 }
 
 .sell-container {
@@ -22,17 +21,6 @@ body {
     font-size: 1.2rem;
 }
 
-.__image__ {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 2rem;
-    
-}
-
-.__details__{
-    justify-content:right ;
-}
 
 .photo-upload {
     display: flex;
@@ -41,7 +29,7 @@ body {
     text-align: center;
 }
 
-.__image_placeholder__ {
+.__image__ {
     width: 15rem; 
     height: 15rem; 
     background-color:rgb(67, 64, 64);
@@ -58,24 +46,12 @@ body {
     width: 50;
 }
 
-.plus {
-    font-size: 2rem;
-    color: white;
-}
-
-.upload-details {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem; 
-}
-
 .upload-text {
     margin-bottom: 10px;
     font-size: 1rem;
 }
 
-.promote_button {
+.__promote_button__ {
     background-color: rgb(19, 126, 241);
     border: none;
     color: white;
@@ -87,13 +63,12 @@ body {
     transition: transform 0.2s ease;
 }
 
-
-.promote_button:hover {
+.__promote_button__:hover {
     background-color: rgb(3, 49, 157);
     transform: scale(1.09);
 }
 
-.premium_button {
+.__premium_button__ {
     background-color: rgba(20, 245, 17, 0.887);
     border: none;
     color: white;
@@ -104,100 +79,81 @@ body {
     transition: transform 0.2s ease;
 }
 
-
-.premium_button:hover {
+.__premium_button__:hover {
     background-color:green;
     transform: scale(1.09);
 }
 
-
-.__form_section__ {
-    background-color: rgba(18, 18, 18, 0.88);
-    padding: 2rem; 
-    border-radius: 0.5rem; 
+.__form_properties__ {
+    border-radius: 40px;
 }
 
-.__selling_form__ {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem; 
-}
-
-.__form_data__ {
-    display: flex;
-    gap: 1.5rem; 
-}
-
-.__form_group__ {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    border-radius: 40px; 
-}
-
-label {
-    font-size: 1rem;
-    margin-bottom: 0.5rem; 
-}
-
-.__form_data_horizontal__ {
-    display: flex;
-    gap: 1rem; 
-    justify-content: space-between; 
-}
-
-
-.__form_data_horizontal__ .__form_group__{
-    flex: 1;
-}
-
-input, select {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-input, select, textarea {
-    background-color:rgb(76, 74, 74);
+.form-control {
+    background-color: rgb(76, 74, 74);
     border: none;
-    color: white;
-    padding: 1rem; 
-    border-radius: 2rem; 
     font-size: 1rem;
+    border-radius: 2rem;
+    color: white;
 }
 
-textarea {
-    resize: none;
+.form-control:focus {
+    background-color: rgb(105, 105, 105); 
+    color: whitesmoke;
+    outline: none; 
 }
 
-.__price_group__{
-    width: 20%;
-    ;
-
+.form-select {
+    background-color: rgb(76, 74, 74);
+    border: none;
+    color: rgb(182, 177, 177);
+    font-size: 1rem;
+    border-radius: 2rem;
 }
+
+.form-select:focus {
+    background-color: rgb(105, 105, 105); 
+    color: whitesmoke;
+    outline: none; 
+}
+
+.price-input {
+    background-color: rgb(0, 140, 255);
+    border: none;
+    color: white; 
+    padding: 1rem 1rem; 
+    border-radius: 15px; 
+    text-align: center;
+    max-width: 150px; 
+    font-size: 0.9rem; 
+}
+
+.price-input::placeholder {
+    color: rgb(19, 27, 111); 
+    font-weight: bold;
+}
+
+.price-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.75);
+}
+
 
 .__sell_button__ {
     background-color: rgb(240, 228, 5);
     border: none;
     color: black;
-    padding: 1rem 2rem; 
+    padding: 0.5rem 1.5rem; 
     border-radius: 0.5rem;
     cursor: pointer;
-    font-size: 1.5rem;
     margin: 0 auto;
-    display: block;
     transition: transform 0.2s ease;
 }
 
 .__sell_button__:hover {
     background-color: rgb(228, 196, 15);
-    justify-content: center;
-    transform: scale(1.25);
-    
+    transform: scale(1.10);
 }
 
-input[type="number"] {
-    background-color: rgb(19, 126, 241); 
-    border: none; 
+.btn_sell {
+    font-size: 1.5rem;
 }

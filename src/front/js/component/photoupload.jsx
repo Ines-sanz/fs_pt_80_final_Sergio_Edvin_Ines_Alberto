@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../../styles/photoupload.css";
 
 export const PhotoUpload = ({ onUploadSuccess }) => {
     const [selectedFile, setSelectedFile] = useState(null);
@@ -44,8 +45,8 @@ export const PhotoUpload = ({ onUploadSuccess }) => {
 
     return (
         <div className="photo-upload">
-            <label htmlFor="photo-input" className="__image_placeholder__">
-                <span className="plus">+</span>
+            <label htmlFor="photo-input" className="__image__">
+                 <span class="fa-solid fa-plus"></span>
             </label>
             <input
                 type="file"
@@ -55,7 +56,7 @@ export const PhotoUpload = ({ onUploadSuccess }) => {
             />
             <button
                 onClick={handleUpload}
-                className="btn btn-primary mt-3"
+                className="btn btn-color mt-3"
                 disabled={uploading}
             >
                 {uploading ? "Subiendo..." : "Subir Foto"}
