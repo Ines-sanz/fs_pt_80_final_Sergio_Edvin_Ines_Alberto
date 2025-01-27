@@ -102,43 +102,25 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       userShoppingCart: async () => {
-
+        const store = getStore();
+        const url = `${store.url}/api/shopping-cart`; 
         try {
-          const store = getStore();
-
-          if (store.user) {
-            const shoppingCartIds =  await store.user.shoppingCart
-
-            console.log("IDs del carrito:", shoppingCartIds);
-
-            if (
-              store.consolas.length > 0 &&
-              store.videojuegos.length > 0 &&
-              store.accesorios.length > 0
-            ) {
-              const allProducts = [
-                ...store.consolas,
-                ...store.videojuegos,
-                ...store.accesorios,
-              ];
-              const productsInCart = allProducts.filter((product) =>
-                shoppingCartIds.includes(product.id)
-              );
-
-              const selectedSubscriptions = store.subscriptions.filter(
-                (sub) => store.selectedSubscriptions.includes(sub.id)
-              );
-
-              const combinedCart = [...productsInCart, ...selectedSubscriptions];
-
-              console.log("Combined Cart:", combinedCart);
-              setStore({ shoppingCart: combinedCart });
+            const response = await fetch(url, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${store.Token}`,
+                },
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                setStore({ shoppingCart: data.shopping_cart_products }); 
             } else {
-              console.log("Los productos aún no están cargados. userShoppingCart no se ejecutará.");
+                console.error("Error al obtener el carrito de compras:", response.status);
             }
-          }
         } catch (error) {
-          console.error("Error al cargar los productos del carrito:", error);
+            console.error("Error al conectar con el servidor:", error);
         }
       },
       loadInfo: async () => {
@@ -212,7 +194,6 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const updatedFavorites = data.updatedFavorites || [];
                 const user = { ...store.user, favorites: updatedFavorites };
                 setStore({ user });
-                alert("Favorito actualizado correctamente.");
             } else {
                 alert(data.msg || "Error al manejar favoritos");
                 console.error("Error del servidor:", data);
