@@ -184,29 +184,37 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       toggleFav: async (newFav) => {
         const store = getStore();
-        console.log("Datos enviados a favoritos:", newFav)
-        try {
-          const response = await fetch(`${store.url}/api/favorites`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${store.Token}`
-            },
-            body: JSON.stringify(newFav),
-          });
+        if (!store.Token) {
+          alert("Debes iniciar sesión para añadir favoritos.");
+          return;
+        }
+        console.log("Datos enviados a favoritos:", newFav);
 
-          const data = await response.json();
-          if (response.ok) {
-            console.log("Respuesta del servidor:", data);
-            const updatedFavorites = data.updatedFavorites || [];
-            const user = { ...store.user, favorites: updatedFavorites };
-            setStore({ user });
-          } else {
-            alert(data.msg || "Error al manejar favoritos");
-          }
+        try {
+            const response = await fetch(`${store.url}/api/favorites`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: store.Token ? `Bearer ${store.Token}` : "",
+                },
+                body: JSON.stringify(newFav),
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                console.log("Respuesta del servidor:", data);
+                const updatedFavorites = data.updatedFavorites || [];
+                const user = { ...store.user, favorites: updatedFavorites };
+                setStore({ user });
+                alert("Favorito actualizado correctamente.");
+            } else {
+                alert(data.msg || "Error al manejar favoritos");
+                console.error("Error del servidor:", data);
+            }
         } catch (error) {
-          alert("Error al conectar con el servidor");
-          console.error(error);
+            alert("Error al conectar con el servidor");
+            console.error("Error de red:", error);
         }
       },
       toggleCart: async (newShoppingItem) => {

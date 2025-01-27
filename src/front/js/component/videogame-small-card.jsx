@@ -13,16 +13,17 @@ export const VideogameCard = (props) => {
     navigate(`/product/${props.id}`);
   };
 
-  const handleFav = () => {
+  const handleFav = (e) => {
+    e.stopPropagation()
     const newFav = {
       user_id: store.user.id,
       product_id: props.id,
     };
     actions.toggleFav(newFav);
   };
-  const isFavorite = store.user && store.user.favorites
-    ? store.user.favorites.some((fav) => fav === props.id)
-    : false
+  
+  const isFavorite = store.user?.favorites?.some((fav) => 
+    fav === props.id) || false;
 
   const handleShopping = () => {
     const newShoppingItem = {
@@ -31,6 +32,7 @@ export const VideogameCard = (props) => {
     };
     actions.toggleCart(newShoppingItem);
   };
+  
   const isInShopping = store.shoppingCart
     ? store.shoppingCart.some((item) => item.id === props.id)
     : false
@@ -64,9 +66,7 @@ export const VideogameCard = (props) => {
               <span className="fa-solid fa-star fav-icon" style={{ opacity: isFavorite ? 1 : 0.4, }} onClick={handleFav}></span>
             </div>
           </div>
-
         </div>
-
       </div>
     </div>
   </>)
