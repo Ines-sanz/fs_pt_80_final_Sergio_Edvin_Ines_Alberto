@@ -2,10 +2,12 @@ import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/sellview.css";
 import { useNavigate } from "react-router-dom";
+import { PhotoUpload } from "../component/photoupload.jsx";
 
 export const SellView = () => {
     const { store, actions } = useContext(Context);
     const [typeOptions, setTypeOptions] = useState([]);
+    const [uploadedPhoto, setUploadedPhoto] = useState("");
     const navigate = useNavigate();
 
     // Función para actualizar las opciones de "Tipo" según la categoría seleccionada
@@ -35,6 +37,12 @@ export const SellView = () => {
         navigate("/suscripcion");
     };
 
+    const handleSell = () => {
+        // Aquí puedes manejar el envío del formulario junto con la URL de la foto cargada
+        console.log("Foto cargada:", uploadedPhoto);
+        // Resto de lógica para enviar el formulario
+    };
+
 
     return (
         <div className="sell-container">
@@ -45,16 +53,8 @@ export const SellView = () => {
 
             <section className="row __image__">
                 <div className="col-md-4 __photo__">
-                    <label htmlFor="photo-input" className="__image_placeholder__">
-                        <span className="plus">+</span>
-                    </label>
-                    <input
-                        type="file"
-                        className="photo-input"
-                        id="photo-input"
-                    />
+                    <PhotoUpload onUploadSuccess={setUploadedPhoto} />
                 </div>
-
                 <div className="col-md-8 __details__">
                     <p className="upload-text">
                         Sube tu foto, añade los datos y empieza a vender. Recuerda que puedes promocionar hasta dos
@@ -163,7 +163,7 @@ export const SellView = () => {
                         <button
                             type="button"
                             className="__sell_button__"
-                            
+                            onClick={handleSell}
                         >
                             Vender
                         </button>
