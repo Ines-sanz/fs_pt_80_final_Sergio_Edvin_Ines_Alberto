@@ -14,32 +14,52 @@ export const ProductBCard = (props) => {
 
   const handleFav = (e) => {
     e.stopPropagation();
-    const newFav = {
-      user_id: store.user.id,
-      product_id: props.id,
-    };
-    actions.toggleFav(newFav);
+    if (!store.isLogged) {
+      if (!store.showLoginModal) {
+        actions.setShowLoginModal(true);
+      }else {
+        alert("Debes iniciar sesión para añadir artículos a favoritos");
+      }
+    } else {
+  
+      const newFav = {
+        user_id: store.user.id,
+        product_id: props.id,
+      };
+      actions.toggleFav(newFav);
+    }
   };
-  const isFavorite = store.user && store.user.favorites
-    ? store.user.favorites.some((fav) => fav === props.id)
-    : false;
-
-  const handleShopping = () => {
+const handleShopping = () => {
+  if (!store.isLogged) {
+    if (!store.showLoginModal) {
+      
+      actions.setShowLoginModal(true); 
+    } else {
+      alert("Debes iniciar sesión para añadir artículos al carrito");
+    }
+  } else {
+   
     const newShoppingItem = {
       user_id: store.user.id,
       product_id: props.id,
     };
     actions.toggleCart(newShoppingItem);
-  };
+  }
+};
+  const isFavorite = store.user && store.user.favorites
+    ? store.user.favorites.some((fav) => fav === props.id)
+    : false;
+
+ 
 
   const isInShopping = store.shoppingCart
     ? store.shoppingCart.some((item) => item.id === props.id)
     : false;
 
   return (<>
-    <div className="row d-flex align-items-stretch" onClick={handleCardClick} >
+    <div className="row d-flex align-items-stretch"  >
 
-      <figure className="col-7 product-bg-bg" >
+      <figure className="col-7 product-bg-bg" onClick={handleCardClick}>
         <img
           className="img-fluid"
           src={props.img}
@@ -54,8 +74,8 @@ export const ProductBCard = (props) => {
         </figure>
 
         <div>
-          <span className="big-c-brand">{props.brand}</span>
-          <h5 className="big-c-name">{props.name}</h5>
+          <span className="big-c-brand" onClick={handleCardClick}>{props.brand}</span>
+          <h5 className="big-c-name" onClick={handleCardClick}>{props.name}</h5>
           <div className="d-flex justify-content-between">
             <span className="big-c-price">
               {props.price !== undefined && !isNaN(props.price)

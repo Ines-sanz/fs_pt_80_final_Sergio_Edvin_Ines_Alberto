@@ -27,6 +27,7 @@ export const Navbar = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     actions.userShoppingCart()
+    actions.setShowLoginModal(false); 
 
     return () => {
       window.removeEventListener("scroll", handleScroll);

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Context } from "../store/appContext";
 import { Link } from "react-router-dom";
 import "../../styles/home.css";
@@ -12,10 +12,15 @@ import { PremiumModal } from "../component/premium-modal.jsx";
 
 export const Home = () => {
   const { store, actions } = useContext(Context);
+   useEffect(() => {
+                      window.scrollTo(0, 0); 
+                      actions.setShowLoginModal(false); 
+                  }, []);
 
   return (
     <div className="home-container">
-      <LoginModal/> <PremiumModal/>
+       {store.showLoginModal && <LoginModal />}
+        <PremiumModal/>
       <section className="home-banners row my-5">
         <figure className=" col-12 col-lg-6">
           {" "}

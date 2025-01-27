@@ -5,6 +5,7 @@ import "../../styles/store.css";
 
 import { ProductCard } from "../component/product-small-card.jsx";
 import { VideogameCard } from "../component/videogame-small-card.jsx";
+import { LoginModal } from "../component/login-modal.jsx";
 
 
 
@@ -18,11 +19,12 @@ export const Store = () => {
     };
 
     useEffect(() => {
-                window.scrollTo(0, 0); 
-            }, []);
-
+        actions.setShowLoginModal(false); 
+      }, []);
     return (
+        
         <div className="home-container">
+            {store.showLoginModal && <LoginModal />}
             <div className="row d-flex justify-content-center my-5 icons-store">
                 <figure className="col-4 col-lg-2">
                     <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/c_thumb,w_200,g_face/v1737114585/icons-store-20_wbf0e6.png" alt="Consolas" onClick={() => handleCategoryClick("consolas")} className="img-fluid" />
