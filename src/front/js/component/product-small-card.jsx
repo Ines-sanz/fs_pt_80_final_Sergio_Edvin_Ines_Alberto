@@ -13,7 +13,8 @@ export const ProductCard = (props) => {
     navigate(`/product/${props.id}`);
   };
 
-  const handleFav = () => {
+  const handleFav = (e) => {
+    e.stopPropagation()
     const newFav = {
         user_id: store.user.id, 
         product_id: props.id,
@@ -28,13 +29,12 @@ const handleShopping = () => {
   actions.toggleCart(newShoppingItem);
 };
 
-const isFavorite = store.user && store.user.favorites
-? store.user.favorites.some((fav) => fav === props.id)
-: false
+const isFavorite = store.user?.favorites?.some((fav) =>
+   fav === props.id) || false;
   
 const isInShopping = store.shoppingCart 
 ? store.shoppingCart.some((item) => item.id === props.id)
-: false
+: false;
 
   return (<>
     <div className="col-10 col-md-6 col-xl-4" onClick={handleCardClick} >

@@ -12,7 +12,8 @@ export const ProductBCard = (props) => {
     navigate(`/product/${props.id}`);
   };
 
-  const handleFav = () => {
+  const handleFav = (e) => {
+    e.stopPropagation();
     const newFav = {
       user_id: store.user.id,
       product_id: props.id,
@@ -21,17 +22,20 @@ export const ProductBCard = (props) => {
   };
   const isFavorite = store.user && store.user.favorites
     ? store.user.favorites.some((fav) => fav === props.id)
-    : false
-    const handleShopping = () => {
-      const newShoppingItem = {
-          user_id: store.user.id, 
-          product_id: props.id,
-      };
-      actions.toggleCart(newShoppingItem);
+    : false;
+
+  const handleShopping = () => {
+    const newShoppingItem = {
+      user_id: store.user.id,
+      product_id: props.id,
     };
-    const isInShopping = store.shoppingCart 
-? store.shoppingCart.some((item) => item.id === props.id)
-: false
+    actions.toggleCart(newShoppingItem);
+  };
+
+  const isInShopping = store.shoppingCart
+    ? store.shoppingCart.some((item) => item.id === props.id)
+    : false;
+
   return (<>
     <div className="row d-flex align-items-stretch" onClick={handleCardClick} >
 
@@ -59,13 +63,18 @@ export const ProductBCard = (props) => {
                 : "N/A"}
             </span>
             <div className="d-flex align-items-center">
-            <span className="fa-solid fa-plus plus-icon" style={{
-    opacity: isInShopping ? 1 : 0.4,
-    color: isInShopping ? "#15a3f5" : "#FFFFFF" 
-  }} onClick={handleShopping}></span>
-              <span className="fa-solid fa-star fav-icon" style={{ opacity: isFavorite ? 1 : 0.4, }} onClick={handleFav}></span></div>
-          </div></div>
-
+              <span className="fa-solid fa-plus plus-icon" style={{
+                opacity: isInShopping ? 1 : 0.4,
+                color: isInShopping ? "#15a3f5" : "#FFFFFF"
+              }} onClick={handleShopping}></span>
+              <span
+                className="fa-solid fa-star fav-icon"
+                style={{ opacity: isFavorite ? 1 : 0.4, }}
+                onClick={handleFav}>
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </>)
