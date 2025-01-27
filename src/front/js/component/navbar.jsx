@@ -26,6 +26,7 @@ export const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
+    actions.userShoppingCart()
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -45,7 +46,7 @@ export const Navbar = () => {
 
   console.log("Usuario:", store.user ? store.user.userName : "Usuario no definido");
   console.log(store);
-  console.log(store.shoppingCart)
+  console.log("ShoppingCart------->",store.shoppingCart)
   return (
     <>
       {/* Offcanvas del menú */}
