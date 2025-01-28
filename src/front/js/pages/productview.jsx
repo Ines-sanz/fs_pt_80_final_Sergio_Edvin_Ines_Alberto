@@ -87,7 +87,17 @@ export const ProductView = () => {
             <section className="product-button mt-4">
                 <div className="row">
                     <div className="col-12 d-flex justify-content-center">
-                        <button className="btn btn-warning">Comprar</button>
+                        <button
+                            className="btn btn-warning"
+                            onClick={() => {
+                                const newShoppingItem = {
+                                    user_id: store.user.id,
+                                    product_id: product.id,
+                                };
+                                actions.toggleCart(newShoppingItem);
+                            }}>
+                            Comprar
+                        </button>
                     </div>
                 </div>
             </section>
