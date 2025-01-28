@@ -16,6 +16,14 @@ export const ProductView = () => {
         fetchProduct();
     }, [id]);
 
+    const handleAddToCart = () => {
+        const newShoppingItem = {
+            user_id: store.user.id,
+            product_id: product.id,
+        };
+        actions.toggleCart(newShoppingItem);
+    };
+
     if (!product) {
         return <p>Cargando producto...</p>;
     }
@@ -59,10 +67,10 @@ export const ProductView = () => {
                                 <p className="info-label">Vendido por:</p>
                                 <div className="d-flex align-items-col ms-2">
                                     <img
-                                        src={"URl Avatar"}
+                                        src={"https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/premium-user.png"}
                                         className="seller-avatar"
                                     />
-                                    <span className="ms-2">{"Usuario"}</span>
+                                    <span className="ms-2">{"SerZeMat"}</span>
                                 </div>
                             </div>
                             <div className="col-12 d-flex justify-content-between align-items-center">
@@ -87,7 +95,9 @@ export const ProductView = () => {
             <section className="product-button mt-4">
                 <div className="row">
                     <div className="col-12 d-flex justify-content-center">
-                        <button className="btn btn-warning">Comprar</button>
+                        <button className="btn btn-warning" onClick={handleAddToCart}>
+                            Comprar
+                        </button>
                     </div>
                 </div>
             </section>

@@ -4,6 +4,16 @@ import "../../styles/perfil.css";
 
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
+    const [userData, setUserData] = useState(null);
+
+    useEffect(() => {
+        if (store.isLogged && store.user) {
+            setUserData(store.user); // Asegúrate de que `store.user` no sea null
+            actions.getFavorites();
+        }
+    }, [store.isLogged, store.user]);
+    
+
 
     // Estado para controlar si se muestra "Registrarse" o "Login"
     const [isRegister, setIsRegister] = useState(false);
@@ -26,6 +36,75 @@ export const Perfil = () => {
             window.scrollTo(0, 0); 
         }, []);
 
+
+    if (store.isLogged && userData) {
+        return (
+            <div className="profile-container-log">
+                <div className="profile-header-log">
+                    <div className="profile-avatar-container-log">
+                        <img
+                            src={userData.avatar || "https://via.placeholder.com/150"}
+                            alt="Avatar del usuario"
+                            className="profile-avatar-log"
+                        />
+                    </div>
+                    <div className="profile-info-log">
+                        <h1 className="profile-name-log">{userData.userName}</h1>
+                        <p className="profile-email-log">{userData.email}</p>
+                        <p className="profile-address-log">
+                            {userData.address}, {userData.city} ({userData.postalCode})
+                        </p>
+                        <div className="profile-stats-log">
+                            <span className="followers-log">{userData.followed_by.length} Seguidores</span>
+                            <span className="following-log">{userData.following_users.length} Seguidos</span>
+                        </div>
+                    </div>
+                </div>
+                <div className="profile-description-log">
+                    <p>{userData.description || "Descripción no proporcionada."}</p>
+                    {!userData.subscription && (
+                        <button className="btn-premium-log">Go Premium</button>
+                    )}
+                </div>
+                <div className="profile-section-log">
+                    <h2>Favoritos</h2>
+                    <div className="horizontal-scrollable">
+                        <div className="row flex-nowrap pt-1">
+                            {store.favorites?.length > 0 ? (
+                                store.favorites.map((product) => (
+                                    <div key={product.id} className="favorite-item-log">
+                                        <img src={product.img} alt={product.name} className="favorite-img-log" />
+                                        <p>{product.name}</p>
+                                        <span>{product.price} €</span>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No tienes productos favoritos.</p>
+                            )}
+                        </div>
+                    </div>
+                </div>
+
+                <div className="profile-section-log">
+                    <h2>Escaparate</h2>
+                    <div className="showcase-container-log">
+                        {userData.products?.length > 0 ? (
+                            userData.products.map((product) => (
+                                <div key={product.id} className="showcase-item-log">
+                                    <img src={product.img} alt={product.name} className="showcase-img-log" />
+                                    <p>{product.name}</p>
+                                    <span>{product.price} €</span>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No tienes productos en tu escaparate.</p>
+                        )}
+                    </div>
+                </div>
+            </div>
+        );
+    }
+        
     return (
         <div className="container-fluid min-vh-100">
             <div className="row h-100">

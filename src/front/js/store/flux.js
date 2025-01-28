@@ -3,7 +3,6 @@ import { React } from "react";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      url: `${process.env.BACKEND_URL}`,
       consolas: [],
       videojuegos: [],
       accesorios: [],
@@ -104,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       userShoppingCart: async () => {
         const store = getStore();
-        const url = `${store.url}/api/shopping-cart`; 
+        const url = `${process.env.BACKEND_URL}/api/shopping-cart`; 
         try {
             const response = await fetch(url, {
                 method: "GET",
@@ -124,10 +123,11 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error al conectar con el servidor:", error);
         }
       },
+      
       loadInfo: async () => {
         try {
           const store = getStore();
-          const url = `${store.url}/api/products`;
+          const url = `${process.env.BACKEND_URL}/api/products`;
           const response = await fetch(url);
           const data = await response.json();
 
@@ -157,7 +157,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       getProductById: async (id) => {
         try {
           const store = getStore();
-          const response = await fetch(`${store.url}/api/product/${id}`);
+          const response = await fetch(`${process.env.BACKEND_URL}/api/product/${id}`);
           if (response.ok) {
             const data = await response.json();
             return data[0];
@@ -179,7 +179,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("Datos enviados a favoritos:", newFav);
 
         try {
-            const response = await fetch(`${store.url}/api/favorites`, {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/favorites`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -209,7 +209,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const actions = getActions();
         console.log("Datos enviados al carrito:", newShoppingItem);
         try {
-          const response = await fetch(`${store.url}/api/shopping_cart`, {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/shopping_cart`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -241,7 +241,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         const actions = getActions();
 
         try {
-          const response = await fetch(`${store.url}/api/reviews`, {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/reviews`, {
             method: "GET",
           });
 
@@ -260,7 +260,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       getAllUsers: async () => {
         try {
           const store = getStore();
-          const response = await fetch(`${store.url}/api/users`, {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -281,7 +281,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       loadSubscriptions: async() => {
         try {
           const store = getStore();
-          const response = await fetch(`${store.url}/api/subscriptions`)
+          const response = await fetch(`${process.env.BACKEND_URL}/api/subscriptions`)
           const data = await response.json();
 
           if (response.ok) {
@@ -313,6 +313,84 @@ const getState = ({ getStore, getActions, setStore }) => {
           ...store,
           showLoginModal: value
         });
+      },
+
+      getFavorites: async () => {
+        const store = getStore();
+        const actions = getActions();
+      
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/favorites`, {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${store.Token}`,
+                    "Content-Type": "application/json",
+                },
+            });
+          
+            if (response.ok) {
+                const data = await response.json();
+                // const favoriteIds = data.favorites.map((fav) => fav.product_id);
+            
+                // // Llamar al action para obtener detalles de cada producto
+                // const favoriteProducts = await Promise.all(
+                //     favoriteIds.map(async (productId) => {
+                //         return await actions.getProductDetails(productId);
+                //     })
+                // );
+              
+                setStore({ favorites: data.favorite_products }); // Guardar los detalles de los productos favoritos
+            } else {
+                console.error("Error al obtener favoritos:", response.statusText);
+            }
+        } catch (error) {
+            console.error("Error al conectar con el servidor:", error);
+        }
+      },
+
+      getProductDetails: async (productId) => {
+        const store = getStore();
+      
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/product/${productId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+          
+            if (response.ok) {
+                const data = await response.json();
+                return data[0]; // El endpoint devuelve un array, seleccionamos el primer elemento
+            } else {
+                console.error(`Error al obtener el producto ${productId}:`, response.statusText);
+            }
+        } catch (error) {
+            console.error(`Error al conectar con el servidor para el producto ${productId}:`, error);
+        }
+       },
+      
+
+      getUserProfile: async (userId) => {
+        const store = getStore();
+      
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/users/${userId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+          
+            if (response.ok) {
+                const userData = await response.json();
+                return userData; // Devuelve los datos del usuario
+            } else {
+                console.error(`Error al obtener el perfil del usuario ${userId}:`, response.statusText);
+            }
+        } catch (error) {
+            console.error(`Error al conectar con el servidor para el usuario ${userId}:`, error);
+        }
       },
       /* termina aqui */
     },
