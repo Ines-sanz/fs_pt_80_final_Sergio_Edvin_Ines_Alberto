@@ -103,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       userShoppingCart: async () => {
         const store = getStore();
-        const url = `${process.env.BACKEND_URL}/api/shopping_cart`; 
+        const url = `${process.env.BACKEND_URL}/api/shopping-cart`; 
         try {
             const response = await fetch(url, {
                 method: "GET",
@@ -115,7 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     
             if (response.ok) {
                 const data = await response.json();
-                setStore({ shoppingCart: data.cart_items }); 
+                setStore({ shoppingCart: data.shopping_cart_products }); 
             } else {
                 console.error("Error al obtener el carrito de compras:", response.status);
             }
@@ -259,23 +259,23 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getAllUsers: async () => {
         try {
-            const store = getStore();
-            const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
-    
-            const data = await response.json();
-    
-            if (response.ok) {
-                setStore({ users: data }); // Guarda la lista en el estado global
-            } else {
-                console.error("Error al cargar los usuarios:", data);
+          const store = getStore();
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
             }
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            setStore({ users: data });
+          } else {
+            console.error("Error al cargar los usuarios:", data);
+          }
         } catch (error) {
-            console.error("Error en la solicitud de usuarios:", error);
+          console.error("Error en la solicitud de usuarios:", error);
         }
       },
       loadSubscriptions: async() => {
@@ -392,33 +392,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error(`Error al conectar con el servidor para el usuario ${userId}:`, error);
         }
       },
-
-      followUser: async (userId) => {
-        try {
-            const store = getStore();
-    
-            const response = await fetch(`${process.env.BACKEND_URL}/api/users/follow`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${store.Token}` // Agregamos el token JWT
-                },
-                body: JSON.stringify({
-                    followed_id: userId, // Solo enviamos `followed_id`, ya que el backend obtiene `follower_id` del token JWT
-                }),
-            });
-    
-            if (response.ok) {
-                console.log(`Usuario ${userId} seguido correctamente.`);
-            } else {
-                const errorData = await response.json();
-                console.error("Error al seguir al usuario:", errorData);
-            }
-        } catch (error) {
-            console.error("Error de red:", error);
-        }
-    }
-    
       /* termina aqui */
     },
   };
