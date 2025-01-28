@@ -426,23 +426,17 @@ def remove_from_favorite(product_id):
 @jwt_required()
 def get_favorites():
     try:
-        #extract user from the request
-        id = get_jwt_identity()
-        user = Users.query.get(id)  
-
-        # validate required field
+        user_id = get_jwt_identity()
+        user = Users.query.get(user_id)
         if not user:
-            return jsonify({'msg':'User ID is required'}), 400
-        
-        #brin all favorite products for the user
-        favorites = Favorites.query.filter_by(user_id=id).all()
-        favorites_list = [{'id': fav.id, 'product_id':fav.product_id} for fav in favorites]
-
-        return jsonify({'favorites': favorites_list}), 200
+            return jsonify({'msg': 'User not found'}), 404
+        favorites = Favorites.query.filter_by(user_id=user_id).all()
+        favorite_product_ids = [favorite.product_id for favorite in favorites]
+        favorite_products = Products.query.filter(Products.id.in_(favorite_product_ids)).all()
+        favorite_products_list = [product.serialize() for product in favorite_products]
+        return jsonify({'favorite_products': favorite_products_list}), 200
     except Exception as error:
-        return jsonify({'error': str(error)}), 400
-    
-
+        return jsonify({'error': str(error)}), 500
 
 
     ##··········································································Cómo USER en CHECKOUT:

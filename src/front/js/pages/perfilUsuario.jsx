@@ -9,6 +9,9 @@ export const PerfilUsuario = () => {
     const { userId } = useParams(); // Obtener el ID del usuario desde la URL
     const [userData, setUserData] = useState(null); // Estado local para los datos del usuario
     const [favoritesDetails, setFavoritesDetails] = useState([]);
+    
+
+
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -45,7 +48,7 @@ export const PerfilUsuario = () => {
                     <h1 className="profile-name-log">{userData.userName}</h1>
                     <p className="profile-email-log">{userData.email}</p>
                     <p className="profile-address-log">
-                        {userData.address}, {userData.city} ({userData.postalCode})
+                        {userData.description}
                     </p>
                     <div className="profile-stats-log">
                         <span className="followers-log">{userData.followed_by.length} Seguidores</span>
