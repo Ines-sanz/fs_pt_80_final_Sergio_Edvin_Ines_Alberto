@@ -59,7 +59,7 @@ export const ProductView = () => {
                                 <p className="info-label">Vendido por:</p>
                                 <div className="d-flex align-items-col ms-2">
                                     <img
-                                        src={"https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/premium-user.png"}
+                                        src={"URl Avatar"}
                                         className="seller-avatar"
                                     />
                                     <span className="ms-2">{"Usuario"}</span>
@@ -87,16 +87,7 @@ export const ProductView = () => {
             <section className="product-button mt-4">
                 <div className="row">
                     <div className="col-12 d-flex justify-content-center">
-                        <button
-                            className="btn btn-warning"
-                            onClick={() => {
-                                const newShoppingItem = {
-                                    user_id: store.user.id, 
-                                    product_id: product.id, 
-                                };
-                                actions.toggleCart(newShoppingItem); }}>
-                            Comprar
-                        </button>
+                        <button className="btn btn-warning">Comprar</button>
                     </div>
                 </div>
             </section>
