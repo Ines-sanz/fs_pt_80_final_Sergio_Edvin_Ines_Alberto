@@ -69,7 +69,6 @@ export const SellView = () => {
                         artículos sin coste extra con tu suscripción.
                     </p>
                     <div className="d-flex gap-2">
-                        <button className="btn btn-primary px-4 __promote_button__">Promocionar</button>
                         <button className="btn btn-success px-4 __premium_button__" onClick={handleGoToPremium}>Go to Premium</button>
                     </div>
                 </div>
@@ -177,7 +176,7 @@ export const SellView = () => {
                     <div className="d-flex justify-content-center __sell_button__">
                         <button
                             type="button"
-                            className="btn btsell px-5"
+                            className="btn bt_sell px-5"
                             onClick={handleSell}>
                             Vender
                         </button>
