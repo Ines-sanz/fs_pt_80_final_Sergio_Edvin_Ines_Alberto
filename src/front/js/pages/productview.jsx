@@ -59,7 +59,7 @@ export const ProductView = () => {
                                 <p className="info-label">Vendido por:</p>
                                 <div className="d-flex align-items-col ms-2">
                                     <img
-                                        src={"https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/premium-user.png"}
+                                        src={"URl Avatar"}
                                         className="seller-avatar"
                                     />
                                     <span className="ms-2">{"Usuario"}</span>
@@ -91,10 +91,11 @@ export const ProductView = () => {
                             className="btn btn-warning"
                             onClick={() => {
                                 const newShoppingItem = {
-                                    user_id: store.user.id, 
-                                    product_id: product.id, 
+                                    user_id: store.user.id,
+                                    product_id: product.id,
                                 };
-                                actions.toggleCart(newShoppingItem); }}>
+                                actions.toggleCart(newShoppingItem);
+                            }}>
                             Comprar
                         </button>
                     </div>
