@@ -391,6 +391,29 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error(`Error al conectar con el servidor para el usuario ${userId}:`, error);
         }
       },
+
+      followUser: async (userId) => {
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/users/follow`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    follower_id: getStore().user.id, // Usuario actual
+                    followed_id: userId, // Usuario a seguir
+                }),
+            });
+    
+            if (response.ok) {
+                console.log(`Usuario ${userId} seguido correctamente.`);
+            } else {
+                console.error("Error al seguir al usuario.");
+            }
+        } catch (error) {
+            console.error("Error de red:", error);
+        }
+      }
       /* termina aqui */
     },
   };

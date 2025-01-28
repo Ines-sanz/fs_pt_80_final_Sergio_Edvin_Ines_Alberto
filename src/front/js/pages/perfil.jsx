@@ -5,13 +5,50 @@ import "../../styles/perfil.css";
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
     const [userData, setUserData] = useState(null);
+    const [showUserList, setShowUserList] = useState(false); // Estado para mostrar la lista de usuarios
+    const [users, setUsers] = useState([]); // Estado para almacenar la lista de usuarios
+
 
     useEffect(() => {
         if (store.isLogged && store.user) {
-            setUserData(store.user); // Asegúrate de que `store.user` no sea null
+            setUserData(store.user);
             actions.getFavorites();
         }
     }, [store.isLogged, store.user]);
+
+     // Función para obtener usuarios desde la API
+     const fetchUsers = async () => {
+        try {
+            const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setUsers(data); // Guardamos la lista de usuarios en el estado
+            } else {
+                console.error("Error al obtener la lista de usuarios");
+            }
+        } catch (error) {
+            console.error("Error de red:", error);
+        }
+    };
+
+    // Función para manejar el clic en el botón "+ Usuarios"
+    const handleShowUserList = async () => {
+        console.log("Clic en + Usuarios"); // Confirmar que la función se ejecuta
+    
+        if (!showUserList) {
+            console.log("Cargando usuarios desde la API...");
+            await fetchUsers();
+        }
+    
+        setShowUserList(!showUserList);
+    };
+    
     
 
 
@@ -36,6 +73,11 @@ export const Perfil = () => {
             window.scrollTo(0, 0); 
         }, []);
 
+    useEffect(() => {
+        console.log("Estado de showUserList:", showUserList);
+    }, [showUserList]);
+        
+
 
     if (store.isLogged && userData) {
         return (
@@ -57,9 +99,43 @@ export const Perfil = () => {
                         <div className="profile-stats-log">
                             <span className="followers-log">{userData.followed_by.length} Seguidores</span>
                             <span className="following-log">{userData.following_users.length} Seguidos</span>
+                            <button 
+                                className="btn btn-primary user-list-btn" 
+                                onClick={handleShowUserList} // Llamamos a la función correctamente
+                            >
+                                + Usuarios
+                            </button> 
                         </div>
                     </div>
                 </div>
+
+                {/* Modal de lista de usuarios */}
+                {showUserList && (
+                    <div className="user-list-modal">
+                        <h3 className="modal-title">Lista de Usuarios</h3>
+                        <button className="close-modal" onClick={handleShowUserList}>X</button>
+                        <div className="user-list">
+                            {users.length > 0 ? (
+                                users.map((user) => (
+                                    <div key={user.id} className="user-item">
+                                        <img src={user.img || "default-avatar.png"} alt={user.userName} className="user-avatar"/>
+                                        <div className="user-info">
+                                            <h5>{user.userName}</h5>
+                                            <p>{user.itemsForSale || 0} artículos en venta</p>
+                                            <button className="btn btn-follow" onClick={() => actions.followUser(user.id)}>
+                                                Seguir +
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No hay usuarios disponibles.</p>
+                            )}
+                        </div>
+                    </div>
+                )}
+
+
                 <div className="profile-description-log">
                     <p>{userData.description || "Descripción no proporcionada."}</p>
                     {!userData.subscription && (
