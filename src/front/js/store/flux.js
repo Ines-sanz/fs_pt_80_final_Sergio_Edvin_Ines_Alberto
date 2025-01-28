@@ -383,6 +383,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           
             if (response.ok) {
                 const userData = await response.json();
+                if (userId === store.user.id) {
+                  setStore({ user: userData });
+                  localStorage.setItem("user", JSON.stringify(userData)); // Actualiza el localStorage
+                } 
                 return userData; // Devuelve los datos del usuario
             } else {
                 console.error(`Error al obtener el perfil del usuario ${userId}:`, response.statusText);
@@ -416,7 +420,30 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
             console.error("Error de red:", error);
         }
-    }
+      },
+      
+      unfollowUser: async (userId) => {
+        try {
+            const store = getStore();
+            const response = await fetch(`${process.env.BACKEND_URL}/api/users/unfollow/${userId}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${store.Token}` // Agregamos el token JWT
+                },
+            });
+    
+            if (response.ok) {
+                console.log(`Usuario ${userId} dejado de seguir correctamente.`);
+            } else {
+                const errorData = await response.json();
+                console.error("Error al dejar de seguir al usuario:", errorData);
+            }
+        } catch (error) {
+            console.error("Error de red:", error);
+        }
+      },
+    
     
       /* termina aqui */
     },

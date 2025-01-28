@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/perfil.css";
+import { Link } from "react-router-dom";
 
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
@@ -34,18 +35,34 @@ export const Perfil = () => {
      const fetchUsers = async () => {
         console.log("Cargando usuarios desde el action getAllUsers...");
         await actions.getAllUsers(); // Llama al action en flux.js
-        setUsers(store.users); // Asigna la lista de usuarios al estado local
+        const allUsers = store.users; // Lista global de usuarios desde el store
+    
+        const updatedUserData = await actions.getUserProfile(store.user.id); // Sincronizar perfil del usuario
+        setFollowedUsers(new Set(updatedUserData.following_users.map(user => user.id))); // Actualizar seguidos
+        setUsers(allUsers); // Asigna la lista de usuarios al estado local
     };
+    
 
     const handleFollowUser = async (userId) => {
-        await actions.followUser(userId); // Llama a la API para seguir al usuario
-        
-        setFollowedUsers(prev => new Set(prev).add(userId)); // Actualiza visualmente
-        setUserData(prev => ({
-            ...prev,
-            following_users: [...prev.following_users, { id: userId }] // Agrega el usuario a la lista de seguidos en local
-        }));
+        if (followedUsers.has(userId)) {
+            // Si ya está seguido, lo dejamos de seguir
+            await actions.unfollowUser(userId);
+            setFollowedUsers(prev => {
+                const updated = new Set(prev);
+                updated.delete(userId);
+                return updated;
+            });
+        } else {
+            // Si no está seguido, lo seguimos
+            await actions.followUser(userId);
+            setFollowedUsers(prev => new Set(prev).add(userId));
+        }
+    
+        // Refrescar el perfil del usuario actual después de seguir o dejar de seguir
+        const updatedUserData = await actions.getUserProfile(store.user.id);
+        setUserData(updatedUserData);
     };
+    
     
 
     useEffect(() => {
@@ -55,15 +72,16 @@ export const Perfil = () => {
 
     // Función para manejar el clic en el botón "+ Usuarios"
     const handleShowUserList = async () => {
-        console.log("Clic en + Usuarios"); // Confirmar que la función se ejecuta
-    
+        console.log("Clic en + Usuarios");
         if (!showUserList) {
-            console.log("Cargando usuarios desde la API...");
-            await fetchUsers();
+            // Sincronizar usuarios y seguidores desde el backend
+            const updatedUserData = await actions.getUserProfile(store.user.id);
+            setFollowedUsers(new Set(updatedUserData.following_users.map(user => user.id))); // Actualiza los seguidos
+            await fetchUsers(); // Actualiza la lista de usuarios
         }
-    
-        setShowUserList(!showUserList);
+        setShowUserList(!showUserList); // Cambia el estado para mostrar/ocultar la lista
     };
+    
     
 
     // Estado para controlar si se muestra "Registrarse" o "Login"
@@ -93,7 +111,7 @@ export const Perfil = () => {
         
     const filteredUsers = users.filter(user => user.id !== store.user.id);
 
-    if (!userData) {
+    if (store.isLogged && !userData) {
         return <p>Cargando datos del usuario...</p>;
     }
 
@@ -134,14 +152,16 @@ export const Perfil = () => {
                             {filteredUsers.length > 0 ? (
                                 filteredUsers.map((user) => (
                                     <div key={user.id} className="user-item">
-                                        <img src={user.avatar || "default-avatar.png"} alt={user.userName} className="user-avatar"/>
+                                        <img src={user.avatar || "default-avatar.png"} alt={user.userName} className="user-avatar" />
                                         <div className="user-info">
-                                            <h5>{user.userName}</h5>
+                                            {/* Hacemos el nombre del usuario clicable */}
+                                            <Link to={`/perfil/${user.id}`} className="user-name-link">
+                                                <h5>{user.userName}</h5>
+                                            </Link>
                                             <p>{user.itemsForSale || 0} artículos en venta</p>
                                             <button 
                                                 className={`btn btn-follow ${followedUsers.has(user.id) ? "followed" : ""}`} 
                                                 onClick={() => handleFollowUser(user.id)}
-                                                disabled={followedUsers.has(user.id)} 
                                             >
                                                 {followedUsers.has(user.id) ? "Seguido" : "Seguir +"}
                                             </button>
@@ -151,6 +171,7 @@ export const Perfil = () => {
                             ) : (
                                 <p>No hay usuarios disponibles.</p>
                             )}
+
                         </div>
                     </div>
                 )}
