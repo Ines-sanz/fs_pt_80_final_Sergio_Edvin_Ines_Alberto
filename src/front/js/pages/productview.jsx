@@ -7,13 +7,31 @@ export const ProductView = () => {
     const { id } = useParams();
     const { store, actions } = useContext(Context);
     const [product, setProduct] = useState(null);
+    const [rating, setRating] = useState(0);
+    const [buyer, setBuyer] = useState("");
 
     useEffect(() => {
         const fetchProduct = async () => {
             const fetchedProduct = await actions.getProductById(id);
             setProduct(fetchedProduct);
         };
+
+        const users = [
+            "juanito22", "CarmenEspaña", "halamadrid10", "ClassicAaron",
+            "PixelAndrea", "retroLucas", "AlbertoGamer", "MarianaAdventure",
+            "RaulCollector", "SofiaLover", "MartinRetro", "LauraPlays"
+        ];
+
+        const getRandomUser = () => users[Math.floor(Math.random() * users.length)];
+        setBuyer(getRandomUser());
+
+        const generateRandomRating = () => {
+            const randomRating = Math.floor(Math.random() * 3) + 3;
+            setRating(randomRating);
+        };
+
         fetchProduct();
+        generateRandomRating();
     }, [id]);
 
     const handleAddToCart = () => {
@@ -22,6 +40,13 @@ export const ProductView = () => {
             product_id: product.id,
         };
         actions.toggleCart(newShoppingItem);
+    };
+    const renderStars = () => {
+        let stars = "";
+        for (let i = 0; i < 5; i++) {
+            stars += i < rating ? "★" : "☆";
+        }
+        return stars;
     };
 
     if (!product) {
@@ -32,7 +57,6 @@ export const ProductView = () => {
         <div className="product-container">
             <section className="__product_header__">
                 <div className="row align-items-center">
-                    {/* Columna izquierda */}
                     <div className="col-md-6 d-flex flex-column align-items-start">
                         <p className="brand">{product.brand}</p>
                         <h1 className="product-name">{product.name}</h1>
@@ -44,7 +68,6 @@ export const ProductView = () => {
                             />
                         </div>
                     </div>
-                    {/* Columna derecha */}
                     <div className="col-md-6 product-info">
                         <div className="row">
                             <div className="col-6">
@@ -70,11 +93,11 @@ export const ProductView = () => {
                                         src={"https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/premium-user.png"}
                                         className="seller-avatar"
                                     />
-                                    <span className="ms-2">{"SerZeMat"}</span>
+                                    <span className="ms-2">{buyer}</span>
                                 </div>
                             </div>
                             <div className="col-12 d-flex justify-content-between align-items-center">
-                                <span className="rating">⭐⭐⭐⭐☆</span>   {/* Poner Ratting según experiecnias del User*/}
+                                <span className="rating">{renderStars()}</span>
                                 <div className="product-price">
                                     <p className="price-value">{product.price.toFixed(2)}€</p>
                                 </div>

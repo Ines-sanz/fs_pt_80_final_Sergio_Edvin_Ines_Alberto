@@ -96,7 +96,7 @@ body {
     margin-bottom: 2rem;
 }
 
-/* Botón de comprar */
+
 .product-button .btn {
     font-size: 1.2rem;
     font-weight: bold;
@@ -113,3 +113,7 @@ body {
     transform: scale(1.1);
 }
 
+.rating {
+    font-size: 1.5rem;
+    color: #ffc107;
+}
