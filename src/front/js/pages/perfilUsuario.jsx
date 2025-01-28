@@ -9,6 +9,9 @@ export const PerfilUsuario = () => {
     const { userId } = useParams(); // Obtener el ID del usuario desde la URL
     const [userData, setUserData] = useState(null); // Estado local para los datos del usuario
     const [favoritesDetails, setFavoritesDetails] = useState([]);
+    
+
+
 
     useEffect(() => {
         const fetchUserProfile = async () => {

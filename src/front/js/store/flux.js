@@ -258,23 +258,23 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getAllUsers: async () => {
         try {
-          const store = getStore();
-          const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
+            const store = getStore();
+            const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                }
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                setStore({ users: data }); // Guarda la lista en el estado global
+            } else {
+                console.error("Error al cargar los usuarios:", data);
             }
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            setStore({ users: data });
-          } else {
-            console.error("Error al cargar los usuarios:", data);
-          }
         } catch (error) {
-          console.error("Error en la solicitud de usuarios:", error);
+            console.error("Error en la solicitud de usuarios:", error);
         }
       },
       loadSubscriptions: async() => {
@@ -394,26 +394,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       followUser: async (userId) => {
         try {
+            const store = getStore();
+    
             const response = await fetch(`${process.env.BACKEND_URL}/api/users/follow`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": `Bearer ${store.Token}` // Agregamos el token JWT
                 },
                 body: JSON.stringify({
-                    follower_id: getStore().user.id, // Usuario actual
-                    followed_id: userId, // Usuario a seguir
+                    followed_id: userId, // Solo enviamos `followed_id`, ya que el backend obtiene `follower_id` del token JWT
                 }),
             });
     
             if (response.ok) {
                 console.log(`Usuario ${userId} seguido correctamente.`);
             } else {
-                console.error("Error al seguir al usuario.");
+                const errorData = await response.json();
+                console.error("Error al seguir al usuario:", errorData);
             }
         } catch (error) {
             console.error("Error de red:", error);
         }
-      }
+    }
+    
       /* termina aqui */
     },
   };
