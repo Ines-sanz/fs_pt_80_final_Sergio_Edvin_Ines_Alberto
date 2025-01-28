@@ -191,21 +191,6 @@ h2 {
     background-color: darkblue;
 }
 
-.user-list-btn {
-    background-color: blue;
-    color: white;
-    border: none;
-    padding: 8px 15px;
-    border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.user-list-btn:hover {
-    background-color: darkblue;
-}
-
 .user-list-modal {
     position: fixed;
     top: 50%;

@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BackendURL } from "./component/backendURL";
 
 import { Home } from "./pages/home.jsx";
 import { Store } from "./pages/store.jsx";

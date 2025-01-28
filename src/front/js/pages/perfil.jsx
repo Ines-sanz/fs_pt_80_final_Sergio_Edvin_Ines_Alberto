@@ -37,11 +37,11 @@ export const Perfil = () => {
         await actions.getAllUsers(); // Llama al action en flux.js
         const allUsers = store.users; // Lista global de usuarios desde el store
     
-        const updatedUserData = await actions.getUserProfile(store.user.id); // Sincronizar perfil del usuario
-        setFollowedUsers(new Set(updatedUserData.following_users.map(user => user.id))); // Actualizar seguidos
+        // Actualizamos followedUsers para incluir la lista actualizada del usuario
+        const updatedUserData = await actions.getUserProfile(store.user.id);
+        setFollowedUsers(new Set(updatedUserData.following_users.map(user => user.id))); // Sincroniza los seguidos
         setUsers(allUsers); // Asigna la lista de usuarios al estado local
     };
-    
 
     const handleFollowUser = async (userId) => {
         if (followedUsers.has(userId)) {
@@ -74,14 +74,10 @@ export const Perfil = () => {
     const handleShowUserList = async () => {
         console.log("Clic en + Usuarios");
         if (!showUserList) {
-            // Sincronizar usuarios y seguidores desde el backend
-            const updatedUserData = await actions.getUserProfile(store.user.id);
-            setFollowedUsers(new Set(updatedUserData.following_users.map(user => user.id))); // Actualiza los seguidos
-            await fetchUsers(); // Actualiza la lista de usuarios
+            await fetchUsers(); // Forzar la sincronización de usuarios y seguidores
         }
-        setShowUserList(!showUserList); // Cambia el estado para mostrar/ocultar la lista
+        setShowUserList(!showUserList);
     };
-    
     
 
     // Estado para controlar si se muestra "Registrarse" o "Login"
@@ -171,7 +167,6 @@ export const Perfil = () => {
                             ) : (
                                 <p>No hay usuarios disponibles.</p>
                             )}
-
                         </div>
                     </div>
                 )}

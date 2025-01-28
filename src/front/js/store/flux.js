@@ -103,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       userShoppingCart: async () => {
         const store = getStore();
-        const url = `${process.env.BACKEND_URL}/api/shopping_cart`; 
+        const url = `${process.env.BACKEND_URL}/api/shopping-cart`; 
         try {
             const response = await fetch(url, {
                 method: "GET",
@@ -115,7 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     
             if (response.ok) {
                 const data = await response.json();
-                setStore({ shoppingCart: data.cart_items }); 
+                setStore({ shoppingCart: data.shopping_cart_products }); 
             } else {
                 console.error("Error al obtener el carrito de compras:", response.status);
             }
@@ -123,6 +123,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error al conectar con el servidor:", error);
         }
       },
+      
       loadInfo: async () => {
         try {
           const store = getStore();
@@ -258,23 +259,23 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
       getAllUsers: async () => {
         try {
-            const store = getStore();
-            const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                }
-            });
-    
-            const data = await response.json();
-    
-            if (response.ok) {
-                setStore({ users: data }); // Guarda la lista en el estado global
-            } else {
-                console.error("Error al cargar los usuarios:", data);
+          const store = getStore();
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
             }
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            setStore({ users: data });
+          } else {
+            console.error("Error al cargar los usuarios:", data);
+          }
         } catch (error) {
-            console.error("Error en la solicitud de usuarios:", error);
+          console.error("Error en la solicitud de usuarios:", error);
         }
       },
       loadSubscriptions: async() => {
