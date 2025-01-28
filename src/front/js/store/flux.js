@@ -103,7 +103,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       userShoppingCart: async () => {
         const store = getStore();
-        const url = `${process.env.BACKEND_URL}/api/shopping-cart`; 
+        const url = `${process.env.BACKEND_URL}/api/shopping_cart`; 
         try {
             const response = await fetch(url, {
                 method: "GET",
@@ -115,7 +115,7 @@ const getState = ({ getStore, getActions, setStore }) => {
     
             if (response.ok) {
                 const data = await response.json();
-                setStore({ shoppingCart: data.shopping_cart_products }); 
+                setStore({ shoppingCart: data.cart_items }); 
             } else {
                 console.error("Error al obtener el carrito de compras:", response.status);
             }
