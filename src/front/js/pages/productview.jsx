@@ -16,6 +16,7 @@ export const ProductView = () => {
         fetchProduct();
     }, [id]);
 
+
     if (!product) {
         return <p>Cargando producto...</p>;
     }
@@ -94,7 +95,8 @@ export const ProductView = () => {
                                     user_id: store.user.id, 
                                     product_id: product.id, 
                                 };
-                                actions.toggleCart(newShoppingItem); }}>
+                                actions.toggleCart(newShoppingItem);
+                                console.log("datos enviados al carrito", newShoppingItem); }}>
                             Comprar
                         </button>
                     </div>
