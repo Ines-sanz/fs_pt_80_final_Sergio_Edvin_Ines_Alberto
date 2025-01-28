@@ -428,15 +428,23 @@ def get_favorites():
     try:
         user_id = get_jwt_identity()
         user = Users.query.get(user_id)
+
         if not user:
             return jsonify({'msg': 'User not found'}), 404
+
         favorites = Favorites.query.filter_by(user_id=user_id).all()
         favorite_product_ids = [favorite.product_id for favorite in favorites]
+
         favorite_products = Products.query.filter(Products.id.in_(favorite_product_ids)).all()
         favorite_products_list = [product.serialize() for product in favorite_products]
+
         return jsonify({'favorite_products': favorite_products_list}), 200
+
     except Exception as error:
         return jsonify({'error': str(error)}), 500
+
+    
+
 
 
     ##··········································································Cómo USER en CHECKOUT:
@@ -706,6 +714,27 @@ def create_payment():
 
 
 #Shopping Cart
+@api.route('/shopping-cart', methods=['GET'])
+@jwt_required()
+def get_shopping_cart():
+    try:
+        user_id = get_jwt_identity()
+        user = Users.query.get(user_id)
+
+        if not user:
+            return jsonify({'msg': 'User not found'}), 404
+
+        shopping_cart_items = ShoppingCart.query.filter_by(user_id=user_id).all()
+        shopping_cart_product_ids = [item.product_id for item in shopping_cart_items]
+
+        shopping_cart_products = Products.query.filter(Products.id.in_(shopping_cart_product_ids)).all()
+        shopping_cart_products_list = [product.serialize() for product in shopping_cart_products]
+
+        return jsonify({'shopping_cart_products': shopping_cart_products_list}), 200
+
+    except Exception as error:
+        return jsonify({'error': str(error)}), 500
+    
 @api.route('/shopping_cart', methods=['POST'])
 @jwt_required()
 def add_to_shopping_cart():
@@ -768,22 +797,3 @@ def remove_from_shopping_cart(product_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
 
-@api.route('/shopping_cart', methods=['GET'])
-@jwt_required()
-def get_shopping_cart():
-    try:
-        # Extraer usuario de la solicitud
-        id = get_jwt_identity()
-        user = Users.query.get(id)  
-
-        # Validar campo requerido
-        if not user:
-            return jsonify({'msg':'User not found'}), 400
-        
-        # Obtener todos los productos en el carrito del usuario
-        shopping_cart = ShoppingCart.query.filter_by(user_id=id).all()
-        cart_items = [{'id': item.id, 'product_id': item.product_id} for item in shopping_cart]
-
-        return jsonify({'shopping_cart': cart_items}), 200
-    except Exception as error:
-        return jsonify({'error': str(error)}), 400
