@@ -17,6 +17,7 @@ export const ProductView = () => {
         };
 
         const users = [
+            "FinalBossStore","FinalBossStore","FinalBossStore","FinalBossStore",
             "juanito22", "CarmenEspaña", "halamadrid10", "ClassicAaron",
             "PixelAndrea", "retroLucas", "AlbertoGamer", "MarianaAdventure",
             "RaulCollector", "SofiaLover", "MartinRetro", "LauraPlays"
