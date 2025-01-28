@@ -123,6 +123,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.error("Error al conectar con el servidor:", error);
         }
       },
+      
       loadInfo: async () => {
         try {
           const store = getStore();
