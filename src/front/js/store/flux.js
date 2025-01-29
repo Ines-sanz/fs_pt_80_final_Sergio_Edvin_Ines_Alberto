@@ -14,38 +14,38 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: JSON.parse(localStorage.getItem("user")) || "",
       shoppingCart: [],
       users: [],
-    
+
     },
     actions: {
 
       login: async (formData1) => {
         const actions = getActions();
         try {
-            const url = `${process.env.BACKEND_URL}/api/login`;
-            console.log("URL final:", url);
-            console.log("Datos enviados al servidor:", formData1);
-    
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData1),
-            });
-    
-            const data = await response.json();
-            console.log("Respuesta del servidor:", data);
-    
-            if (response.ok) {
-                alert("Inicio de sesión exitoso");
-                localStorage.setItem("Token", data.token);
-                localStorage.setItem("user", JSON.stringify(data.user)); 
-                setStore({ isLogged: true, Token: data.token, user: data.user });
+          const url = `${process.env.BACKEND_URL}/api/login`;
+          console.log("URL final:", url);
+          console.log("Datos enviados al servidor:", formData1);
 
-                await actions.userShoppingCart()
-            } else {
-                alert(data.msg || "Error en el inicio de sesión");
-            }
+          const response = await fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData1),
+          });
+
+          const data = await response.json();
+          console.log("Respuesta del servidor:", data);
+
+          if (response.ok) {
+            alert("Inicio de sesión exitoso");
+            localStorage.setItem("Token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            setStore({ isLogged: true, Token: data.token, user: data.user });
+
+            await actions.userShoppingCart()
+          } else {
+            alert(data.msg || "Error en el inicio de sesión");
+          }
         } catch (error) {
           console.error("Error al conectar con el servidor:", error);
           alert("Error al conectar con el servidor");
@@ -101,32 +101,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      userShoppingCart: async () => {
-        const store = getStore();
-        const url = `${process.env.BACKEND_URL}/api/shopping-cart`; 
-        try {
-            const response = await fetch(url, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${store.Token}`,
-                },
-            });
-    
-            if (response.ok) {
-                const data = await response.json();
-                setStore({ shoppingCart: data.shopping_cart_products }); 
-            } else {
-                console.error("Error al obtener el carrito de compras:", response.status);
-            }
-        } catch (error) {
-            console.error("Error al conectar con el servidor:", error);
-        }
-      },
-      
       loadInfo: async () => {
         try {
-          const store = getStore();
           const url = `${process.env.BACKEND_URL}/api/products`;
           const response = await fetch(url);
           const data = await response.json();
@@ -154,9 +130,9 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error loading data:", error);
         }
       },
+
       getProductById: async (id) => {
         try {
-          const store = getStore();
           const response = await fetch(`${process.env.BACKEND_URL}/api/product/${id}`);
           if (response.ok) {
             const data = await response.json();
@@ -170,6 +146,33 @@ const getState = ({ getStore, getActions, setStore }) => {
           return null;
         }
       },
+
+      sellProduct: async (formData, navigate) => {
+        const store = getStore();
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/product`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${store.Token}`,
+            },
+            body: JSON.stringify(formData),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            alert("Producto publicado con éxito");
+            navigate("/profile");
+          } else {
+            alert(data.msg || "Error al publicar el producto");
+          }
+        } catch (error) {
+          console.error("Error al publicar producto:", error);
+          alert("Error al conectar con el servidor");
+        }
+      },
+
       toggleFav: async (newFav) => {
         const store = getStore();
         if (!store.Token) {
@@ -179,31 +182,55 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("Datos enviados a favoritos:", newFav);
 
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/api/favorites`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: store.Token ? `Bearer ${store.Token}` : "",
-                },
-                body: JSON.stringify(newFav),
-            });
-    
-            const data = await response.json();
-    
-            if (response.ok) {
-                console.log("Respuesta del servidor:", data);
-                const updatedFavorites = data.updatedFavorites || [];
-                const user = { ...store.user, favorites: updatedFavorites };
-                setStore({ user });
-            } else {
-                alert(data.msg || "Error al manejar favoritos");
-                console.error("Error del servidor:", data);
-            }
+          const response = await fetch(`${process.env.BACKEND_URL}/api/favorites`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: store.Token ? `Bearer ${store.Token}` : "",
+            },
+            body: JSON.stringify(newFav),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            console.log("Respuesta del servidor:", data);
+            const updatedFavorites = data.updatedFavorites || [];
+            const user = { ...store.user, favorites: updatedFavorites };
+            setStore({ user });
+          } else {
+            alert(data.msg || "Error al manejar favoritos");
+            console.error("Error del servidor:", data);
+          }
         } catch (error) {
-            alert("Error al conectar con el servidor");
-            console.error("Error de red:", error);
+          alert("Error al conectar con el servidor");
+          console.error("Error de red:", error);
         }
       },
+
+      userShoppingCart: async () => {
+        const store = getStore();
+        const url = `${process.env.BACKEND_URL}/api/shopping-cart`;
+        try {
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${store.Token}`,
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            setStore({ shoppingCart: data.shopping_cart_products });
+          } else {
+            console.error("Error al obtener el carrito de compras:", response.status);
+          }
+        } catch (error) {
+          console.error("Error al conectar con el servidor:", error);
+        }
+      },
+
       toggleCart: async (newShoppingItem) => {
         const store = getStore();
         const actions = getActions();
@@ -257,6 +284,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           alert("Error al conectar con el servidor");
         }
       },
+
       getAllUsers: async () => {
         try {
           const store = getStore();
@@ -278,22 +306,24 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error en la solicitud de usuarios:", error);
         }
       },
-      loadSubscriptions: async() => {
+
+      loadSubscriptions: async () => {
         try {
           const store = getStore();
           const response = await fetch(`${process.env.BACKEND_URL}/api/subscriptions`)
           const data = await response.json();
 
           if (response.ok) {
-            setStore({subscriptions: data});
-          } else{
+            setStore({ subscriptions: data });
+          } else {
             console.error("Error loading suscriptions")
           }
         } catch (error) {
           console.error("Error fetching suscriptions", error)
         }
       },
-      toggleSubscription: async(subscripionId) => {
+
+      toggleSubscription: async (subscripionId) => {
         const store = getStore();
         let selectedSubscriptions = [...store.selectedSubscriptions]
 
@@ -304,11 +334,11 @@ const getState = ({ getStore, getActions, setStore }) => {
         } else {
           selectedSubscriptions.push(subscripionId);
         }
-        setStore({selectedSubscriptions});
+        setStore({ selectedSubscriptions });
       },
 
       setShowLoginModal: (value) => {
-         const store = getStore();
+        const store = getStore();
         setStore({
           ...store,
           showLoginModal: value
@@ -318,78 +348,78 @@ const getState = ({ getStore, getActions, setStore }) => {
       getFavorites: async () => {
         const store = getStore();
         const actions = getActions();
-      
+
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/api/favorites`, {
-                method: "GET",
-                headers: {
-                    "Authorization": `Bearer ${store.Token}`,
-                    "Content-Type": "application/json",
-                },
-            });
-          
-            if (response.ok) {
-                const data = await response.json();
-                // const favoriteIds = data.favorites.map((fav) => fav.product_id);
-            
-                // // Llamar al action para obtener detalles de cada producto
-                // const favoriteProducts = await Promise.all(
-                //     favoriteIds.map(async (productId) => {
-                //         return await actions.getProductDetails(productId);
-                //     })
-                // );
-              
-                setStore({ favorites: data.favorite_products }); // Guardar los detalles de los productos favoritos
-            } else {
-                console.error("Error al obtener favoritos:", response.statusText);
-            }
+          const response = await fetch(`${process.env.BACKEND_URL}/api/favorites`, {
+            method: "GET",
+            headers: {
+              "Authorization": `Bearer ${store.Token}`,
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            // const favoriteIds = data.favorites.map((fav) => fav.product_id);
+
+            // // Llamar al action para obtener detalles de cada producto
+            // const favoriteProducts = await Promise.all(
+            //     favoriteIds.map(async (productId) => {
+            //         return await actions.getProductDetails(productId);
+            //     })
+            // );
+
+            setStore({ favorites: data.favorite_products }); // Guardar los detalles de los productos favoritos
+          } else {
+            console.error("Error al obtener favoritos:", response.statusText);
+          }
         } catch (error) {
-            console.error("Error al conectar con el servidor:", error);
+          console.error("Error al conectar con el servidor:", error);
         }
       },
 
       getProductDetails: async (productId) => {
         const store = getStore();
-      
+
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/api/product/${productId}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-          
-            if (response.ok) {
-                const data = await response.json();
-                return data[0]; // El endpoint devuelve un array, seleccionamos el primer elemento
-            } else {
-                console.error(`Error al obtener el producto ${productId}:`, response.statusText);
-            }
+          const response = await fetch(`${process.env.BACKEND_URL}/api/product/${productId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            return data[0]; // El endpoint devuelve un array, seleccionamos el primer elemento
+          } else {
+            console.error(`Error al obtener el producto ${productId}:`, response.statusText);
+          }
         } catch (error) {
-            console.error(`Error al conectar con el servidor para el producto ${productId}:`, error);
+          console.error(`Error al conectar con el servidor para el producto ${productId}:`, error);
         }
-       },
-      
+      },
+
 
       getUserProfile: async (userId) => {
         const store = getStore();
-      
+
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/api/users/${userId}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-          
-            if (response.ok) {
-                const userData = await response.json();
-                return userData; // Devuelve los datos del usuario
-            } else {
-                console.error(`Error al obtener el perfil del usuario ${userId}:`, response.statusText);
-            }
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users/${userId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (response.ok) {
+            const userData = await response.json();
+            return userData; // Devuelve los datos del usuario
+          } else {
+            console.error(`Error al obtener el perfil del usuario ${userId}:`, response.statusText);
+          }
         } catch (error) {
-            console.error(`Error al conectar con el servidor para el usuario ${userId}:`, error);
+          console.error(`Error al conectar con el servidor para el usuario ${userId}:`, error);
         }
       },
       /* termina aqui */
