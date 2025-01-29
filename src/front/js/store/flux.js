@@ -263,7 +263,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      uploadImageToCloudinary: async (selectedFile) => {
+      uploadImageToBackend: async (selectedFile) => {
         if (!selectedFile) {
           alert("Por favor, selecciona un archivo.");
           return null;
@@ -271,27 +271,23 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         const formData = new FormData();
         formData.append("file", selectedFile);
-        formData.append("upload_preset", "your_upload_preset"); // Buscar configuración en cluodinary
-        formData.append("cloud_name", "dr0wlij0c");
 
         try {
-          const response = await fetch(`https://api.cloudinary.com/v1_1/dr0wlij0c/image/upload`, {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/upload`, {
             method: "POST",
             body: formData,
           });
 
           const data = await response.json();
-          console.log("Detalles de la imagen cargada:", data);
-
-          if (data.secure_url) {
-            return data.secure_url; 
+          if (response.ok && data.secure_url) {
+            return data.secure_url;
           } else {
-            alert("Error: No se recibió la URL de la imagen.");
+            alert(data.error || "Error al subir la imagen.");
             return null;
           }
         } catch (error) {
-          console.error("Error al subir la foto:", error);
-          alert("Error al subir la foto.");
+          console.error("Error al subir la imagen:", error);
+          alert("Error de conexión al subir la imagen.");
           return null;
         }
       },

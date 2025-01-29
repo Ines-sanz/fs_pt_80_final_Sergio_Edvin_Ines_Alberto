@@ -9,6 +9,8 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 import stripe
 import os
 import datetime
+import cloudinary
+import cloudinary.uploader
 
 api = Blueprint('api', __name__)
 stripe.api_key = os.getenv("STRIPE_API_KEY")
@@ -797,3 +799,12 @@ def remove_from_shopping_cart(product_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
 
+# Subimos productos al Cloudinary
+@api.route('/upload', methods=['POST'])
+def upload():
+    file_to_upload = request.files['file']
+    if file_to_upload:
+        upload = cloudinary.uploader.upload(file_to_upload)
+        print('----------Url donde está la imagen-----------', upload)
+        return jsonify(upload)
+    return jsonify({"error": "No file uploaded"}), 400

@@ -59,9 +59,17 @@ export const SellView = () => {
         return true;
     };
 
-    const handleSell = () => {
+    const handleSell = async () => {
         if (!validateForm()) return;
-        actions.sellProduct(formData, navigate);
+    
+        try {
+            await actions.sellProduct(formData, navigate);
+            alert("Producto subido exitosamente.");
+            navigate("/home"); 
+        } catch (error) {
+            console.error("Error al subir el producto:", error);
+            alert("Hubo un error al subir el producto. Por favor, intenta de nuevo.");
+        }
     };
 
 
