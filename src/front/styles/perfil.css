@@ -254,3 +254,16 @@ h2 {
 .btn-follow:hover {
     background-color: darkblue;
 }
+
+.profile-avatar-container-log {
+    display: flex;
+    flex-direction: column; /* Asegura que los elementos estén en columna */
+    align-items: center; /* Centra los elementos horizontalmente */
+    gap: 10px; /* Espacio entre la imagen y el botón */
+}
+
+.logout-button-container {
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    display: flex;
+    justify-content: center; /* Centra el botón horizontalmente */
+}

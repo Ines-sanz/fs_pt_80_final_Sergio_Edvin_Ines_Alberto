@@ -62,6 +62,11 @@ export const Perfil = () => {
         const updatedUserData = await actions.getUserProfile(store.user.id);
         setUserData(updatedUserData);
     };
+
+    const handleLogout = () => {
+        actions.logout(); // Llama a la función logout definida en flux.js
+    };
+    
     
     
 
@@ -121,7 +126,13 @@ export const Perfil = () => {
                             alt="Avatar del usuario"
                             className="profile-avatar-log"
                         />
+                        <div className="logout-button-container">
+                            <button className="btn btn-secondary logout-btn" onClick={handleLogout}>
+                                Cerrar sesión
+                            </button>
+                        </div>
                     </div>
+
                     <div className="profile-info-log">
                         <h1 className="profile-name-log">{userData.userName}</h1>
                         <p className="profile-email-log">{userData.email}</p>
@@ -249,7 +260,6 @@ export const Perfil = () => {
 
                                     // Verificamos que las contraseñas coincidan
                                     if (formData.password !== formData.repeatPassword) {
-                                        alert("Las contraseñas no coinciden. Por favor, verifica e inténtalo de nuevo.");
                                         return;
                                     }
 

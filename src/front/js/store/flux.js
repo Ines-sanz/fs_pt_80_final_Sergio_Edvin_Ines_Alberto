@@ -37,18 +37,15 @@ const getState = ({ getStore, getActions, setStore }) => {
             console.log("Respuesta del servidor:", data);
     
             if (response.ok) {
-                alert("Inicio de sesión exitoso");
                 localStorage.setItem("Token", data.token);
                 localStorage.setItem("user", JSON.stringify(data.user)); 
                 setStore({ isLogged: true, Token: data.token, user: data.user });
 
                 await actions.userShoppingCart()
             } else {
-                alert(data.msg || "Error en el inicio de sesión");
             }
         } catch (error) {
           console.error("Error al conectar con el servidor:", error);
-          alert("Error al conectar con el servidor");
         }
       },
 
@@ -68,7 +65,6 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (response.ok) {
             // Registro exitoso
-            alert("Registro exitoso. Bienvenido!");
             console.log("Token:", data.token);
             console.log("Usuario:", data.user);
             localStorage.setItem("Token", data.token);
@@ -76,10 +72,8 @@ const getState = ({ getStore, getActions, setStore }) => {
             setStore({ isLogged: true, Token: data.token, user: data.user })
           } else {
             // Error en el registro
-            alert(data.msg || "Error durante el registro");
           }
         } catch (error) {
-          alert("Error al conectar con el servidor");
           console.error(error);
         }
       },
@@ -173,7 +167,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       toggleFav: async (newFav) => {
         const store = getStore();
         if (!store.Token) {
-          alert("Debes iniciar sesión para añadir favoritos.");
           return;
         }
         console.log("Datos enviados a favoritos:", newFav);
@@ -196,11 +189,9 @@ const getState = ({ getStore, getActions, setStore }) => {
                 const user = { ...store.user, favorites: updatedFavorites };
                 setStore({ user });
             } else {
-                alert(data.msg || "Error al manejar favoritos");
                 console.error("Error del servidor:", data);
             }
         } catch (error) {
-            alert("Error al conectar con el servidor");
             console.error("Error de red:", error);
         }
       },
@@ -228,10 +219,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 
           } else {
-            alert(data.msg || "Error al manejar el carrito de compras");
           }
         } catch (error) {
-          alert("Error al conectar con el servidor");
           console.error(error);
         }
       },
@@ -254,7 +243,6 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         } catch (error) {
           console.error("Error al cargar las reseñas:", error);
-          alert("Error al conectar con el servidor");
         }
       },
       getAllUsers: async () => {
@@ -443,6 +431,16 @@ const getState = ({ getStore, getActions, setStore }) => {
         } catch (error) {
             console.error("Error de red:", error);
         }
+      },
+      
+      logout: () => {
+        localStorage.removeItem("Token");
+        localStorage.removeItem("user");
+        setStore({
+            isLogged: false,
+            Token: null,
+            user: "",
+        });
       },
     
     
