@@ -20,7 +20,7 @@ export const SellView = () => {
         platform: "",
         type: "",
         category: "",
-        state: "",
+        state: false,
         promoted: false,
         price: "",
         seller_id: store.user.id, // Usuario autenticado como vendedor
@@ -53,7 +53,7 @@ export const SellView = () => {
         const { name, description, img, year, brand, platform, type, category, state, price } = formData;
 
         if (!name || !description || !img || !year || !brand || !platform || !category || !type || !state || !price) {
-            alert("Completa todos los campos obligatorios y sube una imagen");
+            alert("No olvides subir primero la foto 👾");
             return false;
         }
         return true;
@@ -61,24 +61,20 @@ export const SellView = () => {
 
     const handleSell = async () => {
         if (!validateForm()) return;
-    
+
         try {
             await actions.sellProduct(formData, navigate);
-            alert("Producto subido exitosamente.");
-            navigate("/home"); 
+            alert("Producto subido exitosamente ✅");
+            navigate("/");
         } catch (error) {
             console.error("Error al subir el producto:", error);
-            alert("Hubo un error al subir el producto. Por favor, intenta de nuevo.");
+            alert("Hubo un error al subir el producto. Por favor, intenta de nuevo ⚠️");
         }
     };
-
-
     // useEffect(() => {
     //                     window.scrollTo(0, 0); 
     //                     actions.setShowLoginModal(false); 
     //                 }, []);
-
-
     return (
         <div className="__sell_container__">
             {/*{store.showLoginModal && <LoginModal />*/}
@@ -143,8 +139,8 @@ export const SellView = () => {
                                         onChange={handleChange} required
                                     >
                                         <option value="">Selecciona</option>
-                                        <option value="nuevo">Nuevo</option>
-                                        <option value="usado">Usado</option>
+                                        <option value="True">Nuevo</option>
+                                        <option value="False">Usado</option>
                                     </select>
                                 </div>
                             </div>

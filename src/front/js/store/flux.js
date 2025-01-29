@@ -148,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": `Bearer ${store.Token}`,
+              Authorization: `Bearer ${store.Token}`,
             },
             body: JSON.stringify(formData),
           });
