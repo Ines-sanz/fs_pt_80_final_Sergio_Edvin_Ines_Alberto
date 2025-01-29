@@ -12,7 +12,7 @@ export const CheckoutForm = ({ totalAmount }) => {
     // Create PaymentIntent as soon as the page loads with the dynamic totalAmount
     fetch(process.env.BACKEND_URL + '/api/create-payment', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+localStorage.getItem('Token') },
       body: JSON.stringify({ amount: totalAmount * 100, currency: 'eur' }) // Amount in cents
     })
       .then((res) => res.json())
@@ -43,6 +43,7 @@ export const CheckoutForm = ({ totalAmount }) => {
       console.log('[error]', error);
     } else if (paymentIntent.status === 'succeeded') {
       console.log('Payment succeeded!');
+      console.log(paymentIntent);
     }
     else {
       console.log('some error');

@@ -6,7 +6,7 @@ import { CheckoutForm } from "../component/checkoutForm.jsx";
 import "../../styles/checkout.css";
 
 export const Checkout = () => {
-  const stripePromise = loadStripe(process.env.STRIPE_PROMISE);
+  const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
   const { store, actions } = useContext(Context);
   const [selectedSubscription, setSelectedSubscription] = useState(null);
 
