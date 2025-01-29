@@ -17,30 +17,14 @@ export const PhotoUpload = ({ onUploadSuccess }) => {
 
         setUploading(true);
 
-        const formData = new FormData();
-        formData.append("file", selectedFile);
-        formData.append("upload_preset", "your_upload_preset"); // Sustituir con tu upload preset de Cloudinary
-        formData.append("cloud_name", "dr0wlij0c");
+        const imageUrl = await actions.uploadImageToCloudinary(selectedFile); 
 
-        try {
-            const response = await fetch(`https://api.cloudinary.com/v1_1/dr0wlij0c/image/upload`, {
-                method: "POST",
-                body: formData,
-            });
-
-            const data = await response.json();
-            console.log("Detalles de la imagen cargada:", data);
-
+        if (imageUrl) {
             alert("Foto subida con éxito.");
-            if (onUploadSuccess) {
-                onUploadSuccess(data.url); // Retorna la URL de la imagen al componente padre
-            }
-        } catch (error) {
-            console.error("Error al subir la foto:", error);
-            alert("Error al subir la foto.");
-        } finally {
-            setUploading(false);
+            onUploadSuccess(imageUrl); 
         }
+
+        setUploading(false);
     };
 
     return (
@@ -57,7 +41,7 @@ export const PhotoUpload = ({ onUploadSuccess }) => {
             <button
                 onClick={handleUpload}
                 className="btn btn-color mt-3"
-                disabled={uploading}
+                disabled={uploading || !selectedFile}
             >
                 {uploading ? "Subiendo..." : "Subir Foto"}
             </button>
