@@ -144,11 +144,11 @@ const getState = ({ getStore, getActions, setStore }) => {
       sellProduct: async (formData, navigate) => {
         const store = getStore();
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/product`, {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              Authorization: `Bearer ${store.Token}`,
+              "Authorization": `Bearer ${store.Token}`,
             },
             body: JSON.stringify(formData),
           });
@@ -157,7 +157,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (response.ok) {
             alert("Producto publicado con éxito");
-            navigate("/profile");
+            navigate("/");
           } else {
             alert(data.msg || "Error al publicar el producto");
           }
