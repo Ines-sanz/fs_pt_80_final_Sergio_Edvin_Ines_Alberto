@@ -6,12 +6,6 @@ import { Link } from "react-router-dom";
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
     const [userData, setUserData] = useState(null);
-    const [showUserList, setShowUserList] = useState(false); // Estado para mostrar la lista de usuarios
-    const [users, setUsers] = useState([]); // Estado para almacenar la lista de usuarios
-    const [followedUsers, setFollowedUsers] = useState(new Set(userData?.following_users.map(user => user.id) || []));
-    const [favoritesDetails, setFavoritesDetails] = useState([]); // Detalles de productos favoritos
-
-
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -136,16 +130,12 @@ export const Perfil = () => {
                     <div className="profile-info-log">
                         <h1 className="profile-name-log">{userData.userName}</h1>
                         <p className="profile-email-log">{userData.email}</p>
-                        <p className="profile-address-log">{userData.description}</p>
+                        <p className="profile-address-log">
+                            {userData.address}, {userData.city} ({userData.postalCode})
+                        </p>
                         <div className="profile-stats-log">
                             <span className="followers-log">{userData.followed_by.length} Seguidores</span>
                             <span className="following-log">{userData.following_users.length} Seguidos</span>
-                            <button 
-                                className="btn btn-primary user-list-btn" 
-                                onClick={handleShowUserList}
-                            >
-                                + Usuarios
-                            </button> 
                         </div>
                     </div>
                 </div>
@@ -188,17 +178,16 @@ export const Perfil = () => {
                         <button className="btn-premium-log">Go Premium</button>
                     )}
                 </div>
-    
                 <div className="profile-section-log">
                     <h2>Favoritos</h2>
                     <div className="horizontal-scrollable">
                         <div className="row flex-nowrap pt-1">
-                            {favoritesDetails.length > 0 ? (
-                                favoritesDetails.map((fav) => (
-                                    <div key={fav.id} className="favorite-item-log">
-                                        <img src={fav.img} alt={fav.name} className="favorite-img-log" />
-                                        <p>{fav.name}</p>
-                                        <span>{fav.price} €</span>
+                            {store.favorites?.length > 0 ? (
+                                store.favorites.map((product) => (
+                                    <div key={product.id} className="favorite-item-log">
+                                        <img src={product.img} alt={product.name} className="favorite-img-log" />
+                                        <p>{product.name}</p>
+                                        <span>{product.price} €</span>
                                     </div>
                                 ))
                             ) : (
@@ -207,28 +196,26 @@ export const Perfil = () => {
                         </div>
                     </div>
                 </div>
-    
+
                 <div className="profile-section-log">
                     <h2>Escaparate</h2>
-                    <div className="horizontal-scrollable">
-                        <div className="row flex-nowrap pt-1">
-                            {userData.products?.length > 0 ? (
-                                userData.products.map((product) => (
-                                    <div key={product.id} className="showcase-item-log">
-                                        <img src={product.img} alt={product.name} className="showcase-img-log" />
-                                        <p>{product.name}</p>
-                                        <span>{product.price} €</span>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No tienes productos en tu escaparate.</p>
-                            )}
-                        </div>
+                    <div className="showcase-container-log">
+                        {userData.products?.length > 0 ? (
+                            userData.products.map((product) => (
+                                <div key={product.id} className="showcase-item-log">
+                                    <img src={product.img} alt={product.name} className="showcase-img-log" />
+                                    <p>{product.name}</p>
+                                    <span>{product.price} €</span>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No tienes productos en tu escaparate.</p>
+                        )}
                     </div>
                 </div>
             </div>
         );
-    };
+    }
         
     return (
         <div className="container-fluid min-vh-100">
