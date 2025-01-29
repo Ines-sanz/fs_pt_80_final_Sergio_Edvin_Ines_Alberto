@@ -6,12 +6,17 @@ import { Link } from "react-router-dom";
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
     const [userData, setUserData] = useState(null);
+    const [showUserList, setShowUserList] = useState(false); // Estado para mostrar la lista de usuarios
+    const [users, setUsers] = useState([]); // Estado para almacenar la lista de usuarios
+    const [followedUsers, setFollowedUsers] = useState(new Set(userData?.following_users.map(user => user.id) || []));
+    const [favoritesDetails, setFavoritesDetails] = useState([]); // Detalles de productos favoritos
 
     useEffect(() => {
         const fetchUserData = async () => {
             const data = await actions.getUserProfile(store.user.id); // Obtiene el perfil del usuario actual
             setUserData(data);
             setFollowedUsers(new Set(data.following_users.map(user => user.id))); // Guardamos los seguidos en local
+            
 
             if (data?.favorites?.length > 0) {
                 // Obtener los detalles de los productos favoritos
@@ -136,6 +141,12 @@ export const Perfil = () => {
                         <div className="profile-stats-log">
                             <span className="followers-log">{userData.followed_by.length} Seguidores</span>
                             <span className="following-log">{userData.following_users.length} Seguidos</span>
+                            <button 
+                                className="btn btn-primary user-list-btn" 
+                                onClick={handleShowUserList}
+                            >
+                                + Usuarios
+                            </button> 
                         </div>
                     </div>
                 </div>
@@ -181,13 +192,13 @@ export const Perfil = () => {
                 <div className="profile-section-log">
                     <h2>Favoritos</h2>
                     <div className="horizontal-scrollable">
-                        <div className="row flex-nowrap pt-1">
-                            {store.favorites?.length > 0 ? (
-                                store.favorites.map((product) => (
-                                    <div key={product.id} className="favorite-item-log">
-                                        <img src={product.img} alt={product.name} className="favorite-img-log" />
-                                        <p>{product.name}</p>
-                                        <span>{product.price} €</span>
+                    <div className="row flex-nowrap pt-1">
+                            {favoritesDetails.length > 0 ? (
+                                favoritesDetails.map((fav) => (
+                                    <div key={fav.id} className="favorite-item-log">
+                                        <img src={fav.img} alt={fav.name} className="favorite-img-log" />
+                                        <p>{fav.name}</p>
+                                        <span>{fav.price} €</span>
                                     </div>
                                 ))
                             ) : (
