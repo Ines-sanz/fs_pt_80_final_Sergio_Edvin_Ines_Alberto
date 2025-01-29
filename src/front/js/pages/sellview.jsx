@@ -18,15 +18,8 @@ export const SellView = () => {
             setTypeOptions(["Sobremesa", "Portátil", "Híbrida"]);
         } else if (category === "juego") {
             setTypeOptions([
-                "Acción",
-                "Aventura",
-                "Rol (RPG)",
-                "Estrategia",
-                "Deportes",
-                "Peleas",
-                "Plataformas",
-                "Terror/Survival Horror",
-                "Indie",
+                "Acción", "Aventura", "Rol (RPG)", "Estrategia", "Deportes",
+                "Peleas", "Plataformas", "Terror/Survival Horror","Indie",
             ]);
         } else if (category === "accesorio") {
             setTypeOptions(["Accesorio"]);
