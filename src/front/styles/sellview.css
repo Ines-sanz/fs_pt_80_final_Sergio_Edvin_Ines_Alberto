@@ -123,10 +123,12 @@ body {
 
 
 .__sell_button__ {
+    font-size: 1.7rem;
+    font-weight: bold;
     background-color: rgb(240, 228, 5);
     border: none;
     color: black;
-    padding: 0.5rem 1.5rem; 
+    padding: 0.75rem 1.5rem; 
     border-radius: 0.5rem;
     cursor: pointer;
     margin: 0 auto;
@@ -136,8 +138,4 @@ body {
 .__sell_button__:hover {
     background-color: rgb(228, 196, 15);
     transform: scale(1.10);
-}
-
-.btn_sell {
-    font-size: 1.9rem;
 }
