@@ -45,7 +45,7 @@ export const SellView = () => {
         // Resto de lógica para enviar el formulario
     };
 
-    // useEffect(() => {
+    // useEffect(() => {pull ori
     //                     window.scrollTo(0, 0); 
     //                     actions.setShowLoginModal(false); 
     //                 }, []);
