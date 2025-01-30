@@ -12,6 +12,7 @@ import os
 import datetime
 import cloudinary
 import cloudinary.uploader
+import json
 
 api = Blueprint('api', __name__)
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
@@ -805,3 +806,107 @@ def upload():
         print('----------Url donde está la imagen-----------', upload)
         return jsonify(upload)
     return jsonify({"error": "No file uploaded"}), 400
+
+@api.route('/dummy', methods=['POST'])
+def insert_dummy():
+        with open('src/api/products.json', 'r') as file:
+            data = json.load(file)
+        with open('src/api/users.json', 'r') as file_2:
+            data_user = json.load(file_2)
+        with open('src/api/favorites.json', 'r') as file_3:
+            favorites_data = json.load(file_3)
+        with open('src/api/shoppingcart.json', 'r') as file_4:
+            shopping_data = json.load(file_4)
+        with open('src/api/reviews.json', 'r') as file_5:
+            reviews_data = json.load(file_5)
+        for i in data['consoles']:
+            print (i['name'])
+            prod = Products()
+            prod.name = i['name']
+            prod.img = i['img']
+            prod.year = i['year']
+            prod.brand = i['brand']
+            prod.platform = i['platform']
+            prod.type = i['type']
+            prod.category = i['category']
+            prod.description = i['description']
+            prod.stock = i['stock']
+            prod.state = i['state']
+            prod.promoted = i['promoted']
+            prod.price = i['price']
+            db.session.add(prod)
+            db.session.commit()
+        for i in data['videogames']:
+            print (i['name'])
+            prod = Products()
+            prod.name = i['name']
+            prod.img = i['img']
+            prod.year = i['year']
+            prod.brand = i['brand']
+            prod.platform = i['platform']
+            prod.type = i['type']
+            prod.category = i['category']
+            prod.description = i['description']
+            prod.stock = i['stock']
+            prod.state = i['state']
+            prod.promoted = i['promoted']
+            prod.price = i['price']
+            db.session.add(prod)
+            db.session.commit()
+        for i in data['accessory']:
+            print (i['name'])
+            prod = Products()
+            prod.name = i['name']
+            prod.img = i['img']
+            prod.year = i['year']
+            prod.brand = i['brand']
+            prod.platform = i['platform']
+            prod.type = i['type']
+            prod.category = i['category']
+            prod.description = i['description']
+            prod.stock = i['stock']
+            prod.state = i['state']
+            prod.promoted = i['promoted']
+            prod.price = i['price']
+            db.session.add(prod)
+            db.session.commit() 
+        for i in data_user['users']:
+            print (i['userName'])
+            prod = Users()
+            prod.email = i['email']
+            prod.password = i['password']
+            prod.userName = i['userName']
+            prod.avatar = i['avatar']
+            prod.description = i['description']
+            prod.address = i['address']
+            prod.postalCode = i['postalCode']
+            prod.city = i['city']
+            prod.following = i['following']
+            prod.subscription = i['subscription']
+            prod.role = i['role']
+            db.session.add(prod)
+            db.session.commit()   
+        for i in favorites_data['favorites']:
+            print (i['user_id'])
+            prod = Favorites()
+            prod.user_id = i['user_id']
+            prod.product_id = i['product_id']
+            db.session.add(prod)
+            db.session.commit()    
+        for i in shopping_data['shopping_cart']:
+            print (i['user_id'])
+            prod = ShoppingCart()
+            prod.user_id = i['user_id']
+            prod.product_id = i['product_id']
+            db.session.add(prod)
+            db.session.commit()  
+        for i in reviews_data['reviews']:
+            print (i['comment'])
+            prod = Reviews()
+            prod.rating = i['rating']
+            prod.comment = i['comment']
+            prod.user_id = i['user_id']
+            prod.product_id = i['product_id']
+            db.session.add(prod)
+            db.session.commit()         
+
