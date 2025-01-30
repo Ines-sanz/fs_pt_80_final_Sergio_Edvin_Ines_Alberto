@@ -9,9 +9,9 @@ export const OrderSuccess = () => {
     const navigate = useNavigate()
 
 
-    setTimeout(()=>{
-        navigate('/')
-    },3000)
+    // setTimeout(()=>{
+    //     navigate('/')
+    // },10000)
 
 
     return(
@@ -22,6 +22,12 @@ export const OrderSuccess = () => {
                 <strong>
                     Pedido con exito!
                 </strong>
+                <img
+        src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/adventure.png"
+        alt="Imagen FinalBoss success"
+        className="success-img"
+        style={{ width: '10%', marginLeft: 'auto' }}
+    />
                 </h2>
                 <div className ="order-details">
             <p>Date: {store.orderSuccess?.date} </p>

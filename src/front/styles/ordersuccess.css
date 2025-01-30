@@ -48,3 +48,16 @@
     font-size: 1.5rem;
     margin-bottom: 15px;
 }
+
+.success-img{
+    width: 250px;
+    display: block;
+    margin: 10px auto; 
+    border-radius: 10px; 
+
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.success-img:hover{
+    transform: scale(1.2); 
+}
