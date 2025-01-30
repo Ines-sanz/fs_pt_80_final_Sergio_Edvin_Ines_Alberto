@@ -9,9 +9,9 @@ export const OrderSuccess = () => {
     const navigate = useNavigate()
 
 
-    // setTimeout(()=>{
-    //     navigate('/')
-    // },3000)
+    setTimeout(()=>{
+        navigate('/')
+    },3000)
 
 
     return(
