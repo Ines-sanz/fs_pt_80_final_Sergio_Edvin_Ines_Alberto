@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 import { Link, useLocation } from "react-router-dom";
+import "../../styles/ordersuccess.css";
 
 
 export const OrderSuccess = () => {
     const location = useLocation();
     const { amount, paymentIntentId } = location.state || {};
     const [order, setOrder] = useState(null);
-
+    
     if (!order) {
         return <p>Loading...</p>;
     }

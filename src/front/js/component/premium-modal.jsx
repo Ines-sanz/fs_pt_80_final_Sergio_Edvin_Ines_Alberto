@@ -21,12 +21,12 @@ export const PremiumModal = () => {
   };
 
   return (<>
- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#premiumModal">
+ <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#premiumModal">
 </button>
-<div class="modal fade " id="premiumModal" tabindex="-1" aria-labelledby="premiumModalLabel" aria-hidden="true">
-  <div class=" modal-lg modal-dialog p-5">
-    <div class="modal-content my-modal-sus">
-      <div className="d-flex justify-content-end p-3"><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<div className="modal fade " id="premiumModal" tabindex="-1" aria-labelledby="premiumModalLabel" aria-hidden="true">
+  <div className=" modal-lg modal-dialog p-5">
+    <div className="modal-content my-modal-sus">
+      <div className="d-flex justify-content-end p-3"><button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
      </div>
     <div className="row  justify-content-end">
 <div className="col-6 pe-5 text-center">
