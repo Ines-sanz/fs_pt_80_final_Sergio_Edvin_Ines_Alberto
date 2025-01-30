@@ -60,9 +60,9 @@ class Orders(db.Model):
     address = db.Column(db.String, nullable=False)
     city = db.Column(db.String, nullable=False)
     postal_code = db.Column(db.Integer, nullable=False)
-    country = db.Column(db.String, nullable=False)
+    country = db.Column(db.String, nullable=True)
     buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
 
     #Relationships
     products_in_order = db.relationship('ProductsInOrder', backref='orders')
@@ -104,6 +104,7 @@ class Checkout(db.Model):
     __tablename__ = 'checkout'
     id = db.Column(db.Integer, primary_key=True)
     payment_method = db.Column(db.String, nullable=False)
+    stripe_id = db.Column(db.String, nullable=False)
     status = db.Column(db.Enum('Pending', 'Paid', 'Sent','Transit','Received', name='status_enum'), nullable=False)
     order_id = db.Column(db.Integer, db.ForeignKey('orders.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

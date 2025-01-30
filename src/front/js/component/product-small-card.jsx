@@ -30,7 +30,7 @@ export const ProductCard = (props) => {
       actions.toggleFav(newFav);
     }
   };
-const handleShopping = () => {
+const handleShopping = async () => {
   if (!store.isLogged) {
     if (!store.showLoginModal) {
       
@@ -44,7 +44,7 @@ const handleShopping = () => {
       user_id: store.user.id,
       product_id: props.id,
     };
-    actions.toggleCart(newShoppingItem);
+    await actions.toggleCart(newShoppingItem);
   }
 };
 
