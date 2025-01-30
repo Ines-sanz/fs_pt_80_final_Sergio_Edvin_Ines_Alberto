@@ -1,40 +1,50 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, {useContext} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
+import "../../styles/ordersuccess.css";
 
 
 export const OrderSuccess = () => {
-    const location = useLocation();
-    const { amount, paymentIntentId } = location.state || {};
-    const [order, setOrder] = useState(null);
+    const {store, actions} = useContext(Context);
+    const navigate = useNavigate()
 
-    if (!order) {
-        return <p>Loading...</p>;
-    }
+
+    setTimeout(()=>{
+        navigate('/')
+    },10000)
+
 
     return(
-        <div>
+        <div className="order-container">
+            <div className="order-card">
 
-                <h2>
-                    Order Successful!
+                <h2 className="order-title">
+                <strong>
+                    Pedido con exito!
+                </strong>
+                <img
+        src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/adventure.png"
+        alt="Imagen FinalBoss success"
+        className="success-img"
+        
+    />
                 </h2>
-                <div>
-            <p>Date: {order.date} </p>
-            <p>Subtotal: {order.subtotal_amount} </p>
-            <p>Total: {order.total_amount} </p>
-            <p>Discount: {order.discount} </p>
-            <p>Address: {order.address} </p>
-            <p>City: {order.city} </p>
-            <p>Postal Code: {order.postal_code} </p>
-            <p>Country {order.country} </p>
-            <p>Buyer ID: {order.buyer_id} </p>
-            <p>Seller ID: {order.seller_id} </p>
+                <div className ="order-details">
+            <p>Date: {store.orderSuccess?.date} </p>
+            <p>Subtotal: {store.orderSuccess?.subtotal_amount} </p>
+            <p>Total: {store.orderSuccess?.total_amount} </p>
+            <p>Discount: {store.orderSuccess?.discount} </p>
+            <p>Address: {store.orderSuccess?.address} </p>
+            <p>City: {store.orderSuccess?.city} </p>
+            <p>Postal Code: {store.orderSuccess?.postal_code} </p>
                 </div>
                 <div>
                     <Link to="/">
-                    <button>
+                    <button className="home-button">
                         Home
                     </button>
                     </Link>
+            </div>
                 </div>
         </div>
 
