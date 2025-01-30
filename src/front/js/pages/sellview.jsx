@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/sellview.css";
 import { useNavigate } from "react-router-dom";
 import { PhotoUpload } from "../component/photoupload.jsx";
+import { LoginModal } from "../component/login-modal.jsx";
 
 //import { LoginModal } from "../component/login-modal.jsx";
 
@@ -38,14 +39,15 @@ export const SellView = () => {
         // Resto de lógica para enviar el formulario
     };
 
-    // useEffect(() => {
-    //                     window.scrollTo(0, 0); 
-    //                     actions.setShowLoginModal(false); 
-    //                 }, []);
+    useEffect(() => {
+                         window.scrollTo(0, 0); 
+                         actions.setShowLoginModal(false); 
+                     }, []);
 
 
     return (
         <div className="sell-container">
+         {store.showLoginModal && <LoginModal />}
             {/*{store.showLoginModal && <LoginModal />*/}
             <section className="text-center mb-4">
                 <h1 className="title">¡Empieza a vender!</h1>
