@@ -12,6 +12,7 @@ from api.admin import setup_admin
 from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
 import stripe
+import cloudinary
 
 # from models import Person
 
@@ -30,6 +31,13 @@ jwt = JWTManager(app)
 
 # >>>>>>> 761a4d467e04d943c47df102916c0cb61f7ef90e
 # database condiguration
+
+#Configure Cloudinary
+cloudinary.config(
+    cloud_name=os.getenv('CLOUDINARY_CLOUD_NAME'),
+    api_key=os.getenv('CLOUDINARY_API_KEY'),
+    api_secret=os.getenv('CLOUDINARY_API_SECRET')
+)
 
 db_url = os.getenv("DATABASE_URL")
 if db_url is not None:

@@ -144,7 +144,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       sellProduct: async (formData, navigate) => {
         const store = getStore();
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/product`, {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -157,7 +157,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
           if (response.ok) {
             alert("Producto publicado con éxito");
-            navigate("/profile");
+            navigate("/");
           } else {
             alert(data.msg || "Error al publicar el producto");
           }
@@ -249,6 +249,32 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         } catch (error) {
           console.error(error);
+        }
+      },
+
+      uploadImageToBackend: async (selectedFile) => {
+        if (!selectedFile) {
+          alert("Por favor, selecciona un archivo.");
+          return null;
+        }
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/upload`, {
+            method: "POST",
+            body: formData,
+          });
+          const data = await response.json();
+          if (response.ok && data.secure_url) {
+            return data.secure_url;
+          } else {
+            alert(data.error || "Error al subir la imagen.");
+            return null;
+          }
+        } catch (error) {
+          console.error("Error al subir la imagen:", error);
+          alert("Error de conexión al subir la imagen.");
+          return null;
         }
       },
 
