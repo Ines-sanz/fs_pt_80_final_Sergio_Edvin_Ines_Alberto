@@ -1,19 +1,88 @@
 import React, { useContext, useState, useEffect } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/perfil.css";
+import { Link } from "react-router-dom";
 
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
     const [userData, setUserData] = useState(null);
+    const [showUserList, setShowUserList] = useState(false); // Estado para mostrar la lista de usuarios
+    const [users, setUsers] = useState([]); // Estado para almacenar la lista de usuarios
+    const [followedUsers, setFollowedUsers] = useState(new Set(userData?.following_users.map(user => user.id) || []));
+    const [favoritesDetails, setFavoritesDetails] = useState([]); // Detalles de productos favoritos
 
     useEffect(() => {
-        if (store.isLogged && store.user) {
-            setUserData(store.user); // Asegúrate de que `store.user` no sea null
-            actions.getFavorites();
+        const fetchUserData = async () => {
+            const data = await actions.getUserProfile(store.user.id); // Obtiene el perfil del usuario actual
+            setUserData(data);
+            setFollowedUsers(new Set(data.following_users.map(user => user.id))); // Guardamos los seguidos en local
+            
+
+            if (data?.favorites?.length > 0) {
+                // Obtener los detalles de los productos favoritos
+                const details = await Promise.all(
+                    data.favorites.map(fav => actions.getProductDetails(fav.product_id))
+                );
+                setFavoritesDetails(details); // Guarda los detalles de los productos favoritos
+            }
+        };
+
+        fetchUserData();
+    }, [store.user.id]);
+
+     // Función para obtener usuarios desde la API
+     const fetchUsers = async () => {
+        console.log("Cargando usuarios desde el action getAllUsers...");
+        await actions.getAllUsers(); // Llama al action en flux.js
+        const allUsers = store.users; // Lista global de usuarios desde el store
+    
+        // Actualizamos followedUsers para incluir la lista actualizada del usuario
+        const updatedUserData = await actions.getUserProfile(store.user.id);
+        setFollowedUsers(new Set(updatedUserData.following_users.map(user => user.id))); // Sincroniza los seguidos
+        setUsers(allUsers); // Asigna la lista de usuarios al estado local
+    };
+
+    const handleFollowUser = async (userId) => {
+        if (followedUsers.has(userId)) {
+            // Si ya está seguido, lo dejamos de seguir
+            await actions.unfollowUser(userId);
+            setFollowedUsers(prev => {
+                const updated = new Set(prev);
+                updated.delete(userId);
+                return updated;
+            });
+        } else {
+            // Si no está seguido, lo seguimos
+            await actions.followUser(userId);
+            setFollowedUsers(prev => new Set(prev).add(userId));
         }
-    }, [store.isLogged, store.user]);
+    
+        // Refrescar el perfil del usuario actual después de seguir o dejar de seguir
+        const updatedUserData = await actions.getUserProfile(store.user.id);
+        setUserData(updatedUserData);
+    };
+
+    const handleLogout = () => {
+        actions.logout(); // Llama a la función logout definida en flux.js
+    };
+    
+    
     
 
+    useEffect(() => {
+        setUsers(store.users);
+    }, [store.users]); // Se ejecuta cuando cambia la lista global de usuarios
+    
+
+    // Función para manejar el clic en el botón "+ Usuarios"
+    const handleShowUserList = async () => {
+        console.log("Clic en + Usuarios");
+        if (!showUserList) {
+            await fetchUsers(); // Forzar la sincronización de usuarios y seguidores
+        }
+        setShowUserList(!showUserList);
+    };
+    
 
     // Estado para controlar si se muestra "Registrarse" o "Login"
     const [isRegister, setIsRegister] = useState(false);
@@ -36,6 +105,15 @@ export const Perfil = () => {
             window.scrollTo(0, 0); 
         }, []);
 
+    useEffect(() => {
+        console.log("Estado de showUserList:", showUserList);
+    }, [showUserList]);
+        
+    const filteredUsers = users.filter(user => user.id !== store.user.id);
+
+    if (store.isLogged && !userData) {
+        return <p>Cargando datos del usuario...</p>;
+    }
 
     if (store.isLogged && userData) {
         return (
@@ -47,7 +125,13 @@ export const Perfil = () => {
                             alt="Avatar del usuario"
                             className="profile-avatar-log"
                         />
+                        <div className="logout-button-container">
+                            <button className="btn btn-secondary logout-btn" onClick={handleLogout}>
+                                Cerrar sesión
+                            </button>
+                        </div>
                     </div>
+
                     <div className="profile-info-log">
                         <h1 className="profile-name-log">{userData.userName}</h1>
                         <p className="profile-email-log">{userData.email}</p>
@@ -57,9 +141,48 @@ export const Perfil = () => {
                         <div className="profile-stats-log">
                             <span className="followers-log">{userData.followed_by.length} Seguidores</span>
                             <span className="following-log">{userData.following_users.length} Seguidos</span>
+                            <button 
+                                className="btn btn-primary user-list-btn" 
+                                onClick={handleShowUserList}
+                            >
+                                + Usuarios
+                            </button> 
                         </div>
                     </div>
                 </div>
+    
+                {/* Modal de lista de usuarios */}
+                {showUserList && (
+                    <div className="user-list-modal">
+                        <h3 className="modal-title">Lista de Usuarios</h3>
+                        <button className="close-modal" onClick={handleShowUserList}>X</button>
+                        <div className="user-list">
+                            {filteredUsers.length > 0 ? (
+                                filteredUsers.map((user) => (
+                                    <div key={user.id} className="user-item">
+                                        <img src={user.avatar || "default-avatar.png"} alt={user.userName} className="user-avatar" />
+                                        <div className="user-info">
+                                            {/* Hacemos el nombre del usuario clicable */}
+                                            <Link to={`/perfil/${user.id}`} className="user-name-link">
+                                                <h5>{user.userName}</h5>
+                                            </Link>
+                                            <p>{user.itemsForSale || 0} artículos en venta</p>
+                                            <button 
+                                                className={`btn btn-follow ${followedUsers.has(user.id) ? "followed" : ""}`} 
+                                                onClick={() => handleFollowUser(user.id)}
+                                            >
+                                                {followedUsers.has(user.id) ? "Seguido" : "Seguir +"}
+                                            </button>
+                                        </div>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No hay usuarios disponibles.</p>
+                            )}
+                        </div>
+                    </div>
+                )}
+    
                 <div className="profile-description-log">
                     <p>{userData.description || "Descripción no proporcionada."}</p>
                     {!userData.subscription && (
@@ -69,13 +192,13 @@ export const Perfil = () => {
                 <div className="profile-section-log">
                     <h2>Favoritos</h2>
                     <div className="horizontal-scrollable">
-                        <div className="row flex-nowrap pt-1">
-                            {store.favorites?.length > 0 ? (
-                                store.favorites.map((product) => (
-                                    <div key={product.id} className="favorite-item-log">
-                                        <img src={product.img} alt={product.name} className="favorite-img-log" />
-                                        <p>{product.name}</p>
-                                        <span>{product.price} €</span>
+                    <div className="row flex-nowrap pt-1">
+                            {favoritesDetails.length > 0 ? (
+                                favoritesDetails.map((fav) => (
+                                    <div key={fav.id} className="favorite-item-log">
+                                        <img src={fav.img} alt={fav.name} className="favorite-img-log" />
+                                        <p>{fav.name}</p>
+                                        <span>{fav.price} €</span>
                                     </div>
                                 ))
                             ) : (
@@ -135,7 +258,6 @@ export const Perfil = () => {
 
                                     // Verificamos que las contraseñas coincidan
                                     if (formData.password !== formData.repeatPassword) {
-                                        alert("Las contraseñas no coinciden. Por favor, verifica e inténtalo de nuevo.");
                                         return;
                                     }
 
