@@ -13,6 +13,7 @@ from api.commands import setup_commands
 from flask_jwt_extended import JWTManager
 import stripe
 import cloudinary
+import cloudinary.uploader
 
 # from models import Person
 

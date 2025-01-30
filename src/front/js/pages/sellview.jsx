@@ -27,7 +27,7 @@ export const SellView = () => {
         price: "",
         seller_id: store.user.id, // Usuario autenticado como vendedor
     });
-    
+
 
     // Función para actualizar las opciones de "Tipo" según la categoría seleccionada
     const updateTypeOptions = (category) => {
@@ -35,7 +35,7 @@ export const SellView = () => {
         setTypeOptions(
             category === "consola" ? ["Sobremesa", "Portátil", "Híbrida"] :
                 category === "juego" ? ["Acción", "Aventura", "Rol", "Estrategia", "Deportes", "Peleas", "Plataformas", "Terror", "Indie"] :
-                    category === "accesorio" ? ["Accesorio"] : []
+                    category === "accesorios" ? ["Accesorios"] : []
         );
     };
 
@@ -43,22 +43,52 @@ export const SellView = () => {
         navigate("/suscripcion");
     };
 
-    const handleSell = () => {
-        // Aquí puedes manejar el envío del formulario junto con la URL de la foto cargada
-        console.log("Foto cargada:", uploadedPhoto);
-        // Resto de lógica para enviar el formulario
+
+    const handleImageUpload = (imageUrl) => {
+        setUploadedPhoto(imageUrl);
+        setFormData((prev) => ({ ...prev, img: imageUrl }));
     };
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: name === "state" || name === "promoted" ? value === "true" : value,
+        });
+    };
+    const validateForm = () => {
+        const { name, description, img, year, brand, platform, type, category, price } = formData;
+
+        if (!name || !description || !img || !year || !brand || !platform || !category || !type || !price) {
+            alert("No olvides subir la foto del producto 👾");
+            return false;
+        }
+        return true;
+    };
+
+    const handleSell = async () => {
+        console.log("Datos enviados:", formData);
+        if (!validateForm()) return;
+
+        try {
+            await actions.sellProduct(formData, navigate);
+            alert("Producto subido exitosamente");
+            navigate("/");
+        } catch (error) {
+            console.error("Error al subir el producto:", error);
+            alert("Hubo un error al subir el producto. Por favor, intenta de nuevo");
+        }
+    };
     useEffect(() => {
-                         window.scrollTo(0, 0); 
-                         actions.setShowLoginModal(false); 
-                     }, []);
+        window.scrollTo(0, 0);
+        actions.setShowLoginModal(false);
+    }, []);
 
 
     return (
-        
-        <div className="sell-container">
-         {store.showLoginModal && <LoginModal />}
+
+        <div className="__sell_container__">
+            {store.showLoginModal && <LoginModal />}
             {/*{store.showLoginModal && <LoginModal />*/}
             <section className="text-center mb-4">
                 <h1 className="title">¡Empieza a vender!</h1>
@@ -108,7 +138,7 @@ export const SellView = () => {
                                         <option value="">Selecciona</option>
                                         <option value="consola">Consola</option>
                                         <option value="juego">Juego</option>
-                                        <option value="accesorio">Accesorio</option>
+                                        <option value="accesorios">Accesorios</option>
                                     </select>
                                 </div>
                                 <div className="col-6 d-flex flex-column __form_properties__">
@@ -121,8 +151,8 @@ export const SellView = () => {
                                         onChange={handleChange} required
                                     >
                                         <option value="">Selecciona</option>
-                                        <option value="True">Nuevo</option>
-                                        <option value="False">Usado</option>
+                                        <option value="true">Nuevo</option>
+                                        <option value="false">Usado</option>
                                     </select>
                                 </div>
                             </div>
@@ -138,8 +168,7 @@ export const SellView = () => {
                                 className="form-control"
                                 value={formData.brand}
                                 placeholder="Marca"
-                                onChange={handleChange}
-                                required
+                                onChange={handleChange} required
                             />
                         </div>
                         <div className="col-md-6 d-flex flex-column __form_properties__">
@@ -171,7 +200,14 @@ export const SellView = () => {
                         </div>
                         <div className="col-md-6 d-flex flex-column __form_properties__">
                             <label htmlFor="type" className="mb-2">Tipo</label>
-                            <select id="type" className="form-select">
+                            <select
+                                name="type"
+                                id="type"
+                                className="form-select"
+                                value={formData.type}
+                                onChange={handleChange}
+                                required
+                            >
                                 <option value="">Selecciona</option>
                                 {typeOptions.map((option, index) => (
                                     <option key={index} value={option}>

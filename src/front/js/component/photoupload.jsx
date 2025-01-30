@@ -24,7 +24,7 @@ export const PhotoUpload = ({ onUploadSuccess }) => {
 
         if (imageUrl) {
             setUploadedUrl(imageUrl);
-            alert("Foto subida con éxito ✅");
+            alert("Foto subida con éxito ✨ ");
             onUploadSuccess(imageUrl);
         } else {
             alert("Error al subir la foto 📢");

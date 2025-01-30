@@ -188,6 +188,7 @@ def login():
 @api.route('/product', methods=['POST']) 
 @jwt_required()     
 def create_product():
+    print(request.json)
     try:
         id = get_jwt_identity()
         user = Users.query.get(id)
