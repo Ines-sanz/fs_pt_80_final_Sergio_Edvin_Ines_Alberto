@@ -1,0 +1,65 @@
+.product-bg-bg{
+    background-color: white;
+    padding: 8px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    border: solid #FCEE21 6px;
+    min-height: 350px;
+}
+
+.big-c-brand{
+    font-family: "Kanit", serif;
+    font-weight: 300; 
+    color: #AFAFB2;
+    font-size: 25px;
+}
+
+.big-c-name{
+    width: 100%;
+    overflow: hidden;
+    font-family: "Kanit", serif;
+    font-weight: 400; 
+    color: white;
+    font-size: 34px;
+}
+.big-c-price{
+    font-family: "Kanit", serif;
+    font-weight: 500; 
+    letter-spacing: 1px; 
+    color: white;
+    font-size: 32px;
+    background-color: #3A39FF;
+    padding: 6px 26px ;
+    border-radius: 30px;
+}
+
+.fav-icon{
+   cursor: pointer;
+    font-size: 30px;
+    color: rgba(255, 255, 255);
+    opacity: 0.4;
+    transform: ease 0.2s;
+}
+
+.fav-icon:hover {
+    color: white;
+    opacity: 0.7;
+    transform: scale(1.1);
+}
+
+.plus-icon{
+    cursor: pointer;
+    font-size: 32px;
+    color: rgba(255, 255, 255);
+    opacity: 0.4;
+    transform: ease 0.2s;
+    margin-right: 10px;
+}
+
+.plus-icon:hover {
+    color: #08B5F9;
+    opacity: 1;
+    transform: scale(1.1);
+}

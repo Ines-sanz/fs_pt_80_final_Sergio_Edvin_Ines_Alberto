@@ -1,0 +1,119 @@
+body {
+    font-family: "Kode Mono", sans-serif;
+    background-color: black;
+    color:white;
+}
+
+.__product_container__ {
+    background-color: black;
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+
+.brand {
+    font-size: 1.2rem;
+    color: rgb(214, 211, 211); 
+    margin-bottom: 0.5rem;
+}
+
+.__product_header__ {
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    gap: 2rem;
+}
+
+.__product_name__ {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: white;
+    margin-left: 1rem;
+}
+.__product_image__ {
+    max-width: 100%;
+    width: 200%;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
+}
+
+.product-info p {
+    margin-bottom: 2rem; /* Mayor separación entre líneas */
+}
+
+.product-info .rating {
+    font-size: 1.5rem;
+    color:rgb(246, 205, 20);
+    margin-left: 1rem;
+}
+
+.__info_label__ {
+    font-size: 1rem;
+    color: rgb(205, 202, 202);
+    margin-bottom: 0.3rem;
+}
+
+.__info_value__ {
+    font-size: 1.5rem; /* Resaltar valores */
+    font-weight: bold;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.__seller_avatar__ {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Circular */
+    object-fit: cover;
+    margin-right: 0.5rem;
+}
+
+.price-wrapper {
+    text-align: right;
+    margin-top: 2rem;
+}
+
+.__price_value__ {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    background-color: rgb(19, 126, 241);
+    padding: 0.5rem 1rem;
+    border-radius: 30px; 
+}
+
+.__product_description__ {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgb(205, 202, 202);
+    margin-bottom: 2rem;
+}
+
+
+.__product_button__ .btn {
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 0.8rem 2rem;
+    background-color: rgb(240, 228, 5);
+    color: black;
+    border: none;
+    border-radius: 10px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.__product_button__ .btn:hover {
+    background-color: rgb(228, 196, 15);
+    transform: scale(1.1);
+}
+
+.rating {
+    font-size: 1.5rem;
+    color: #ffc107;
+}

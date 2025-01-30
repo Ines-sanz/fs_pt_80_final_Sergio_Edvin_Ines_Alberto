@@ -1,0 +1,146 @@
+body {
+    font-family: "Kode Mono", sans-serif;
+    background-color: black;
+}
+
+.__sell_container__ {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem; 
+}
+
+.title {
+    font-size: 2rem;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.subtitle {
+    text-align: left;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+
+.photo-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.__image__ {
+    width: 15rem; 
+    height: 15rem; 
+    background-color:rgb(67, 64, 64);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px; 
+    margin-bottom: 10px; 
+    cursor: pointer;
+}
+
+.photo-input {
+    display: none;
+    width: 50;
+}
+
+.upload-text {
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
+
+.__premium_button__ {
+    background-color: rgb(19, 126, 241);
+    border: none;
+    color: white;
+    padding: 1rem 2rem; 
+    border-radius: 8px; 
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.__premium_button__:hover {
+    background-color:rgb(3, 49, 157);
+    transform: scale(1.09);
+}
+
+.__form_properties__ {
+    border-radius: 40px;
+}
+
+.form-control {
+    background-color: rgb(76, 74, 74);
+    border: none;
+    font-size: 1rem;
+    border-radius: 2rem;
+    color: white;
+}
+
+.form-control:focus {
+    background-color: rgb(105, 105, 105); 
+    color: whitesmoke;
+    outline: none; 
+}
+
+.form-select {
+    background-color: rgb(76, 74, 74);
+    border: none;
+    color: rgb(182, 177, 177);
+    font-size: 1rem;
+    border-radius: 2rem;
+}
+
+.form-select:focus {
+    background-color: rgb(105, 105, 105); 
+    color: whitesmoke;
+    outline: none; 
+}
+
+.__price_input__ {
+    background-color: rgb(41, 189, 238);
+    border: none;
+    color:white; 
+    padding: 0.5rem 1rem; 
+    border-radius: 15px; 
+    text-align: center;
+    max-width: 150px; 
+    font-size: 1.0rem; 
+}
+
+.__price_input__::placeholder {
+    color: rgb(19, 27, 111); 
+    font-weight: bold;
+}
+
+.__price_input__:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.75);
+}
+
+
+.__sell_button__ {
+    font-size: 1.7rem;
+    font-weight: bold;
+    background-color: rgb(240, 228, 5);
+    border: none;
+    color: black;
+    padding: 0.5rem 1.5rem; 
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: transform 0.2s ease;
+}
+
+.__sell_button__:hover {
+    background-color: rgb(228, 196, 15);
+    transform: scale(1.10);
+}
+
+.bt_sell {
+    font-size: 1.4rem !important;
+    font-weight: bold;
+}

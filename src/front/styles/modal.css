@@ -1,0 +1,29 @@
+.my-modal-login{
+    background-image: url("https://res.cloudinary.com/dr0wlij0c/image/upload/v1736524948/web-illustrations/oaomqvzfdzp5we50d9ka.png");
+    border: 0;
+    height: 55vh;
+    background-size: cover;
+}
+.my-modal-sus{
+    background-image: url("https://res.cloudinary.com/dr0wlij0c/image/upload/v1737373786/suscription-28_tis2u8.png");
+    border: 0;
+    height: 55vh;
+    background-size: cover;    
+}
+.my-modal-text{
+   font-family:"Kanit", serif;
+   font-weight: 300;
+    font-size: 18px;
+    color: #AFAFB2;
+}
+
+.sus-modal-text{
+   font-family:"Kanit", serif;
+    font-weight: 600;
+    font-size: 50px;
+}
+
+.sus-modal-text span{
+    font-weight: 200;
+    font-size: 16px;
+}

@@ -1,0 +1,10 @@
+.btn-color {
+    background-color: #6c757d !important; /* Gris estándar */
+    border-color: #6c757d !important;
+    color: white !important; /* Texto blanco para contraste */
+}
+
+.btn-color:hover {
+    background-color: #5a6268 !important; /* Un gris más oscuro al hacer hover */
+    border-color: #545b62 !important;
+}
