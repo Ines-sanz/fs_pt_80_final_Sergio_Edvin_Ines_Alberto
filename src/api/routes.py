@@ -9,8 +9,6 @@ from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_requir
 import stripe
 import os
 import datetime
-import cloudinary
-import cloudinary.uploader
 
 api = Blueprint('api', __name__)
 stripe.api_key = os.getenv("STRIPE_API_KEY")
@@ -219,16 +217,17 @@ def create_product():
         type = request.json.get('type', None)
         category = request.json.get('category', None)
         state = request.json.get('state', None)
-        #promoted = request.json.get('promoted', None) 
+        promoted = request.json.get('promoted', None) 
         price = request.json.get('price', None)
-    
+        seller_id = id
         
+
         #validate required fields
-        if not name or not description or not img or not year or not brand or not platform or not type or not category  or not state or not price:
+        if not name or not description or not img or not year or not brand or not platform or not category or not type or not state or not promoted or not price:
             return jsonify({'msg': 'Please fill all the data'}), 400
         
         #create a new product
-        new_product = Products(name=name, description=description, img=img, year=year, brand=brand, platform=platform, category=category, type=type, state=state, price=price, seller_id = id)
+        new_product = Products(name=name, description=description, img=img, year=year, brand=brand, platform=platform, category=category, type=type, state=state, promoted=promoted, price=price, seller_id = id)
         db.session.add(new_product)
         db.session.commit()
 
@@ -798,12 +797,3 @@ def remove_from_shopping_cart(product_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
 
-# Subimos productos al Cloudinary
-@api.route('/upload', methods=['POST'])
-def upload():
-    file_to_upload = request.files['file']
-    if file_to_upload:
-        upload = cloudinary.uploader.upload(file_to_upload)
-        print('----------Url donde está la imagen-----------', upload)
-        return jsonify(upload)
-    return jsonify({"error": "No file uploaded"}), 400

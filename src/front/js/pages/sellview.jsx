@@ -3,80 +3,49 @@ import { Context } from "../store/appContext";
 import "../../styles/sellview.css";
 import { useNavigate } from "react-router-dom";
 import { PhotoUpload } from "../component/photoupload.jsx";
+
 //import { LoginModal } from "../component/login-modal.jsx";
 
 export const SellView = () => {
     const { store, actions } = useContext(Context);
     const [typeOptions, setTypeOptions] = useState([]);
-    const navigate = useNavigate();
     const [uploadedPhoto, setUploadedPhoto] = useState("");
+    const navigate = useNavigate();
 
-    const [formData, setFormData] = useState({
-        name: "",
-        description: "",
-        img: "",
-        year: "",
-        brand: "",
-        platform: "",
-        type: "",
-        category: "",
-        state: false,
-        promoted: false,
-        price: "",
-        seller_id: store.user.id, // Usuario autenticado como vendedor
-    });
-
+    // Función para actualizar las opciones de "Tipo" según la categoría seleccionada
     const updateTypeOptions = (category) => {
-        setFormData({ ...formData, category, type: "" });
-        setTypeOptions(
-            category === "consola" ? ["Sobremesa", "Portátil", "Híbrida"] :
-                category === "juego" ? ["Acción", "Aventura", "Rol", "Estrategia", "Deportes", "Peleas", "Plataformas", "Terror", "Indie"] :
-                    category === "accesorio" ? ["Accesorio"] : []
-        );
+        if (category === "consola") {
+            setTypeOptions(["Sobremesa", "Portátil", "Híbrida"]);
+        } else if (category === "juego") {
+            setTypeOptions([
+                "Acción", "Aventura", "Rol (RPG)", "Estrategia", "Deportes",
+                "Peleas", "Plataformas", "Terror/Survival Horror","Indie",
+            ]);
+        } else if (category === "accesorio") {
+            setTypeOptions(["Accesorio"]);
+        } else {
+            setTypeOptions([]);
+        }
     };
 
     const handleGoToPremium = () => {
         navigate("/suscripcion");
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+    const handleSell = () => {
+        // Aquí puedes manejar el envío del formulario junto con la URL de la foto cargada
+        console.log("Foto cargada:", uploadedPhoto);
+        // Resto de lógica para enviar el formulario
     };
 
-    const handleImageUpload = (imageUrl) => {
-        setUploadedPhoto(imageUrl);
-        setFormData((prev) => ({ ...prev, img: imageUrl }));
-    };
-
-    const validateForm = () => {
-        const { name, description, img, year, brand, platform, type, category, state, price } = formData;
-
-        if (!name || !description || !img || !year || !brand || !platform || !category || !type || !state || !price) {
-            alert("No olvides subir primero la foto 👾");
-            return false;
-        }
-        return true;
-    };
-
-    const handleSell = async () => {
-        if (!validateForm()) return;
-
-        try {
-            await actions.sellProduct(formData, navigate);
-            alert("Producto subido exitosamente ✅");
-            navigate("/");
-        } catch (error) {
-            console.error("Error al subir el producto:", error);
-            alert("Hubo un error al subir el producto. Por favor, intenta de nuevo ⚠️");
-        }
-    };
     // useEffect(() => {
     //                     window.scrollTo(0, 0); 
     //                     actions.setShowLoginModal(false); 
     //                 }, []);
+
+
     return (
-        <div className="__sell_container__">
+        <div className="sell-container">
             {/*{store.showLoginModal && <LoginModal />*/}
             <section className="text-center mb-4">
                 <h1 className="title">¡Empieza a vender!</h1>
@@ -85,7 +54,7 @@ export const SellView = () => {
 
             <section className="row align-items-center mb-4">
                 <div className="col-md-4 d-flex justify-content-center">
-                    <PhotoUpload onUploadSuccess={handleImageUpload} />
+                    <PhotoUpload onUploadSuccess={setUploadedPhoto} />
                 </div>
                 <div className="col-md-8 d-flex flex-column justify-content-center">
                     <p className="mb-3">
@@ -105,12 +74,9 @@ export const SellView = () => {
                             <label htmlFor="name" className="mb-2">Nombre</label>
                             <input
                                 type="text"
-                                name="name"
-                                id="name"
                                 className="form-control"
-                                value={formData.name}
+                                id="name"
                                 placeholder="Nombre"
-                                onChange={handleChange} required
                             />
                         </div>
                         <div className="col-md-6">
@@ -118,11 +84,9 @@ export const SellView = () => {
                                 <div className="col-6 d-flex flex-column __form_properties__">
                                     <label htmlFor="category" className="mb-2">Categoría</label>
                                     <select
-                                        name="category"
-                                        id="category"
                                         className="form-select"
-                                        onChange={(e) => updateTypeOptions(e.target.value)} required
-                                    >
+                                        id="category"
+                                        onChange={(e) => updateTypeOptions(e.target.value)}>
                                         <option value="">Selecciona</option>
                                         <option value="consola">Consola</option>
                                         <option value="juego">Juego</option>
@@ -132,15 +96,11 @@ export const SellView = () => {
                                 <div className="col-6 d-flex flex-column __form_properties__">
                                     <label htmlFor="state" className="mb-2">Estado</label>
                                     <select
-                                        name="state"
-                                        id="state"
                                         className="form-select"
-                                        value={formData.state}
-                                        onChange={handleChange} required
-                                    >
+                                        id="state">
                                         <option value="">Selecciona</option>
-                                        <option value="True">Nuevo</option>
-                                        <option value="False">Usado</option>
+                                        <option value="nuevo">Nuevo</option>
+                                        <option value="usado">Usado</option>
                                     </select>
                                 </div>
                             </div>
@@ -151,26 +111,18 @@ export const SellView = () => {
                             <label htmlFor="brand" className="mb-2">Marca</label>
                             <input
                                 type="text"
-                                name="brand"
-                                id="brand"
                                 className="form-control"
-                                value={formData.brand}
+                                id="brand"
                                 placeholder="Marca"
-                                onChange={handleChange}
-                                required
                             />
                         </div>
                         <div className="col-md-6 d-flex flex-column __form_properties__">
                             <label htmlFor="year" className="mb-2">Año</label>
                             <input
-                                type="number"
-                                name="year"
-                                id="year"
+                                type="text"
                                 className="form-control"
-                                value={formData.year}
+                                id="year"
                                 placeholder="Año"
-                                min="1900"
-                                onChange={handleChange} required
                             />
                         </div>
                     </div>
@@ -179,22 +131,14 @@ export const SellView = () => {
                             <label htmlFor="platform" className="mb-2">Plataforma</label>
                             <input
                                 type="text"
-                                name="platform"
-                                id="platform"
                                 className="form-control"
-                                value={formData.platform}
+                                id="platform"
                                 placeholder="Plataforma"
-                                onChange={handleChange} required
                             />
                         </div>
                         <div className="col-md-6 d-flex flex-column __form_properties__">
                             <label htmlFor="type" className="mb-2">Tipo</label>
-                            <select
-                                name="type"
-                                id="type"
-                                className="form-select"
-                                value={formData.type}
-                                onChange={handleChange} required>
+                            <select id="type" className="form-select">
                                 <option value="">Selecciona</option>
                                 {typeOptions.map((option, index) => (
                                     <option key={index} value={option}>
@@ -207,27 +151,19 @@ export const SellView = () => {
                     <div className="d-flex flex-column __form_properties__">
                         <label htmlFor="description" className="mb-2">Descripción</label>
                         <textarea
-                            name="description"
                             id="description"
                             className="form-control"
-                            rows="3"
-                            value={formData.description}
                             placeholder="Escribe una descripción..."
-                            onChange={handleChange} required
-
+                            rows="3"
                         ></textarea>
                     </div>
                     <div className="d-flex flex-column w-50">
                         <label htmlFor="price" className="mb-2">Precio</label>
                         <input
                             type="number"
-                            name="price"
+                            className="price-input"
                             id="price"
-                            value={formData.price}
-                            className="__price_input__"
                             placeholder="€uros"
-                            min="1.01"
-                            onChange={handleChange} required
                         />
                     </div>
                     <div className="d-flex justify-content-center __sell_button__">
