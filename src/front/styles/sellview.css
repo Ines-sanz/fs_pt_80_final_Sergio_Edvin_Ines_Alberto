@@ -3,7 +3,7 @@ body {
     background-color: black;
 }
 
-.__sell_container__ {
+.sell-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 2rem; 
@@ -100,7 +100,7 @@ body {
     outline: none; 
 }
 
-.__price_input__ {
+.price-input {
     background-color: rgb(41, 189, 238);
     border: none;
     color:white; 
@@ -111,22 +111,24 @@ body {
     font-size: 1.0rem; 
 }
 
-.__price_input__::placeholder {
+.price-input::placeholder {
     color: rgb(19, 27, 111); 
     font-weight: bold;
 }
 
-.__price_input__:focus {
+.price-input:focus {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 123, 255, 0.75);
 }
 
 
 .__sell_button__ {
+    font-size: 1.7rem;
+    font-weight: bold;
     background-color: rgb(240, 228, 5);
     border: none;
     color: black;
-    padding: 0.5rem 1.5rem; 
+    padding: 0.75rem 1.5rem; 
     border-radius: 0.5rem;
     cursor: pointer;
     margin: 0 auto;
@@ -136,9 +138,4 @@ body {
 .__sell_button__:hover {
     background-color: rgb(228, 196, 15);
     transform: scale(1.10);
-}
-
-.bt_sell {
-    font-size: 1.5rem !important;
-    font-weight: bold;
 }
