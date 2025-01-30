@@ -56,7 +56,7 @@ export const SellView = () => {
 
 
     return (
-        <div className="__sell_container__">
+        
         <div className="sell-container">
          {store.showLoginModal && <LoginModal />}
             {/*{store.showLoginModal && <LoginModal />*/}
