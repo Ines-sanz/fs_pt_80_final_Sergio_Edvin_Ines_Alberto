@@ -11,7 +11,7 @@ export const OrderSuccess = () => {
 
     setTimeout(()=>{
         navigate('/')
-    },3000)
+    },10000)
 
 
     return(
@@ -20,8 +20,14 @@ export const OrderSuccess = () => {
 
                 <h2 className="order-title">
                 <strong>
-                    Order Successful!
+                    Pedido con exito!
                 </strong>
+                <img
+        src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/adventure.png"
+        alt="Imagen FinalBoss success"
+        className="success-img"
+        
+    />
                 </h2>
                 <div className ="order-details">
             <p>Date: {store.orderSuccess?.date} </p>
