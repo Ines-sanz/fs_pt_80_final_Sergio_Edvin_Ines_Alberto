@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useActionState, useContext } from "react";
 import { CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import "../../styles/checkoutform.css";
 import { useNavigate } from "react-router-dom";
+import { Context } from "../store/appContext";
 
 export const CheckoutForm = ({ totalAmount }) => {
+  const {actions} = useContext(Context);
   const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
@@ -77,6 +79,8 @@ export const CheckoutForm = ({ totalAmount }) => {
   .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          actions.userShoppingCart()
+          actions.modStore('orderSuccess', data.order)
           // Redirect to order success page
           navigate("/order-success", { state: { amount: totalAmount, paymentIntentId: paymentIntent.id } });
         })
