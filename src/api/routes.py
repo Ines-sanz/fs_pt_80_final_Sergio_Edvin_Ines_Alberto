@@ -6,9 +6,9 @@ from api.models import db, Products, Orders, ProductsInOrder, Checkout, Follower
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token, get_jwt_identity, jwt_required
+import datetime
 import stripe
 import os
-import datetime
 
 api = Blueprint('api', __name__)
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
@@ -707,38 +707,43 @@ def create_payment():
 @jwt_required()
 def payment_succeeded():
         try:
-            id = get_jwt_identity(id)
+            id = get_jwt_identity()
             user = Users.query.get(id)
             data = request.json
-            payment_intent_id = data.get('payment_intent_id')
+            print(data)
 
-            payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
-            if payment_intent.status != 'succeeded':
-                return jsonify({'msg': 'Pago sin exito'}), 400
+            # payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+            # if payment_intent.status != 'succeeded':
+            #     return jsonify({'msg': 'Pago sin exito'}), 400
             
             
             # getting items from the cart
-            cart_items = ShoppingCart.query.filter_by(user_id=id).all()  
+            cart_items = ShoppingCart.query.filter_by(user_id=id).all() 
+            shopping_cart_product_ids = [item.product_id for item in cart_items]
+            print(shopping_cart_product_ids) 
+            print(cart_items)
+            # print(data['amount']-700 if user.subscription else data['amount'])
+            print(user.serialize())
 
             #creating the order
             new_order = Orders(
                 date= datetime.today().strftime('%Y-%m-%d'),
-                subtotal_amount=float(payment_intent.amount -700),
+                subtotal_amount=float(data['amount']),
                 total_amount=float(data['amount']),
+                
+                discount= user.subscription,
+                
                 status = 'confirmed',
                 address = user.address,
                 city=user.city,
-                postal_code=user.postal_code,
+                postal_code=user.postalCode,
                 country=user.country,
-                buyer_id=id,
-                discount=user.discount
+                buyer_id=id
             )
 
-            db.session.add('subscription')
+            db.session.add(new_order)
+            db.session.commit()
 
-            #updated user subscription if chosen
-            if payment_intent.metadata.get('subscription'):
-                user.subscription = True
 
             # clearing cart after the order has been successful
             for item in cart_items:
@@ -750,6 +755,7 @@ def payment_succeeded():
         
         except Exception as e:
             db.session.rollback()
+            print(str(e))
             return jsonify({'msg': 'Error al procesar el pago'}), 500
         
 

@@ -60,9 +60,9 @@ class Orders(db.Model):
     address = db.Column(db.String, nullable=False)
     city = db.Column(db.String, nullable=False)
     postal_code = db.Column(db.Integer, nullable=False)
-    country = db.Column(db.String, nullable=False)
+    country = db.Column(db.String, nullable=True)
     buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
 
     #Relationships
     products_in_order = db.relationship('ProductsInOrder', backref='orders')

@@ -59,6 +59,7 @@ export const CheckoutForm = ({ totalAmount }) => {
       console.log('Payment succeeded!');
       console.log(paymentIntent);
     
+      
   {/* fetch(/payment-succeeded)*/}
 
   fetch(process.env.BACKEND_URL + '/api/payment-succeeded', {
@@ -69,6 +70,8 @@ export const CheckoutForm = ({ totalAmount }) => {
     },
     body: JSON.stringify({
       amount: totalAmount * 100,
+      payment_intent: paymentIntent, 
+      
     }),
   })
   .then((res) => res.json())
