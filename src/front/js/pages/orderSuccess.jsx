@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../store/appContext";
+import "../../styles/ordersuccess.css";
 
 
 export const OrderSuccess = () => {
@@ -14,11 +15,15 @@ export const OrderSuccess = () => {
 
 
     return(
-        <div>
-                <h2>
+        <div className="order-container">
+            <div className="order-card">
+
+                <h2 className="order-title">
+                <strong>
                     Order Successful!
+                </strong>
                 </h2>
-                <div>
+                <div className ="order-details">
             <p>Date: {store.orderSuccess?.date} </p>
             <p>Subtotal: {store.orderSuccess?.subtotal_amount} </p>
             <p>Total: {store.orderSuccess?.total_amount} </p>
@@ -29,10 +34,11 @@ export const OrderSuccess = () => {
                 </div>
                 <div>
                     <Link to="/">
-                    <button>
+                    <button className="home-button">
                         Home
                     </button>
                     </Link>
+            </div>
                 </div>
         </div>
 

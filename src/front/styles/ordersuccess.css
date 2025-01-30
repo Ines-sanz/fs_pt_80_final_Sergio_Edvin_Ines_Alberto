@@ -1,4 +1,50 @@
+/* .home-button {
+    background-color:rgb(0, 255, 234);
+    color: black;
+    border-radius: 10px;
+    border: none;
+    font-size: 1rem;
+} */
+
 .home-button {
-    background-color:yellow;
-    color: white;
+    background-color: #FCEE21;
+    border: none;
+    padding: 10px 20px; 
+    font-size: 1.5rem;
+    color: #000;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    width: 250px; 
+}
+
+.home-button:hover {
+    background-color: #33f8ff;
+}
+
+
+
+.home-button hover {
+    background-color: salmon;
+
+}
+.order-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.order-card {
+    background: rgb(51, 0, 0);
+    border-radius: 15px;
+    width: 600px;
+    padding: 24px;
+    text-align: center;
+}
+
+.order-title{
+    font-size: 1.5rem;
+    margin-bottom: 15px;
 }
