@@ -25,16 +25,16 @@ export const SellView = () => {
         state: false,
         promoted: false,
         price: "",
-        seller_id: store.user.id, // Usuario autenticado como vendedor
+        seller_id: store.user.id, // User autenticado como vendedor
     });
 
 
-    // Función para actualizar las opciones de "Tipo" según la categoría seleccionada
+    // Función opciones de "Tipo" según categoría seleccionada
     const updateTypeOptions = (category) => {
         setFormData({ ...formData, category, type: "" });
         setTypeOptions(
-            category === "consola" ? ["Sobremesa", "Portátil", "Híbrida"] :
-                category === "juego" ? ["Acción", "Aventura", "Rol", "Estrategia", "Deportes", "Peleas", "Plataformas", "Terror", "Indie"] :
+            category === "consolas" ? ["Sobremesa", "Portátil", "Híbrida"] :
+                category === "videojuegos" ? ["Acción", "Aventura", "Rol", "Estrategia", "Deportes", "Peleas", "Plataformas", "Terror", "Indie"] :
                     category === "accesorios" ? ["Accesorios"] : []
         );
     };
@@ -60,7 +60,7 @@ export const SellView = () => {
         const { name, description, img, year, brand, platform, type, category, price } = formData;
 
         if (!name || !description || !img || !year || !brand || !platform || !category || !type || !price) {
-            alert("No olvides subir la foto del producto 👾");
+            alert("No olvides subir la foto del producto o completar todos los campos ⚠️");
             return false;
         }
         return true;
@@ -72,7 +72,6 @@ export const SellView = () => {
 
         try {
             await actions.sellProduct(formData, navigate);
-            alert("Producto subido exitosamente");
             navigate("/");
         } catch (error) {
             console.error("Error al subir el producto:", error);
@@ -89,7 +88,6 @@ export const SellView = () => {
 
         <div className="__sell_container__">
             {store.showLoginModal && <LoginModal />}
-            {/*{store.showLoginModal && <LoginModal />*/}
             <section className="text-center mb-4">
                 <h1 className="title">¡Empieza a vender!</h1>
                 <p className="subtitle">Fácil y rápido, con total seguridad. Garantía Final Boss.</p>
@@ -136,8 +134,8 @@ export const SellView = () => {
                                         onChange={(e) => updateTypeOptions(e.target.value)} required
                                     >
                                         <option value="">Selecciona</option>
-                                        <option value="consola">Consola</option>
-                                        <option value="juego">Juego</option>
+                                        <option value="consolas">Consola</option>
+                                        <option value="videojuegos">Videojuego</option>
                                         <option value="accesorios">Accesorios</option>
                                     </select>
                                 </div>

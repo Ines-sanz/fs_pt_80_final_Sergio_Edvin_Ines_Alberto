@@ -148,7 +148,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("Enviando datos a /api/product:", payload);
 
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}api/product`, {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -160,10 +160,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json();
 
           if (response.ok) {
-            alert("Producto publicado con éxito");
+            alert("Producto publicado con éxito 🎉");
             navigate("/");
           } else {
-            alert(data.msg || "Error al publicar el producto");
+            alert(data.msg || "Error al publicar el producto ⚠️ ");
           }
         } catch (error) {
           console.error("Error al publicar producto:", error);

@@ -12,8 +12,16 @@ export const ProductView = () => {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const fetchedProduct = await actions.getProductById(id);
-            setProduct(fetchedProduct);
+            try {
+                const fetchedProduct = await actions.getProductById(id);
+                if (fetchedProduct) {
+                    setProduct(fetchedProduct);
+                } else {
+                    console.error("Producto no encontrado.");
+                }
+            } catch (error) {
+                console.error("Error al obtener el producto:", error);
+            }
         };
 
         const users = [
@@ -51,7 +59,7 @@ export const ProductView = () => {
     };
 
     if (!product) {
-        return <p>Cargando producto...</p>;
+        return <p>Producto no encontrado. Por favor, verifica el ID o inténtalo más tarde.</p>;
     }
 
     return (
