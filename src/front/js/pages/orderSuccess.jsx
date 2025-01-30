@@ -26,7 +26,7 @@ export const OrderSuccess = () => {
         src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/adventure.png"
         alt="Imagen FinalBoss success"
         className="success-img"
-        style={{ width: '10%', marginLeft: 'auto' }}
+        
     />
                 </h2>
                 <div className ="order-details">

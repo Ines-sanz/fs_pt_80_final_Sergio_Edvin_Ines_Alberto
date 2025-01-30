@@ -23,12 +23,6 @@
     background-color: #33f8ff;
 }
 
-
-
-.home-button hover {
-    background-color: salmon;
-
-}
 .order-container {
     display: flex;
     justify-content: center;
