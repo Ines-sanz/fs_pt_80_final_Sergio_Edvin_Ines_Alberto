@@ -1,0 +1,125 @@
+.my-navbar{
+    background-color: black;
+    font-family: "Kode Mono", serif;
+    font-weight: 500;
+    font-size: 22px;
+    letter-spacing: 2px; 
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+.my-navbar.transparent {
+    background-color: transparent; }
+.navbar-nav {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    width: 100%; 
+  }
+  
+.float{
+    color: #EDEDEF;
+    display: inline-block; 
+  position: relative; 
+  transition: transform 0.3s ease;
+}
+.float:hover{
+    color: #FCEE21;
+    transform: translateY(-5px);
+}
+.float:focus{
+    color: #FCEE21;
+}
+.my-dropdown button{
+    color: #19191d;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.my-dropdown button:hover{
+    color: #19191d;
+    background-color: hsla(56, 97%, 56%, 0.8);
+    border-radius: 30px;
+    transform: scale(1.1);
+}
+.my-dropdown button:focus{
+    color: #19191d;
+    background-color: hsla(56, 97%, 56%, 0.8);
+    border-radius: 30px;
+    transform: scale(1.1);
+}
+
+.my-navbar-button{
+    text-transform: uppercase;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    font-size: 18px;
+    padding: 2px;
+    border-radius: 10px;
+    border: #FCEE21 solid 1px;
+    text-decoration: none;
+}
+
+.my-navbar-button:hover{
+    color: #FCEE21;
+}
+
+
+.nav-shopping-bag{
+font-size: 30px;
+margin-top: 5px;
+margin-left: 5px;
+
+}
+
+.small-device{
+    display: none;
+    font-size: 30px;
+margin-top: 5px;
+margin-left: 5px;
+
+}
+
+.menu-icon{
+    color: white;
+    font-size: 32px;
+    margin-left: 10%;
+    border: none;
+}
+
+
+.navbar-collapse {
+    flex-direction: column !important;
+ }
+
+ .my-offcanvas, .offcanvas-shopping{
+    border: none;
+    background-color: #19191D;
+    
+ }
+
+ .my-offcanvas-text{
+    font-size: 30px;
+    color: white;
+ }
+
+ .offcanvas{
+    border: none;
+    width:30%;
+ }
+
+
+ @media(max-width: 990px){
+    .small-device{
+        display: flex;
+    }
+    .offcanvas{
+    width:50%;
+   
+ }
+ }
+ @media(max-width: 776px){
+    .offcanvas{
+    width:80%;
+   
+ }
+ }
