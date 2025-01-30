@@ -20,7 +20,7 @@ export const OrderSuccess = () => {
 
                 <h2 className="order-title">
                 <strong>
-                    Order Successful!
+                    Pedido con exito!
                 </strong>
                 </h2>
                 <div className ="order-details">
