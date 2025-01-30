@@ -46,7 +46,7 @@ export const PhotoUpload = ({ onUploadSuccess }) => {
     return (
         <div className="photo-upload">
             <label htmlFor="photo-input" className="__image__">
-                 <span class="fa-solid fa-plus"></span>
+                 <span className="fa-solid fa-plus"></span>
             </label>
             <input
                 type="file"
