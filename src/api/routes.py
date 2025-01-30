@@ -19,7 +19,6 @@ CORS(api)
 
 ## ······················································· Cómo USER (profile):
 
-#Funciona!!!
 @api.route('/register', methods=['POST'])          
 def register():
     try:
@@ -56,7 +55,7 @@ def register():
         db.session.rollback()
         return jsonify({'error':str(error)}), 400
     
-#lo he cambiado y ahora si que va, faltaba comprobar valores
+
 @api.route('/user/<int:user_id>', methods=['PUT'])       
 @jwt_required()
 def update_user(user_id):
@@ -105,8 +104,7 @@ def update_user(user_id):
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
-
-#funciona!!   
+   
 @api.route('/user/<int:user_id>', methods=['DELETE'])
 @jwt_required()      
 def delete_user(user_id):
@@ -140,10 +138,6 @@ def get_users():
     except Exception as error:
         return jsonify({'error': str(error)}), 400
 
-
-
-
-#he hecho este para traer solo un user, funciona!!
 @api.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     try:
@@ -159,9 +153,8 @@ def get_user(user_id):
         return jsonify({'error': str(error)}), 400
   
 
-  ##........................................................ COMO USER LOGIN 
+##........................................................ COMO USER LOGIN 
 
-#funciona!!
 @api.route('/login', methods=['POST'])  
 def login():
     try: 
@@ -187,18 +180,9 @@ def login():
             db.session.rollback()
             return jsonify({'error': str(error)}), 400
 
-#     @api.route('/protected' , methods=['GET'])
-# @jwt_required()
-# def protected():
-#     id = get_jwt_identity()
-#     user = User.query.get(id)
-#     if not user:
-#         return jsonify({"msg": "something went wrong"})
-#     return jsonify({"user": user.serialize()}), 200
-    
 
-    ##·······················································  Cómo USER(buy/sell):
-# funciona!!!!!
+##·······················································  Cómo USER(buy/sell):
+
 @api.route('/product', methods=['POST']) 
 @jwt_required()     
 def create_product():
@@ -236,7 +220,6 @@ def create_product():
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-#FUNCIONAAAAAAA!!!!!!!!!!!!!
 @api.route('/product/<int:product_id>', methods=['PUT'])  
 @jwt_required()
 def update_product(product_id):
@@ -275,7 +258,6 @@ def update_product(product_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-
 @api.route('/product/<int:product_id>', methods=['DELETE'])
 @jwt_required()
 def delete_product(product_id):
@@ -299,7 +281,6 @@ def delete_product(product_id):
         return jsonify({'error': str(error)}), 400
 
 
-#funciona!!!
 @api.route('/products', methods=['GET'])
 def get_products():
     try:
@@ -327,7 +308,7 @@ def get_products():
     except Exception as error:
         return jsonify({'error': str(error)})
     
-#funciona!!!
+
 @api.route('/product/<int:product_id>', methods=['GET'])  
 def get_product(product_id):
     try:
@@ -447,7 +428,7 @@ def get_favorites():
 
 
 
-    ##··········································································Cómo USER en CHECKOUT:
+##··········································································Cómo USER en CHECKOUT:
 
 @api.route('/checkout', methods=['POST'])
 @jwt_required()
@@ -476,52 +457,6 @@ def add_to_checkout():
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-
-# @api.route('/checkout/<int:product_id>', methods=['DELETE'])
-# def remove_from_checkout(product_id):
-#     try:
-#         #Extract user_id from the request
-#         user_id = request.json.get('user_id', None)
-
-#         #validate required fields
-#         if not user_id:
-#             return jsonify({'msg': 'User ID is required'}), 400
-    
-#         #find the checkout item by user_id and product_id
-#         checkout_item = Checkout.query.filter_by(user_id=user_id, product_id=product_id).first()
-#         if not checkout_item:
-#             return jsonify({'msg': 'Product not found in checkout'}), 404
-        
-#         #remove from chechout 
-#         db.session.delete(checkout_item)
-#         db.session.commit()
-
-#         return jsonify({'msg':'Product removed from the checkout succesfully'}), 200
-#     except Exception as error:
-#         return jsonify({'error': str(error)}), 400
-
-
-    
-
-# @api.route('/checkout', methods=['GET'])
-# def get_checkout():
-#     try:
-#         # Extract user_id from the request
-#         user_id = request.args.get('user_id', None)
-
-#         #validate required fields
-#         if not user_id:
-#             return jsonify({'msg': 'user ID is required'}), 400
-        
-#         #retrieve all checkout items for the user
-#         checkout_items = Checkout.query.filter_by(user_id=user_id).all()
-#         checkout_list = [{'id': item.id, 'product_id': item.product_id} for item in checkout_items]
-
-#         return jsonify({'checkout': checkout_list}), 200
-#     except Exception as error:
-#         return jsonify({'error': str(error)}),400
- 
-# uSer to User followed
 
 @api.route('/users/following', methods=['GET'])
 @jwt_required()
@@ -570,69 +505,13 @@ def unfollow_user(followed_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
 
-# User to Review
 
-#todas las review sin jwt para que se carguen en la home 
 @api.route('/reviews', methods=['GET'])
 def get_all_reviews():
     try:
         reviews = Reviews.query.all()  
         return jsonify([r.serialize() for r in reviews]), 200
     except Exception as error:
-        return jsonify({'error': str(error)}), 400
-
-#reviews del usuario, quiza no sea necesario
-@api.route('/users/reviews', methods=['GET'])
-@jwt_required()
-def get_reviews():
-    try:
-        id = get_jwt_identity()
-        reviews = Reviews.query.filter_by(user_id=id).all()
-     
-        return jsonify([r.serialize() for r in reviews]), 200
-    except Exception as error:
-        return jsonify({'error': str(error)}), 400
-
-
-@api.route('/users/reviews', methods=['POST'])
-@jwt_required()
-def add_review():
-    try:
-        id = get_jwt_identity()
-        product_id = request.get.json('product_id')
-        rating = request.get.json('rating')
-        comment = request.get.json('comment')
-
-        if not product_id or not rating or not comment:
-            return jsonify({'error': 'product_id, rating, and comment are required'}), 400
-        
-        if not (1 <= rating <= 5):
-            return jsonify({'error': 'Rating must be between 1 and 5'}), 400
-
-        new_review = Reviews(user_id=id, product_id=product_id, rating=rating, comment=comment)
-        db.session.add(new_review)
-        db.session.commit()
-        return jsonify({'msg': 'Review added successfully'}), 201
-    except Exception as error:
-        db.session.rollback()
-        return jsonify({'error': str(error)}), 400
-
-
-@api.route('/users/reviews/<int:review_id>', methods=['DELETE'])
-@jwt_required()
-def delete_review(review_id):
-    try:
-        id = get_jwt_identity()
-        review = Reviews.query.filter_by(id=review_id, user_id=id).first()
-
-        if not review:
-            return jsonify({'error': 'Review not found'}), 404
-
-        db.session.delete(review)
-        db.session.commit()
-        return jsonify({'msg': 'Review deleted successfully'}), 200
-    except Exception as error:
-        db.session.rollback()
         return jsonify({'error': str(error)}), 400
 
 
