@@ -11,7 +11,7 @@ import os
 import datetime
 
 api = Blueprint('api', __name__)
-stripe.api_key = os.getenv("STRIPE_API_KEY")
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 # Allow CORS requests to this API
 CORS(api)
@@ -638,12 +638,28 @@ def delete_review(review_id):
 
     ##nuevo STRIPE! pago para productos y suscripcion
 
-def getPrice(ids):
-    total = 0
-    #buscar los ids de los productos
-    #sumar los precios para generar un total
-    #devolver ese total
-    return total
+def getPrice(products):
+    try:
+        total = 0
+        product_ids = [product["id"] for product in products]
+        
+        db_products = Products.query.filter(Products.id.in_(product_ids)).all() # Query all products from database 
+        
+        price_map = {str(product.id): product.price for product in db_products}  # Create a map of product id to price for faster lookup
+        
+        # Sum prices
+        for product in products:
+            product_id = str(product["id"])
+            if product_id in price_map:
+                
+                price_in_cents = int(float(price_map[product_id]) * 100)   # Convert price to cents for Stripe and to make sure to be integer
+                total += price_in_cents
+            
+        return total
+
+    except Exception as e:
+        print(f"Error in getPrice: {str(e)}")
+        raise e
 
 @api.route('/create-payment', methods=['POST'])
 @jwt_required()
@@ -651,34 +667,118 @@ def create_payment():
     try:
         id = get_jwt_identity()
         user = Users.query.get(id)
+
         if not user:
             return jsonify({'msg': 'Unauthorized: User not found'}), 401
+        
         data = request.json
-        if data["products"]:
-            #PODEMOS PASAR TODOS LOS ELEMENTOS QUE PERMITA EL OBJETO DE PAYMENTINTENT.CREATE 
-            intent = stripe.PaymentIntent.create(
-                #amount=getPrice(data['products']), # se deberia de calcular el precio en el back, no recibirse del front
-                currency=data['currency'],
-                automatic_payment_methods={
-                    'enabled': True
-                }
-            )
-            return jsonify({
-                'clientSecret': intent['client_secret']
-            })
-        if data["suscripcion"]:
-            intent = stripe.PaymentIntent.create(
-                amount= 9.99,
-                currency="eur",
-                automatic_payment_methods={
-                    'enabled': True
-                }
-            )
-            return jsonify({
-                'clientSecret': intent['client_secret']
-            })
+
+        # total_amount = 0  # initialize the total
+
+        # if data.get("products"):                    #if in a cart -> calculate total products 
+        #     print(data.get('products'))
+        #     total_amount = getPrice(data["products"])
+
+        # if data.get("suscripcion"):                 #add subscr. cost if selected
+        #     suscription_amount = int(9.99 * 100)
+        #     total_amount += suscription_amount
+
+
+
+        intent = stripe.PaymentIntent.create(
+            amount=data.get('amount'),
+            currency="eur",
+            automatic_payment_methods={
+                'enabled': True
+            }
+        )
+
+        return jsonify({'success': True, 'clientSecret': intent.client_secret})
+
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+         return jsonify({'success': False, 'error': str(e)})
+
+    
+    
+
+
+
+@api.route('/payment-succeeded', methods=['POST'])
+@jwt_required()
+def payment_succeeded():
+        try:
+            id = get_jwt_identity(id)
+            user = Users.query.get(id)
+            data = request.json
+            payment_intent_id = data.get('payment_intent_id')
+
+            payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+            if payment_intent.status != 'succeeded':
+                return jsonify({'msg': 'Pago sin exito'}), 400
+            
+            
+            # getting items from the cart
+            cart_items = ShoppingCart.query.filter_by(user_id=id).all()  
+
+            #creating the order
+            new_order = Orders(
+                date= datetime.today().strftime('%Y-%m-%d'),
+                subtotal_amount=float(payment_intent.amount -700),
+                total_amount=float(data['amount']),
+                status = 'confirmed',
+                address = user.address,
+                city=user.city,
+                postal_code=user.postal_code,
+                country=user.country,
+                buyer_id=id,
+                discount=user.discount
+            )
+
+            db.session.add('subscription')
+
+            #updated user subscription if chosen
+            if payment_intent.metadata.get('subscription'):
+                user.subscription = True
+
+            # clearing cart after the order has been successful
+            for item in cart_items:
+                db.session.delete(item)
+
+                db.session.commit()
+
+            return jsonify({'msg': 'Pago realizado con exito y order ha sido creado', 'order_id': new_order.id}), 200
+        
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'msg': 'Error al procesar el pago'}), 500
+        
+
+        #buscar en el carrito los productos del usuario. 
+        #crear orden(tabla back) (llama) (con los productos que estan en carrito)
+        #y llamar todos los elementos de orders
+
+        #__tablename__ = 'orders'
+    # id = db.Column(db.Integer, primary_key=True)
+    # date = db.Column(db.Date, nullable=False)
+    # subtotal_amount = db.Column(db.Float, nullable=False)
+    # total_amount = db.Column(db.Float, nullable=False)
+    # discount = db.Column(db.Boolean, default=False)
+    # status = db.Column(db.String)
+    # address = db.Column(db.String, nullable=False)
+    # city = db.Column(db.String, nullable=False)
+    # postal_code = db.Column(db.Integer, nullable=False)
+    # country = db.Column(db.String, nullable=False)
+    # buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    # seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    # crear 2 vistas (success, fail)
+    # nuevo endpoint POST para almacenar orden
+    # despues del compra -> vaciar el carrito
+
+     
+
+    
+            
     
     
 #     ## pago de subscricpion con stripe
