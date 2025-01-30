@@ -590,7 +590,7 @@ def payment_succeeded():
             user = Users.query.get(id)
             data = request.json
             print(data)
-
+            payment_intent = data['payment_intent']
             # payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
             # if payment_intent.status != 'succeeded':
             #     return jsonify({'msg': 'Pago sin exito'}), 400
@@ -606,7 +606,7 @@ def payment_succeeded():
 
             #creating the order
             new_order = Orders(
-                date= datetime.today().strftime('%Y-%m-%d'),
+                date= datetime.datetime.now(),
                 subtotal_amount=float(data['amount']),
                 total_amount=float(data['amount']),
                 
@@ -616,7 +616,6 @@ def payment_succeeded():
                 address = user.address,
                 city=user.city,
                 postal_code=user.postalCode,
-                country=user.country,
                 buyer_id=id
             )
 
@@ -624,13 +623,24 @@ def payment_succeeded():
             db.session.commit()
 
 
+            #from shopping cart to order table
+            for item in cart_items:
+                new_products_order = ProductsInOrder(order_id = new_order.id, product_id=item.id)
+                db.session.add(new_products_order)
+                db.session.commit()
+            
+            #from order to checkout table
+            checkout = Checkout(payment_method = 'stripe', status='Paid', order_id= new_order.id, user_id = user.id, stripe_id=payment_intent['id'])
+            db.session.add(checkout)
+            db.session.commit()
+            
+            
             # clearing cart after the order has been successful
             for item in cart_items:
                 db.session.delete(item)
-
                 db.session.commit()
 
-            return jsonify({'msg': 'Pago realizado con exito y order ha sido creado', 'order_id': new_order.id}), 200
+            return jsonify({'msg': 'Pago realizado con exito y order ha sido creado', 'order': new_order.serialize()}), 200
         
         except Exception as e:
             db.session.rollback()

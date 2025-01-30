@@ -1,9 +1,16 @@
 """empty message
 
+<<<<<<< HEAD:migrations/versions/875a1a72e33f_.py
 <<<<<<<< HEAD:migrations/versions/875a1a72e33f_.py
 Revision ID: 875a1a72e33f
 Revises: 
 Create Date: 2025-01-30 10:29:26.604293
+=======
+<<<<<<<< HEAD:migrations/versions/c6c92f853621_.py
+Revision ID: c6c92f853621
+Revises: 
+Create Date: 2025-01-30 10:56:04.782525
+>>>>>>> cdde6db0f287f0630b8e19af5c96f0fb5c18a589:migrations/versions/c6c92f853621_.py
 ========
 Revision ID: f4186c8fdda0
 Revises: 
@@ -16,8 +23,13 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
+<<<<<<< HEAD:migrations/versions/875a1a72e33f_.py
 <<<<<<<< HEAD:migrations/versions/875a1a72e33f_.py
 revision = '875a1a72e33f'
+=======
+<<<<<<<< HEAD:migrations/versions/c6c92f853621_.py
+revision = 'c6c92f853621'
+>>>>>>> cdde6db0f287f0630b8e19af5c96f0fb5c18a589:migrations/versions/c6c92f853621_.py
 ========
 revision = 'f4186c8fdda0'
 >>>>>>>> 0cba86597c93c80d01e49eb241b1b2409cfbaa3b:migrations/versions/f4186c8fdda0_.py
@@ -61,7 +73,7 @@ def upgrade():
     sa.Column('address', sa.String(), nullable=False),
     sa.Column('city', sa.String(), nullable=False),
     sa.Column('postal_code', sa.Integer(), nullable=False),
-    sa.Column('country', sa.String(), nullable=True),
+    sa.Column('country', sa.String(), nullable=False),
     sa.Column('buyer_id', sa.Integer(), nullable=False),
     sa.Column('seller_id', sa.Integer(), nullable=True),
     sa.ForeignKeyConstraint(['buyer_id'], ['users.id'], ),

@@ -14,10 +14,12 @@ const getState = ({ getStore, getActions, setStore }) => {
       user: JSON.parse(localStorage.getItem("user")) || "",
       shoppingCart: [],
       users: [],
-
+      orderSuccess: []
     },
     actions: {
-
+      modStore: (key, value)=>{
+        setStore({[key]: value})
+      },
       login: async (formData1) => {
         const actions = getActions();
         try {
