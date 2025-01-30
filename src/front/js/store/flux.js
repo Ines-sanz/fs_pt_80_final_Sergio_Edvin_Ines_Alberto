@@ -23,29 +23,29 @@ const getState = ({ getStore, getActions, setStore }) => {
       login: async (formData1) => {
         const actions = getActions();
         try {
-            const url = `${process.env.BACKEND_URL}/api/login`;
-            console.log("URL final:", url);
-            console.log("Datos enviados al servidor:", formData1);
-    
-            const response = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(formData1),
-            });
-    
-            const data = await response.json();
-            console.log("Respuesta del servidor:", data);
-    
-            if (response.ok) {
-                localStorage.setItem("Token", data.token);
-                localStorage.setItem("user", JSON.stringify(data.user)); 
-                setStore({ isLogged: true, Token: data.token, user: data.user });
+          const url = `${process.env.BACKEND_URL}/api/login`;
+          console.log("URL final:", url);
+          console.log("Datos enviados al servidor:", formData1);
 
-                await actions.userShoppingCart()
-            } else {
-            }
+          const response = await fetch(url, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData1),
+          });
+
+          const data = await response.json();
+          console.log("Respuesta del servidor:", data);
+
+          if (response.ok) {
+            localStorage.setItem("Token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            setStore({ isLogged: true, Token: data.token, user: data.user });
+
+            await actions.userShoppingCart()
+          } else {
+          }
         } catch (error) {
           console.error("Error al conectar con el servidor:", error);
         }
@@ -145,8 +145,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       sellProduct: async (formData, navigate) => {
         const store = getStore();
+
+        const payload = { ...formData, state: formData.state === "True", promoted: formData.promoted === "True" };
+        console.log("Enviando datos a /api/product:", payload);
+
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/product`, {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -158,10 +162,10 @@ const getState = ({ getStore, getActions, setStore }) => {
           const data = await response.json();
 
           if (response.ok) {
-            alert("Producto publicado con éxito");
-            navigate("/profile");
+            alert("Producto publicado con éxito 🎉");
+            navigate("/");
           } else {
-            alert(data.msg || "Error al publicar el producto");
+            alert(data.msg || "Error al publicar el producto ⚠️ ");
           }
         } catch (error) {
           console.error("Error al publicar producto:", error);
@@ -177,27 +181,27 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("Datos enviados a favoritos:", newFav);
 
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/api/favorites`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: store.Token ? `Bearer ${store.Token}` : "",
-                },
-                body: JSON.stringify(newFav),
-            });
-    
-            const data = await response.json();
-    
-            if (response.ok) {
-                console.log("Respuesta del servidor:", data);
-                const updatedFavorites = data.updatedFavorites || [];
-                const user = { ...store.user, favorites: updatedFavorites };
-                setStore({ user });
-            } else {
-                console.error("Error del servidor:", data);
-            }
+          const response = await fetch(`${process.env.BACKEND_URL}/api/favorites`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: store.Token ? `Bearer ${store.Token}` : "",
+            },
+            body: JSON.stringify(newFav),
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            console.log("Respuesta del servidor:", data);
+            const updatedFavorites = data.updatedFavorites || [];
+            const user = { ...store.user, favorites: updatedFavorites };
+            setStore({ user });
+          } else {
+            console.error("Error del servidor:", data);
+          }
         } catch (error) {
-            console.error("Error de red:", error);
+          console.error("Error de red:", error);
         }
       },
 
@@ -251,6 +255,35 @@ const getState = ({ getStore, getActions, setStore }) => {
           }
         } catch (error) {
           console.error(error);
+        }
+      },
+
+      uploadImageToBackend: async (selectedFile) => {
+        if (!selectedFile) {
+          alert("Por favor, selecciona un archivo.");
+          return null;
+        }
+
+        const formData = new FormData();
+        formData.append("file", selectedFile);
+
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/upload`, {
+            method: "POST",
+            body: formData,
+          });
+
+          const data = await response.json();
+          if (response.ok && data.secure_url) {
+            return data.secure_url;
+          } else {
+            alert(data.error || "Error al subir la imagen.");
+            return null;
+          }
+        } catch (error) {
+          console.error("Error al subir la imagen:", error);
+          alert("Error de conexión al subir la imagen.");
+          return null;
         }
       },
 
@@ -395,23 +428,23 @@ const getState = ({ getStore, getActions, setStore }) => {
         const store = getStore();
 
         try {
-            const response = await fetch(`${process.env.BACKEND_URL}/api/users/${userId}`, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-            });
-          
-            if (response.ok) {
-                const userData = await response.json();
-                if (userId === store.user.id) {
-                  setStore({ user: userData });
-                  localStorage.setItem("user", JSON.stringify(userData)); // Actualiza el localStorage
-                } 
-                return userData; // Devuelve los datos del usuario
-            } else {
-                console.error(`Error al obtener el perfil del usuario ${userId}:`, response.statusText);
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users/${userId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (response.ok) {
+            const userData = await response.json();
+            if (userId === store.user.id) {
+              setStore({ user: userData });
+              localStorage.setItem("user", JSON.stringify(userData)); // Actualiza el localStorage
             }
+            return userData; // Devuelve los datos del usuario
+          } else {
+            console.error(`Error al obtener el perfil del usuario ${userId}:`, response.statusText);
+          }
         } catch (error) {
           console.error(`Error al conectar con el servidor para el usuario ${userId}:`, error);
         }
@@ -419,63 +452,63 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       followUser: async (userId) => {
         try {
-            const store = getStore();
-    
-            const response = await fetch(`${process.env.BACKEND_URL}/api/users/follow`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${store.Token}` // Agregamos el token JWT
-                },
-                body: JSON.stringify({
-                    followed_id: userId, // Solo enviamos `followed_id`, ya que el backend obtiene `follower_id` del token JWT
-                }),
-            });
-    
-            if (response.ok) {
-                console.log(`Usuario ${userId} seguido correctamente.`);
-            } else {
-                const errorData = await response.json();
-                console.error("Error al seguir al usuario:", errorData);
-            }
+          const store = getStore();
+
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users/follow`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${store.Token}` // Agregamos el token JWT
+            },
+            body: JSON.stringify({
+              followed_id: userId, // Solo enviamos `followed_id`, ya que el backend obtiene `follower_id` del token JWT
+            }),
+          });
+
+          if (response.ok) {
+            console.log(`Usuario ${userId} seguido correctamente.`);
+          } else {
+            const errorData = await response.json();
+            console.error("Error al seguir al usuario:", errorData);
+          }
         } catch (error) {
-            console.error("Error de red:", error);
+          console.error("Error de red:", error);
         }
       },
-      
+
       unfollowUser: async (userId) => {
         try {
-            const store = getStore();
-            const response = await fetch(`${process.env.BACKEND_URL}/api/users/unfollow/${userId}`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${store.Token}` // Agregamos el token JWT
-                },
-            });
-    
-            if (response.ok) {
-                console.log(`Usuario ${userId} dejado de seguir correctamente.`);
-            } else {
-                const errorData = await response.json();
-                console.error("Error al dejar de seguir al usuario:", errorData);
-            }
+          const store = getStore();
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users/unfollow/${userId}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${store.Token}` // Agregamos el token JWT
+            },
+          });
+
+          if (response.ok) {
+            console.log(`Usuario ${userId} dejado de seguir correctamente.`);
+          } else {
+            const errorData = await response.json();
+            console.error("Error al dejar de seguir al usuario:", errorData);
+          }
         } catch (error) {
-            console.error("Error de red:", error);
+          console.error("Error de red:", error);
         }
       },
-      
+
       logout: () => {
         localStorage.removeItem("Token");
         localStorage.removeItem("user");
         setStore({
-            isLogged: false,
-            Token: null,
-            user: "",
+          isLogged: false,
+          Token: null,
+          user: "",
         });
       },
-    
-    
+
+
       /* termina aqui */
     },
   };

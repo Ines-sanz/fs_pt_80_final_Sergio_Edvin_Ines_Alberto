@@ -10,45 +10,84 @@ import { LoginModal } from "../component/login-modal.jsx";
 export const SellView = () => {
     const { store, actions } = useContext(Context);
     const [typeOptions, setTypeOptions] = useState([]);
-    const [uploadedPhoto, setUploadedPhoto] = useState("");
     const navigate = useNavigate();
+    const [uploadedPhoto, setUploadedPhoto] = useState("");
 
-    // Función para actualizar las opciones de "Tipo" según la categoría seleccionada
+    const [formData, setFormData] = useState({
+        name: "",
+        description: "",
+        img: "",
+        year: "",
+        brand: "",
+        platform: "",
+        type: "",
+        category: "",
+        state: false,
+        promoted: false,
+        price: "",
+        seller_id: store.user.id, // User autenticado como vendedor
+    });
+
+
+    // Función opciones de "Tipo" según categoría seleccionada
     const updateTypeOptions = (category) => {
-        if (category === "consola") {
-            setTypeOptions(["Sobremesa", "Portátil", "Híbrida"]);
-        } else if (category === "juego") {
-            setTypeOptions([
-                "Acción", "Aventura", "Rol (RPG)", "Estrategia", "Deportes",
-                "Peleas", "Plataformas", "Terror/Survival Horror","Indie",
-            ]);
-        } else if (category === "accesorio") {
-            setTypeOptions(["Accesorio"]);
-        } else {
-            setTypeOptions([]);
-        }
+        setFormData({ ...formData, category, type: "" });
+        setTypeOptions(
+            category === "consolas" ? ["Sobremesa", "Portátil", "Híbrida"] :
+                category === "videojuegos" ? ["Acción", "Aventura", "Rol", "Estrategia", "Deportes", "Peleas", "Plataformas", "Terror", "Indie"] :
+                    category === "accesorios" ? ["Accesorios"] : []
+        );
     };
 
     const handleGoToPremium = () => {
         navigate("/suscripcion");
     };
 
-    const handleSell = () => {
-        // Aquí puedes manejar el envío del formulario junto con la URL de la foto cargada
-        console.log("Foto cargada:", uploadedPhoto);
-        // Resto de lógica para enviar el formulario
+
+    const handleImageUpload = (imageUrl) => {
+        setUploadedPhoto(imageUrl);
+        setFormData((prev) => ({ ...prev, img: imageUrl }));
     };
 
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: name === "state" || name === "promoted" ? value === "true" : value,
+        });
+    };
+    const validateForm = () => {
+        const { name, description, img, year, brand, platform, type, category, price } = formData;
+
+        if (!name || !description || !img || !year || !brand || !platform || !category || !type || !price) {
+            alert("No olvides subir la foto del producto o completar todos los campos ⚠️");
+            return false;
+        }
+        return true;
+    };
+
+    const handleSell = async () => {
+        console.log("Datos enviados:", formData);
+        if (!validateForm()) return;
+
+        try {
+            await actions.sellProduct(formData, navigate);
+            navigate("/");
+        } catch (error) {
+            console.error("Error al subir el producto:", error);
+            alert("Hubo un error al subir el producto. Por favor, intenta de nuevo");
+        }
+    };
     useEffect(() => {
-                         window.scrollTo(0, 0); 
-                         actions.setShowLoginModal(false); 
-                     }, []);
+        window.scrollTo(0, 0);
+        actions.setShowLoginModal(false);
+    }, []);
 
 
     return (
-        <div className="sell-container">
-         {store.showLoginModal && <LoginModal />}
-            {/*{store.showLoginModal && <LoginModal />*/}
+
+        <div className="__sell_container__">
+            {store.showLoginModal && <LoginModal />}
             <section className="text-center mb-4">
                 <h1 className="title">¡Empieza a vender!</h1>
                 <p className="subtitle">Fácil y rápido, con total seguridad. Garantía Final Boss.</p>
@@ -56,7 +95,7 @@ export const SellView = () => {
 
             <section className="row align-items-center mb-4">
                 <div className="col-md-4 d-flex justify-content-center">
-                    <PhotoUpload onUploadSuccess={setUploadedPhoto} />
+                    <PhotoUpload onUploadSuccess={handleImageUpload} />
                 </div>
                 <div className="col-md-8 d-flex flex-column justify-content-center">
                     <p className="mb-3">
@@ -76,9 +115,12 @@ export const SellView = () => {
                             <label htmlFor="name" className="mb-2">Nombre</label>
                             <input
                                 type="text"
-                                className="form-control"
+                                name="name"
                                 id="name"
+                                className="form-control"
+                                value={formData.name}
                                 placeholder="Nombre"
+                                onChange={handleChange} required
                             />
                         </div>
                         <div className="col-md-6">
@@ -86,23 +128,29 @@ export const SellView = () => {
                                 <div className="col-6 d-flex flex-column __form_properties__">
                                     <label htmlFor="category" className="mb-2">Categoría</label>
                                     <select
-                                        className="form-select"
+                                        name="category"
                                         id="category"
-                                        onChange={(e) => updateTypeOptions(e.target.value)}>
+                                        className="form-select"
+                                        onChange={(e) => updateTypeOptions(e.target.value)} required
+                                    >
                                         <option value="">Selecciona</option>
-                                        <option value="consola">Consola</option>
-                                        <option value="juego">Juego</option>
-                                        <option value="accesorio">Accesorio</option>
+                                        <option value="consolas">Consola</option>
+                                        <option value="videojuegos">Videojuego</option>
+                                        <option value="accesorios">Accesorios</option>
                                     </select>
                                 </div>
                                 <div className="col-6 d-flex flex-column __form_properties__">
                                     <label htmlFor="state" className="mb-2">Estado</label>
                                     <select
+                                        name="state"
+                                        id="state"
                                         className="form-select"
-                                        id="state">
+                                        value={formData.state}
+                                        onChange={handleChange} required
+                                    >
                                         <option value="">Selecciona</option>
-                                        <option value="nuevo">Nuevo</option>
-                                        <option value="usado">Usado</option>
+                                        <option value="true">Nuevo</option>
+                                        <option value="false">Usado</option>
                                     </select>
                                 </div>
                             </div>
@@ -113,18 +161,25 @@ export const SellView = () => {
                             <label htmlFor="brand" className="mb-2">Marca</label>
                             <input
                                 type="text"
-                                className="form-control"
+                                name="brand"
                                 id="brand"
+                                className="form-control"
+                                value={formData.brand}
                                 placeholder="Marca"
+                                onChange={handleChange} required
                             />
                         </div>
                         <div className="col-md-6 d-flex flex-column __form_properties__">
                             <label htmlFor="year" className="mb-2">Año</label>
                             <input
-                                type="text"
-                                className="form-control"
+                                type="number"
+                                name="year"
                                 id="year"
+                                className="form-control"
+                                value={formData.year}
                                 placeholder="Año"
+                                min="1900"
+                                onChange={handleChange} required
                             />
                         </div>
                     </div>
@@ -133,14 +188,24 @@ export const SellView = () => {
                             <label htmlFor="platform" className="mb-2">Plataforma</label>
                             <input
                                 type="text"
-                                className="form-control"
+                                name="platform"
                                 id="platform"
+                                className="form-control"
+                                value={formData.platform}
                                 placeholder="Plataforma"
+                                onChange={handleChange} required
                             />
                         </div>
                         <div className="col-md-6 d-flex flex-column __form_properties__">
                             <label htmlFor="type" className="mb-2">Tipo</label>
-                            <select id="type" className="form-select">
+                            <select
+                                name="type"
+                                id="type"
+                                className="form-select"
+                                value={formData.type}
+                                onChange={handleChange}
+                                required
+                            >
                                 <option value="">Selecciona</option>
                                 {typeOptions.map((option, index) => (
                                     <option key={index} value={option}>
@@ -153,19 +218,26 @@ export const SellView = () => {
                     <div className="d-flex flex-column __form_properties__">
                         <label htmlFor="description" className="mb-2">Descripción</label>
                         <textarea
+                            name="description"
                             id="description"
                             className="form-control"
-                            placeholder="Escribe una descripción..."
                             rows="3"
+                            value={formData.description}
+                            placeholder="Escribe una descripción..."
+                            onChange={handleChange} required
                         ></textarea>
                     </div>
                     <div className="d-flex flex-column w-50">
                         <label htmlFor="price" className="mb-2">Precio</label>
                         <input
                             type="number"
-                            className="price-input"
+                            name="price"
                             id="price"
+                            value={formData.price}
+                            className="__price_input__"
                             placeholder="€uros"
+                            min="1.01"
+                            onChange={handleChange} required
                         />
                     </div>
                     <div className="d-flex justify-content-center __sell_button__">
