@@ -693,9 +693,70 @@ def create_payment():
             }
         )
 
-        #buscar en el carrito los productos del usaurio. 
+        return jsonify({'success': True, 'clientSecret': intent.client_secret})
+
+    except Exception as e:
+         return jsonify({'success': False, 'error': str(e)})
+
+    
+    
+
+
+
+@api.route('/payment-succeeded', methods=['POST'])
+@jwt_required()
+def payment_succeeded():
+        try:
+            id = get_jwt_identity(id)
+            user = Users.query.get(id)
+            data = request.json
+            payment_intent_id = data.get('payment_intent_id')
+
+            payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+            if payment_intent.status != 'succeeded':
+                return jsonify({'msg': 'Pago sin exito'}), 400
+            
+            
+            # getting items from the cart
+            cart_items = ShoppingCart.query.filter_by(user_id=id).all()  
+
+            #creating the order
+            new_order = Orders(
+                date= datetime.today().strftime('%Y-%m-%d'),
+                subtotal_amount=float(payment_intent.amount -700),
+                total_amount=float(data['amount']),
+                status = 'confirmed',
+                address = user.address,
+                city=user.city,
+                postal_code=user.postal_code,
+                country=user.country,
+                buyer_id=id,
+                discount=user.discount
+            )
+
+            db.session.add('subscription')
+
+            #updated user subscription if chosen
+            if payment_intent.metadata.get('subscription'):
+                user.subscription = True
+
+            # clearing cart after the order has been successful
+            for item in cart_items:
+                db.session.delete(item)
+
+                db.session.commit()
+
+            return jsonify({'msg': 'Pago realizado con exito y order ha sido creado', 'order_id': new_order.id}), 200
+        
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'msg': 'Error al procesar el pago'}), 500
+        
+
+        #buscar en el carrito los productos del usuario. 
         #crear orden(tabla back) (llama) (con los productos que estan en carrito)
         #y llamar todos los elementos de orders
+
         #__tablename__ = 'orders'
     # id = db.Column(db.Integer, primary_key=True)
     # date = db.Column(db.Date, nullable=False)
@@ -711,11 +772,12 @@ def create_payment():
     # seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
     # crear 2 vistas (success, fail)
+    # nuevo endpoint POST para almacenar orden
+    # despues del compra -> vaciar el carrito
 
-        return jsonify({'clientSecret': intent['client_secret']})
+     
 
-    except Exception as e:
-         return jsonify({'success': False, 'error': str(e)})
+    
             
     
     
