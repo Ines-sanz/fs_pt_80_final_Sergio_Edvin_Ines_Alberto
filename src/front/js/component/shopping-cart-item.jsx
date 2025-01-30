@@ -29,7 +29,7 @@ export const CartItem = (props) => {
 
             <div className="px-0 mt-2 d-flex">
                 <div className="align-self-start ">
-                    <span class="fa-solid fa-x close-shopping" onClick={handleShopping}></span>
+                    <span className="fa-solid fa-x close-shopping" onClick={handleShopping}></span>
                 </div>
                 <div className="align-self-end mb-2">
                     <h5 className="shopping-c-name">{props.name}</h5>
