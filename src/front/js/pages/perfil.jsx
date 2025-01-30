@@ -15,7 +15,7 @@ export const Perfil = () => {
         const fetchUserData = async () => {
             const data = await actions.getUserProfile(store.user.id); // Obtiene el perfil del usuario actual
             setUserData(data);
-            setFollowedUsers(new Set(data.following_users.map(user => user.id))); // Guardamos los seguidos en local
+            setFollowedUsers(new Set(data?.following_users.map(user => user.id))); // Guardamos los seguidos en local
             
 
             if (data?.favorites?.length > 0) {

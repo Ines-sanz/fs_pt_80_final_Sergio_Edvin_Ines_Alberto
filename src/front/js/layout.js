@@ -17,6 +17,7 @@ import { ProductView } from "./pages/productview.jsx";
 import { VideogameType } from "./pages/videogame-type.jsx";
 import { Checkout } from "./pages/checkout.jsx";
 import { PerfilUsuario } from "./pages/perfilUsuario.jsx";
+import { OrderSuccess } from "./pages/orderSuccess.jsx";
 
 
 //create your first component
@@ -42,6 +43,7 @@ const Layout = () => {
                         <Route element={<Suscription />} path="/suscripcion" />
                         <Route element={<CategoryPage />} path="/store/:category"  />
                         <Route element={<Checkout />} path="/checkout" />
+                        <Route element={<OrderSuccess />} path="/order-success" />
                         <Route element={<VideogameType />} path="/store/videogames/:type"  />
                         <Route element={<h1>Not found!</h1>} />
                         <Route path="/perfil/:userId" element={<PerfilUsuario />} />

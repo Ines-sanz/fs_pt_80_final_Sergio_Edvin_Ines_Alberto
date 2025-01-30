@@ -3,6 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/sellview.css";
 import { useNavigate } from "react-router-dom";
 import { PhotoUpload } from "../component/photoupload.jsx";
+import { LoginModal } from "../component/login-modal.jsx";
 
 //import { LoginModal } from "../component/login-modal.jsx";
 
@@ -42,43 +43,22 @@ export const SellView = () => {
         navigate("/suscripcion");
     };
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-    const handleImageUpload = (imageUrl) => {
-        setUploadedPhoto(imageUrl);
-        setFormData((prev) => ({ ...prev, img: imageUrl }));
+    const handleSell = () => {
+        // Aquí puedes manejar el envío del formulario junto con la URL de la foto cargada
+        console.log("Foto cargada:", uploadedPhoto);
+        // Resto de lógica para enviar el formulario
     };
 
-    const validateForm = () => {
-        const { name, description, img, year, brand, platform, type, category, state, price } = formData;
-        if (!name || !description || !img || !year || !brand || !platform || !category || !type || !state || !price) {
-            alert("No olvides subir primero la foto 👾");
-            return false;
-        }
-        return true;
-    };
-    const handleSell = async () => {
-        if (!validateForm()) return;
-        try {
-            await actions.sellProduct(formData, navigate);
-            alert("Producto subido exitosamente ✅");
-            navigate("/");
-        } catch (error) {
-            console.error("Error al subir el producto:", error);
-            alert("Hubo un error al subir el producto. Por favor, intenta de nuevo ⚠️");
-        }
-    };
-
-    // useEffect(() => {
-    //                     window.scrollTo(0, 0); 
-    //                     actions.setShowLoginModal(false); 
-    //                 }, []);
+    useEffect(() => {
+                         window.scrollTo(0, 0); 
+                         actions.setShowLoginModal(false); 
+                     }, []);
 
 
     return (
         <div className="__sell_container__">
+        <div className="sell-container">
+         {store.showLoginModal && <LoginModal />}
             {/*{store.showLoginModal && <LoginModal />*/}
             <section className="text-center mb-4">
                 <h1 className="title">¡Empieza a vender!</h1>

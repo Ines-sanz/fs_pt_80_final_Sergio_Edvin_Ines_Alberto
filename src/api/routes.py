@@ -13,7 +13,7 @@ import cloudinary
 import cloudinary.uploader
 
 api = Blueprint('api', __name__)
-stripe.api_key = os.getenv("STRIPE_API_KEY")
+stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 # Allow CORS requests to this API
 CORS(api)
@@ -21,7 +21,6 @@ CORS(api)
 
 ## ······················································· Cómo USER (profile):
 
-#Funciona!!!
 @api.route('/register', methods=['POST'])          
 def register():
     try:
@@ -58,7 +57,7 @@ def register():
         db.session.rollback()
         return jsonify({'error':str(error)}), 400
     
-#lo he cambiado y ahora si que va, faltaba comprobar valores
+
 @api.route('/user/<int:user_id>', methods=['PUT'])       
 @jwt_required()
 def update_user(user_id):
@@ -107,8 +106,7 @@ def update_user(user_id):
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
-
-#funciona!!   
+   
 @api.route('/user/<int:user_id>', methods=['DELETE'])
 @jwt_required()      
 def delete_user(user_id):
@@ -142,10 +140,6 @@ def get_users():
     except Exception as error:
         return jsonify({'error': str(error)}), 400
 
-
-
-
-#he hecho este para traer solo un user, funciona!!
 @api.route('/users/<int:user_id>', methods=['GET'])
 def get_user(user_id):
     try:
@@ -161,9 +155,8 @@ def get_user(user_id):
         return jsonify({'error': str(error)}), 400
   
 
-  ##........................................................ COMO USER LOGIN 
+##........................................................ COMO USER LOGIN 
 
-#funciona!!
 @api.route('/login', methods=['POST'])  
 def login():
     try: 
@@ -189,18 +182,9 @@ def login():
             db.session.rollback()
             return jsonify({'error': str(error)}), 400
 
-#     @api.route('/protected' , methods=['GET'])
-# @jwt_required()
-# def protected():
-#     id = get_jwt_identity()
-#     user = User.query.get(id)
-#     if not user:
-#         return jsonify({"msg": "something went wrong"})
-#     return jsonify({"user": user.serialize()}), 200
-    
 
-    ##·······················································  Cómo USER(buy/sell):
-# funciona!!!!!
+##·······················································  Cómo USER(buy/sell):
+
 @api.route('/product', methods=['POST']) 
 @jwt_required()     
 def create_product():
@@ -238,7 +222,6 @@ def create_product():
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-#FUNCIONAAAAAAA!!!!!!!!!!!!!
 @api.route('/product/<int:product_id>', methods=['PUT'])  
 @jwt_required()
 def update_product(product_id):
@@ -277,7 +260,6 @@ def update_product(product_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-
 @api.route('/product/<int:product_id>', methods=['DELETE'])
 @jwt_required()
 def delete_product(product_id):
@@ -301,7 +283,6 @@ def delete_product(product_id):
         return jsonify({'error': str(error)}), 400
 
 
-#funciona!!!
 @api.route('/products', methods=['GET'])
 def get_products():
     try:
@@ -329,7 +310,7 @@ def get_products():
     except Exception as error:
         return jsonify({'error': str(error)})
     
-#funciona!!!
+
 @api.route('/product/<int:product_id>', methods=['GET'])  
 def get_product(product_id):
     try:
@@ -449,7 +430,7 @@ def get_favorites():
 
 
 
-    ##··········································································Cómo USER en CHECKOUT:
+##··········································································Cómo USER en CHECKOUT:
 
 @api.route('/checkout', methods=['POST'])
 @jwt_required()
@@ -478,52 +459,6 @@ def add_to_checkout():
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
     
-
-# @api.route('/checkout/<int:product_id>', methods=['DELETE'])
-# def remove_from_checkout(product_id):
-#     try:
-#         #Extract user_id from the request
-#         user_id = request.json.get('user_id', None)
-
-#         #validate required fields
-#         if not user_id:
-#             return jsonify({'msg': 'User ID is required'}), 400
-    
-#         #find the checkout item by user_id and product_id
-#         checkout_item = Checkout.query.filter_by(user_id=user_id, product_id=product_id).first()
-#         if not checkout_item:
-#             return jsonify({'msg': 'Product not found in checkout'}), 404
-        
-#         #remove from chechout 
-#         db.session.delete(checkout_item)
-#         db.session.commit()
-
-#         return jsonify({'msg':'Product removed from the checkout succesfully'}), 200
-#     except Exception as error:
-#         return jsonify({'error': str(error)}), 400
-
-
-    
-
-# @api.route('/checkout', methods=['GET'])
-# def get_checkout():
-#     try:
-#         # Extract user_id from the request
-#         user_id = request.args.get('user_id', None)
-
-#         #validate required fields
-#         if not user_id:
-#             return jsonify({'msg': 'user ID is required'}), 400
-        
-#         #retrieve all checkout items for the user
-#         checkout_items = Checkout.query.filter_by(user_id=user_id).all()
-#         checkout_list = [{'id': item.id, 'product_id': item.product_id} for item in checkout_items]
-
-#         return jsonify({'checkout': checkout_list}), 200
-#     except Exception as error:
-#         return jsonify({'error': str(error)}),400
- 
-# uSer to User followed
 
 @api.route('/users/following', methods=['GET'])
 @jwt_required()
@@ -572,9 +507,7 @@ def unfollow_user(followed_id):
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
 
-# User to Review
 
-#todas las review sin jwt para que se carguen en la home 
 @api.route('/reviews', methods=['GET'])
 def get_all_reviews():
     try:
@@ -583,69 +516,31 @@ def get_all_reviews():
     except Exception as error:
         return jsonify({'error': str(error)}), 400
 
-#reviews del usuario, quiza no sea necesario
-@api.route('/users/reviews', methods=['GET'])
-@jwt_required()
-def get_reviews():
-    try:
-        id = get_jwt_identity()
-        reviews = Reviews.query.filter_by(user_id=id).all()
-     
-        return jsonify([r.serialize() for r in reviews]), 200
-    except Exception as error:
-        return jsonify({'error': str(error)}), 400
-
-
-@api.route('/users/reviews', methods=['POST'])
-@jwt_required()
-def add_review():
-    try:
-        id = get_jwt_identity()
-        product_id = request.get.json('product_id')
-        rating = request.get.json('rating')
-        comment = request.get.json('comment')
-
-        if not product_id or not rating or not comment:
-            return jsonify({'error': 'product_id, rating, and comment are required'}), 400
-        
-        if not (1 <= rating <= 5):
-            return jsonify({'error': 'Rating must be between 1 and 5'}), 400
-
-        new_review = Reviews(user_id=id, product_id=product_id, rating=rating, comment=comment)
-        db.session.add(new_review)
-        db.session.commit()
-        return jsonify({'msg': 'Review added successfully'}), 201
-    except Exception as error:
-        db.session.rollback()
-        return jsonify({'error': str(error)}), 400
-
-
-@api.route('/users/reviews/<int:review_id>', methods=['DELETE'])
-@jwt_required()
-def delete_review(review_id):
-    try:
-        id = get_jwt_identity()
-        review = Reviews.query.filter_by(id=review_id, user_id=id).first()
-
-        if not review:
-            return jsonify({'error': 'Review not found'}), 404
-
-        db.session.delete(review)
-        db.session.commit()
-        return jsonify({'msg': 'Review deleted successfully'}), 200
-    except Exception as error:
-        db.session.rollback()
-        return jsonify({'error': str(error)}), 400
-
 
     ##nuevo STRIPE! pago para productos y suscripcion
 
-def getPrice(ids):
-    total = 0
-    #buscar los ids de los productos
-    #sumar los precios para generar un total
-    #devolver ese total
-    return total
+def getPrice(products):
+    try:
+        total = 0
+        product_ids = [product["id"] for product in products]
+        
+        db_products = Products.query.filter(Products.id.in_(product_ids)).all() # Query all products from database 
+        
+        price_map = {str(product.id): product.price for product in db_products}  # Create a map of product id to price for faster lookup
+        
+        # Sum prices
+        for product in products:
+            product_id = str(product["id"])
+            if product_id in price_map:
+                
+                price_in_cents = int(float(price_map[product_id]) * 100)   # Convert price to cents for Stripe and to make sure to be integer
+                total += price_in_cents
+            
+        return total
+
+    except Exception as e:
+        print(f"Error in getPrice: {str(e)}")
+        raise e
 
 @api.route('/create-payment', methods=['POST'])
 @jwt_required()
@@ -653,34 +548,118 @@ def create_payment():
     try:
         id = get_jwt_identity()
         user = Users.query.get(id)
+
         if not user:
             return jsonify({'msg': 'Unauthorized: User not found'}), 401
+        
         data = request.json
-        if data["products"]:
-            #PODEMOS PASAR TODOS LOS ELEMENTOS QUE PERMITA EL OBJETO DE PAYMENTINTENT.CREATE 
-            intent = stripe.PaymentIntent.create(
-                #amount=getPrice(data['products']), # se deberia de calcular el precio en el back, no recibirse del front
-                currency=data['currency'],
-                automatic_payment_methods={
-                    'enabled': True
-                }
-            )
-            return jsonify({
-                'clientSecret': intent['client_secret']
-            })
-        if data["suscripcion"]:
-            intent = stripe.PaymentIntent.create(
-                amount= 9.99,
-                currency="eur",
-                automatic_payment_methods={
-                    'enabled': True
-                }
-            )
-            return jsonify({
-                'clientSecret': intent['client_secret']
-            })
+
+        # total_amount = 0  # initialize the total
+
+        # if data.get("products"):                    #if in a cart -> calculate total products 
+        #     print(data.get('products'))
+        #     total_amount = getPrice(data["products"])
+
+        # if data.get("suscripcion"):                 #add subscr. cost if selected
+        #     suscription_amount = int(9.99 * 100)
+        #     total_amount += suscription_amount
+
+
+
+        intent = stripe.PaymentIntent.create(
+            amount=data.get('amount'),
+            currency="eur",
+            automatic_payment_methods={
+                'enabled': True
+            }
+        )
+
+        return jsonify({'success': True, 'clientSecret': intent.client_secret})
+
     except Exception as e:
-        return jsonify({'success': False, 'error': str(e)})
+         return jsonify({'success': False, 'error': str(e)})
+
+    
+    
+
+
+
+@api.route('/payment-succeeded', methods=['POST'])
+@jwt_required()
+def payment_succeeded():
+        try:
+            id = get_jwt_identity(id)
+            user = Users.query.get(id)
+            data = request.json
+            payment_intent_id = data.get('payment_intent_id')
+
+            payment_intent = stripe.PaymentIntent.retrieve(payment_intent_id)
+            if payment_intent.status != 'succeeded':
+                return jsonify({'msg': 'Pago sin exito'}), 400
+            
+            
+            # getting items from the cart
+            cart_items = ShoppingCart.query.filter_by(user_id=id).all()  
+
+            #creating the order
+            new_order = Orders(
+                date= datetime.today().strftime('%Y-%m-%d'),
+                subtotal_amount=float(payment_intent.amount -700),
+                total_amount=float(data['amount']),
+                status = 'confirmed',
+                address = user.address,
+                city=user.city,
+                postal_code=user.postal_code,
+                country=user.country,
+                buyer_id=id,
+                discount=user.discount
+            )
+
+            db.session.add('subscription')
+
+            #updated user subscription if chosen
+            if payment_intent.metadata.get('subscription'):
+                user.subscription = True
+
+            # clearing cart after the order has been successful
+            for item in cart_items:
+                db.session.delete(item)
+
+                db.session.commit()
+
+            return jsonify({'msg': 'Pago realizado con exito y order ha sido creado', 'order_id': new_order.id}), 200
+        
+        except Exception as e:
+            db.session.rollback()
+            return jsonify({'msg': 'Error al procesar el pago'}), 500
+        
+
+        #buscar en el carrito los productos del usuario. 
+        #crear orden(tabla back) (llama) (con los productos que estan en carrito)
+        #y llamar todos los elementos de orders
+
+        #__tablename__ = 'orders'
+    # id = db.Column(db.Integer, primary_key=True)
+    # date = db.Column(db.Date, nullable=False)
+    # subtotal_amount = db.Column(db.Float, nullable=False)
+    # total_amount = db.Column(db.Float, nullable=False)
+    # discount = db.Column(db.Boolean, default=False)
+    # status = db.Column(db.String)
+    # address = db.Column(db.String, nullable=False)
+    # city = db.Column(db.String, nullable=False)
+    # postal_code = db.Column(db.Integer, nullable=False)
+    # country = db.Column(db.String, nullable=False)
+    # buyer_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    # seller_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+
+    # crear 2 vistas (success, fail)
+    # nuevo endpoint POST para almacenar orden
+    # despues del compra -> vaciar el carrito
+
+     
+
+    
+            
     
     
 #     ## pago de subscricpion con stripe
