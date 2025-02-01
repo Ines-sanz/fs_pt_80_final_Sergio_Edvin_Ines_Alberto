@@ -357,7 +357,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (isInCart) {
 
           setStore({
-            localShoppingCarts: store.localShoppingCart.filter(
+            localShoppingCart: store.localShoppingCart.filter(
               (el) => !((el.product_id
                 === newShoppingItem.product_id
               ))
@@ -376,8 +376,6 @@ const getState = ({ getStore, getActions, setStore }) => {
             ],
           });
         }
-
-        console.log(getStore().localFavorites);
       },
 
 

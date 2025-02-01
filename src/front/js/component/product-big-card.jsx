@@ -46,16 +46,14 @@ export const ProductBCard = (props) => {
       actions.toggleLocalCart(newShoppingItem);
     }
   }
-  const isFavorite =
-  (store.user?.favorites?.some((fav) => fav === props.id)) ||
-  (store.localFavorites?.some((fav) => fav.product_id === props.id)) ||
-  false;
+  const isFavorite = store.user
+  ? store.user.favorites?.some((fav) => fav === props.id)
+  : store.localFavorites?.some((fav) => fav.product_id === props.id) || false;
  
 
-    const isInShopping = 
-    (store.shoppingCart?.some((item) => item.id === props.id)) || 
-    (store.localShoppingCart?.some((item) => item.product_id === props.id));
-  
+  const isInShopping = store.user
+  ? store.shoppingCart?.some((item) => item.id === props.id)
+  : store.localShoppingCart?.some((item) => item.product_id === props.id)
   return (<>
     <div className="row d-flex align-items-stretch"  >
 
