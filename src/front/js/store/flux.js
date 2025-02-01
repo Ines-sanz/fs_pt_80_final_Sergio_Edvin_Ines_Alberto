@@ -58,33 +58,34 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       register: async (formData) => {
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/register`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(
-              formData
-            ),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            // Registro exitoso
-            console.log("Token:", data.token);
-            console.log("Usuario:", data.user);
-            localStorage.setItem("Token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
-            setStore({ isLogged: true, Token: data.token, user: data.user })
-          } else {
-            // Error en el registro
-          }
+            console.log("Datos del formulario para registro:", formData);  // Verifica que los datos son correctos
+    
+            const response = await fetch(`${process.env.BACKEND_URL}/api/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                // Registro exitoso
+                console.log("Token:", data.token);
+                console.log("Usuario:", data.user);
+                localStorage.setItem("Token", data.token);
+                localStorage.setItem("user", JSON.stringify(data.user));
+                setStore({ isLogged: true, Token: data.token, user: data.user });
+            } else {
+                // Si no fue exitoso, mostrar mensaje de error
+                console.error('Error en el registro:', data.msg || 'Error desconocido');
+            }
         } catch (error) {
-          console.error(error);
+            console.error("Error en el registro:", error);
         }
-      },
-
+    },
+    
       isLogged: async () => {
         try {
           const store = getStore();
