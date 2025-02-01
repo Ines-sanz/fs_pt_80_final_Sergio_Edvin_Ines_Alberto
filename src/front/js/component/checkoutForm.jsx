@@ -12,7 +12,8 @@ export const CheckoutForm = ({ totalAmount }) => {
   const [clientSecret, setClientSecret] = useState('');
   const [loading, setLoading] = useState(false);
 
-    
+  // //formating the total amount to show decimal
+  // const formattedAmount = (totalAmount).toFixed(2).replace('.', ',');
 
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads with the dynamic totalAmount
