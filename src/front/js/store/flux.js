@@ -133,6 +133,47 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error loading data:", error);
         }
       },
+      getAllReviews: async () => {
+        const store = getStore();
+        const actions = getActions();
+
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/reviews`, {
+            method: "GET",
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
+            setStore({ reviews: shuffleArray(data) });
+          } else {
+            console.error("Error al cargar las reseñas:", error);
+          }
+        } catch (error) {
+          console.error("Error al cargar las reseñas:", error);
+        }
+      },
+      getAllUsers: async () => {
+        try {
+          const store = getStore();
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            }
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            setStore({ users: data });
+          } else {
+            console.error("Error al cargar los usuarios:", data);
+          }
+        } catch (error) {
+          console.error("Error en la solicitud de usuarios:", error);
+        }
+      },
 
       //---------------------------------------------------GET SINGLE PRODUCT--------------------------------------------
 
@@ -230,7 +271,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         if (isFavorite) {
 
           setStore({
-            favorites: store.localFavorites.filter(
+            localFavorites: store.localFavorites.filter(
               (el) => !((el.product_id
                 === newFav.product_id
               ))
@@ -249,7 +290,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log(getStore().localFavorites);
       },
 
-      //--------------------------------------------CARRITO USUARIO LOGEADO-----------------------------------------------------
+      //--------------------------------------------------------SHOPPING CART--------------------------------------------
       userShoppingCart: async () => {
         const store = getStore();
         const url = `${process.env.BACKEND_URL}/api/shopping-cart`;
@@ -304,6 +345,43 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      toggleLocalCart: (newShoppingItem) => {
+        const store = getStore();
+
+        const isInCart = store.localShoppingCart.some(
+          (el) => (el.product_id
+            === newShoppingItem.product_id
+          )
+        );
+
+        if (isInCart) {
+
+          setStore({
+            localShoppingCarts: store.localShoppingCart.filter(
+              (el) => !((el.product_id
+                === newShoppingItem.product_id
+              ))
+            ),
+          });
+        } else {
+
+          setStore({
+            localShoppingCart: [
+              ...store.localShoppingCart,
+              { product_id: newShoppingItem.product_id,
+                name: newShoppingItem.name,
+                img: newShoppingItem.img,
+                price: newShoppingItem.price,
+               },
+            ],
+          });
+        }
+
+        console.log(getStore().localFavorites);
+      },
+
+
+
       uploadImageToBackend: async (selectedFile) => {
         if (!selectedFile) {
           alert("Por favor, selecciona un archivo.");
@@ -333,48 +411,6 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-      getAllReviews: async () => {
-        const store = getStore();
-        const actions = getActions();
-
-        try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/reviews`, {
-            method: "GET",
-          });
-
-          if (response.ok) {
-            const data = await response.json();
-            const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
-            setStore({ reviews: shuffleArray(data) });
-          } else {
-            console.error("Error al cargar las reseñas:", error);
-          }
-        } catch (error) {
-          console.error("Error al cargar las reseñas:", error);
-        }
-      },
-
-      getAllUsers: async () => {
-        try {
-          const store = getStore();
-          const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            }
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            setStore({ users: data });
-          } else {
-            console.error("Error al cargar los usuarios:", data);
-          }
-        } catch (error) {
-          console.error("Error en la solicitud de usuarios:", error);
-        }
-      },
 
       loadSubscriptions: async () => {
         try {
