@@ -15,15 +15,20 @@ export const ProductCard = (props) => {
 
   const handleFav = (e) => {
     e.stopPropagation();
-    
+    if(store.user){
+        const newFav = {
+          user_id: store.user.id,
+          product_id: props.id,
+        };
+        actions.toggleFav(newFav);}
+    else{
+        const newFav = {
+          product_id: props.id,
+        };
+        actions.toggleLocalFav(newFav);}
+      }
   
-      const newFav = {
-        user_id: store.user.id,
-        product_id: props.id,
-      };
-      actions.toggleFav(newFav);
-    
-  };
+
   const handleShopping = () => {
     if (store.isLogged) {
          const newShoppingItem = {
@@ -34,16 +39,16 @@ export const ProductCard = (props) => {
     }
   };
 
-
-
-const isFavorite = store.user?.favorites?.some((fav) =>
-   fav === props.id) || false;
+  const isFavorite = 
+  (store.user?.favorites?.some((fav) => fav === props.id)) || 
+  (store.localFavorites?.some((fav) => fav.product_id === props.id)) || 
+  false;
   
 const isInShopping = store.shoppingCart 
 ? store.shoppingCart.some((item) => item.id === props.id)
 : false;
 
-  return (<>
+return (<>
     <div className="col-10 col-md-6 col-xl-4"  >
    
       <div className={ isPromoted ? "promoted": "product-sm-bg" }  onClick={handleCardClick}>

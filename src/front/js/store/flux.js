@@ -3,23 +3,28 @@ import { React } from "react";
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
+      isLogged: localStorage.getItem("Token") ? true : false,
+      Token: localStorage.getItem("Token") || null,
+      user: JSON.parse(localStorage.getItem("user")) || "",
       consolas: [],
       videojuegos: [],
       accesorios: [],
       subscriptions: [],
       selectedProduct: null,
       promoted: [],
-      isLogged: localStorage.getItem("Token") ? true : false,
-      Token: localStorage.getItem("Token") || null,
-      user: JSON.parse(localStorage.getItem("user")) || "",
       shoppingCart: [],
+      localFavorites: [],
+      localShoppingCart: [],
       users: [],
       orderSuccess: []
     },
     actions: {
-      modStore: (key, value)=>{
-        setStore({[key]: value})
+      modStore: (key, value) => {
+        setStore({ [key]: value })
       },
+
+      //----------------------------------------------------LOGIN Y REGISTRO--------------------------------------------
+
       login: async (formData1) => {
         const actions = getActions();
         try {
@@ -97,6 +102,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      //------------------------------------------------------LOAD INFO--------------------------------------------------
+
       loadInfo: async () => {
         try {
           const url = `${process.env.BACKEND_URL}/api/products`;
@@ -127,6 +134,8 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      //---------------------------------------------------GET SINGLE PRODUCT--------------------------------------------
+
       getProductById: async (id) => {
         try {
           const response = await fetch(`${process.env.BACKEND_URL}/api/product/${id}`);
@@ -142,6 +151,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           return null;
         }
       },
+
+      //------------------------------------------------------SELL PRODUCT-----------------------------------------------
 
       sellProduct: async (formData, navigate) => {
         const store = getStore();
@@ -172,6 +183,8 @@ const getState = ({ getStore, getActions, setStore }) => {
           alert("Error al conectar con el servidor");
         }
       },
+
+      //---------------------------------------------------------FAVS---------------------------------------------------
 
       toggleFav: async (newFav) => {
         const store = getStore();
@@ -205,7 +218,38 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-//--------------------------------------------CARRITO USUARIO LOGEADO-----------------------------------------------------
+      toggleLocalFav: (newFav) => {
+        const store = getStore();
+
+        const isFavorite = store.localFavorites.some(
+          (el) => (el.product_id
+            === newFav.product_id
+          )
+        );
+
+        if (isFavorite) {
+
+          setStore({
+            favorites: store.localFavorites.filter(
+              (el) => !((el.product_id
+                === newFav.product_id
+              ))
+            ),
+          });
+        } else {
+
+          setStore({
+            localFavorites: [
+              ...store.localFavorites,
+              { product_id: newFav.product_id },
+            ],
+          });
+        }
+
+        console.log(getStore().localFavorites);
+      },
+
+      //--------------------------------------------CARRITO USUARIO LOGEADO-----------------------------------------------------
       userShoppingCart: async () => {
         const store = getStore();
         const url = `${process.env.BACKEND_URL}/api/shopping-cart`;
@@ -230,6 +274,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       },
 
       toggleCart: async (newShoppingItem) => {
+
         const store = getStore();
         const actions = getActions();
         console.log("Datos enviados al carrito:", newShoppingItem);
