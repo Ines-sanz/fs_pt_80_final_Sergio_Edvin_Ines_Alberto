@@ -14,32 +14,17 @@ export const ProductBCard = (props) => {
 
   const handleFav = (e) => {
     e.stopPropagation();
-    if (!store.isLogged) {
-      if (!store.showLoginModal) {
-        actions.setShowLoginModal(true);
-      }else {
-        alert("Debes iniciar sesión para añadir artículos a favoritos");
-      }
-    } else {
-  
+    
       const newFav = {
         user_id: store.user.id,
         product_id: props.id,
       };
       actions.toggleFav(newFav);
-    }
+    
   };
 const handleShopping = () => {
-  if (!store.isLogged) {
-    if (!store.showLoginModal) {
-      
-      actions.setShowLoginModal(true); 
-    } else {
-      alert("Debes iniciar sesión para añadir artículos al carrito");
-    }
-  } else {
-   
-    const newShoppingItem = {
+  if (store.isLogged) {
+       const newShoppingItem = {
       user_id: store.user.id,
       product_id: props.id,
     };
