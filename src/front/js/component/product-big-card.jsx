@@ -14,33 +14,48 @@ export const ProductBCard = (props) => {
 
   const handleFav = (e) => {
     e.stopPropagation();
-    
+    if (store.user) {
       const newFav = {
         user_id: store.user.id,
         product_id: props.id,
       };
       actions.toggleFav(newFav);
-    
-  };
-const handleShopping = () => {
-  if (store.isLogged) {
-       const newShoppingItem = {
-      user_id: store.user.id,
-      product_id: props.id,
-    };
-    actions.toggleCart(newShoppingItem);
+    }
+    else {
+      const newFav = {
+        product_id: props.id,
+      };
+      actions.toggleLocalFav(newFav);
+    }
   }
-};
-  const isFavorite = store.user && store.user.favorites
-    ? store.user.favorites.some((fav) => fav === props.id)
-    : false;
-
+  const handleShopping = () => {
+    if (store.user) {
+      const newShoppingItem = {
+        user_id: store.user.id,
+        product_id: props.id,
+      };
+      actions.toggleCart(newShoppingItem);
+    }
+    else {
+      const newShoppingItem = {
+        product_id: props.id,
+        name: props.name,
+        img: props.img,
+        price: props.price,
+      };
+      actions.toggleLocalCart(newShoppingItem);
+    }
+  }
+  const isFavorite =
+  (store.user?.favorites?.some((fav) => fav === props.id)) ||
+  (store.localFavorites?.some((fav) => fav.product_id === props.id)) ||
+  false;
  
 
-  const isInShopping = store.shoppingCart
-    ? store.shoppingCart.some((item) => item.id === props.id)
-    : false;
-
+    const isInShopping = 
+    (store.shoppingCart?.some((item) => item.id === props.id)) || 
+    (store.localShoppingCart?.some((item) => item.product_id === props.id));
+  
   return (<>
     <div className="row d-flex align-items-stretch"  >
 
