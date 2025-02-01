@@ -205,6 +205,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+//--------------------------------------------CARRITO USUARIO LOGEADO-----------------------------------------------------
       userShoppingCart: async () => {
         const store = getStore();
         const url = `${process.env.BACKEND_URL}/api/shopping-cart`;

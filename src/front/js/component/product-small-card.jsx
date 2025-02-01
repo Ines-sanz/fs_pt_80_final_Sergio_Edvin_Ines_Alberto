@@ -31,15 +31,7 @@ export const ProductCard = (props) => {
     }
   };
 const handleShopping = async () => {
-  if (!store.isLogged) {
-    if (!store.showLoginModal) {
-      
-      actions.setShowLoginModal(true); 
-    } else {
-      alert("Debes iniciar sesión para añadir artículos al carrito");
-    }
-  } else {
-   
+ {
     const newShoppingItem = {
       user_id: store.user.id,
       product_id: props.id,

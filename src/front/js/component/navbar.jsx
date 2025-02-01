@@ -8,9 +8,9 @@ import { CartItem } from "./shopping-cart-item.jsx"
 
 export const Navbar = () => {
   const { store, actions } = useContext(Context)
-
   const [isTransparent, setIsTransparent] = useState(false);
   let lastScrollTop = 0;
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const handleScroll = () => {
     const currentScroll = window.scrollY;
@@ -27,13 +27,28 @@ export const Navbar = () => {
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     actions.userShoppingCart()
-    actions.setShowLoginModal(false); 
-
+  
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
+  useEffect(() => {
+    if (store.shoppingCart.length > 0) {
+      const offcanvasElement = document.getElementById("offcanvasShopping");
+      if (offcanvasElement) {
+        let offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+  
+        if (!offcanvasInstance) {
+          offcanvasInstance = new bootstrap.Offcanvas(offcanvasElement);
+        }
+  
+        if (!offcanvasElement.classList.contains("show")) {
+          offcanvasInstance.show();
+        }
+      }
+    }
+  }, [store.shoppingCart]);
 
   const navigate = useNavigate();
 
@@ -180,7 +195,7 @@ export const Navbar = () => {
             {/* Ícono de la bolsa de compras, se oculta en pantallas grandes */}
             <div>
             <span
-              className={store.Token ? "fa-solid fa-bag-shopping small-device float" : "oculto"}
+              className={"fa-solid fa-bag-shopping small-device float"}
               alt="Shopping bag"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasShopping"
@@ -249,7 +264,7 @@ export const Navbar = () => {
                 </li>
                 <li className="nav-item nav-link float" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                   {/* Ícono de la bolsa de compras pantallas grandes, tambien abre el offcanvas */}
-                  <span className={store.Token ? "fa-solid fa-bag-shopping nav-shopping-bag float" : "oculto"}
+                  <span className={"fa-solid fa-bag-shopping nav-shopping-bag float"}
                     alt="Shopping bag"
                     data-bs-toggle="offcanvas"
                     data-bs-target="#offcanvasShopping"
