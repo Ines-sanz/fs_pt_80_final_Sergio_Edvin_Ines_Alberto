@@ -31,8 +31,8 @@ export const OrderSuccess = () => {
                 </h2>
                 <div className ="order-details">
             <p>Fecha: {store.orderSuccess?.date} </p>
-            <p>Subtotal: {store.orderSuccess?.subtotal_amount} </p>
-            <p>Total: {store.orderSuccess?.total_amount} </p>
+            <p>Subtotal: {store.orderSuccess?.subtotal_amount} € </p>
+            <p>Total: {store.orderSuccess?.total_amount} € </p>
             <p>Descuento: {store.orderSuccess?.discount} </p>
             <p>Direccion: {store.orderSuccess?.address} </p>
             <p>Ciudad: {store.orderSuccess?.city} </p>

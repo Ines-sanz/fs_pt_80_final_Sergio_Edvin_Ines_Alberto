@@ -20,7 +20,7 @@ export const CheckoutForm = ({ totalAmount }) => {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer '+localStorage.getItem('Token') 
       },
-      body: JSON.stringify({ amount: totalAmount * 100, currency: 'eur' }) // Amount in cents
+      body: JSON.stringify({ amount: totalAmount * 100 , currency: 'eur' }) // Amount in cents
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret)); 
