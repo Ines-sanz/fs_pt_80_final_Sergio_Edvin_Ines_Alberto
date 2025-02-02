@@ -17,7 +17,7 @@ export const Checkout = () => {
     ) || 0;
 
     const subscriptionPrice = selectedSubscription ? 9.99 : 0;
-    const shippingPrice = (store.user?.subscription || isSubscriptionOnly) ? 0: 7;
+    const shippingPrice = (store.user?.subscription || selectedSubscription) ? 0: 7;
     return cartTotal + subscriptionPrice + shippingPrice;
   };
 
@@ -146,7 +146,7 @@ export const Checkout = () => {
 
         {/* subscription part end */}
 
-        {!isSubscriptionOnly && (
+        {!isSubscriptionOnly && !selectedSubscription && (
           store.user?.subscription ? (
             <p className="shipping-fee">
               <span className="text-decoration-line-through text-dark">Gastos de envio: 7.00€</span>

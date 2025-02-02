@@ -11,7 +11,7 @@ export const OrderSuccess = () => {
 
     setTimeout(() => {
        navigate('/')
-    }, 10000)
+    }, 15000)
 
 
     return (
