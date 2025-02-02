@@ -4,6 +4,9 @@ import { useContext } from "react";
 import { Context } from "../store/appContext";
 import "../../styles/perfil.css";
 
+import { ProductCard } from "../component/product-small-card.jsx";
+
+
 export const PerfilUsuario = () => {
     const { actions } = useContext(Context);
     const { userId } = useParams(); // Obtener el ID del usuario desde la URL
@@ -44,9 +47,7 @@ export const PerfilUsuario = () => {
                 <div className="profile-info-log">
                     <h1 className="profile-name-log">{userData.userName}</h1>
                     <p className="profile-email-log">{userData.email}</p>
-                    <p className="profile-address-log">
-                        {userData.address}, {userData.city} ({userData.postalCode})
-                    </p>
+                    
                     <div className="profile-stats-log">
                         <span className="followers-log">{userData.followed_by.length} Seguidores</span>
                         <span className="following-log">{userData.following_users.length} Seguidos</span>
@@ -61,16 +62,20 @@ export const PerfilUsuario = () => {
                 <div className="horizontal-scrollable">
                     <div className="row flex-nowrap pt-1">
                         {favoritesDetails.length > 0 ? (
-                            favoritesDetails.map((fav) => (
-                                <div key={fav.id} className="favorite-item-log">
-                                    <img src={fav.img} alt={fav.name} className="favorite-img-log" />
-                                    <p>{fav.name}</p>
-                                    <span>{fav.price} €</span>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No tiene productos favoritos.</p>
-                        )}
+                                                        favoritesDetails.map((fav) => (
+                                                            <ProductCard
+                                                                key={fav.id}
+                                                                img={fav.img}
+                                                                name={fav.name}
+                                                                brand={fav.brand}
+                                                                price={fav.price}
+                                                                promoted={fav.promoted}
+                                                                id={fav.id}
+                                                            />
+                                                        ))
+                                                    ) : (
+                                                        <p>No tienes productos favoritos.</p>
+                                                    )}
                     </div>
                 </div>
             </div>
