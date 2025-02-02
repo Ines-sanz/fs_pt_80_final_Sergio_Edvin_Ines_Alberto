@@ -3,6 +3,9 @@ import { Context } from "../store/appContext";
 import "../../styles/perfil.css";
 import { Link } from "react-router-dom";
 
+import { ProductCard } from "../component/product-small-card.jsx";
+import { Reviews } from "../component/reviews.jsx";
+
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
     const [userData, setUserData] = useState(null);
@@ -71,11 +74,14 @@ export const Perfil = () => {
 
     // Función para manejar el clic en el botón "+ Usuarios"
     const handleShowUserList = async () => {
-        console.log("Clic en + Usuarios");
-        if (!showUserList) {
-            await fetchUsers(); // Forzar la sincronización de usuarios y seguidores
+        await fetchUsers();
+        const offcanvasElement = document.getElementById("offcanvasUsers");
+        let offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+
+        if (!offcanvasInstance) {
+            offcanvasInstance = new bootstrap.Offcanvas(offcanvasElement);
         }
-        setShowUserList(!showUserList);
+        offcanvasInstance.show();
     };
 
     const [formData, setFormData] = useState({
@@ -99,7 +105,7 @@ export const Perfil = () => {
             [name]: value
         });
     };
-    
+
     const handleRepeatPasswordChange = (e) => {
         setRepeatPassword(e.target.value);
     };
@@ -122,97 +128,121 @@ export const Perfil = () => {
     if (store.isLogged && userData) {
         return (
             <div className="profile-container-log">
-                <div className="profile-header-log">
-                    <div className="profile-avatar-container-log">
+                <div className="profile-header-log row">
+                    <div className="profile-avatar-container-log col-xl-4 col-12">
                         <img
-                            src={userData.avatar || "https://via.placeholder.com/150"}
+                            src={userData.avatar || "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/user.png"}
                             alt="Avatar del usuario"
                             className="profile-avatar-log"
                         />
-                        <div className="logout-button-container">
-                            <button className="btn btn-secondary logout-btn" onClick={handleLogout}>
-                                Cerrar sesión
-                            </button>
-                        </div>
+    
                     </div>
 
-                    <div className="profile-info-log">
-                        <h1 className="profile-name-log">{userData.userName}</h1>
+                    <div className="col-xl-8 col-12 mt-5">
+                        <div className="d-flex">
+                            <h5 className="profile-name-log">{userData.userName}</h5><button className="btn btn-secondary logout-btn" onClick={handleLogout}>
+                                <span class="fa-solid fa-arrow-right-from-bracket ms-3"></span>
+                            </button></div>
                         <p className="profile-email-log">{userData.email}</p>
                         <p className="profile-address-log">
                             {userData.address}, {userData.city} ({userData.postalCode})
                         </p>
-                        <div className="profile-stats-log">
-                            <span className="followers-log">{userData.followed_by.length} Seguidores</span>
-                            <span className="following-log">{userData.following_users.length} Seguidos</span>
-                            <button 
-                                className="btn btn-primary user-list-btn" 
+                        <div className="profile-stats-log row justify-content-between">
+                            <div className="col-md-6 col-12">
+                                <span className="followers-log">{userData.followed_by.length} Seguidores</span>
+                                <span className="following-log">{userData.following_users.length} Seguidos</span>
+                                </div>
+
+                            <span
+                                className=" user-list-btn col-md-2 col-5 mt-2 ms-2"
                                 onClick={handleShowUserList}
                             >
                                 + Usuarios
-                            </button>
+                            </span>
+
                         </div>
                     </div>
                 </div>
 
                 {/* Modal de lista de usuarios */}
-                {showUserList && (
-                    <div className="user-list-modal">
-                        <h3 className="modal-title">Lista de Usuarios</h3>
-                        <button className="close-modal" onClick={handleShowUserList}>X</button>
-                        <div className="user-list">
-                            {filteredUsers.length > 0 ? (
-                                filteredUsers.map((user) => (
+                <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasUsers" aria-labelledby="offcanvasUsersLabel">
+
+                    <div className="offcanvas-body users-offcanvas">
+                        {users.length > 0 ? (
+                            users.map(user => (
+                                <div className="shopping-c-item p-2">
                                     <div key={user.id} className="user-item">
-                                        <img src={user.avatar || "default-avatar.png"} alt={user.userName} className="user-avatar" />
-                                        <div className="user-info">
-                                            <Link to={`/perfil/${user.id}`} className="user-name-link">
-                                                <h5>{user.userName}</h5>
-                                            </Link>
-                                            <p>{user.itemsForSale || 0} artículos en venta</p>
-                                            <button 
-                                                className={`btn btn-follow ${followedUsers.has(user.id) ? "followed" : ""}`} 
-                                                onClick={() => handleFollowUser(user.id)}
-                                            >
-                                                {followedUsers.has(user.id) ? "Seguido" : "Seguir +"}
-                                            </button>
+                                        <div className="d-flex">
+                                            <img src={user.avatar} alt={user.userName} className="user-avatar" />
+                                            <div >
+                                                <div className="d-flex justify-content-between ">
+                                            <Link to={`/perfil/${user.id}`} className="user-name-link mt-2 ms-2">{user.userName}</Link>
+                                             <button className={`btn ${followedUsers.has(user.id) ? "btn-seguir" : "btn-seguido"}`}
+                                                onClick={() => handleFollowUser(user.id)}>
+                                                {followedUsers.has(user.id) ?<span class="fa-solid fa-user-minus"></span>: <span class="fa-solid fa-user-plus"></span>}
+                                            </button> </div>
+                                            <p className="user-description ms-2">{user.description ? (user.description.length > 60 ? user.description.substring(0, 60) + "..." : user.description) : "Sin descripción"}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                ))
-                            ) : (
-                                <p>No hay usuarios disponibles.</p>
-                            )}
-                        </div>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No hay usuarios disponibles.</p>
+                        )}
                     </div>
-                )}
+                </div>
 
                 <div className="profile-description-log">
-                    <p>{userData.description || "Descripción no proporcionada."}</p>
-                    {!userData.subscription && (
-                        <button className="btn-premium-log">Go Premium</button>
-                    )}
+                    <p>{userData.description || "Nos encantaria saber algo mas de tí..."}</p>
+                    
                 </div>
+                {!userData.subscription && (
+                        <Link to={`/suscripcion`} className="faq-home-button" style={{ maxWidth: "320px", textAlign: "center"}}>Hazte premium</Link>
+                    )}
+
+
+                <h3 className="t-section">REVIEWS</h3>
+                            <div className="row pt-1 d-flex">
+                                {store.reviews
+                                    ?.filter((review) => review.user_id === Number(userData.id))
+                                    .map((review) => (
+                                        <Reviews
+                                            key={review.id}
+                                            user_id={review.user_id}
+                                            rating={review.rating}
+                                            comment={review.comment}
+                                            product_id={review.product_id}
+                                        />
+                                    ))}
+                            </div>
                 <div className="profile-section-log">
-                    <h2>Favoritos</h2>
+        
+                    <h3 className="t-section">FAVORITOS</h3>
                     <div className="horizontal-scrollable">
                         <div className="row flex-nowrap pt-1">
                             {favoritesDetails.length > 0 ? (
                                 favoritesDetails.map((fav) => (
-                                    <div key={fav.id} className="favorite-item-log">
-                                        <img src={fav.img} alt={fav.name} className="favorite-img-log" />
-                                        <p>{fav.name}</p>
-                                        <span>{fav.price} €</span>
-                                    </div>
+                                    <ProductCard
+                                        key={fav.id}
+                                        img={fav.img}
+                                        name={fav.name}
+                                        brand={fav.brand}
+                                        price={fav.price}
+                                        promoted={fav.promoted}
+                                        id={fav.id}
+                                    />
                                 ))
                             ) : (
                                 <p>No tienes productos favoritos.</p>
                             )}
                         </div>
                     </div>
+
                 </div>
 
                 <div className="profile-section-log">
-                    <h2>Escaparate</h2>
+                    <h3 className="t-section">ESCAPARATE</h3>
                     <div className="showcase-container-log">
                         {userData.products?.length > 0 ? (
                             userData.products.map((product) => (
@@ -239,110 +269,110 @@ export const Perfil = () => {
                 {/* Sección del formulario o botones iniciales */}
                 <div className="col-md-5 d-flex align-items-center justify-content-center form-alt my-form-column" style={{ maxWidth: '550px' }}>
                     <div className="form-container rounded text-center">
-                        
+
                         {/* Si elige "Registrarse", muestra el formulario */}
                         {isRegister === true && (
-                         <form
-                         onSubmit={async (e) => {
-                             e.preventDefault(); // Prevenir la acción por defecto del formulario (recarga de página)
-                     
-                             const { email, password, userName } = formData;
-                     
-                             // Verificamos que las contraseñas coincidan
-                             if (password !== repeatPassword) {
-                                 alert('Las contraseñas no coinciden');
-                                 return;
-                             }
-                     
-                             // Crea un nuevo objeto solo con los campos necesarios para el backend
-                             const formDataForBackend = {
-                                 email,
-                                 password,
-                                 userName
-                             };
-                     
-                             // Llamada a la acción de registro con los datos correctos
-                             await actions.register(formDataForBackend);
-                         }}
-                     >
-                         <div className="text-center mb-4">
-                             <h3>Crear Cuenta</h3>
-                         </div>
-                         <div className="mb-3">
-                             <label htmlFor="userName" className="form-label">
-                                 Nombre de usuario*
-                             </label>
-                             <input
-                                 type="text"
-                                 className="my-form-control w-100"
-                                 id="userName"
-                                 placeholder="Nombre de usuario"
-                                 required
-                                 name="userName"
-                                 value={formData.userName}
-                                 onChange={handleChange}
-                             />
-                         </div>
-                         <div className="mb-3">
-                             <label htmlFor="email" className="form-label">
-                                 Email*
-                             </label>
-                             <input
-                                 type="email"
-                                 className="my-form-control w-100"
-                                 id="email"
-                                 placeholder="ejemplo@ejemplo.com"
-                                 required
-                                 name="email"
-                                 value={formData.email}
-                                 onChange={handleChange}
-                             />
-                         </div>
-                         <div className="mb-3">
-                             <label htmlFor="password" className="form-label">
-                                 Contraseña*
-                             </label>
-                             <input
-                                 type="password"
-                                 className="my-form-control w-100"
-                                 id="password"
-                                 placeholder="Contraseña"
-                                 required
-                                 name="password"
-                                 value={formData.password}
-                                 onChange={handleChange}
-                             />
-                         </div>
-                         <div className="mb-3">
-                             <label htmlFor="repeatPassword" className="form-label">
-                                 Repetir Contraseña*
-                             </label>
-                             <input
-                                 type="password"
-                                 className="my-form-control w-100"
-                                 id="repeatPassword"
-                                 placeholder="Repite tu contraseña"
-                                 required
-                                 name="repeatPassword"
-                                 value={repeatPassword} // Usamos el estado repeatPassword
-                                 onChange={handleRepeatPasswordChange} // Manejamos su cambio con esta función
-                             />
-                         </div>
-                     
-                         <div className="d-flex flex-column">
-                             <button type="submit" className="btn faq-home-button mt-4">
-                                 Crear perfil
-                             </button>
-                     
-                             <a
-                                 className="btn-secondary mt-2"
-                                 onClick={() => setIsRegister(false)}
-                             >
-                                 Login
-                             </a>
-                         </div>
-                     </form>
-                     
+                            <form
+                                onSubmit={async (e) => {
+                                    e.preventDefault(); // Prevenir la acción por defecto del formulario (recarga de página)
+
+                                    const { email, password, userName } = formData;
+
+                                    // Verificamos que las contraseñas coincidan
+                                    if (password !== repeatPassword) {
+                                        alert('Las contraseñas no coinciden');
+                                        return;
+                                    }
+
+                                    // Crea un nuevo objeto solo con los campos necesarios para el backend
+                                    const formDataForBackend = {
+                                        email,
+                                        password,
+                                        userName
+                                    };
+
+                                    // Llamada a la acción de registro con los datos correctos
+                                    await actions.register(formDataForBackend);
+                                }}
+                            >
+                                <div className="text-center mb-4">
+                                    <h3>Crear Cuenta</h3>
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="userName" className="form-label">
+                                        Nombre de usuario*
+                                    </label>
+                                    <input
+                                        type="text"
+                                        className="my-form-control w-100"
+                                        id="userName"
+                                        placeholder="Nombre de usuario"
+                                        required
+                                        name="userName"
+                                        value={formData.userName}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">
+                                        Email*
+                                    </label>
+                                    <input
+                                        type="email"
+                                        className="my-form-control w-100"
+                                        id="email"
+                                        placeholder="ejemplo@ejemplo.com"
+                                        required
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="password" className="form-label">
+                                        Contraseña*
+                                    </label>
+                                    <input
+                                        type="password"
+                                        className="my-form-control w-100"
+                                        id="password"
+                                        placeholder="Contraseña"
+                                        required
+                                        name="password"
+                                        value={formData.password}
+                                        onChange={handleChange}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="repeatPassword" className="form-label">
+                                        Repetir Contraseña*
+                                    </label>
+                                    <input
+                                        type="password"
+                                        className="my-form-control w-100"
+                                        id="repeatPassword"
+                                        placeholder="Repite tu contraseña"
+                                        required
+                                        name="repeatPassword"
+                                        value={repeatPassword} // Usamos el estado repeatPassword
+                                        onChange={handleRepeatPasswordChange} // Manejamos su cambio con esta función
+                                    />
+                                </div>
+
+                                <div className="d-flex flex-column">
+                                    <button type="submit" className="btn faq-home-button mt-4">
+                                        Crear perfil
+                                    </button>
+
+                                    <a
+                                        className="btn-secondary mt-2"
+                                        onClick={() => setIsRegister(false)}
+                                    >
+                                        Login
+                                    </a>
+                                </div>
+                            </form>
+
                         )}
 
                         {/* Formulario de login */}
