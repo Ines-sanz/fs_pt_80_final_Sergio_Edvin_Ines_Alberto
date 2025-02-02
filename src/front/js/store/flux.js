@@ -10,6 +10,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       videojuegos: [],
       accesorios: [],
       subscriptions: [],
+      selectedSubscriptions: [],
       selectedProduct: null,
       promoted: [],
       shoppingCart: [],
