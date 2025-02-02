@@ -40,7 +40,7 @@ export const PerfilUsuario = () => {
             <div className="profile-header-log">
                 <div className="profile-avatar-container-log">
                     <img
-                        src={userData.avatar || "https://via.placeholder.com/150"}
+                        src={userData.avatar || "https://res.cloudinary.com/dshjlidcs/image/upload/v1738526759/j8e22hpsiepivnue4rby-min_dbfghd.png"}
                         alt="Avatar del usuario"
                         className="profile-avatar-log"
                     />

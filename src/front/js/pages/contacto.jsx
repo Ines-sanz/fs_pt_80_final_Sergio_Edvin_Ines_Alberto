@@ -339,7 +339,7 @@ export const Contacto = () => {
     Hazte Premium
     </Link>
     <img
-        src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736455865/web-illustrations/r5r3z9kfuqd95yennokv.png"
+        src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526760/r5r3z9kfuqd95yennokv-min_mcza4i.png"
         alt="Imagen FinalBoss Dudas"
         className="image"
         style={{ width: '10%', marginLeft: 'auto' }}
