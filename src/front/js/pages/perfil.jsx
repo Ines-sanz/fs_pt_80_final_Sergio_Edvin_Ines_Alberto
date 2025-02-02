@@ -4,6 +4,7 @@ import "../../styles/perfil.css";
 import { Link } from "react-router-dom";
 
 import { ProductCard } from "../component/product-small-card.jsx";
+import { Reviews } from "../component/reviews.jsx";
 
 export const Perfil = () => {
     const { store, actions } = useContext(Context);
@@ -172,7 +173,7 @@ export const Perfil = () => {
                                 <div className="shopping-c-item p-2">
                                     <div key={user.id} className="user-item">
                                         <div className="d-flex">
-                                            <img src={user.avatar || "default-avatar.png"} alt={user.userName} className="user-avatar" />
+                                            <img src={user.avatar} alt={user.userName} className="user-avatar" />
                                             <div >
                                                 <div className="d-flex justify-content-between ">
                                             <Link to={`/perfil/${user.id}`} className="user-name-link mt-2 ms-2">{user.userName}</Link>
@@ -194,12 +195,30 @@ export const Perfil = () => {
 
                 <div className="profile-description-log">
                     <p>{userData.description || "Nos encantaria saber algo mas de tí..."}</p>
-                    {!userData.subscription && (
-                        <button className="btn-premium-log">Go Premium</button>
-                    )}
+                    
                 </div>
+                {!userData.subscription && (
+                        <Link to={`/suscripcion`} className="faq-home-button" style={{ maxWidth: "320px", textAlign: "center"}}>Hazte premium</Link>
+                    )}
+
+
+                <h3 className="t-section">REVIEWS</h3>
+                            <div className="row pt-1 d-flex">
+                                {store.reviews
+                                    ?.filter((review) => review.user_id === Number(userData.id))
+                                    .map((review) => (
+                                        <Reviews
+                                            key={review.id}
+                                            user_id={review.user_id}
+                                            rating={review.rating}
+                                            comment={review.comment}
+                                            product_id={review.product_id}
+                                        />
+                                    ))}
+                            </div>
                 <div className="profile-section-log">
-                    <h2>Favoritos</h2>
+        
+                    <h3 className="t-section">FAVORITOS</h3>
                     <div className="horizontal-scrollable">
                         <div className="row flex-nowrap pt-1">
                             {favoritesDetails.length > 0 ? (
@@ -223,7 +242,7 @@ export const Perfil = () => {
                 </div>
 
                 <div className="profile-section-log">
-                    <h2>Escaparate</h2>
+                    <h3 className="t-section">ESCAPARATE</h3>
                     <div className="showcase-container-log">
                         {userData.products?.length > 0 ? (
                             userData.products.map((product) => (
