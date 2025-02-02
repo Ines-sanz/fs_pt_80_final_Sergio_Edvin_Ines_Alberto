@@ -26,7 +26,7 @@ export const Home = () => {
           {" "}
           <Link to="/suscripcion">
             <img
-              src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/premium-boss.png"
+              src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526760/imvwy8iwmkzk8mqskwzk-min_uhxbxt.png"
               alt=""
               className="img-fluid"
             />
@@ -35,7 +35,7 @@ export const Home = () => {
         <figure className="col-12 col-lg-6">
           <Link to="/sell">
             <img
-              src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/sell-items.png"
+              src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526760/efzol3qocdcsps6rlczz-min_mlcoyz.png"
               alt=""
               className="img-fluid"
             />
@@ -127,7 +127,7 @@ export const Home = () => {
           <p className="faq-home-p">Contacto directo y mucho más...</p>
         </div>
         <figure className="col-3 text-start">
-          <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/c_thumb,w_200,g_face/v1736455865/web-illustrations/r5r3z9kfuqd95yennokv.png" alt="FAQ" className="img-fluid" />
+          <img src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526760/r5r3z9kfuqd95yennokv-min_mcza4i.png" alt="FAQ" className="img-fluid" />
         </figure>
       </section>
       <div className="divider"></div>

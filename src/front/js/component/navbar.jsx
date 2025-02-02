@@ -189,7 +189,7 @@ export const Navbar = () => {
           <div className="col-2 text-center">
             <Link to="/">
               <img
-                src="https://res.cloudinary.com/dr0wlij0c/image/upload/c_thumb,w_200,g_face/v1736453861/web-illustrations/logo.png"
+                src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526760/qzicckdcplcmnoqckd1i-min_pre39g.png"
                 className="img-fluid"
                 alt="Logo"
               />

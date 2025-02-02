@@ -131,7 +131,7 @@ export const Perfil = () => {
                 <div className="profile-header-log row">
                     <div className="profile-avatar-container-log col-xl-4 col-12">
                         <img
-                            src={userData.avatar || "https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/user.png"}
+                            src={userData.avatar || "https://res.cloudinary.com/dshjlidcs/image/upload/v1738526759/j8e22hpsiepivnue4rby-min_dbfghd.png"}
                             alt="Avatar del usuario"
                             className="profile-avatar-log"
                         />

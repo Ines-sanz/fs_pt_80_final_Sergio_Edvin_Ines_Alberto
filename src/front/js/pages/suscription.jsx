@@ -27,7 +27,7 @@ export const Suscription = () => {
                 <div className="card basic">
                     <div className="circle-icon">
                         <img
-                            src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/user.png"
+                            src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526759/j8e22hpsiepivnue4rby-min_dbfghd.png"
                             alt="Basic subscription user illustration"
                         />
                     </div>
@@ -45,12 +45,12 @@ export const Suscription = () => {
                     
                     <div className="circle-icon">
                         <img
-                            src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453861/web-illustrations/premium-user.png"
+                            src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526760/t9wliafde7eongd3umez-min_usjcnx.png"
                             alt="Premium subscription user illustration"
                         />
                     </div>
                     <img className="img-fluid"
-                    src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1737132420/Manual-Final-Boss-26_efcv6i.png"
+                    src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738527220/web-img/n0mqeqtviwcpjyhqkyen.png"
                     alt="premium boss"/>
                     <ul className="text">
                         <li className="bulleted-list d-flex flex-start">• Descuentos exclusivos</li>
