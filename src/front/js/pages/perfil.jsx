@@ -3,7 +3,7 @@ import { Context } from "../store/appContext";
 import "../../styles/perfil.css";
 import { Link } from "react-router-dom";
 
-import { ProductCard } from "../component/product-small-card.jsx";
+import { FavCard } from "../component/fav-card.jsx";
 import { Reviews } from "../component/reviews.jsx";
 
 export const Perfil = () => {
@@ -122,7 +122,7 @@ export const Perfil = () => {
     const filteredUsers = users.filter(user => user.id !== store.user.id);
 
     if (store.isLogged && !userData) {
-        return <p>Cargando datos del usuario...</p>;
+        return <p className="loging-data">Cargando datos del usuario...</p>;
     }
 
     if (store.isLogged && userData) {
@@ -135,7 +135,7 @@ export const Perfil = () => {
                             alt="Avatar del usuario"
                             className="profile-avatar-log"
                         />
-    
+
                     </div>
 
                     <div className="col-xl-8 col-12 mt-5">
@@ -151,7 +151,7 @@ export const Perfil = () => {
                             <div className="col-md-6 col-12">
                                 <span className="followers-log">{userData.followed_by.length} Seguidores</span>
                                 <span className="following-log">{userData.following_users.length} Seguidos</span>
-                                </div>
+                            </div>
 
                             <span
                                 className=" user-list-btn col-md-2 col-5 mt-2 ms-2"
@@ -176,12 +176,12 @@ export const Perfil = () => {
                                             <img src={user.avatar} alt={user.userName} className="user-avatar" />
                                             <div >
                                                 <div className="d-flex justify-content-between ">
-                                            <Link to={`/perfil/${user.id}`} className="user-name-link mt-2 ms-2">{user.userName}</Link>
-                                             <button className={`btn ${followedUsers.has(user.id) ? "btn-seguir" : "btn-seguido"}`}
-                                                onClick={() => handleFollowUser(user.id)}>
-                                                {followedUsers.has(user.id) ?<span class="fa-solid fa-user-minus"></span>: <span class="fa-solid fa-user-plus"></span>}
-                                            </button> </div>
-                                            <p className="user-description ms-2">{user.description ? (user.description.length > 60 ? user.description.substring(0, 60) + "..." : user.description) : "Sin descripción"}</p>
+                                                    <Link to={`/perfil/${user.id}`} className="user-name-link mt-2 ms-2">{user.userName}</Link>
+                                                    <button className={`btn ${followedUsers.has(user.id) ? "btn-seguir" : "btn-seguido"}`}
+                                                        onClick={() => handleFollowUser(user.id)}>
+                                                        {followedUsers.has(user.id) ? <span class="fa-solid fa-user-minus"></span> : <span class="fa-solid fa-user-plus"></span>}
+                                                    </button> </div>
+                                                <p className="user-description ms-2">{user.description ? (user.description.length > 60 ? user.description.substring(0, 60) + "..." : user.description) : "Sin descripción"}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -195,35 +195,34 @@ export const Perfil = () => {
 
                 <div className="profile-description-log">
                     <p>{userData.description || "Nos encantaria saber algo mas de tí..."}</p>
-                    
+
                 </div>
                 {!userData.subscription && (
-                        <Link to={`/suscripcion`} className="faq-home-button" style={{ maxWidth: "320px", textAlign: "center"}}>Hazte premium</Link>
-                    )}
+                    <Link to={`/suscripcion`} className="faq-home-button" style={{ maxWidth: "320px", textAlign: "center" }}>Hazte premium</Link>
+                )}
 
 
                 <h3 className="t-section">REVIEWS</h3>
-                            <div className="row pt-1 d-flex">
-                                {store.reviews
-                                    ?.filter((review) => review.user_id === Number(userData.id))
-                                    .map((review) => (
-                                        <Reviews
-                                            key={review.id}
-                                            user_id={review.user_id}
-                                            rating={review.rating}
-                                            comment={review.comment}
-                                            product_id={review.product_id}
-                                        />
-                                    ))}
-                            </div>
+                <div className="row pt-1 d-flex justify-content-center justify-content-lg-start">
+                    {store.reviews
+                        ?.filter((review) => review.user_id === Number(userData.id))
+                        .map((review) => (
+                            <Reviews
+                                key={review.id}
+                                user_id={review.user_id}
+                                rating={review.rating}
+                                comment={review.comment}
+                                product_id={review.product_id}
+                            />
+                        ))}
+                </div>
                 <div className="profile-section-log">
-        
                     <h3 className="t-section">FAVORITOS</h3>
                     <div className="horizontal-scrollable">
                         <div className="row flex-nowrap pt-1">
                             {favoritesDetails.length > 0 ? (
                                 favoritesDetails.map((fav) => (
-                                    <ProductCard
+                                    <FavCard
                                         key={fav.id}
                                         img={fav.img}
                                         name={fav.name}
@@ -231,6 +230,7 @@ export const Perfil = () => {
                                         price={fav.price}
                                         promoted={fav.promoted}
                                         id={fav.id}
+                                        removeFavorite={() => removeFav(fav.id)} 
                                     />
                                 ))
                             ) : (
@@ -238,10 +238,10 @@ export const Perfil = () => {
                             )}
                         </div>
                     </div>
-
+                    <div className="divider"></div>
                 </div>
 
-                <div className="profile-section-log">
+                {/* <div className="profile-section-log">
                     <h3 className="t-section">ESCAPARATE</h3>
                     <div className="showcase-container-log">
                         {userData.products?.length > 0 ? (
@@ -256,7 +256,7 @@ export const Perfil = () => {
                             <p>No tienes productos en tu escaparate.</p>
                         )}
                     </div>
-                </div>
+                </div> */}
             </div>
         );
     }
@@ -295,7 +295,7 @@ export const Perfil = () => {
                                     await actions.register(formDataForBackend);
                                 }}
                             >
-                                <div className="text-center mb-4">
+                                <div className="text-center  mt-5 mb-lg-4">
                                     <h3>Crear Cuenta</h3>
                                 </div>
                                 <div className="mb-3">

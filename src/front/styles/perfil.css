@@ -221,6 +221,13 @@
   text-transform: uppercase;
   font-size: 20px;
 }
+
+.loging-data{
+  width: 60%;
+  margin: auto;
+  font-size: 2rem;
+  color: #eee;
+}
 @media (max-width: 1400px) {
   .user-description {
     display: none;
@@ -228,7 +235,7 @@
 }
 @media (max-width: 767px) {
   .my-form-column {
-    margin-left: 5%;
+    margin: auto;
   }
 
   .user-name-link {

@@ -120,13 +120,13 @@ export const Home = () => {
       </section>
       <div className="divider"></div>
       <section className="row faq-home">
-        <div className="col-9">
+        <div className="col-12 col-lg-9">
           <h3 className="faq-home-h3">¿Tienes dudas?</h3>
           <p className="faq-home-p">Consulta nuestras <Link to="/contacto" className="faq-home-p-a">preguntas frecuentes</Link></p>
           <Link to="/suscripcion" className="faq-home-button">Go premium</Link>
           <p className="faq-home-p">Contacto directo y mucho más...</p>
         </div>
-        <figure className="col-3 text-start">
+        <figure className=" col-8 col-lg-3 text-start ms-5 ms-lg-0">
           <img src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526760/r5r3z9kfuqd95yennokv-min_mcza4i.png" alt="FAQ" className="img-fluid" />
         </figure>
       </section>
