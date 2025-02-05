@@ -365,7 +365,8 @@ def add_to_favorites():
         if existing_favorite:
             db.session.delete(existing_favorite)
             db.session.commit()
-            return jsonify({'msg': 'Product deleted'}), 200
+            updated_favorites = [fav.product_id for fav in user.favorites] 
+            return jsonify({'msg': 'Product deleted', 'updatedFavorites': updated_favorites}), 200
         else:
         # add to favorites
             new_favorite = Favorites(user_id=id, product_id=product_id)
@@ -385,23 +386,23 @@ def remove_from_favorite(product_id):
         id = get_jwt_identity()
         user = Users.query.get(id)
         if not user:
-            return jsonify({'msg':'Unauthorized: User not found'}), 401 
+            return jsonify({'msg': 'Unauthorized: User not found'}), 401
 
-
-        #validate required fields
         if not id:
             return jsonify({'msg': 'User ID is required'}), 400
         
-        #find the favorite
-        favorite = Favorites.query.filter_by(user_id = id, product_id=product_id).first()
+        favorite = Favorites.query.filter_by(user_id=id, product_id=product_id).first()
         if not favorite:
             return jsonify({'msg': 'Favorite not found'}), 404
         
-        #remove from favorites
         db.session.delete(favorite)
         db.session.commit()
 
-        return jsonify({'msg': 'Removed from favorites successfully'}), 200
+    
+        updated_favorites = Favorites.query.filter_by(user_id=id).all()
+        updated_favorites_list = [{'product_id': fav.product_id} for fav in updated_favorites]
+
+        return jsonify({'msg': 'Removed from favorites successfully', 'updatedFavorites': updated_favorites_list}), 200
     except Exception as error:
         db.session.rollback()
         return jsonify({'error': str(error)}), 400
@@ -581,8 +582,42 @@ def create_payment():
          return jsonify({'success': False, 'error': str(e)})
 
     
-    
+##---------------------------------------------------MERGING LOCAL STORE TO BACK---------------------------------------------    
 
+@api.route('/merge-data', methods=['POST'])
+@jwt_required()
+def merge_data():
+    try:
+        user_id = get_jwt_identity()  # Obtiene el user_id del token
+        user = Users.query.get(user_id)
+
+        if not user:
+            return jsonify({'msg': 'Usuario no encontrado'}), 404
+
+        data = request.json
+        local_favorites = data.get('localFavorites', [])
+        local_shopping_cart = data.get('localShoppingCart', [])
+
+        # Fusionar favoritos sin duplicados
+        for fav in local_favorites:
+            exists = Favorites.query.filter_by(user_id=user_id, product_id=fav['product_id']).first()
+            if not exists:
+                new_fav = Favorites(user_id=user_id, product_id=fav['product_id'])
+                db.session.add(new_fav)
+
+        # Fusionar carrito sin duplicados
+        for item in local_shopping_cart:
+            exists = ShoppingCart.query.filter_by(user_id=user_id, product_id=item['product_id']).first()
+            if not exists:
+                new_cart_item = ShoppingCart(user_id=user_id, product_id=item['product_id'])
+                db.session.add(new_cart_item)
+
+        db.session.commit()
+
+        return jsonify({'msg': 'Datos fusionados correctamente', 'success': True}), 200
+
+    except Exception as e:
+        return jsonify({'msg': 'Error en la fusión de datos', 'error': str(e)}), 500
 
 
 @api.route('/payment-succeeded', methods=['POST'])

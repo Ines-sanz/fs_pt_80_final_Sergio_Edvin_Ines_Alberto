@@ -91,3 +91,19 @@
         height: 20px;
     }
     }
+
+    @media(max-width: 767px){
+      .faq-home-h3{
+        font-size: 28px;
+      }
+      
+      .faq-home-p{
+        font-size: 18px;
+      }
+    
+      .faq-home-button{
+   
+        font-size: 25px;
+   
+      }
+    }

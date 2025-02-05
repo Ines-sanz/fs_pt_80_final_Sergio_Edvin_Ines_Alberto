@@ -26,7 +26,6 @@ export const Navbar = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
-    actions.userShoppingCart()
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
@@ -186,7 +185,7 @@ export const Navbar = () => {
           }`}
       >
         <div className="container-fluid">
-          <div className="col-2 text-center">
+          <div className="col-3 col-md-2 text-center">
             <Link to="/">
               <img
                 src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526760/qzicckdcplcmnoqckd1i-min_pre39g.png"
