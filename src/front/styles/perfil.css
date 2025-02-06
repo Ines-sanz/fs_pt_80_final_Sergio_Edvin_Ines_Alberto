@@ -1,6 +1,6 @@
 .bg-image {
   height: 100vh;
-  background-image: url(https://res.cloudinary.com/dr0wlij0c/image/upload/v1738435233/perfil-long_kcfdc2.png);
+  background-image: url(https://res.cloudinary.com/dshjlidcs/image/upload/v1738527220/web-img/wh0uqjc5on0dx3e3rp44.png);
   background-size: cover;
   background-position: right top;
 }
@@ -51,16 +51,18 @@
 .btn-secondary {
   font-size: 20px;
   border: none;
-  background-color: transparent;
-  color: #08b5f9;
+  background-color: transparent !important;
+  color: #08b5f9 !important;
   font-weight: 400;
   text-decoration: underline;
 }
-.btn-secondary:hover {
-  cursor: pointer;
+
+.edit-btn{
+  font-size: 20px;
+  border: none;
   background-color: transparent;
-  color: #08b5f9;
-  transform: scale(1.05);
+  color: #fff;
+  font-weight: 400;
 }
 
 .profile-container-log {
@@ -221,6 +223,13 @@
   text-transform: uppercase;
   font-size: 20px;
 }
+
+.loging-data{
+  width: 60%;
+  margin: auto;
+  font-size: 2rem;
+  color: #eee;
+}
 @media (max-width: 1400px) {
   .user-description {
     display: none;
@@ -228,7 +237,7 @@
 }
 @media (max-width: 767px) {
   .my-form-column {
-    margin-left: 5%;
+    margin: auto;
   }
 
   .user-name-link {
