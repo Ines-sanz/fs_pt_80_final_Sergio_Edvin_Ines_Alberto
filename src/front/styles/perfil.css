@@ -51,16 +51,18 @@
 .btn-secondary {
   font-size: 20px;
   border: none;
-  background-color: transparent;
-  color: #08b5f9;
+  background-color: transparent !important;
+  color: #08b5f9 !important;
   font-weight: 400;
   text-decoration: underline;
 }
-.btn-secondary:hover {
-  cursor: pointer;
+
+.edit-btn{
+  font-size: 20px;
+  border: none;
   background-color: transparent;
-  color: #08b5f9;
-  transform: scale(1.05);
+  color: #fff;
+  font-weight: 400;
 }
 
 .profile-container-log {

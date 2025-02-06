@@ -105,7 +105,7 @@ export const Home = () => {
       <section className="my-5 row">
         <h3 className="faq-home-h3">La mejor plataforma para comprar y vender.</h3>
         <p className="faq-home-p">Nuestros clientes nos avalan</p>
-          <div className="row pt-1 d-flex justify-content-center">
+          <div className="row pt-1 d-flex justify-content-center justify-content-md-start">
           {store.reviews?.slice(0, 4).map((review) => (
               <Reviews
                 key={review.id}
@@ -119,14 +119,14 @@ export const Home = () => {
 
       </section>
       <div className="divider"></div>
-      <section className="row faq-home">
-        <div className="col-12 col-lg-9">
+      <section className="row faq-home d-flex justify-content-md-start justify-content-center">
+        <div className="col-10 col-lg-9">
           <h3 className="faq-home-h3">¿Tienes dudas?</h3>
           <p className="faq-home-p">Consulta nuestras <Link to="/contacto" className="faq-home-p-a">preguntas frecuentes</Link></p>
           <Link to="/suscripcion" className="faq-home-button">Go premium</Link>
           <p className="faq-home-p">Contacto directo y mucho más...</p>
         </div>
-        <figure className=" col-8 col-lg-3 text-start ms-5 ms-lg-0">
+        <figure className=" col-8 col-lg-3 text-md-start text-center ms-lg-0">
           <img src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526760/r5r3z9kfuqd95yennokv-min_mcza4i.png" alt="FAQ" className="img-fluid" />
         </figure>
       </section>

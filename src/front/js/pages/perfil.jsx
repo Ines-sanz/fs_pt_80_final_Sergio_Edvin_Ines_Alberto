@@ -11,7 +11,7 @@ export const Perfil = () => {
     const [userData, setUserData] = useState(null);
     const [showUserList, setShowUserList] = useState(false); // Estado para mostrar la lista de usuarios
     const [users, setUsers] = useState([]); // Estado para almacenar la lista de usuarios
-    const [followedUsers, setFollowedUsers] = useState(new Set(userData?.following_users.map(user => user.id) || []));
+    const [followedUsers, setFollowedUsers] = useState(new Set(userData?.following_users?.map(user => user.id) || []));
     const [favoritesDetails, setFavoritesDetails] = useState([]); // Detalles de productos favoritos
 
     useEffect(() => {
@@ -106,10 +106,37 @@ export const Perfil = () => {
         });
     };
 
+    const [editData, setEditData] = useState({
+        userName: userData?.userName || "",
+        address: userData?.address || "",
+        city: userData?.city || "",
+        postalCode: userData?.postalCode || "",
+        description: userData?.description || ""
+    });
+
     const handleRepeatPasswordChange = (e) => {
         setRepeatPassword(e.target.value);
     };
     const handleChange1 = e => setFormData1({ ...formData1, [e.target.name]: e.target.value });
+
+    const handleChange2 = (e) => {
+        const { name, value } = e.target;
+        setEditData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const updatedUser = await actions.updateUserProfile(store.user.id, editData);
+    
+        if (updatedUser) {
+           
+            setUserData(updatedUser);
+            setIsEditing(false);  // Cierra el formulario de edición
+        }
+    };
+    const [isEditing, setIsEditing] = useState(false); // Controla si el formulario de edición está visible
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -139,10 +166,18 @@ export const Perfil = () => {
                     </div>
 
                     <div className="col-xl-8 col-12 mt-5">
-                        <div className="d-flex">
-                            <h5 className="profile-name-log">{userData.userName}</h5><button className="btn btn-secondary logout-btn" onClick={handleLogout}>
-                                <span class="fa-solid fa-arrow-right-from-bracket ms-3"></span>
-                            </button></div>
+                        <div className="d-flex justify-content-between">
+                            <div className="d-flex">
+                                <h5 className="profile-name-log">{userData.userName}</h5>
+                                <button className="btn btn-secondary float" onClick={handleLogout}>
+                                    <span class="fa-solid fa-arrow-right-from-bracket ms-3"></span>
+                                </button>
+                            </div>
+                            <button type="button" className="btn edit-btn float" onClick={() => setIsEditing(true)}>
+                                <span className="fa-solid fa-pen-to-square"></span>
+                            </button>
+
+                        </div>
                         <p className="profile-email-log">{userData.email}</p>
                         <p className="profile-address-log">
                             {userData.address}, {userData.city} ({userData.postalCode})
@@ -163,6 +198,67 @@ export const Perfil = () => {
                         </div>
                     </div>
                 </div>
+                {/* Modal de edición de perfil*/}
+              {/* Formulario de edición, se muestra cuando isEditing es true */}
+              {isEditing && (
+                    <form onSubmit={handleSubmit} className="mt-4">
+                        <div className="mb-3">
+                            <label htmlFor="userName" className="form-label">Nombre de usuario</label>
+                            <input
+                                type="text"
+                                className="my-form-control w-100"
+                                id="userName"
+                                name="userName"
+                                value={editData.userName}
+                                onChange={handleChange2}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="address" className="form-label">Dirección</label>
+                            <input
+                                type="text"
+                                className="my-form-control w-100"
+                                id="address"
+                                name="address"
+                                value={editData.address}
+                                onChange={handleChange2}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="city" className="form-label">Ciudad</label>
+                            <input
+                                type="text"
+                                className="my-form-control w-100"
+                                id="city"
+                                name="city"
+                                value={editData.city}
+                                onChange={handleChange2}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="postalCode" className="form-label">Código Postal</label>
+                            <input
+                                type="text"
+                                className="my-form-control w-100"
+                                id="postalCode"
+                                name="postalCode"
+                                value={editData.postalCode}
+                                onChange={handleChange2}
+                            />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="description" className="form-label">Descripción</label>
+                            <textarea
+                                className="my-form-control w-100"
+                                id="description"
+                                name="description"
+                                value={editData.description}
+                                onChange={handleChange2}
+                            />
+                        </div>
+                        <button type="submit" className="btn btn-primary w-100">Guardar cambios</button>
+                    </form>
+                )}
 
                 {/* Modal de lista de usuarios */}
                 <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasUsers" aria-labelledby="offcanvasUsersLabel">
@@ -230,7 +326,7 @@ export const Perfil = () => {
                                         price={fav.price}
                                         promoted={fav.promoted}
                                         id={fav.id}
-                                        removeFavorite={() => removeFav(fav.id)} 
+                                        removeFavorite={() => removeFav(fav.id)}
                                     />
                                 ))
                             ) : (

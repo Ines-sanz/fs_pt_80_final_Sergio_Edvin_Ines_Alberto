@@ -147,7 +147,41 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error loading data:", error);
         }
       },
-
+      updateUserProfile: async (userId, updatedData) => {
+        const store = getStore();
+        try {
+            const token = store.Token;
+            if (!token) {
+                console.error("No se encontró un token válido");
+                return null;
+            }
+    
+            // Verifica que updatedData no esté vacío
+            console.log("Datos que se van a actualizar:", updatedData);
+    
+            const response = await fetch(`${process.env.BACKEND_URL}/api/user/${userId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(updatedData)
+            });
+    
+            if (!response.ok) {
+                const errorDetails = await response.text(); // Obtener detalles del error del servidor
+                console.error("Error al actualizar perfil, código:", response.status, "Detalles:", errorDetails);
+                throw new Error("Error al actualizar perfil");
+            }
+    
+            const data = await response.json();
+            console.log("Perfil actualizado:", data);
+            return data;
+        } catch (error) {
+            console.error("Error en updateUserProfile:", error);
+            return null;
+        }
+    },
       //------------------------------------------------------LOAD INFO--------------------------------------------------
 
       loadInfo: async () => {
