@@ -831,14 +831,19 @@ def remove_from_shopping_cart(product_id):
         return jsonify({'error': str(error)}), 400
 
 # Subimos productos al Cloudinary
+
 @api.route('/upload', methods=['POST'])
 def upload():
-    file_to_upload = request.files['file']
-    if file_to_upload:
+    try:
+        file_to_upload = request.files.get('file')
+        if not file_to_upload:
+            return jsonify({"error": "No file uploaded"}), 400
+        
         upload = cloudinary.uploader.upload(file_to_upload)
         print('----------Url donde está la imagen-----------', upload)
         return jsonify(upload)
-    return jsonify({"error": "No file uploaded"}), 400
+    except Exception as e:
+        return jsonify({"error": f"Upload failed: {str(e)}"}), 500
 
 @api.route('/dummy2', methods=['POST']) 
 def dummy():

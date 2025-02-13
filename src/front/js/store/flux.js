@@ -147,6 +147,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error loading data:", error);
         }
       },
+
       updateUserProfile: async (userId, updatedData) => {
         const store = getStore();
         try {
@@ -233,6 +234,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error al cargar las reseñas:", error);
         }
       },
+
       getAllUsers: async () => {
         try {
           const store = getStore();
@@ -288,13 +290,13 @@ const getState = ({ getStore, getActions, setStore }) => {
               "Content-Type": "application/json",
               Authorization: `Bearer ${store.Token}`,
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(payload),
           });
 
           const data = await response.json();
 
           if (response.ok) {
-            alert("Producto publicado con éxito 🎉");
+            setShowSuccess(true);
             navigate("/");
           } else {
             alert(data.msg || "Error al publicar el producto ⚠️ ");
@@ -492,7 +494,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
-
+      //------------------------------------------------------UPLOAD_PHOTO-----------------------------------------------
 
       uploadImageToBackend: async (selectedFile) => {
         if (!selectedFile) {
