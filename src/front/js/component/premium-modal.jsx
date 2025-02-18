@@ -30,7 +30,7 @@ export const PremiumModal = () => {
      </div>
     <div className="row  justify-content-end">
 <div className="col-6 pe-5 text-center">
-      <img src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738527220/web-img/o7qykckeyaqyrrzjbwxz.png" alt="Premium-boss" className="img-fluid" />
+      <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1737132420/Manual-Final-Boss-26_efcv6i.png" alt="Premium-boss" className="img-fluid" />
       
       <div className="divider"></div>
       <div className="divider"></div>

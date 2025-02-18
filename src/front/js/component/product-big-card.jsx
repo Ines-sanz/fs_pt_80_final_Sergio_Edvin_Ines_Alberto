@@ -14,46 +14,48 @@ export const ProductBCard = (props) => {
 
   const handleFav = (e) => {
     e.stopPropagation();
-    if (store.user) {
+    if (!store.isLogged) {
+      if (!store.showLoginModal) {
+        actions.setShowLoginModal(true);
+      }else {
+        alert("Debes iniciar sesión para añadir artículos a favoritos");
+      }
+    } else {
+  
       const newFav = {
         user_id: store.user.id,
         product_id: props.id,
       };
       actions.toggleFav(newFav);
     }
-    else {
-      const newFav = {
-        product_id: props.id,
-      };
-      actions.toggleLocalFav(newFav);
+  };
+const handleShopping = () => {
+  if (!store.isLogged) {
+    if (!store.showLoginModal) {
+      
+      actions.setShowLoginModal(true); 
+    } else {
+      alert("Debes iniciar sesión para añadir artículos al carrito");
     }
+  } else {
+   
+    const newShoppingItem = {
+      user_id: store.user.id,
+      product_id: props.id,
+    };
+    actions.toggleCart(newShoppingItem);
   }
-  const handleShopping = () => {
-    if (store.user) {
-      const newShoppingItem = {
-        user_id: store.user.id,
-        product_id: props.id,
-      };
-      actions.toggleCart(newShoppingItem);
-    }
-    else {
-      const newShoppingItem = {
-        product_id: props.id,
-        name: props.name,
-        img: props.img,
-        price: props.price,
-      };
-      actions.toggleLocalCart(newShoppingItem);
-    }
-  }
-  const isFavorite = store.user
-  ? store.user.favorites?.some((fav) => fav === props.id)
-  : store.localFavorites?.some((fav) => fav.product_id === props.id) || false;
+};
+  const isFavorite = store.user && store.user.favorites
+    ? store.user.favorites.some((fav) => fav === props.id)
+    : false;
+
  
 
-  const isInShopping = store.user
-  ? store.shoppingCart?.some((item) => item.id === props.id)
-  : store.localShoppingCart?.some((item) => item.product_id === props.id)
+  const isInShopping = store.shoppingCart
+    ? store.shoppingCart.some((item) => item.id === props.id)
+    : false;
+
   return (<>
     <div className="row d-flex align-items-stretch"  >
 
@@ -68,7 +70,7 @@ export const ProductBCard = (props) => {
       <div className="px-3 mt-2 col-5 d-flex flex-column justify-content-between py-5 ">
         <div className="divider"></div>
         <figure>
-          <img src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526759/final-boss-selection-25_g3brv4-min_k0olin.png" alt="FinalBossSelection" className="img-fluid" />
+          <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1737124509/final-boss-selection-25_g3brv4.png" alt="FinalBossSelection" className="img-fluid" />
         </figure>
 
         <div>
