@@ -195,6 +195,7 @@ def create_product():
         if not user:
             return jsonify({'msg':'Unauthorized: User not found'}), 401
         #extract product details from the request
+               
         name = request.json.get('name', None)
         description = request.json.get('description', None)
         img = request.json.get('img', None)
@@ -208,10 +209,10 @@ def create_product():
         price = request.json.get('price', None)
         
         
-
         #validate required fields
-        if not name or not description or not img or not year or not brand or not platform or not category or not type or not state  or not price:
-            return jsonify({'msg': 'Please fill all the data'}), 400
+        if not name or not description or not img or not year or not brand or not platform or not category or not type or not price:
+            print(name, description, img, year, brand, platform, type, category, state, price)
+            raise Exception ("Error missing data")
         
         #create a new product
         new_product = Products(name=name, description=description, img=img, year=year, brand=brand, platform=platform, category=category, type=type, state=state, price=price, seller_id = id)

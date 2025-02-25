@@ -4,17 +4,13 @@ import "../../styles/sellview.css";
 import { useNavigate } from "react-router-dom";
 import { PhotoUpload } from "../component/photoupload.jsx";
 import { LoginModal } from "../component/login-modal.jsx";
-import { PremiumModal } from "../component/premium-modal.jsx";
 
-
-//import { LoginModal } from "../component/login-modal.jsx";
 
 export const SellView = () => {
     const { store, actions } = useContext(Context);
     const [typeOptions, setTypeOptions] = useState([]);
     const navigate = useNavigate();
     const [uploadedPhoto, setUploadedPhoto] = useState("");
-    const [showSuccess, setShowSuccess] = useState(false);
 
 
     const [formData, setFormData] = useState({
@@ -77,24 +73,25 @@ export const SellView = () => {
         if (!validateForm()) return;
 
         try {
-            await actions.sellProduct(formData, navigate, setShowSuccess);
+            await actions.sellProduct(formData, navigate);
+            alert("Producto publicado con éxito 🎉");
             navigate("/");
         } catch (error) {
             console.error("Error al subir el producto:", error);
             alert("Hubo un error al subir el producto. Por favor, intenta de nuevo");
         }
     };
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        actions.setShowLoginModal(false);
-    }, []);
+    
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    //     actions.setShowLoginModal(false);
+    // }, []);
 
 
     return (
 
         <div className="__sell_container__">
-            {store.showLoginModal && <LoginModal />}
-            {showSuccess && <PremiumModal />}
+            {/* {store.showLoginModal && <LoginModal />} */}
             <section className="text-center mb-4">
                 <h1 className="title">¡Empieza a vender!</h1>
                 <p className="subtitle">Fácil y rápido, con total seguridad. Garantía Final Boss.</p>
