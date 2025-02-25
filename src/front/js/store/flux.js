@@ -199,7 +199,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error loading data:", error);
         }
       },
-      
+
       updateUserProfile: async (userId, updatedData) => {
         const store = getStore();
         try {
@@ -286,6 +286,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error al cargar las reseñas:", error);
         }
       },
+
       getAllUsers: async () => {
         try {
           const store = getStore();
@@ -330,33 +331,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       sellProduct: async (formData, navigate) => {
         const store = getStore();
-
+    
         const payload = { ...formData, state: formData.state === "True", promoted: formData.promoted === "True" };
         console.log("Enviando datos a /api/product:", payload);
-
+    
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${store.Token}`,
-            },
-            body: JSON.stringify(formData),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            alert("Producto publicado con éxito 🎉");
-            navigate("/");
-          } else {
-            alert(data.msg || "Error al publicar el producto ⚠️ ");
-          }
+            const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${store.Token}`,
+                },
+                body: JSON.stringify(payload),
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+            } else {
+                alert(data.msg || "Error al publicar el producto ⚠️");
+            }
         } catch (error) {
-          console.error("Error al publicar producto:", error);
-          alert("Error al conectar con el servidor");
+            console.error("Error al publicar producto:", error);
+            alert("Error al conectar con el servidor");
         }
-      },
+    },
 
       //---------------------------------------------------------FAVS---------------------------------------------------
 
@@ -531,7 +530,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         console.log("Carrito local guardado en localStorage:", JSON.parse(localStorage.getItem("localShoppingCart")));
     },
 
-
+      //------------------------------------------------------UPLOAD_PHOTO-----------------------------------------------
 
       uploadImageToBackend: async (selectedFile) => {
         if (!selectedFile) {
