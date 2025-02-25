@@ -234,7 +234,7 @@ export const Perfil = () => {
                 {/* Sección de la imagen */}
                 <div className="col-md-7 bg-image p-0 d-none d-md-block">
                     <img
-                        src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526759/j8e22hpsiepivnue4rby-min_dbfghd.png"
+                        src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738527220/web-img/wh0uqjc5on0dx3e3rp44.png"
                         alt="Icono"
                         className="w-100 h-100"
                     />
