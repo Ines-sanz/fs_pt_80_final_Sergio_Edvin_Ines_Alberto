@@ -5,13 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { PhotoUpload } from "../component/photoupload.jsx";
 import { LoginModal } from "../component/login-modal.jsx";
 
-//import { LoginModal } from "../component/login-modal.jsx";
 
 export const SellView = () => {
     const { store, actions } = useContext(Context);
     const [typeOptions, setTypeOptions] = useState([]);
     const navigate = useNavigate();
     const [uploadedPhoto, setUploadedPhoto] = useState("");
+
 
     const [formData, setFormData] = useState({
         name: "",
@@ -33,9 +33,11 @@ export const SellView = () => {
     const updateTypeOptions = (category) => {
         setFormData({ ...formData, category, type: "" });
         setTypeOptions(
-            category === "consolas" ? ["Sobremesa", "Portátil", "Híbrida"] :
-                category === "videojuegos" ? ["Acción", "Aventura", "Rol", "Estrategia", "Deportes", "Peleas", "Plataformas", "Terror", "Indie"] :
-                    category === "accesorios" ? ["Accesorios"] : []
+            category === "consolas" 
+                ? ["Sobremesa", "Portátil", "Híbrida"] 
+                : category === "videojuegos" 
+                ? ["Acción", "Aventura", "Rol", "Estrategia", "Deportes", "Peleas", "Plataformas", "Terror", "Indie"] 
+                : category === "accesorios" ? ["Accesorios"] : []
         );
     };
 
@@ -72,22 +74,24 @@ export const SellView = () => {
 
         try {
             await actions.sellProduct(formData, navigate);
+            alert("Producto publicado con éxito 🎉");
             navigate("/");
         } catch (error) {
             console.error("Error al subir el producto:", error);
             alert("Hubo un error al subir el producto. Por favor, intenta de nuevo");
         }
     };
-    useEffect(() => {
-        window.scrollTo(0, 0);
-        actions.setShowLoginModal(false);
-    }, []);
+    
+    // useEffect(() => {
+    //     window.scrollTo(0, 0);
+    //     actions.setShowLoginModal(false);
+    // }, []);
 
 
     return (
 
         <div className="__sell_container__">
-            {store.showLoginModal && <LoginModal />}
+            {/* {store.showLoginModal && <LoginModal />} */}
             <section className="text-center mb-4">
                 <h1 className="title">¡Empieza a vender!</h1>
                 <p className="subtitle">Fácil y rápido, con total seguridad. Garantía Final Boss.</p>

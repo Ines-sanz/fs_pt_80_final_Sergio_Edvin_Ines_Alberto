@@ -4,6 +4,8 @@ import "../../styles/navbar.css";
 import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
+
+
 import { CartItem } from "./shopping-cart-item.jsx"
 
 export const Navbar = () => {
@@ -34,6 +36,19 @@ export const Navbar = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const offcanvasElement = document.getElementById("offcanvasShopping");
+    if (!offcanvasElement) return;
+  
+    let offcanvasInstance = bootstrap.Offcanvas.getInstance(offcanvasElement);
+    if (!offcanvasInstance) {
+      offcanvasInstance = new bootstrap.Offcanvas(offcanvasElement);
+    }
+  
+    if ((store.shoppingCart.length > 0 || store.localShoppingCart.length > 0) && !offcanvasElement.classList.contains("show")) {
+      offcanvasInstance.show();
+    }
+  }, [store.shoppingCart, store.localShoppingCart]);
 
   const navigate = useNavigate();
 

@@ -97,6 +97,43 @@ const getState = ({ getStore, getActions, setStore }) => {
         }
       },
 
+      updateUserProfile: async (userId, updatedData) => {
+        const store = getStore();
+        try {
+            const token = store.Token;
+            if (!token) {
+                console.error("No se encontró un token válido");
+                return null;
+            }
+    
+            // Verifica que updatedData no esté vacío
+            console.log("Datos que se van a actualizar:", updatedData);
+    
+            const response = await fetch(`${process.env.BACKEND_URL}/api/user/${userId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(updatedData)
+            });
+    
+            if (!response.ok) {
+                const errorDetails = await response.text(); // Obtener detalles del error del servidor
+                console.error("Error al actualizar perfil, código:", response.status, "Detalles:", errorDetails);
+                throw new Error("Error al actualizar perfil");
+            }
+    
+            const data = await response.json();
+            console.log("Perfil actualizado:", data);
+            return data;
+        } catch (error) {
+            console.error("Error en updateUserProfile:", error);
+            return null;
+        }
+    },
+      //------------------------------------------------------LOAD INFO--------------------------------------------------
+
       loadInfo: async () => {
         try {
           const url = `${process.env.BACKEND_URL}/api/products`;
@@ -126,6 +163,50 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error("Error loading data:", error);
         }
       },
+      getAllReviews: async () => {
+        const store = getStore();
+        const actions = getActions();
+
+        try {
+          const response = await fetch(`${process.env.BACKEND_URL}/api/reviews`, {
+            method: "GET",
+          });
+
+          if (response.ok) {
+            const data = await response.json();
+            const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
+            setStore({ reviews: shuffleArray(data) });
+          } else {
+            console.error("Error al cargar las reseñas:", error);
+          }
+        } catch (error) {
+          console.error("Error al cargar las reseñas:", error);
+        }
+      },
+
+      getAllUsers: async () => {
+        try {
+          const store = getStore();
+          const response = await fetch(`${process.env.BACKEND_URL}/api/users`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            }
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            setStore({ users: data });
+          } else {
+            console.error("Error al cargar los usuarios:", data);
+          }
+        } catch (error) {
+          console.error("Error en la solicitud de usuarios:", error);
+        }
+      },
+
+      //---------------------------------------------------GET SINGLE PRODUCT--------------------------------------------
 
       getProductById: async (id) => {
         try {
@@ -145,33 +226,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       sellProduct: async (formData, navigate) => {
         const store = getStore();
-
+    
         const payload = { ...formData, state: formData.state === "True", promoted: formData.promoted === "True" };
         console.log("Enviando datos a /api/product:", payload);
-
+    
         try {
-          const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${store.Token}`,
-            },
-            body: JSON.stringify(formData),
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            alert("Producto publicado con éxito 🎉");
-            navigate("/");
-          } else {
-            alert(data.msg || "Error al publicar el producto ⚠️ ");
-          }
+            const response = await fetch(`${process.env.BACKEND_URL}/api/product`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${store.Token}`,
+                },
+                body: JSON.stringify(payload),
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+            } else {
+                alert(data.msg || "Error al publicar el producto ⚠️");
+            }
         } catch (error) {
-          console.error("Error al publicar producto:", error);
-          alert("Error al conectar con el servidor");
+            console.error("Error al publicar producto:", error);
+            alert("Error al conectar con el servidor");
         }
-      },
+    },
+
+      //---------------------------------------------------------FAVS---------------------------------------------------
 
       toggleFav: async (newFav) => {
         const store = getStore();
@@ -257,6 +338,32 @@ const getState = ({ getStore, getActions, setStore }) => {
           console.error(error);
         }
       },
+
+      toggleLocalCart: (newShoppingItem) => {
+        const store = getStore();
+    
+        let updatedCart = [...store.localShoppingCart];
+    
+        const isInCart = updatedCart.some(el => el.product_id === newShoppingItem.product_id);
+    
+        if (isInCart) {
+            updatedCart = updatedCart.filter(el => el.product_id !== newShoppingItem.product_id);
+        } else {
+            updatedCart.push({
+                product_id: newShoppingItem.product_id,
+                name: newShoppingItem.name,
+                img: newShoppingItem.img,
+                price: newShoppingItem.price
+            });
+        }
+    
+        setStore({ localShoppingCart: updatedCart });
+        localStorage.setItem("localShoppingCart", JSON.stringify(updatedCart)); //Guardar en localStorage
+    
+        console.log("Carrito local guardado en localStorage:", JSON.parse(localStorage.getItem("localShoppingCart")));
+    },
+
+      //------------------------------------------------------UPLOAD_PHOTO-----------------------------------------------
 
       uploadImageToBackend: async (selectedFile) => {
         if (!selectedFile) {

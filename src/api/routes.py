@@ -197,6 +197,7 @@ def create_product():
         if not user:
             return jsonify({'msg':'Unauthorized: User not found'}), 401
         #extract product details from the request
+               
         name = request.json.get('name', None)
         description = request.json.get('description', None)
         img = request.json.get('img', None)
@@ -210,10 +211,10 @@ def create_product():
         price = request.json.get('price', None)
         
         
-
         #validate required fields
-        if not name or not description or not img or not year or not brand or not platform or not category or not type or not state  or not price:
-            return jsonify({'msg': 'Please fill all the data'}), 400
+        if not name or not description or not img or not year or not brand or not platform or not category or not type or not price:
+            print(name, description, img, year, brand, platform, type, category, state, price)
+            raise Exception ("Error missing data")
         
         #create a new product
         new_product = Products(name=name, description=description, img=img, year=year, brand=brand, platform=platform, category=category, type=type, state=state, price=price, seller_id = id)
@@ -798,14 +799,19 @@ def remove_from_shopping_cart(product_id):
         return jsonify({'error': str(error)}), 400
 
 # Subimos productos al Cloudinary
+
 @api.route('/upload', methods=['POST'])
 def upload():
-    file_to_upload = request.files['file']
-    if file_to_upload:
+    try:
+        file_to_upload = request.files.get('file')
+        if not file_to_upload:
+            return jsonify({"error": "No file uploaded"}), 400
+        
         upload = cloudinary.uploader.upload(file_to_upload)
         print('----------Url donde está la imagen-----------', upload)
         return jsonify(upload)
-    return jsonify({"error": "No file uploaded"}), 400
+    except Exception as e:
+        return jsonify({"error": f"Upload failed: {str(e)}"}), 500
 
 @api.route('/dummy2', methods=['POST']) 
 def dummy():
