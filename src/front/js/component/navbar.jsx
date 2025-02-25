@@ -45,10 +45,16 @@ export const Navbar = () => {
       offcanvasInstance = new bootstrap.Offcanvas(offcanvasElement);
     }
   
-    if ((store.shoppingCart.length > 0 || store.localShoppingCart.length > 0) && !offcanvasElement.classList.contains("show")) {
-      offcanvasInstance.show();
+    if (
+      Array.isArray(store.shoppingCart) && store.shoppingCart.length > 0 ||
+      Array.isArray(store.localShoppingCart) && store.localShoppingCart.length > 0
+    ) {
+      if (!offcanvasElement.classList.contains("show")) {
+        offcanvasInstance.show();
+      }
     }
   }, [store.shoppingCart, store.localShoppingCart]);
+  
 
   const navigate = useNavigate();
 
