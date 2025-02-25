@@ -23,7 +23,7 @@ export const OrderSuccess = () => {
                     Pedido con exito!
                 </strong>
                 <img
-        src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1736453860/web-illustrations/adventure.png"
+        src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526761/uvyx3nvtoxpfwynbwgry-min_cammqk.png"
         alt="Imagen FinalBoss success"
         className="success-img"
         

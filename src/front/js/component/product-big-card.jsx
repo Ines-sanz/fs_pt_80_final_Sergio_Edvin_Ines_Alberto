@@ -70,7 +70,7 @@ const handleShopping = () => {
       <div className="px-3 mt-2 col-5 d-flex flex-column justify-content-between py-5 ">
         <div className="divider"></div>
         <figure>
-          <img src="https://res.cloudinary.com/dr0wlij0c/image/upload/v1737124509/final-boss-selection-25_g3brv4.png" alt="FinalBossSelection" className="img-fluid" />
+          <img src="https://res.cloudinary.com/dshjlidcs/image/upload/v1738526759/final-boss-selection-25_g3brv4-min_k0olin.png" alt="FinalBossSelection" className="img-fluid" />
         </figure>
 
         <div>
