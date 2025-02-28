@@ -9,7 +9,7 @@ font-weight: 400;
 font-style: normal;
 overflow-x: hidden;
 background-color: black;
-background-attachment: fixed;
+/*background-attachment: fixed;*/
 background-size: cover;
 background-image: url(https://res.cloudinary.com/dshjlidcs/image/upload/v1738526759/fondo-finalboss-opacity_wgwrxe-min_k3shyv.png) ;
 background-repeat: repeat-y;
@@ -29,5 +29,8 @@ background-repeat: repeat-y;
         width: 80%;
         margin: auto;
     }
-    
+    .reviews-home{
+        display:none;
+    }
+
   }

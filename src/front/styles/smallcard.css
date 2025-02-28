@@ -184,3 +184,9 @@
     transition: all ease 0.4s;
     text-decoration: none;
   }
+
+  @media(max-width: 992px){
+    .videogame-sm-bg img{
+      height: 70vw;
+    }
+  }
